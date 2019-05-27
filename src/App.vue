@@ -1,16 +1,42 @@
 <template>
-  <div id="app">
-    <MainPage />
+  <div id="app" >
+    <HamBurger 
+      :alive="isMenuActive" 
+      @click.native="onHamClick"/>
+    <MenuBar 
+      :alive="isMenuActive" 
+      :menuItems="menuItems"
+      @click.native="onMenuClick"/>
+      <router-view>
+      </router-view>
   </div>
 </template>
 
 <script>
-import MainPage from './components/MainPage.vue'
+import MenuBar from './components/MenuBar.vue'
+import HamBurger from './components/HamBurger.vue'
 
 export default {
   name: 'app',
   components: {
-    MainPage
+    MenuBar,
+    HamBurger
+  },
+  data(){
+    return{      
+      isMenuActive: false,
+      menuItems: ['home', 'about', 'work', 'contact']
+    }
+  },
+  methods: {
+      onHamClick(){
+        this.isMenuActive = !this.isMenuActive;
+      },
+      onMenuClick(){
+        if(this.isMenuActive){
+          this.isMenuActive = false;
+        }
+      }
   }
 }
 </script>

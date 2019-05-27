@@ -1,13 +1,15 @@
 <template>
     <div>
-        Side Bar 
+        This is Work page.
     </div>
 </template>
+
 <script>
 export default {
-    name: 'SideBar'
+    name: 'WorkPage'
 }
 </script>
+
 <style>
 
 </style>
