@@ -15,6 +15,7 @@
     </div>
 </template>
 <script>
+import axios from 'axios';
 export default {
     name: 'HomePage',
     data() {
@@ -23,14 +24,18 @@ export default {
             desc: 'DEVELOPER',
             slash: '/',
         }
+    },
+    created: function() {
+        axios.get('/data.json')
+        .then(resolve => {
+            console.log(resolve)
+        }, reject => {
+            console.log(reject)
+        })
     }
 }
 </script>
-<style>
-    @font-face {
-        font-family: "Hipstelvetica";
-        src: url("../assets/fonts/Hipstelvetica.ttf");
-    }
+<style scoped>
     .container{
         display: flex;
         justify-content: center;

@@ -7,10 +7,10 @@ Vue.use(VueRouter)
 Vue.config.productionTip = false
 
 const router = new VueRouter({
-  routes: routes
+  routes
 })
 
 new Vue({
-  router: router,
+  router,
   render: h => h(App),
 }).$mount('#app')

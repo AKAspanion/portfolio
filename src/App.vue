@@ -43,6 +43,15 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+@font-face {
+  font-family: "Hipstelvetica";
+  src: url("./assets/fonts/Hipstelvetica.ttf");
+}
+
+@font-face {
+  font-family: "Andis";
+  src: url("./assets/fonts/Andis.ttf");
+}
 body{
   margin: 0;
   padding: 0;  

@@ -3,12 +3,14 @@
         :class="{active: alive}"
         >
         <div class="side-menu">
-            <div
+            <router-link
+                tag="div"
                 class="side-item"
                 v-for="item in menuItems" 
-                :key="item">                
-                    <router-link :to="'/' + item">{{item}}</router-link>
-            </div>
+                :key="item"
+                :to="'/' + item">
+                    {{item}}
+            </router-link>
         </div>
     </div>
 </template>
@@ -27,10 +29,6 @@ export default {
 }
 </script>
 <style>
-    @font-face {
-        font-family: "Hipstelvetica";
-        src: url("../assets/fonts/Hipstelvetica.ttf");
-    }
     .menu-container{
         position: absolute;
         display: flex;
@@ -48,7 +46,7 @@ export default {
         margin: 0 auto;
         width: 80vw;
         font-size: 5vw;
-        font-family: 'Hipstelvetica';
+        font-family: 'Andis';
     }
     .side-item{
         cursor: pointer;

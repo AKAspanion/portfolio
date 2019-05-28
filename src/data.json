@@ -1,0 +1,12 @@
+{
+    "home": {
+        "name": "ANKIT PANDIT",
+        "slash": "/",
+        "description": "DEVELOPER"
+    },
+    "about":{
+        "name": "Ankit Kumar Pandit",
+        "position": "Software Developer",
+        "company": "GLobal Ids"
+    }   
+}
