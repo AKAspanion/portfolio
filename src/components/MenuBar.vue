@@ -38,14 +38,14 @@ export default {
         width: 100vw;
         color:beige;
         height: 100vh;
-        transition: 0.5s;
+        transition: 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
         transform: translateY(-100vh);
     }
     .side-menu{
         text-align: center;
         margin: 0 auto;
-        width: 30vw;
-        font-size: 5vw;
+        width: 20vw;
+        font-size: 5vh;
         font-family: 'Andis';
     }
     .side-item{
@@ -55,41 +55,5 @@ export default {
     }
     .active{
         transform: translateX(0);
-    }
-    span {
-        position: relative;
-        display: block;
-        cursor: pointer;
-    }
-
-    span:before, span:after {
-        content: '';
-        position: absolute;
-        width: 0%;
-        height: 1px;
-        top: 50%;
-        margin-top: -0.5px;
-        background: #fff;
-    }
-
-    span:before {
-        left: -2.5px;   
-    }
-    span:after {
-        right: 2.5px;
-        background: #fff;
-        transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-
-    span:hover:before {
-        background: #fff;
-        width: 100%;
-        transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-    }
-
-    span:hover:after {
-        background: transparent;
-        width: 100%;
-        transition: 0s;
-    }
+    }    
 </style>

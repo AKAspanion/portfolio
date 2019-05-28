@@ -7,7 +7,7 @@
       :alive="isMenuActive" 
       :menuItems="menuItems"
       @click.native="onMenuClick"/>
-      <transition name="router-anim">
+      <transition>
         <router-view>
         </router-view>
       </transition>
@@ -63,34 +63,56 @@ body{
   font-family: 'Rubik';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
-}
-/* .router-anim-enter-active{
-  animation: coming 1s;
-  animation-delay: .5s;
-  opacity: 0;
-}
-.router-anim-leave-active{
-  animation: going 1s;
-}
-@keyframes going{
-  from{
-    transform: translate(0)
-  }
-  to{
-    transform: translateY(-100vh);
-    opacity: 0;
-  }
+  color: rgb(65, 65, 65);
 }
 
-@keyframes coming {
-  from{
-    transform: translateY(100vh);
-    opacity: 0;
-  }
-  to{
-    transform: translate(0);
-    opacity: 1;
-  }
-} */
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+/* for Hover effect */
+span {
+    position: relative;
+    display: block;
+    cursor: pointer;
+}
+
+span:before, span:after {
+    content: '';
+    position: absolute;
+    width: 0%;
+    height: 2px;
+    top: 55%;
+    margin-top: -0.5px;
+    background: #fff;
+}
+
+span:before {
+    left: -2.5px;   
+}
+span:after {
+    right: 2.5px;
+    background: #fff;
+    transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+span:hover:before {
+    background: #fff;
+    width: 100%;
+    transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+span:hover:after {
+    background: transparent;
+    width: 100%;
+    transition: 0s;
+}
+
+::-webkit-scrollbar {
+      width: 0;
+}
 </style>

@@ -18,14 +18,6 @@ export default {
 </script>
 
 <style scoped>
-.container{
-    z-index: -1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100vh;
-}
 .contact-container{
     height: 60vh;
     width: 80vw;

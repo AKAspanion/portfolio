@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+// https://codepen.io/nailaahmad/pen/MyZXVE
+
 class DataService{
     constructor(){    
         axios.defaults.baseURL = 'http://localhost:8081/data.json';
@@ -22,6 +24,13 @@ class DataService{
         ._get()
         .then(response =>{
             callback(response.data.about);
+        })
+    }
+    getWork(callback){
+        this
+        ._get()
+        .then(response =>{
+            callback(response.data.work);
         })
     }
 

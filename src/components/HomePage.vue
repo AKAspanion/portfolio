@@ -37,17 +37,17 @@ export default {
 }
 </script>
 <style scoped>
-    .container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100vw;
-        height: 100vh;
+    .container{        
         text-align: center;
+        font-size: 7vw;
     }
     .name, .slash, .desc{
         font-family: "Hipstelvetica";
-        font-size: 8vw;
         font-weight: bold;
+    }
+    @media only screen and (max-width: 600px) {
+        .container{
+            font-size: 7vh;
+        }
     }
 </style>
