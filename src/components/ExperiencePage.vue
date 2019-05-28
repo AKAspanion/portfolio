@@ -1,82 +1,31 @@
 <template>
     <div class="wrapper" >
-
-    <nav class="nav__wrapper" id="navbar-example">
-      <ul class="nav">
-        
-        <li
-            role="presentation" 
+        <nav class="nav__wrapper" id="navbar-example">
+            <ul class="nav">
+                <li
+                    role="presentation" 
+                    v-for="n in 6"
+                    :key="n">
+                <a            
+                    @click="scrollMeTo('section'+n)"
+                    >
+                    <div class="nav__counter">0{{n}}</div>
+                    <h3 class="nav__title">Section {{n}} Title</h3>
+                    <p class="nav__body">
+                        <strong>Timeline-style navigation</strong>. 
+                        Scroll down to see what happens, or click on a number in the nav.
+                    </p>
+                </a>
+                </li>
+            </ul>
+        </nav>
+        <section 
             v-for="n in 6"
-            :key="n">
-          <a            
-            @click="scrollMeTo('section'+n)"
-            >
-            <span class="nav__counter">0{{n}}</span>
-            <h3 class="nav__title">Section {{n}} Title</h3>
-            <p class="nav__body"><strong>Timeline-style navigation</strong>. Scroll down to see what happens, or click on a number in the nav.</p>
-          </a>
-        </li>
-
-        <!-- <li role="presentation" class="active">
-          <a href="#section3">
-            <span class="nav__counter">03</span>
-            <h3 class="nav__title">Section 3 Title</h3>
-            <p class="nav__body">Sed sit amet justo sed odio tempus tempus. Vestibulum sed varius mi, sit amet condimentum lacus.</p>
-          </a>
-        </li>
-        
-        <li role="presentation">
-          <a href="#section4">
-            <span class="nav__counter">04</span>
-            <h3 class="nav__title">Section 4 Title</h3>
-            <p class="nav__body">Sed sit amet justo sed odio tempus tempus. Vestibulum sed varius mi, sit amet condimentum lacus.</p>
-          </a>
-        </li>
-        
-        <li role="presentation">
-          <a href="#section5">
-            <span class="nav__counter">05</span>
-            <h3 class="nav__title">Section 5 Title</h3>
-            <p class="nav__body">Sed sit amet justo sed odio tempus tempus. Vestibulum sed varius mi, sit amet condimentum lacus.</p>
-          </a>
-        </li>
-        
-        <li role="presentation">
-          <a href="#section6">
-            <span class="nav__counter">06</span>
-            <h3 class="nav__title">Section 6 Title</h3>
-            <p class="nav__body">Sed sit amet justo sed odio tempus tempus. Vestibulum sed varius mi, sit amet condimentum lacus.</p>
-          </a>
-        </li> -->
-
-      </ul>
-    </nav>
-
-    <section class="section section1" id="section1">
-      Scroll down or use the nav.
-    </section>
-
-    <section class="section section2" id="section2">
-      Section 2
-    </section>
-
-    <section class="section section3" id="section3">
-      Section 3
-    </section>
-
-    <section class="section section4" id="section4">
-      Section 4
-    </section>
-
-    <section class="section section5" id="section5">
-      Section 5
-    </section>
-
-    <section class="section section6" id="section6">
-      Section 6
-    </section>
-
-
+            :class="['section section'] + n" 
+            :key="n"
+            :id="['section'+n]">
+            Scroll down or use the nav {{n}}.
+        </section>
   </div>
 </template>
 
