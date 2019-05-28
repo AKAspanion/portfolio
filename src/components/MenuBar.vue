@@ -9,7 +9,7 @@
                 v-for="item in menuItems" 
                 :key="item"
                 :to="'/' + item">
-                    {{item}}
+                    <span>{{item}}</span>
             </router-link>
         </div>
     </div>
@@ -44,7 +44,7 @@ export default {
     .side-menu{
         text-align: center;
         margin: 0 auto;
-        width: 80vw;
+        width: 30vw;
         font-size: 5vw;
         font-family: 'Andis';
     }
@@ -53,10 +53,43 @@ export default {
         margin: 15px 0;
         transition: 0.5s;
     }
-    .side-item:hover{
-        background: rgb(65, 65, 65);
-    }
     .active{
         transform: translateX(0);
+    }
+    span {
+        position: relative;
+        display: block;
+        cursor: pointer;
+    }
+
+    span:before, span:after {
+        content: '';
+        position: absolute;
+        width: 0%;
+        height: 1px;
+        top: 50%;
+        margin-top: -0.5px;
+        background: #fff;
+    }
+
+    span:before {
+        left: -2.5px;   
+    }
+    span:after {
+        right: 2.5px;
+        background: #fff;
+        transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    span:hover:before {
+        background: #fff;
+        width: 100%;
+        transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    span:hover:after {
+        background: transparent;
+        width: 100%;
+        transition: 0s;
     }
 </style>
