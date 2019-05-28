@@ -7,8 +7,10 @@
       :alive="isMenuActive" 
       :menuItems="menuItems"
       @click.native="onMenuClick"/>
-      <router-view>
-      </router-view>
+      <transition name="router-anim">
+        <router-view>
+        </router-view>
+      </transition>
   </div>
 </template>
 
@@ -63,4 +65,32 @@ body{
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
+/* .router-anim-enter-active{
+  animation: coming 1s;
+  animation-delay: .5s;
+  opacity: 0;
+}
+.router-anim-leave-active{
+  animation: going 1s;
+}
+@keyframes going{
+  from{
+    transform: translate(0)
+  }
+  to{
+    transform: translateY(-100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes coming {
+  from{
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  to{
+    transform: translate(0);
+    opacity: 1;
+  }
+} */
 </style>

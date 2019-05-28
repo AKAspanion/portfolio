@@ -2,36 +2,37 @@
     <div class="container">
         <div>
             <div class="name">
-                {{name}}
+                {{home.name}}
             </div>
 
             <div class="slash">
-                {{slash}}
+                {{home.slash}}
             </div>
             <div class="desc">
-                {{desc}}
+                {{home.description}}
             </div>
         </div>
     </div>
 </template>
 <script>
-import axios from 'axios';
+import DataService  from '../dataproviders/DataService';
 export default {
     name: 'HomePage',
     data() {
-        return {            
-            name: 'ANKIT PANDIT',
-            desc: 'DEVELOPER',
-            slash: '/',
+        return {        
+            home: {}
         }
     },
-    created: function() {
-        axios.get('/data.json')
-        .then(resolve => {
-            console.log(resolve)
-        }, reject => {
-            console.log(reject)
-        })
+    methods: {
+        fetchData(){
+            DataService
+            .getHome((data) => {
+                this.home = data;
+            })
+        } 
+    },
+    created(){
+        this.fetchData();
     }
 }
 </script>

@@ -5,18 +5,35 @@
                 Hi.
             </div>
             <div class="name seperated">
-                My name is Ankit Kumar Pandit.
+                My name is {{about.name}}.
             </div>
             <div class="about seperated">
-                I am a Software Developer currently working at Global Ids.
+                I am a {{about.position}} currently working at {{about.company}}.
             </div>
         </div>
     </div>    
 </template>
 
 <script>
+import DataService  from '../dataproviders/DataService';
 export default {
     name: 'AboutPage',
+    data(){
+        return{
+            about: {}
+        }
+    },
+    methods: {
+        fetchData(){
+            DataService
+            .getAbout((data) => {
+                this.about = data;
+            })
+        } 
+    },
+    created(){
+        this.fetchData();
+    }
 }
 </script>
 
