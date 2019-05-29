@@ -1,6 +1,6 @@
 <template>
   <div id="app" >
-    <HamBurger 
+    <!-- <HamBurger 
       :alive="isMenuActive" 
       @click.native="onHamClick"/>
     <MenuBar 
@@ -10,19 +10,22 @@
       <transition>
         <router-view>
         </router-view>
-      </transition>
+      </transition> -->
+      <vuetify-playground/>
   </div>
 </template>
 
 <script>
-import MenuBar from './components/MenuBar.vue'
-import HamBurger from './components/HamBurger.vue'
+// import MenuBar from './components/MenuBar.vue'
+// import HamBurger from './components/HamBurger.vue'
+import VuetifyPlayground from './VuetifyPlayground.vue'
 
 export default {
   name: 'app',
   components: {
-    MenuBar,
-    HamBurger
+    // MenuBar,
+    // HamBurger,
+    VuetifyPlayground
   },
   data(){
     return{      
