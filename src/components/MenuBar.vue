@@ -31,10 +31,11 @@ export default {
 <style>
     .menu-container{
         position: absolute;
+        z-index: 1;
         display: flex;
         justify-content:baseline;
         align-items: center;
-        background: goldenrod;
+        background: #17252A;
         width: 100vw;
         color:beige;
         height: 100vh;

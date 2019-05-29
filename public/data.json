@@ -18,7 +18,7 @@
             "title": "Software Developer",
             "period": "May 2019 - Current",
             "company": "GLobal IDs, Kolkata",
-            "description": "As a Software Developer I build and revamp UI of product along with my team using Vue.JS",
+            "description": "As a Software Developer I build and revamp the UI of product along with my team using Vue.JS",
             "technologies": [
                 "Vue.js",
                 "Swagger"
@@ -34,5 +34,8 @@
                 "Node.JS"
             ]
         }
+    ],
+    "projects" :[
+        
     ]
 }

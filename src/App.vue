@@ -27,7 +27,7 @@ export default {
   data(){
     return{      
       isMenuActive: false,
-      menuItems: ['home', 'about', 'work', 'contact']
+      menuItems: ['home', 'about', 'contact']
     }
   },
   methods: {
@@ -54,9 +54,14 @@ export default {
   font-family: "Andis";
   src: url("./assets/fonts/Andis.ttf");
 }
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 body{
   margin: 0;
-  padding: 0;  
+  padding: 0; 
+  z-index: -1; 
 }
 #app {
   font-family: 'Rubik';
@@ -72,45 +77,6 @@ body{
   width: 100vw;
   height: 100vh;
 }
-
-/* for Hover effect */
-span {
-    position: relative;
-    display: block;
-    cursor: pointer;
-}
-
-span:before, span:after {
-    content: '';
-    position: absolute;
-    width: 0%;
-    height: 2px;
-    top: 55%;
-    margin-top: -0.5px;
-    background: #fff;
-}
-
-span:before {
-    left: -2.5px;   
-}
-span:after {
-    right: 2.5px;
-    background: #fff;
-    transition: width 0.8s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-span:hover:before {
-    background: #fff;
-    width: 100%;
-    transition: width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1);
-}
-
-span:hover:after {
-    background: transparent;
-    width: 100%;
-    transition: 0s;
-}
-
 ::-webkit-scrollbar {
       width: 0;
 }

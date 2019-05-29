@@ -46,9 +46,12 @@ export default {
 
 <style scoped>
     .about-container{
-        margin-top: 15vh;
+        padding-top: 15vh;
+        padding-left: 15vw;
         height: 85vh;
-        width: 80vw;
+        width: 100vw;
+        background: #2B7A78;
+        color: #FEFFFF;
         overflow-y: scroll;
     }
     .hi{
@@ -66,7 +69,7 @@ export default {
     }
     .link{
         text-decoration: none;
-        color: rgb(65,65,65);
+        color: #FEFFFF;
     }
     @media only screen and (max-width: 600px) {
         .container{

@@ -40,6 +40,8 @@ export default {
     .container{        
         text-align: center;
         font-size: 7vw;
+        background: #3AAfA9;
+        color: #DEF2F1;
     }
     .name, .slash, .desc{
         font-family: "Hipstelvetica";
