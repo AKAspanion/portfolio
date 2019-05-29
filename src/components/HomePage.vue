@@ -2,46 +2,54 @@
     <div class="container">
         <div>
             <div class="name">
-                {{name}}
+                {{home.name}}
             </div>
 
             <div class="slash">
-                {{slash}}
+                {{home.slash}}
             </div>
             <div class="desc">
-                {{desc}}
+                {{home.description}}
             </div>
         </div>
     </div>
 </template>
 <script>
+import DataService  from '../dataproviders/DataService';
 export default {
     name: 'HomePage',
     data() {
-        return {            
-            name: 'ANKIT PANDIT',
-            desc: 'DEVELOPER',
-            slash: '/',
+        return {        
+            home: {}
         }
+    },
+    methods: {
+        fetchData(){
+            DataService
+            .getHome((data) => {
+                this.home = data;
+            })
+        } 
+    },
+    created(){
+        this.fetchData();
     }
 }
 </script>
-<style>
-    @font-face {
-        font-family: "Hipstelvetica";
-        src: url("../assets/fonts/Hipstelvetica.ttf");
-    }
-    .container{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100vw;
-        height: 100vh;
+<style scoped>
+    .container{        
         text-align: center;
+        font-size: 7vw;
+        background: #3AAfA9;
+        color: #DEF2F1;
     }
     .name, .slash, .desc{
         font-family: "Hipstelvetica";
-        font-size: 8vw;
         font-weight: bold;
+    }
+    @media only screen and (max-width: 600px) {
+        .container{
+            font-size: 7vh;
+        }
     }
 </style>

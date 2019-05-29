@@ -7,8 +7,10 @@
       :alive="isMenuActive" 
       :menuItems="menuItems"
       @click.native="onMenuClick"/>
-      <router-view>
-      </router-view>
+      <transition>
+        <router-view>
+        </router-view>
+      </transition>
   </div>
 </template>
 
@@ -25,7 +27,7 @@ export default {
   data(){
     return{      
       isMenuActive: false,
-      menuItems: ['home', 'about', 'work', 'contact']
+      menuItems: ['home', 'about', 'contact']
     }
   },
   methods: {
@@ -43,15 +45,39 @@ export default {
 
 <style>
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
+@font-face {
+  font-family: "Hipstelvetica";
+  src: url("./assets/fonts/Hipstelvetica.ttf");
+}
+
+@font-face {
+  font-family: "Andis";
+  src: url("./assets/fonts/Andis.ttf");
+}
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 body{
   margin: 0;
-  padding: 0;  
-  overflow: hidden;
+  padding: 0; 
+  z-index: -1; 
 }
 #app {
   font-family: 'Rubik';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+  color: rgb(65, 65, 65);
+}
+
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+::-webkit-scrollbar {
+      width: 0;
 }
 </style>

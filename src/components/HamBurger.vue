@@ -25,7 +25,7 @@ export default {
         left: 0;
         right: 0;
         margin: 0 auto;
-        z-index: 1;
+        z-index: 2;
         width: 100px;
         height: 100px;
         display: flex;
@@ -43,7 +43,7 @@ export default {
         width: 50px;
         height: 8px;
         margin-bottom: 5px;
-        background: rgb(65, 65, 65);
+        background: #DEF2F1;
         transition: 0.5s;
     }
     .ham-1{
