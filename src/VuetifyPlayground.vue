@@ -2,7 +2,7 @@
     <div>   
         <v-dialog
             v-model="dialog"
-            width="800"
+            width="600"
             >
             <template v-slot:activator="{ on }">
                 <v-btn
@@ -14,7 +14,7 @@
                 </v-btn>
             </template>
             <v-card>
-                 <v-tabs
+                <v-tabs
                     v-model="tabs"
                     centered
                     slider-color="blue"
@@ -35,7 +35,7 @@
                     <v-tab-item>          
                         <v-container fill-height grid-list-md >
                             <v-layout row wrap>                                
-                                <v-flex xs6>
+                                <v-flex xs6>    <!-- date picker -->
                                     <v-menu
                                         ref="menuDate"
                                         v-model="menuDate"
@@ -59,7 +59,7 @@
                                         </template>
                                         <v-date-picker 
                                             v-model="scheduleDate" 
-                                            :min="scheduleDate"
+                                            :min="new Date().toISOString().substr(0, 10)"
                                             no-title scrollable>
                                         <v-spacer></v-spacer>
                                         <v-btn flat color="primary" @click="menuDate = false">Cancel</v-btn>
@@ -67,7 +67,7 @@
                                         </v-date-picker>
                                     </v-menu>
                                 </v-flex> 
-                                <v-flex xs6>
+                                <v-flex xs6>    <!-- time picker -->
                                     <v-menu
                                         ref="menuTime"
                                         v-model="menuTime"
@@ -98,146 +98,160 @@
                                             ></v-time-picker>
                                     </v-menu>
                                 </v-flex>                                
-                                <v-flex xs12>
+                                <v-flex xs12>   <!-- divider -->
                                     <v-divider></v-divider>
                                 </v-flex>
-                                <v-flex xs8 grow align-self-center>
-                                    <v-switch 
-                                        v-model="timeRestrictionSwitch" 
-                                        color="green" 
-                                        label="Time Restriction"
-                                        ></v-switch>
-                                </v-flex>
-                                <v-spacer></v-spacer>
-                                <v-flex text-lg-right>
-                                    <v-btn
-                                        :disabled="!timeRestrictionSwitch"
-                                        color="green lighten"
-                                        dark
-                                        >
-                                        + Add New
-                                    </v-btn>
-                                </v-flex>
-                                <v-flex xs12>
-                                    <v-list 
-                                        style="max-height: 100px; border: 1px solid #ccc;"
-                                        class="scroll-y"
-                                        
-                                        >
-                                        <template v-for="(task) in predefinedTasks">
-                                            
-                                            <v-list-tile
-                                                :key="task.id"
-                                                @click="onTileClick(task)"
-                                                >
-                                                <v-list-tile-content>
-                                                    <v-list-tile-title v-html="task.name"></v-list-tile-title>
-                                                </v-list-tile-content>
-                                            </v-list-tile>
-                                        </template>
-                                    </v-list>
-                                </v-flex> 
-                                <v-radio-group                   
-                                    class="radio-group-full-width"                                
-                                    :disabled="!timeRestrictionSwitch"
-                                    v-model="restrictionRadios" 
-                                    :mandatory="true"
-                                    @change="onRestrictionRadioChange">                                                             
-                                    <v-layout row style="margin-top: -25px;">
-                                        <v-flex align-self-center shrink style="margin-left: 2px;">
-                                            Don't run tasks between 
-                                        </v-flex> 
-                                        <v-flex xs1 align-self-center >                                                                       
-                                            <v-select
-                                                v-model="fromTime"
-                                                :items="timeIntervals"
-                                                :disabled="!timeRestrictionSwitch || checkAllDay"
-                                            ></v-select>
-                                        </v-flex>                                     
-                                        <v-flex xs1 align-self-center text-lg-center>
-                                            and 
-                                        </v-flex>    
-                                        <v-flex xs1 align-self-center>                                                                       
-                                            <v-select
-                                                v-model="toTime"
-                                                :items="timeIntervals"
-                                                :disabled="!timeRestrictionSwitch || checkAllDay"
-                                            ></v-select>
-                                        </v-flex>        
-                                        <v-spacer></v-spacer>
-                                        <v-flex xs2 text-lg-right >
-                                            <v-checkbox 
-                                                :disabled="restrictionRadios==='radioEveryday' ? true:false"
-                                                v-model="checkAllDay" 
-                                                label="Entire day">
-                                            </v-checkbox>
-                                        </v-flex>     
-                                    </v-layout>                 
-                                    <v-layout row style="padding-bottom: 20px;">                                                                                
-                                        <v-flex xs12 align-self-center>
-                                            <v-radio 
-                                                label="Everyday" 
-                                                value="radioEveryday"                                                
-                                                ></v-radio>
-                                        </v-flex>
-                                    </v-layout>                                      
-                                    <v-layout row >                                        
-                                        <v-flex xs6 align-self-center>
-                                            <v-radio label="On certain day of week" value="radioWeekday"></v-radio>
-                                        </v-flex>
-                                        <v-spacer></v-spacer>
-                                        <v-flex xs4 text-xs-right>                                    
-                                            <v-select
-                                                :disabled="restrictionRadios==='radioWeekday' ? false:true"
-                                                v-model="weekDay"
-                                                :items="weekDays"
-                                                label="Week Day"
-                                            ></v-select>
-                                        </v-flex>
-                                    </v-layout>     
-                                    <v-layout row justify-start>                                        
-                                        <v-flex xs6 align-self-center>
-                                            <v-radio 
-                                                label="On certain date" 
-                                                value="radioDate"
-                                                ></v-radio>
-                                        </v-flex>                                        
-                                        <v-spacer></v-spacer>
-                                        <v-flex xs4>
-                                            <v-menu
-                                                ref="menuRestrictDate"
-                                                v-model="menuRestrictDate"
-                                                :close-on-content-click="false"
-                                                :nudge-right="40"
-                                                :return-value.sync="restrictDate"
-                                                lazy
-                                                transition="scale-transition"
-                                                offset-y
-                                                full-width
-                                                min-width="290px"
+                                <v-layout row>  <!-- time restriction toggle -->
+                                    <v-flex xs8 grow align-self-center ml-1>
+                                        <v-switch 
+                                            @change="onRestrictionSwitchChange"
+                                            v-model="timeRestrictionSwitch" 
+                                            color="green" 
+                                            label="Time Restriction"
+                                            ></v-switch>
+                                    </v-flex>
+                                    <v-spacer></v-spacer>
+                                    <v-flex text-lg-right align-self-center mb-2>
+                                        <v-btn
+                                            :disabled="!timeRestrictionSwitch"
+                                            color="green lighten"
                                             >
-                                                <template v-slot:activator="{ on }">
-                                                <v-text-field
-                                                    :disabled="restrictionRadios==='radioDate' ? false:true"
-                                                    v-model="restrictDate"
-                                                    append-icon="event"
-                                                    label="Date"
-                                                    readonly
-                                                    v-on="on"
-                                                ></v-text-field>
-                                                </template>
-                                                <v-date-picker 
-                                                    v-model="restrictDate" 
-                                                    :min="restrictDate"
-                                                    no-title scrollable>
-                                                <v-spacer></v-spacer>
-                                                <v-btn flat color="primary" @click="menuRestrictDate = false">Cancel</v-btn>
-                                                <v-btn flat color="primary" @click="$refs.menuRestrictDate.save(restrictDate)">OK</v-btn>
-                                                </v-date-picker>
-                                            </v-menu>
-                                        </v-flex> 
-                                    </v-layout>
-                                </v-radio-group>
+                                            + Add New
+                                        </v-btn>
+                                    </v-flex>
+                                </v-layout>
+                                <v-expansion-panel
+                                    v-model="expansionRestriction"
+                                    expand
+                                    >
+                                    <v-expansion-panel-content>
+                                    <v-card> 
+                                        <v-card-text>                                            
+                                            <v-flex xs12>   <!-- defined restrictions list -->
+                                                <v-list 
+                                                    style="max-height: 100px; border: 1px solid #ccc;"
+                                                    class="scroll-y"
+                                                    
+                                                    >
+                                                    <template v-for="(task) in predefinedTasks">
+                                                        
+                                                        <v-list-tile
+                                                            :key="task.id"
+                                                            @click="onTileClick(task)"
+                                                            >
+                                                            <v-list-tile-content>
+                                                                <v-list-tile-title v-html="task.name"></v-list-tile-title>
+                                                            </v-list-tile-content>
+                                                        </v-list-tile>
+                                                    </template>
+                                                </v-list>
+                                            </v-flex> 
+                                                            <!-- radio group -->   
+                                            <v-radio-group                
+                                                class="radio-group-full-width"                                
+                                                :disabled="!timeRestrictionSwitch"
+                                                v-model="restrictionRadios" 
+                                                :mandatory="true"
+                                                @change="onRestrictionRadioChange">                                                             
+                                                <v-layout row style="margin-top: -30px;" >   <!-- task between picker -->
+                                                    <v-flex align-self-center grow style="margin-left: 2px;">
+                                                        Don't run tasks between 
+                                                    </v-flex> 
+                                                    <v-flex xs2 align-self-center>                                                                       
+                                                        <v-select
+                                                            v-model="fromTime"
+                                                            :items="timeIntervals"
+                                                            :disabled="!timeRestrictionSwitch || checkEntireDay"
+                                                        ></v-select>
+                                                    </v-flex>                                     
+                                                    <v-flex xs1 align-self-center text-lg-center>
+                                                        and 
+                                                    </v-flex>    
+                                                    <v-flex xs2 align-self-center>                                                                       
+                                                        <v-select
+                                                            v-model="toTime"
+                                                            :items="timeIntervals"
+                                                            :disabled="!timeRestrictionSwitch || checkEntireDay"
+                                                        ></v-select>
+                                                    </v-flex>        
+                                                    <v-flex xs3 text-lg-right ml-3 align-self-center mt-1>
+                                                        <v-checkbox 
+                                                            :disabled="restrictionRadios==='radioEveryday' ? true:false"
+                                                            v-model="checkEntireDay" 
+                                                            label="Entire day">
+                                                        </v-checkbox>
+                                                    </v-flex>     
+                                                </v-layout>                 
+                                                <v-layout row >  <!-- everyday radio -->                                                                              
+                                                    <v-flex xs12 align-self-center style="margin: -10px 0;">
+                                                        <v-radio 
+                                                            label="Everyday" 
+                                                            value="radioEveryday"                                                
+                                                            ></v-radio>
+                                                    </v-flex>
+                                                </v-layout>                                      
+                                                <v-layout row style="margin-bottom: -20px;">      <!-- weekday radio -->                                  
+                                                    <v-flex xs6 align-self-center>
+                                                        <v-radio 
+                                                            label="On certain day of week" 
+                                                            value="radioWeekday"
+                                                            ></v-radio>
+                                                    </v-flex>
+                                                    <v-spacer></v-spacer>
+                                                    <v-flex xs3 text-xs-right align-self-center>                                    
+                                                        <v-select
+                                                            :disabled="restrictionRadios==='radioWeekday' ? false:true"
+                                                            v-model="weekDay"
+                                                            :items="weekDays"
+                                                        ></v-select>
+                                                    </v-flex>
+                                                </v-layout>     
+                                                <v-layout row style="margin-bottom: -45px; margin-top: -10px;">     <!-- date radio -->                                   
+                                                    <v-flex xs6 align-self-center>
+                                                        <v-radio 
+                                                            label="On certain date" 
+                                                            value="radioDate"
+                                                            ></v-radio>
+                                                    </v-flex>                                        
+                                                    <v-spacer></v-spacer>
+                                                    <v-flex xs3>
+                                                        <v-menu
+                                                            ref="menuRestrictDate"
+                                                            v-model="menuRestrictDate"
+                                                            :close-on-content-click="false"
+                                                            :nudge-right="40"
+                                                            :return-value.sync="restrictDate"
+                                                            lazy
+                                                            transition="scale-transition"
+                                                            offset-y
+                                                            full-width
+                                                            min-width="290px"
+                                                        >
+                                                            <template v-slot:activator="{ on }">
+                                                            <v-text-field
+                                                                :disabled="restrictionRadios==='radioDate' ? false:true"
+                                                                v-model="restrictDate"
+                                                                append-icon="event"
+                                                                readonly
+                                                                v-on="on"
+                                                            ></v-text-field>
+                                                            </template>
+                                                            <v-date-picker 
+                                                                v-model="restrictDate" 
+                                                                :min="new Date().toISOString().substr(0, 10)"
+                                                                no-title scrollable>
+                                                            <v-spacer></v-spacer>
+                                                            <v-btn flat color="primary" @click="menuRestrictDate = false">Cancel</v-btn>
+                                                            <v-btn flat color="primary" @click="$refs.menuRestrictDate.save(restrictDate)">OK</v-btn>
+                                                            </v-date-picker>
+                                                        </v-menu>
+                                                    </v-flex> 
+                                                </v-layout>
+                                            </v-radio-group>
+                                        </v-card-text>
+                                    </v-card>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
                             </v-layout>
                         </v-container>
                     </v-tab-item>
@@ -281,94 +295,106 @@
                                     <v-switch 
                                         v-model="notificationSwitch" 
                                         color="blue" 
-                                        label="Send Notification" 
+                                        label="Send Notification"
+                                        @change="onNotificationSwitchChange" 
                                         ></v-switch>
-                                </v-flex>                                   
-                                <v-radio-group  
-                                    @change="onNotificationRadioChange"
-                                    :disabled="!notificationSwitch" 
-                                    v-model="notificationRadios" 
-                                    :mandatory="true">
-                                    <v-flex xs12 >
-                                        <v-radio 
-                                            label="Whenever a task fails or terminates" 
-                                            value="radioFail"
-                                            ></v-radio>
-                                    </v-flex>
-                                    <v-layout row >
-                                        <v-flex align-self-center shrink ml-1>
-                                            <v-radio 
-                                                label="At every given" 
-                                                value="radioHour"
-                                                ></v-radio>
-                                        </v-flex> 
-                                        <v-flex xs2 align-self-center >                                                                       
-                                            <v-select
-                                                v-model="fromTime"
-                                                :items=Array.from(Array(10).keys())
-                                                :disabled="notificationRadios !=='radioHour'"
-                                            ></v-select>
-                                        </v-flex>                                                                            
-                                        <v-flex xs1 align-self-center text-lg-right>
-                                            hour
-                                        </v-flex>  
-                                    </v-layout>             
-                                    <v-flex xs12 >
-                                        <v-radio 
-                                            label="When activity is complete" 
-                                            value="radioComplete"></v-radio>
-                                    </v-flex>
-                                </v-radio-group>
-                                <v-flex xs12 >
-                                    <v-card height="250" class="scroll">  
-                                        <v-list
-                                            one-line
-                                            >        
-                                            <v-list-tile>                                                    
-                                                <v-list-tile-action>
-                                                    <v-checkbox 
-                                                        :disabled="notificationRadios !=='radioComplete'" 
-                                                        v-model="checkAllEmail"
-                                                        @change="selectAllEmails"
-                                                        >
-                                                        </v-checkbox>
-                                                </v-list-tile-action>
-                                                <v-list-tile-content>
-                                                    <v-list-tile-title>
-                                                        Recipients
-                                                    </v-list-tile-title>
-                                                </v-list-tile-content>
-                                            </v-list-tile>   
-                                            <template 
-                                                v-for="(item, index) in emails">
-                                                <v-divider
-                                                :key="['divider' + index]"
-                                                ></v-divider>
-                                                <v-list-tile
-                                                    :key="['email' + index]"
-                                                    >                                                    
-                                                    <v-list-tile-action>
-                                                        <v-checkbox 
-                                                            :disabled="notificationRadios !=='radioComplete'" 
-                                                            v-model="emailsSelected"
-                                                            :value="item"
-                                                            >
-                                                            </v-checkbox>
-                                                    </v-list-tile-action>
-                                                    <v-list-tile-content>
-                                                        <v-list-tile-title>
-                                                            {{item}}
-                                                        </v-list-tile-title>
-                                                    </v-list-tile-content>
-                                                </v-list-tile>
-                                            </template> 
-                                        </v-list>
-                                    </v-card>
-                                </v-flex>
+                                </v-flex>   
+                                
+                                <v-expansion-panel
+                                    v-model="expansionNotification"
+                                    expand
+                                    >
+                                    <v-expansion-panel-content>
+                                        <v-card> 
+                                            <v-card-text>                                  
+                                                <v-radio-group  
+                                                    @change="onNotificationRadioChange"
+                                                    :disabled="!notificationSwitch" 
+                                                    v-model="notificationRadios" 
+                                                    :mandatory="true">
+                                                    <v-flex xs12 style="margin: -20px 0;">
+                                                        <v-radio 
+                                                            label="Whenever a task fails or terminates" 
+                                                            value="radioFail"
+                                                            ></v-radio>
+                                                    </v-flex>
+                                                    <v-layout row >
+                                                        <v-flex align-self-center shrink ml-1>
+                                                            <v-radio 
+                                                                label="At every given" 
+                                                                value="radioHour"
+                                                                ></v-radio>
+                                                        </v-flex> 
+                                                        <v-flex xs2 align-self-center >                                                                       
+                                                            <v-select
+                                                                v-model="fromTime"
+                                                                :items=Array.from(Array(10).keys())
+                                                                :disabled="notificationRadios !=='radioHour'"
+                                                            ></v-select>
+                                                        </v-flex>                                                                            
+                                                        <v-flex xs1 align-self-center text-lg-right>
+                                                            hour
+                                                        </v-flex>  
+                                                    </v-layout>             
+                                                    <v-flex xs12 style="margin: -20px 0;">
+                                                        <v-radio 
+                                                            label="When activity is complete" 
+                                                            value="radioComplete"></v-radio>
+                                                    </v-flex>
+                                                </v-radio-group>
+                                                <v-flex xs12 >
+                                                    <v-card height="200" class="scroll">  
+                                                        <v-list
+                                                            one-line
+                                                            >        
+                                                            <v-list-tile>                                                    
+                                                                <v-list-tile-action>
+                                                                    <v-checkbox 
+                                                                        :disabled="notificationRadios !=='radioComplete'" 
+                                                                        v-model="checkAllEmail"
+                                                                        @change="selectAllEmails"
+                                                                        >
+                                                                        </v-checkbox>
+                                                                </v-list-tile-action>
+                                                                <v-list-tile-content>
+                                                                    <v-list-tile-title>
+                                                                        Recipients
+                                                                    </v-list-tile-title>
+                                                                </v-list-tile-content>
+                                                            </v-list-tile>   
+                                                            <template 
+                                                                v-for="(item, index) in emails">
+                                                                <v-divider
+                                                                :key="['divider' + index]"
+                                                                ></v-divider>
+                                                                <v-list-tile
+                                                                    :key="['email' + index]"
+                                                                    >                                                    
+                                                                    <v-list-tile-action>
+                                                                        <v-checkbox 
+                                                                            :disabled="notificationRadios !=='radioComplete'" 
+                                                                            v-model="emailsSelected"
+                                                                            :value="item"
+                                                                            >
+                                                                            </v-checkbox>
+                                                                    </v-list-tile-action>
+                                                                    <v-list-tile-content>
+                                                                        <v-list-tile-title>
+                                                                            {{item}}
+                                                                        </v-list-tile-title>
+                                                                    </v-list-tile-content>
+                                                                </v-list-tile>
+                                                            </template> 
+                                                        </v-list>
+                                                    </v-card>
+                                                </v-flex>
+                                            </v-card-text>
+                                        </v-card>
+                                    </v-expansion-panel-content>
+                                </v-expansion-panel>
                             </v-layout>
                         </v-container>
-                    </v-tab-item>                    
-                    
+                    </v-tab-item>
                 </v-tabs-items>
                 <v-divider></v-divider>
                 <v-card-actions>
@@ -400,7 +426,7 @@ export default {
             tabButtonName: 'Next',
             dialog: true,
             tabs: null,
-            checkAllDay: false,
+            checkEntireDay: false,
             timeRestrictionSwitch: false,
             notificationSwitch: false,  
             notificationRadios: 'radioFail',       
@@ -415,6 +441,8 @@ export default {
             fromTime: null,
             toTime: null,
             menuTime: false,
+            expansionNotification: [false],
+            expansionRestriction: [false],
             weekDays: [],
             timeIntervals: [],
             tabItems: ["Schedule","Task Properties", "Notification"],
@@ -429,7 +457,7 @@ export default {
                 {
                     id: 1,
                     name: 'list-1',
-                    checkAllDay: false,
+                    checkEntireDay: false,
                     checkedRadio: "radioEveryday",
                     fromTime: "00:45",
                     toTime: "03:30",
@@ -440,7 +468,7 @@ export default {
                 {
                     id: 2,
                     name: 'list-2',
-                    checkAllDay: true,
+                    checkEntireDay: true,
                     checkedRadio: "radioWeekday",
                     fromTime: null,
                     toTime: null,
@@ -450,7 +478,7 @@ export default {
                 {
                     id: 3,
                     name: 'list-3',
-                    checkAllDay: false,
+                    checkEntireDay: false,
                     checkedRadio: "radioDate",
                     fromTime: "01:00",
                     restrictDate: "2019-05-31",
@@ -472,7 +500,7 @@ export default {
             }
         },
         getTime(){
-            if(!this.checkAllDay){
+            if(!this.checkEntireDay){
                 return ' between ' + this.fromTime +' and ' + this.toTime;
             }
             else{
@@ -514,7 +542,13 @@ export default {
             this.checkAllEmail = false;
         },
         onRestrictionRadioChange(){
-            this.checkAllDay = false;
+            this.checkEntireDay = false;
+        },
+        onRestrictionSwitchChange(){
+            this.expansionRestriction = [this.timeRestrictionSwitch];
+        },
+        onNotificationSwitchChange(){
+            this.expansionNotification = [this.notificationSwitch];
         },
         getHourIntervals(){
             var quarterHours = ["00", "15", "30", "45"];
@@ -531,13 +565,14 @@ export default {
             return times;
         },
         onTileClick(item){
-            console.log(this.getCurrentState());
+            console.log(this.getCurrentState(), this.getTextFromTask(item));
+            
             let 
-            {   checkAllDay,checkedRadio,
+            {   checkEntireDay,checkedRadio,
                 fromTime,toTime,
                 restrictDate,weekDay
             } = item;
-            this.checkAllDay = checkAllDay;
+            this.checkEntireDay = checkEntireDay;
             this.restrictionRadios=checkedRadio;
             this.fromTime=fromTime;
             this.toTime=toTime;
@@ -548,14 +583,32 @@ export default {
             return{
                 fromTime: this.fromTime,
                 toTime: this.toTime,
-                checkAllDay: this.checkAllDay,
+                checkEntireDay: this.checkEntireDay,
                 checkedRadio: this.restrictionRadios,
                 restrictDate: this.restrictDate,
                 weekDay: this.weekDay
             }
         },
-        getTextFromTask(task){
-            let text = 'Don\'t ';
+        getTextFromTask(item){
+            let text = 'Don\'t run tasks';
+            let {   
+                checkEntireDay,checkedRadio,
+                fromTime,toTime,
+                restrictDate,weekDay
+            } = item;
+            if(checkEntireDay === true){
+                if(checkedRadio==='radioWeekday'){
+                    text = text + ' on ' + weekDay;
+                }else if(checkedRadio==='radioDate'){
+                    text = text + ' on ' + restrictDate;
+                }else{
+                    text = text + ' between ' + fromTime + ' to ' + toTime + ' Everyday';
+                }
+            }
+            else{
+
+            }
+            return text;
         }
     },
     created(){
