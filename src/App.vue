@@ -1,5 +1,6 @@
 <template>
   <div id="app" >
+    <v-app>
     <!-- <HamBurger 
       :alive="isMenuActive" 
       @click.native="onHamClick"/>
@@ -12,6 +13,7 @@
         </router-view>
       </transition> -->
       <vuetify-playground/>
+    </v-app>
   </div>
 </template>
 
@@ -80,7 +82,7 @@ body{
   width: 100vw;
   height: 100vh;
 }
-::-webkit-scrollbar {
+/* ::-webkit-scrollbar {
       width: 0;
-}
+} */
 </style>
