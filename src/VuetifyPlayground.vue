@@ -31,11 +31,14 @@
                 </v-tabs>
                 <!-- style="background: red;"-->
                 
-                <v-tabs-items v-model="tabs">
+                <v-tabs-items 
+                    v-model="tabs">
+                    <!-- Schedule Tab -->
                     <v-tab-item>          
                         <v-container fill-height grid-list-md >
-                            <v-layout row wrap>                                
-                                <v-flex xs6>    <!-- date picker -->
+                            <v-layout row wrap style="margin-top: -20px">                                
+                                <!-- date picker -->
+                                <v-flex xs6>    
                                     <v-menu
                                         ref="menuDate"
                                         v-model="menuDate"
@@ -67,7 +70,8 @@
                                         </v-date-picker>
                                     </v-menu>
                                 </v-flex> 
-                                <v-flex xs6>    <!-- time picker -->
+                                <!-- time picker -->
+                                <v-flex xs6>    
                                     <v-menu
                                         ref="menuTime"
                                         v-model="menuTime"
@@ -97,11 +101,15 @@
                                             @click:minute="$refs.menuTime.save(scheduleTime)"
                                             ></v-time-picker>
                                     </v-menu>
-                                </v-flex>                                
-                                <v-flex xs12>   <!-- divider -->
+                                </v-flex> 
+                                 <!-- divider -->                               
+                                <v-flex xs12>  
                                     <v-divider></v-divider>
                                 </v-flex>
-                                <v-layout row>  <!-- time restriction toggle -->
+                                <!-- time restriction toggle -->
+                                <v-layout 
+                                    row
+                                    style="margin: -10px -5px;">  
                                     <v-flex xs8 grow align-self-center ml-1>
                                         <v-switch 
                                             @change="onRestrictionSwitchChange"
@@ -115,45 +123,55 @@
                                         <v-btn
                                             :disabled="!timeRestrictionSwitch"
                                             color="green lighten"
+                                            @click="onAddClick"
                                             >
                                             + Add New
                                         </v-btn>
                                     </v-flex>
                                 </v-layout>
+                                                <!-- expansion panel -->
                                 <v-expansion-panel
                                     v-model="expansionRestriction"
                                     expand
                                     >
                                     <v-expansion-panel-content>
                                     <v-card> 
-                                        <v-card-text>                                            
-                                            <v-flex xs12>   <!-- defined restrictions list -->
+                                        <v-card-text>    
+                                            <!-- defined restrictions list -->
+                                            <v-flex xs12>  
                                                 <v-list 
                                                     style="max-height: 100px; border: 1px solid #ccc;"
-                                                    class="scroll-y"
-                                                    
-                                                    >
-                                                    <template v-for="(task) in predefinedTasks">
-                                                        
+                                                    class="scroll-y">
+                                                    <template v-for="(task) in scheduledTasks">
                                                         <v-list-tile
+                                                            ripple
+                                                            :class="task.id === selectedTask? 'grey-bg':''"
                                                             :key="task.id"
                                                             @click="onTileClick(task)"
                                                             >
-                                                            <v-list-tile-content>
-                                                                <v-list-tile-title v-html="task.name"></v-list-tile-title>
+                                                            <v-list-tile-action>
+                                                                <v-icon
+                                                                    color="red"
+                                                                    @click="onIconClick(task)"
+                                                                >remove_circle</v-icon>
+                                                            </v-list-tile-action>
+                                                            <v-list-tile-content 
+                                                                style="margin-left: -20px">
+                                                                <v-list-tile-title prepend-icon="event" v-html="getTextFromTask(task)"></v-list-tile-title>
                                                             </v-list-tile-content>
                                                         </v-list-tile>
                                                     </template>
                                                 </v-list>
                                             </v-flex> 
-                                                            <!-- radio group -->   
+                                            <!-- radio group -->   
                                             <v-radio-group                
                                                 class="radio-group-full-width"                                
                                                 :disabled="!timeRestrictionSwitch"
                                                 v-model="restrictionRadios" 
                                                 :mandatory="true"
-                                                @change="onRestrictionRadioChange">                                                             
-                                                <v-layout row style="margin-top: -30px;" >   <!-- task between picker -->
+                                                @change="onRestrictionRadioChange">
+                                                <!-- task between picker -->                                                             
+                                                <v-layout row style="margin-top: -35px;" >   
                                                     <v-flex align-self-center grow style="margin-left: 2px;">
                                                         Don't run tasks between 
                                                     </v-flex> 
@@ -176,21 +194,24 @@
                                                     </v-flex>        
                                                     <v-flex xs3 text-lg-right ml-3 align-self-center mt-1>
                                                         <v-checkbox 
+                                                            @change="onCheckEntireDayChange"
                                                             :disabled="restrictionRadios==='radioEveryday' ? true:false"
                                                             v-model="checkEntireDay" 
                                                             label="Entire day">
                                                         </v-checkbox>
                                                     </v-flex>     
-                                                </v-layout>                 
-                                                <v-layout row >  <!-- everyday radio -->                                                                              
-                                                    <v-flex xs12 align-self-center style="margin: -10px 0;">
+                                                </v-layout> 
+                                                <!-- everyday radio -->                 
+                                                <v-layout row >                                                                             
+                                                    <v-flex xs12 align-self-center style="margin: -15px 0;">
                                                         <v-radio 
                                                             label="Everyday" 
                                                             value="radioEveryday"                                                
                                                             ></v-radio>
                                                     </v-flex>
-                                                </v-layout>                                      
-                                                <v-layout row style="margin-bottom: -20px;">      <!-- weekday radio -->                                  
+                                                </v-layout>          
+                                                <!-- weekday radio -->                             
+                                                <v-layout row style="margin-bottom: -25px;">                                       
                                                     <v-flex xs6 align-self-center>
                                                         <v-radio 
                                                             label="On certain day of week" 
@@ -203,10 +224,12 @@
                                                             :disabled="restrictionRadios==='radioWeekday' ? false:true"
                                                             v-model="weekDay"
                                                             :items="weekDays"
+                                                            required
                                                         ></v-select>
                                                     </v-flex>
                                                 </v-layout>     
-                                                <v-layout row style="margin-bottom: -45px; margin-top: -10px;">     <!-- date radio -->                                   
+                                                <!-- date radio --> 
+                                                <v-layout row style="margin-bottom: -45px; margin-top: -15px;">                                       
                                                     <v-flex xs6 align-self-center>
                                                         <v-radio 
                                                             label="On certain date" 
@@ -254,7 +277,8 @@
                                 </v-expansion-panel>
                             </v-layout>
                         </v-container>
-                    </v-tab-item>
+                    </v-tab-item>                    
+                    <!-- Task Properties Tab -->
                     <v-tab-item>                        
                         <v-container fill-height grid-list-md >
                             <v-layout row wrap>
@@ -287,9 +311,10 @@
                                     </v-flex>
                             </v-layout>
                         </v-container>                        
-                    </v-tab-item>
+                    </v-tab-item>                    
+                    <!-- Notification Tab -->
                     <v-tab-item>
-                        <v-container fluid fill-height grid-list-md >
+                        <v-container fill-height grid-list-md >
                             <v-layout row wrap>
                                 <v-flex xs12 >
                                     <v-switch 
@@ -352,7 +377,7 @@
                                                                     <v-checkbox 
                                                                         :disabled="notificationRadios !=='radioComplete'" 
                                                                         v-model="checkAllEmail"
-                                                                        @change="selectAllEmails"
+                                                                        @change="onCheckAllEmailChange"
                                                                         >
                                                                         </v-checkbox>
                                                                 </v-list-tile-action>
@@ -419,94 +444,51 @@
 </template>
 
 <script>
+import uid from 'uid';
 export default {
     name: 'VuetifyPlaygrounds',
     data(){
         return{
-            tabButtonName: 'Next',
             dialog: true,
+            // tab
             tabs: null,
-            checkEntireDay: false,
-            timeRestrictionSwitch: false,
-            notificationSwitch: false,  
-            notificationRadios: 'radioFail',       
-            restrictionRadios: 'radioEveryday',
-            tabs: null,
-            weekDay: null,
-            scheduleDate: null,
-            menuDate: false, 
-            restrictDate: null,
-            menuRestrictDate: false,
-            scheduleTime: null,
-            fromTime: null,
-            toTime: null,
-            menuTime: false,
+            tabButtonName: 'Next',
             expansionNotification: [false],
-            expansionRestriction: [false],
+            expansionRestriction: [true],
+            tabItems: ["Schedule","Task Properties", "Notification"],
+            //restriction
+            scheduleDate: new Date().toISOString().substring(0, 10),
+            scheduleTime: new Date().toISOString().substring(11, 16),
+            timeRestrictionSwitch: true,
+            restrictionRadios: 'radioEveryday',
+            checkEntireDay: false,
+            weekDay: null,
+            restrictDate: null,
+            fromTime: '23:00',
+            toTime: '09:00',
+
+            menuDate: false, 
+            menuTime: false,
+            menuRestrictDate: false,
             weekDays: [],
             timeIntervals: [],
-            tabItems: ["Schedule","Task Properties", "Notification"],
+            //task properties
             priorityItems: ["Very High","High", "Normal", "Low", "Very Low", "Background"],
+            //notification
+            notificationSwitch: false,  
+            notificationRadios: 'radioFail',       
             checkAllEmail: false,
             emailsSelected: [],
             emails: ['thi.that@globalids.com', 'this.hat@globalids.com',
                         'ths.that@globalids.com', 'this.tat@globalids.com', 'this.that@globalis.com',
                         'tis.that@globalids.com', 'this.tht@globalids.com', 'this.that@globalid.com',
                         'his.that@globalids.com', 'this.tha@globalids.com', 'this.that@globalds.com'],
-            predefinedTasks: [
-                {
-                    id: 1,
-                    name: 'list-1',
-                    checkEntireDay: false,
-                    checkedRadio: "radioEveryday",
-                    fromTime: "00:45",
-                    toTime: "03:30",
-                    restrictDate: null,
-                    weekDay: null,
-
-                },
-                {
-                    id: 2,
-                    name: 'list-2',
-                    checkEntireDay: true,
-                    checkedRadio: "radioWeekday",
-                    fromTime: null,
-                    toTime: null,
-                    restrictDate: null,
-                    weekDay: "Tuesday"
-                },
-                {
-                    id: 3,
-                    name: 'list-3',
-                    checkEntireDay: false,
-                    checkedRadio: "radioDate",
-                    fromTime: "01:00",
-                    restrictDate: "2019-05-31",
-                    toTime: "09:00",
-                    weekDay: null
-                }
-            ]
+            selectedTask: null,
+            scheduledTasks: []
         }
     },
     methods: {
-        getDay(){
-            switch(this.restrictionRadios){
-                case 'radioEveryday':
-                    return 'Everyday';
-                case 'radioWeekday':
-                    return this.weekDay;
-                case 'radioDate':
-                    return this.restrictDate
-            }
-        },
-        getTime(){
-            if(!this.checkEntireDay){
-                return ' between ' + this.fromTime +' and ' + this.toTime;
-            }
-            else{
-                return ''
-            }
-        },
+        // events
         onTabChange(){
             if(this.tabs === 2){
                 this.tabButtonName = "Done";
@@ -521,28 +503,35 @@ export default {
                 this.next();
             }
         },
-        next(){
-            const active = parseInt(this.tabs)
-            this.tabs = (active < 2 ? active + 1 : 0)
-            this.onTabChange();
+        onCheckAllEmailChange(){
+            this.selectAllEmails();
         },
-        submit(){
-            console.log('submit');
-        },
-        selectAllEmails(){
-            if(this.checkAllEmail){
-                this.emailsSelected = this.emails;
-            }
-            else{
-                this.emailsSelected = [];
-            }
+        onCheckEntireDayChange(){    
+            !this.checkEntireDay ? this.fromTime = '23:00': this.fromTime = null;
+            !this.checkEntireDay ? this.toTime = '09:00': this.toTime = null;
         },
         onNotificationRadioChange(){
             this.emailsSelected = [];
             this.checkAllEmail = false;
         },
-        onRestrictionRadioChange(){
-            this.checkEntireDay = false;
+        onRestrictionRadioChange(){   
+            switch(this.restrictionRadios){
+                case 'radioEveryday':
+                    this.checkEntireDay = false;
+                    this.fromTime = '23:00';
+                    this.toTime = '09:00';
+                    this.weekDay = null;
+                    this.restrictDate = null;
+                    break;
+                case 'radioWeekday':
+                    this.weekDay = 'Sunday';
+                    this.restrictDate = null;
+                    break;
+                case 'radioDate':
+                    this.restrictDate = new Date().toISOString().substr(0, 10);
+                    this.weekDay = null;
+                    break;
+            }
         },
         onRestrictionSwitchChange(){
             this.expansionRestriction = [this.timeRestrictionSwitch];
@@ -564,9 +553,8 @@ export default {
             }
             return times;
         },
-        onTileClick(item){
-            console.log(this.getCurrentState(), this.getTextFromTask(item));
-            
+        onTileClick(item){ 
+            this.selectedTask = item.id;    
             let 
             {   checkEntireDay,checkedRadio,
                 fromTime,toTime,
@@ -579,8 +567,36 @@ export default {
             this.restrictDate=restrictDate;
             this.weekDay=weekDay;
         },
+        onIconClick(item){
+            this.removeTask(item);
+        },
+        onAddClick(){
+            this.scheduledTasks = [this.getCurrentState(), ...this.scheduledTasks];
+        },
+
+        // functions 
+        removeTask(task){
+            this.scheduledTasks = this.scheduledTasks.filter(e => task.id !== e.id);
+        },
+        next(){
+            const active = parseInt(this.tabs)
+            this.tabs = (active < 2 ? active + 1 : 0)
+            this.onTabChange();
+        },
+        submit(){
+            console.log('submit');
+        },     
+        selectAllEmails(){
+            if(this.checkAllEmail){
+                this.emailsSelected = this.emails;
+            }
+            else{
+                this.emailsSelected = [];
+            }
+        },
         getCurrentState(){
             return{
+                id: uid(),
                 fromTime: this.fromTime,
                 toTime: this.toTime,
                 checkEntireDay: this.checkEntireDay,
@@ -596,20 +612,35 @@ export default {
                 fromTime,toTime,
                 restrictDate,weekDay
             } = item;
-            if(checkEntireDay === true){
-                if(checkedRadio==='radioWeekday'){
-                    text = text + ' on ' + weekDay;
-                }else if(checkedRadio==='radioDate'){
-                    text = text + ' on ' + restrictDate;
-                }else{
-                    text = text + ' between ' + fromTime + ' to ' + toTime + ' Everyday';
-                }
+            if(!checkEntireDay){
+                text = text + ' between ' + fromTime +' and ' + toTime;
             }
-            else{
-
+            switch(checkedRadio){
+                case 'radioEveryday':
+                    text = text + ' everyday';
+                    break;
+                case 'radioWeekday':
+                    text = text + ' on ' + weekDay;
+                    break;
+                case 'radioDate':
+                    text = text + ' on ' + restrictDate;
+                    break;
             }
             return text;
         }
+    },
+    computed: {
+        renderText: {
+            get(){
+                return this.getTextFromTask(this.getCurrentState());
+            }
+        }
+    },
+    beforeUpdate() {
+        let index = this.scheduledTasks.findIndex(task => task.id === this.selectedTask);
+        let newTask = this.getCurrentState();
+        newTask.id = this.selectedTask;
+        this.scheduledTasks[index] = newTask;
     },
     created(){
         this.weekDays = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -624,5 +655,8 @@ export default {
     }    
     .radio-group-full-width >>>.v-input__control {
         width: 100%
+    }
+    .grey-bg{
+        background: #ccc;
     }
 </style>
