@@ -12,7 +12,7 @@
         <router-view>
         </router-view>
       </transition> -->
-      <vuetify-playground v-on:childToParent="onChildClick"/>
+      <vuetify-playground v-on:dataFromSchedule="onChildClick"/>
     </v-app>
   </div>
 </template>

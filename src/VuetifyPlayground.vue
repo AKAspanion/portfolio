@@ -13,7 +13,16 @@
                     Click Me
                 </v-btn>
             </template>
-            <v-card>
+            <v-card style="overflow: hidden;">
+                <v-snackbar
+                    v-model="snackbar.model"
+                    color="info"
+                    left bottom
+                    absolute
+                    :timeout="2000"
+                    >
+                    {{snackbar.message}}                   
+                </v-snackbar>
                 <v-tabs
                     v-model="tab.tabs"
                     centered
@@ -22,11 +31,11 @@
                     @change="onTabChange"
                     >
                     <v-tab
-                        v-for="tab in tab.tabItems"
-                        :key="tab"
+                        v-for="item in tab.tabItems"
+                        :key="item"
                         ripple
                     >
-                    {{tab}}
+                    {{item}}
                     </v-tab>
                 </v-tabs>
                 <!-- style="background: red;"-->
@@ -36,7 +45,7 @@
                     <!-- Schedule Tab -->
                     <v-tab-item>          
                         <v-container fill-height grid-list-md >
-                            <v-layout row wrap style="margin-top: -8px;">                                
+                            <v-layout row wrap style="margin-top: -7px;">                                
                                 <!-- date picker -->
                                 <v-flex xs6>    
                                     <v-menu
@@ -220,7 +229,7 @@
                                                     <v-flex xs3 text-xs-right align-self-center>                                    
                                                         <v-select
                                                             :disabled="restriction.radio==='radioWeekday' ? false:true"
-                                                            v-model="restriction.weekDay"
+                                                            v-model="restriction.restrictDay"
                                                             :items="restriction.weekDays"
                                                             required
                                                         ></v-select>
@@ -443,8 +452,9 @@ export default {
     name: 'VuetifyPlaygrounds',
     data(){
         return{
-            dialog: true,
             tab: null,
+            dialog: true,
+            snackbar: null,
             restriction: null,
             taskProperties: null,
             notification: null
@@ -458,14 +468,6 @@ export default {
             }else{
                 this.tab.tabButtonName = "Next";
             }
-        },
-        onCheckAllEmailChange(){
-            this.selectAllEmails();
-        },
-        onCheckEntireDayChange(){ 
-            let {checkEntireDay} = this.restriction;   
-            !checkEntireDay ? this.restriction.fromTime = '23:00': this.restriction.fromTime = null;
-            !checkEntireDay ? this.restriction.toTime = '09:00': this.restriction.toTime = null;
         },
         onNotificationRadioChange(){
             switch (this.notification.radio) {
@@ -495,16 +497,16 @@ export default {
                     this.restriction.checkEntireDay = false;
                     this.restriction.fromTime = '23:00';
                     this.restriction.toTime = '09:00';
-                    this.restriction.weekDay = null;
+                    this.restriction.restrictDay = null;
                     this.restriction.restrictDate = null;
                     break;
                 case 'radioWeekday':
-                    this.restriction.weekDay = 'Sunday';
+                    this.restriction.restrictDay = 'Sunday';
                     this.restriction.restrictDate = null;
                     break;
                 case 'radioDate':
                     this.restriction.restrictDate = new Date().toISOString().substr(0, 10);
-                    this.restriction.weekDay = null;
+                    this.restriction.restrictDay = null;
                     break;
             }
         },
@@ -516,20 +518,28 @@ export default {
             this.notification.hour = null;
             this.tab.expansionEmailList = [false];
         },
+        onCheckAllEmailChange(){
+            this.selectAllEmails();
+        },
+        onCheckEntireDayChange(){ 
+            let {checkEntireDay} = this.restriction;   
+            !checkEntireDay ? this.restriction.fromTime = '23:00': this.restriction.fromTime = null;
+            !checkEntireDay ? this.restriction.toTime = '09:00': this.restriction.toTime = null;
+        },
         onTileClick(item){ 
             this.restriction.selectedTask = item.id;    
             let {checkEntireDay,checkedRadio,fromTime,
-                toTime,restrictDate,weekDay
+                toTime,restrictDate,restrictDay
             } = item;
             this.restriction.checkEntireDay = checkEntireDay;
             this.restriction.radio=checkedRadio;
             this.restriction.fromTime=fromTime;
             this.restriction.toTime=toTime;
             this.restriction.restrictDate=restrictDate;
-            this.restriction.weekDay=weekDay;
+            this.restriction.restrictDay=restrictDay;
         },
         onIconClick(item){
-            this.removeTask(item);
+            this.removeTaskById(item.id);
         },
         onAddClick(){
             this.restriction.scheduledTasks = [this.getCurrentState(), ...this.restriction.scheduledTasks];
@@ -551,37 +561,33 @@ export default {
         getTaskById(id){
             return this.restriction.scheduledTasks.filter(e => id === e.id)[0];
         },
-        removeTask(task){
-            this.restriction.scheduledTasks = this.restriction.scheduledTasks.filter(e => task.id !== e.id);
+        removeTaskById(id){
+            this.restriction.scheduledTasks = this.restriction.scheduledTasks.filter(e => id !== e.id);
         },
         next(){
             const active = parseInt(this.tab.tabs)
+            switch(active){
+                case 0:
+                    if(this.restriction.switch){
+                        if(this.getTaskById(this.restriction.selectedTask) === undefined){
+                            this.snackbar.model = true;
+                            if(this.restriction.scheduledTasks.length <= 0){
+                                this.snackbar.message = 'Please add a configuration!';
+                            }else{
+                                this.snackbar.message = 'Please select a configuration!';
+                            }
+                            return;
+                        }
+                    }
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+            }
             this.tab.tabs = (active < 2 ? active + 1 : 0)
             this.onTabChange();
-        },
-        getCurrentNotification(){
-            switch (this.notification.radio) {
-                case 'radioComplete':
-                    return {
-                        type: 'complete',
-                        data:{
-                            recipients: this.notification.recipients
-                        }
-                    }
-                case 'radioFail':
-                    return {
-                        type: 'fail',
-                        data: null
-                    }
-                case 'radioHour':                    
-                    return {
-                        type: 'hour',
-                        data:{
-                            hourCount: this.notification.hour
-                        }
-                    }
-            }
-        },
+        },        
         submit(){
             let data ={
                 schedule: {
@@ -604,7 +610,30 @@ export default {
             this.dialog = false;
             this.initState();
             this.emitToParent(data);
-        },     
+        },    
+        getCurrentNotification(){
+            switch (this.notification.radio) {
+                case 'radioComplete':
+                    return {
+                        type: 'complete',
+                        data:{
+                            recipients: this.notification.recipients
+                        }
+                    }
+                case 'radioFail':
+                    return {
+                        type: 'fail',
+                        data: null
+                    }
+                case 'radioHour':                    
+                    return {
+                        type: 'hour',
+                        data:{
+                            hourCount: this.notification.hour
+                        }
+                    }
+            }
+        }, 
         selectAllEmails(){
             if(this.notification.checkAllEmail){
                 this.notification.recipients = this.notification.emails;
@@ -615,13 +644,13 @@ export default {
         },
         getCurrentState(){
             let {fromTime, toTime, checkEntireDay, 
-                radio, restrictDate, weekDay
+                radio, restrictDate, restrictDay
             } = this.restriction;
             return{
                 id: uid(),
                 fromTime,
                 toTime,
-                weekDay,
+                restrictDay,
                 restrictDate,
                 checkEntireDay,
                 checkedRadio: radio
@@ -632,7 +661,7 @@ export default {
             let {   
                 checkEntireDay,checkedRadio,
                 fromTime,toTime,
-                restrictDate,weekDay
+                restrictDate,restrictDay
             } = item;
             if(!checkEntireDay){
                 text = text + ' between ' + fromTime +' and ' + toTime;
@@ -642,7 +671,7 @@ export default {
                     text = text + ' everyday';
                     break;
                 case 'radioWeekday':
-                    text = text + ' on ' + weekDay;
+                    text = text + ' on ' + restrictDay;
                     break;
                 case 'radioDate':
                     text = text + ' on ' + restrictDate;
@@ -666,7 +695,7 @@ export default {
         },
         // emit
         emitToParent (data) {
-            this.$emit('childToParent', data)
+            this.$emit('dataFromSchedule', data);
         },
         //init
         initState(){
@@ -687,7 +716,7 @@ export default {
                 restrictDate: null,
                 fromTime: '23:00',
                 toTime: '09:00',
-                weekDay: null,
+                restrictDay: null,
                 menuDate: false, 
                 menuTime: false,
                 menuRestrictDate: false,
@@ -696,7 +725,7 @@ export default {
                     id: id,
                     fromTime: "23:00",
                     toTime: "09:00",
-                    weekDay: null,
+                    restrictDay: null,
                     restrictDate: null,
                     checkEntireDay: false,
                     checkedRadio: "radioEveryday",
@@ -720,8 +749,11 @@ export default {
                 emails: ['thi.that@globalids.com', 'this.hat@globalids.com', 'tis.hat@globalids.com',
                         'ths.that@globalids.com', 'this.tat@globalids.com', 'this.that@globalis.com',
                         'tis.that@globalids.com', 'this.tht@globalids.com', 'this.that@globalid.com',
-                        'his.that@globalids.com', 'this.tha@globalids.com', 'this.that@globalds.com'],
-
+                        'his.that@globalids.com', 'this.tha@globalids.com', 'this.that@globalds.com']
+            }
+            this.snackbar = {
+                model: false,
+                message: 'Hey I am a snackbar'
             }
         }
     },
