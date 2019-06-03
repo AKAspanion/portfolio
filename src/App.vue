@@ -12,7 +12,7 @@
         <router-view>
         </router-view>
       </transition> -->
-      <vuetify-playground/>
+      <vuetify-playground v-on:childToParent="onChildClick"/>
     </v-app>
   </div>
 </template>
@@ -43,6 +43,9 @@ export default {
         if(this.isMenuActive){
           this.isMenuActive = false;
         }
+      },
+      onChildClick (value) {
+        console.log(value);
       }
   }
 }

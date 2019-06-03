@@ -15,7 +15,7 @@
             </template>
             <v-card>
                 <v-tabs
-                    v-model="tabs"
+                    v-model="tab.tabs"
                     centered
                     slider-color="blue"
                     ripple
@@ -32,7 +32,7 @@
                 <!-- style="background: red;"-->
                 
                 <v-tabs-items 
-                    v-model="tabs">
+                    v-model="tab.tabs">
                     <!-- Schedule Tab -->
                     <v-tab-item>          
                         <v-container fill-height grid-list-md >
@@ -112,7 +112,7 @@
                                         <v-switch 
                                             @change="onRestrictionSwitchChange"
                                             v-model="timeRestrictionSwitch" 
-                                            color="green" 
+                                            color="primary" 
                                             label="Time Restriction"
                                             ></v-switch>
                                     </v-flex>
@@ -120,7 +120,7 @@
                                     <v-flex text-lg-right align-self-center mb-2>
                                         <v-btn
                                             :disabled="!timeRestrictionSwitch"
-                                            color="green lighten"
+                                            color="primary"
                                             @click="onAddClick"
                                             >
                                             + Add New
@@ -451,14 +451,15 @@
                 <v-divider></v-divider>
                 <v-card-actions>
                     <v-spacer></v-spacer><v-btn
-                        color="red"
+                        color="primary"
                         flat
-                        @click="dialog = false"
+                        :disabled="tab.tabs === 0"
+                        @click="onBackClick"
                         >
-                        Cancel
+                        Back
                     </v-btn>
                     <v-btn
-                        color="primary"
+                        color="green"
                         flat
                         @click="onActionClick"
                         >
@@ -477,6 +478,7 @@ export default {
     data(){
         return{
             dialog: true,
+            tab: null,
             // tab
             tabs: null,
             tabButtonName: 'Next',
@@ -529,7 +531,7 @@ export default {
     methods: {
         // events
         onTabChange(){
-            if(this.tabs === 2){
+            if(this.tab.tabs === 2){
                 this.tabButtonName = "Done";
             }else{
                 this.tabButtonName = "Next";
@@ -613,11 +615,16 @@ export default {
             this.scheduledTasks = [this.getCurrentState(), ...this.scheduledTasks];
         },
         onActionClick(){
-            if(this.tabs === 2){
+            if(this.tab.tabs === 2){
                 this.submit();
             }else{
                 this.next();
             }
+        },
+        onBackClick(){
+            const active = parseInt(this.tab.tabs)
+            this.tab.tabs = (active - 1)
+            this.onTabChange();
         },
 
         // functions 
@@ -628,8 +635,8 @@ export default {
             this.scheduledTasks = this.scheduledTasks.filter(e => task.id !== e.id);
         },
         next(){
-            const active = parseInt(this.tabs)
-            this.tabs = (active < 2 ? active + 1 : 0)
+            const active = parseInt(this.tab.tabs)
+            this.tab.tabs = (active < 2 ? active + 1 : 0)
             this.onTabChange();
         },
         getCurrentNotification(){
@@ -674,7 +681,10 @@ export default {
                 notification: this.notificationSwitch ? 
                 this.getCurrentNotification() : null
             }
-            console.log(data);
+            this.tab.tabs = 0;
+            this.onTabChange();
+            this.dialog = false;
+            this.emitToParent(data);
         },     
         selectAllEmails(){
             if(this.checkAllEmail){
@@ -731,6 +741,20 @@ export default {
                 }
             }
             return times;
+        },
+        // emit
+        emitToParent (data) {
+            this.$emit('childToParent', data)
+        },
+        //init
+        initState(){
+            this.tab = {                
+                tabs: null,
+                tabButtonName: 'Next',
+                expansionEmailList: [false],
+                expansionRestriction: [false],
+                tabItems: ["Schedule","Task Properties", "Notification"]
+            }
         }
     },
     computed: {
@@ -749,6 +773,7 @@ export default {
     created(){
         this.weekDays = ['Sunday','Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         this.timeIntervals = this.getHourIntervals();
+        this.initState();
     }
 }
 </script>
