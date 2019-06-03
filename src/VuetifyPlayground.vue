@@ -36,7 +36,7 @@
                     <!-- Schedule Tab -->
                     <v-tab-item>          
                         <v-container fill-height grid-list-md >
-                            <v-layout row wrap style="margin-top: -20px">                                
+                            <v-layout row wrap style="margin-top: -8px;">                                
                                 <!-- date picker -->
                                 <v-flex xs6>    
                                     <v-menu
@@ -107,9 +107,7 @@
                                     <v-divider></v-divider>
                                 </v-flex>
                                 <!-- time restriction toggle -->
-                                <v-layout 
-                                    row
-                                    style="margin: -10px -5px;">  
+                                <v-layout row>  
                                     <v-flex xs8 grow align-self-center ml-1>
                                         <v-switch 
                                             @change="onRestrictionSwitchChange"
@@ -281,15 +279,17 @@
                     <!-- Task Properties Tab -->
                     <v-tab-item>                        
                         <v-container fill-height grid-list-md >
-                            <v-layout row wrap>
-                                <v-flex xs6>
+                            <v-layout row wrap style="margin: -20px 0 -23px 0;">
+                                <v-flex xs6 >
                                 <v-select
+                                    v-model="priorityModel"
                                     :items="priorityItems"
                                     label="Priority"
                                 ></v-select>
                                 </v-flex>
                                 <v-flex xs6>                       
                                 <v-select
+                                    v-model="maxParallelTaskModel"
                                     label="Max tasks run in parallel"
                                     value="2"
                                     :items=Array.from(Array(10).keys())
@@ -298,12 +298,15 @@
                                 <v-flex xs6>
                                     <v-textarea
                                         box
+                                        height="80"
+                                        v-model="actionNameModel"
                                         label="Configure Action Name"
                                         value="DISCOVER TABLES"
                                     ></v-textarea>
                                     </v-flex>
                                     <v-flex xs6>                          
                                     <v-select
+                                        v-model="restartAttemptModel"
                                         label="Attempts to restart failed task"
                                         value="0"
                                         :items=Array.from(Array(10).keys())
@@ -314,109 +317,133 @@
                     </v-tab-item>                    
                     <!-- Notification Tab -->
                     <v-tab-item>
-                        <v-container fill-height grid-list-md >
-                            <v-layout row wrap>
-                                <v-flex xs12 >
+                        <v-container fill-height grid-list-md>
+                            <v-layout row wrap >
+                                <v-flex xs12 style="margin: -25px 0 -10px 0;">
                                     <v-switch 
                                         v-model="notificationSwitch" 
                                         color="blue" 
                                         label="Send Notification"
                                         @change="onNotificationSwitchChange" 
                                         ></v-switch>
-                                </v-flex>   
-                                
-                                <v-expansion-panel
-                                    v-model="expansionNotification"
-                                    expand
-                                    >
-                                    <v-expansion-panel-content>
-                                        <v-card> 
-                                            <v-card-text>                                  
-                                                <v-radio-group  
-                                                    @change="onNotificationRadioChange"
-                                                    :disabled="!notificationSwitch" 
-                                                    v-model="notificationRadios" 
-                                                    :mandatory="true">
-                                                    <v-flex xs12 style="margin: -20px 0;">
-                                                        <v-radio 
-                                                            label="Whenever a task fails or terminates" 
-                                                            value="radioFail"
-                                                            ></v-radio>
-                                                    </v-flex>
-                                                    <v-layout row >
-                                                        <v-flex align-self-center shrink ml-1>
-                                                            <v-radio 
-                                                                label="At every given" 
-                                                                value="radioHour"
-                                                                ></v-radio>
-                                                        </v-flex> 
-                                                        <v-flex xs2 align-self-center >                                                                       
-                                                            <v-select
-                                                                v-model="fromTime"
-                                                                :items=Array.from(Array(10).keys())
-                                                                :disabled="notificationRadios !=='radioHour'"
-                                                            ></v-select>
-                                                        </v-flex>                                                                            
-                                                        <v-flex xs1 align-self-center text-lg-right>
-                                                            hour
-                                                        </v-flex>  
-                                                    </v-layout>             
-                                                    <v-flex xs12 style="margin: -20px 0;">
-                                                        <v-radio 
-                                                            label="When activity is complete" 
-                                                            value="radioComplete"></v-radio>
-                                                    </v-flex>
-                                                </v-radio-group>
-                                                <v-flex xs12 >
-                                                    <v-card height="200" class="scroll">  
-                                                        <v-list
-                                                            one-line
-                                                            >        
-                                                            <v-list-tile>                                                    
-                                                                <v-list-tile-action>
-                                                                    <v-checkbox 
-                                                                        :disabled="notificationRadios !=='radioComplete'" 
-                                                                        v-model="checkAllEmail"
-                                                                        @change="onCheckAllEmailChange"
-                                                                        >
-                                                                        </v-checkbox>
-                                                                </v-list-tile-action>
-                                                                <v-list-tile-content>
-                                                                    <v-list-tile-title>
-                                                                        Recipients
-                                                                    </v-list-tile-title>
-                                                                </v-list-tile-content>
-                                                            </v-list-tile>   
-                                                            <template 
-                                                                v-for="(item, index) in emails">
-                                                                <v-divider
-                                                                :key="['divider' + index]"
-                                                                ></v-divider>
-                                                                <v-list-tile
-                                                                    :key="['email' + index]"
-                                                                    >                                                    
-                                                                    <v-list-tile-action>
-                                                                        <v-checkbox 
-                                                                            :disabled="notificationRadios !=='radioComplete'" 
-                                                                            v-model="emailsSelected"
-                                                                            :value="item"
-                                                                            >
-                                                                            </v-checkbox>
-                                                                    </v-list-tile-action>
-                                                                    <v-list-tile-content>
-                                                                        <v-list-tile-title>
-                                                                            {{item}}
-                                                                        </v-list-tile-title>
-                                                                    </v-list-tile-content>
-                                                                </v-list-tile>
-                                                            </template> 
-                                                        </v-list>
-                                                    </v-card>
-                                                </v-flex>
-                                            </v-card-text>
-                                        </v-card>
-                                    </v-expansion-panel-content>
-                                </v-expansion-panel>
+                                </v-flex>                                    
+                                <v-radio-group  
+                                    @change="onNotificationRadioChange"
+                                    :disabled="!notificationSwitch" 
+                                    v-model="notificationRadios" 
+                                    :mandatory="true">
+                                    <v-flex xs12 style="margin: -20px 0;">
+                                        <v-radio 
+                                            label="Whenever a task fails or terminates" 
+                                            value="radioFail"
+                                            ></v-radio>
+                                    </v-flex>
+                                    <v-layout row >
+                                        <v-flex align-self-center shrink ml-1>
+                                            <v-radio 
+                                                label="At every given hour" 
+                                                value="radioHour"
+                                                ></v-radio>
+                                        </v-flex> 
+                                        <v-flex xs2 align-self-center >                                                                       
+                                            <v-select
+                                                v-model="notificationHour"
+                                                :items=Array.from(Array(10).keys())
+                                                :disabled="notificationRadios !=='radioHour'"
+                                            ></v-select>
+                                        </v-flex>   
+                                    </v-layout>             
+                                    <v-flex xs12 style="margin: -20px 0;">
+                                        <v-radio 
+                                            label="When activity is complete" 
+                                            value="radioComplete"></v-radio>
+                                    </v-flex>
+                                </v-radio-group>
+                                <v-flex xs12>
+                                    <v-expansion-panel
+                                        v-model="expansionEmailList"
+                                        expand
+                                        >
+                                        <v-expansion-panel-content>
+                                            <v-card 
+                                                height="250" 
+                                                class="scroll-y">
+                                                <!-- <v-list>        
+                                                    <v-list-tile>                                                    
+                                                        <v-list-tile-action>
+                                                            <v-checkbox 
+                                                                :disabled="!notificationSwitch" 
+                                                                v-model="checkAllEmail"
+                                                                @change="onCheckAllEmailChange"
+                                                                >
+                                                                </v-checkbox>
+                                                        </v-list-tile-action>
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>
+                                                                Recipients
+                                                            </v-list-tile-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>   
+                                                    <v-list-tile
+                                                        v-for="(email, index) in emails"
+                                                        :key="index"
+                                                        >
+                                                        <v-list-tile-action>
+                                                            <v-checkbox                                           
+                                                                :disabled="!notificationSwitch" 
+                                                                v-model="emailsSelected"
+                                                                >
+                                                                </v-checkbox>
+                                                        </v-list-tile-action>
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>
+                                                                {{email}}
+                                                            </v-list-tile-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                </v-list> -->
+                                                <v-list-tile>                                                    
+                                                    <v-list-tile-action>
+                                                        <v-checkbox 
+                                                            :disabled="!notificationSwitch" 
+                                                            v-model="checkAllEmail"
+                                                            @change="onCheckAllEmailChange"
+                                                            >
+                                                            </v-checkbox>
+                                                    </v-list-tile-action>
+                                                    <v-list-tile-content>
+                                                        <v-list-tile-title>
+                                                            Recipients
+                                                        </v-list-tile-title>
+                                                    </v-list-tile-content>
+                                                </v-list-tile> 
+                                                <template 
+                                                    v-for="(item, index) in emails">
+                                                    <v-divider
+                                                    :key="['divides'+index]"
+                                                    ></v-divider>
+                                                    <v-list-tile
+                                                        :key="index"
+                                                        >                                                    
+                                                        <v-list-tile-action>
+                                                            <v-checkbox 
+                                                                :disabled="!notificationSwitch" 
+                                                                v-model="emailsSelected"
+                                                                :value="item"
+                                                                >
+                                                                </v-checkbox>
+                                                        </v-list-tile-action>
+                                                        <v-list-tile-content>
+                                                            <v-list-tile-title>
+                                                                {{item}}
+                                                            </v-list-tile-title>
+                                                        </v-list-tile-content>
+                                                    </v-list-tile>
+                                                </template>
+                                            </v-card>
+                                        </v-expansion-panel-content>
+                                    </v-expansion-panel>
+                                </v-flex>
                             </v-layout>
                         </v-container>
                     </v-tab-item>
@@ -453,38 +480,50 @@ export default {
             // tab
             tabs: null,
             tabButtonName: 'Next',
-            expansionNotification: [false],
-            expansionRestriction: [true],
+            expansionEmailList: [false],
+            expansionRestriction: [false],
             tabItems: ["Schedule","Task Properties", "Notification"],
             //restriction
             scheduleDate: new Date().toISOString().substring(0, 10),
             scheduleTime: new Date().toISOString().substring(11, 16),
-            timeRestrictionSwitch: true,
+            timeRestrictionSwitch: false,
             restrictionRadios: 'radioEveryday',
             checkEntireDay: false,
             weekDay: null,
             restrictDate: null,
             fromTime: '23:00',
             toTime: '09:00',
-
             menuDate: false, 
             menuTime: false,
             menuRestrictDate: false,
             weekDays: [],
             timeIntervals: [],
             //task properties
+            priorityModel: 'Normal',
+            restartAttemptModel: 0,
+            maxParallelTaskModel: 2,
+            actionNameModel: 'CONFIGURE ACTION',
             priorityItems: ["Very High","High", "Normal", "Low", "Very Low", "Background"],
             //notification
             notificationSwitch: false,  
             notificationRadios: 'radioFail',       
             checkAllEmail: false,
+            notificationHour: null,
             emailsSelected: [],
             emails: ['thi.that@globalids.com', 'this.hat@globalids.com',
                         'ths.that@globalids.com', 'this.tat@globalids.com', 'this.that@globalis.com',
                         'tis.that@globalids.com', 'this.tht@globalids.com', 'this.that@globalid.com',
                         'his.that@globalids.com', 'this.tha@globalids.com', 'this.that@globalds.com'],
-            selectedTask: null,
-            scheduledTasks: []
+            selectedTask: 'rarresk',
+            scheduledTasks: [{
+                checkEntireDay: false,
+                checkedRadio: "radioEveryday",
+                fromTime: "23:00",
+                id: "rarresk",
+                restrictDate: null,
+                toTime: "09:00",
+                weekDay: null
+            }]
         }
     },
     methods: {
@@ -496,13 +535,6 @@ export default {
                 this.tabButtonName = "Next";
             }
         },
-        onActionClick(){
-            if(this.tabs === 2){
-                this.submit();
-            }else{
-                this.next();
-            }
-        },
         onCheckAllEmailChange(){
             this.selectAllEmails();
         },
@@ -511,8 +543,26 @@ export default {
             !this.checkEntireDay ? this.toTime = '09:00': this.toTime = null;
         },
         onNotificationRadioChange(){
-            this.emailsSelected = [];
-            this.checkAllEmail = false;
+            switch (this.notificationRadios) {
+                case 'radioComplete':
+                    this.expansionEmailList = [true];  
+                    this.notificationHour = null;   
+                    this.emailsSelected = this.emails;   
+                    this.checkAllEmail = true;            
+                    break;
+                case 'radioFail':
+                    this.expansionEmailList = [false];  
+                    this.notificationHour = null;    
+                    this.emailsSelected = [];
+                    this.checkAllEmail = false;                            
+                    break;
+                case 'radioHour':
+                    this.expansionEmailList = [false];
+                    this.notificationHour = 1;      
+                    this.emailsSelected = [];
+                    this.checkAllEmail = false;   
+                    break;
+            }
         },
         onRestrictionRadioChange(){   
             switch(this.restrictionRadios){
@@ -537,23 +587,12 @@ export default {
             this.expansionRestriction = [this.timeRestrictionSwitch];
         },
         onNotificationSwitchChange(){
-            this.expansionNotification = [this.notificationSwitch];
-        },
-        getHourIntervals(){
-            var quarterHours = ["00", "15", "30", "45"];
-            var times = [];
-            for(var i = 0; i < 24; i++){
-                for(var j = 0; j < 4; j++){
-                    var time = i + ":" + quarterHours[j];
-                    if(i < 10){
-                        time = "0" + time;
-                    }
-                    times.push(time);
-                }
-            }
-            return times;
+            this.notificationRadios = 'radioFail';
+            this.notificationHour = null;
+            this.expansionEmailList = [false];
         },
         onTileClick(item){ 
+            console.log(item)
             this.selectedTask = item.id;    
             let 
             {   checkEntireDay,checkedRadio,
@@ -573,8 +612,18 @@ export default {
         onAddClick(){
             this.scheduledTasks = [this.getCurrentState(), ...this.scheduledTasks];
         },
+        onActionClick(){
+            if(this.tabs === 2){
+                this.submit();
+            }else{
+                this.next();
+            }
+        },
 
         // functions 
+        getTaskById(id){
+            return this.scheduledTasks.filter(e => id === e.id)[0];
+        },
         removeTask(task){
             this.scheduledTasks = this.scheduledTasks.filter(e => task.id !== e.id);
         },
@@ -583,8 +632,49 @@ export default {
             this.tabs = (active < 2 ? active + 1 : 0)
             this.onTabChange();
         },
+        getCurrentNotification(){
+            switch (this.notificationRadios) {
+                case 'radioComplete':
+                    return {
+                        type: 'complete',
+                        data:{
+                            recipients: this.emailsSelected
+                        }
+                    }
+                case 'radioFail':
+                    return {
+                        type: 'fail',
+                        data: null
+                    }
+                case 'radioHour':                    
+                    return {
+                        type: 'hour',
+                        data:{
+                            hourCount: this.notificationHour
+                        }
+                    }
+            }
+        },
         submit(){
-            console.log('submit');
+            let data ={
+                schedule: {
+                    timeRestriction: this.timeRestrictionSwitch ? {
+                        allRestrictions: this.scheduledTasks,
+                        selectedRestriction: this.getTaskById(this.selectedTask)
+                    } : null,
+                    scheduleDate: this.scheduleDate,
+                    scheduleTime: this.scheduleTime 
+                },
+                taskProperties: {
+                    priority: this.priorityModel.toLowerCase(),
+                    maxParallelTask: this.maxParallelTaskModel,
+                    actionName: this.actionNameModel,
+                    restartAttempt: this.restartAttemptModel
+                },
+                notification: this.notificationSwitch ? 
+                this.getCurrentNotification() : null
+            }
+            console.log(data);
         },     
         selectAllEmails(){
             if(this.checkAllEmail){
@@ -627,6 +717,20 @@ export default {
                     break;
             }
             return text;
+        },
+        getHourIntervals(){
+            var quarterHours = ["00", "15", "30", "45"];
+            var times = [];
+            for(var i = 0; i < 24; i++){
+                for(var j = 0; j < 4; j++){
+                    var time = i + ":" + quarterHours[j];
+                    if(i < 10){
+                        time = "0" + time;
+                    }
+                    times.push(time);
+                }
+            }
+            return times;
         }
     },
     computed: {
