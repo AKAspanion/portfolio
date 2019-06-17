@@ -1,7 +1,7 @@
 <template>
   <div id="app" >
     <v-app>
-    <HamBurger 
+    <!-- <HamBurger 
       :alive="isMenuActive" 
       @click.native="onHamClick"/>
     <MenuBar 
@@ -14,7 +14,6 @@
       >
         <router-view/>
       </transition>
-      <!-- <vuetify-playground v-on:dataFromSchedule="onChildClick"/> -->
       <div class="scroll-icon">
         <div class="arrow-container">
           <div v-show="routeIndex !== 0"  class="arrow-left"></div>
@@ -22,23 +21,24 @@
         <div class="arrow-container">
           <div v-show="routeIndex !== 2" class="arrow-right"></div>
         </div>
-      </div>
+      </div> -->
+      <vuetify-playground v-on:dataFromSchedule="onChildClick"/>
     </v-app>
   </div>
 </template>
 
 <script>
-import MenuBar from './components/MenuBar.vue'
-import HamBurger from './components/HamBurger.vue'
-// import VuetifyPlayground from './VuetifyPlayground.vue'
+// import MenuBar from './components/MenuBar.vue'
+// import HamBurger from './components/HamBurger.vue'
+import VuetifyPlayground from './VuetifyPlayground.vue'
 
 const DEFAULT_TRANSITION = 'slide-left';
 export default {
   name: 'app',
   components: {
-    MenuBar,
-    HamBurger,
-    // VuetifyPlayground
+    // MenuBar,
+    // HamBurger,
+    VuetifyPlayground
   },
   data(){
     return{      
