@@ -48,7 +48,7 @@ export default {
     .about-container{
         height: 100vh;
         width: 100vw;
-        background: #2B7A78;
+        background: #3AAfA9;
         color: #FEFFFF;
         display: flex;
         align-items: center;
@@ -79,11 +79,17 @@ export default {
     }
 
     @media only screen and (max-width: 600px) {
-        .about-container{
-            text-align: center;
-        }
         .about-main{
-            width: 90vw;
+            width: 80vw;
+        }
+        .hi{
+            font-size: 20vw;
+        }
+        .name{
+            font-size: 10vw;
+        }
+        .about{
+            font-size: 5vw;
         }
     }
 </style>

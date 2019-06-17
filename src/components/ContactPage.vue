@@ -24,10 +24,16 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #3AAfA9;
+}
+.contact{
+    margin: 0 auto;
+    text-align: center;
 }
 #form {
     width: 500px;
-    margin: 50px auto;
+    margin: 0 auto;
+    margin-top: 50px;
 }
 
 input {
@@ -38,14 +44,14 @@ input {
     padding: 0px 15px 0px 15px;  
     background: transparent;
     outline: none;
-    color: rgb(65, 65, 65);  
-    border: solid 1px #b3aca7;
+    color: #DEF2F1;  
+    border: solid 1px #DEF2F1;
     border-bottom: none;    
     transition: all 0.3s ease-in-out;
 }
 
 input:hover {
-    background: rgb(65, 65, 65);
+    background: #17252A;
     color: #ffffff;
 }
 
@@ -57,33 +63,37 @@ textarea {
     padding: 15px;    
     background: transparent;
     outline: none;    
-    color: rgb(65, 65, 65);
+    color: #DEF2F1;
     font-family: 'Andis', sans-serif;
     font-size: 0.875em;    
-    border: solid 1px #b3aca7;    
+    border: solid 1px #DEF2F1;    
     transition: all 0.3s ease-in-out;
 }
 
 textarea:hover {
-    background: rgb(65, 65, 65);
+    background: #17252A;
     color: #ffffff;
 }
 
 #submit {
-    width: 470px;    
+    max-width: 470px;    
     padding: 0;
     margin: -6px 0px 0px 0px;    
     font-family: 'Andis';
     font-size: 0.875em;
-    color: #b3aca7;    
+    color: #DEF2F1;    
     outline:none;
     cursor: pointer;    
-    border: solid 1px #b3aca7;
+    border: solid 1px #DEF2F1;
     border-top: none;
 }
 
 #submit:hover {
-    color: #e2dedb;
+    color: #DEF2F1;
+}
+::placeholder {
+    color: #DEF2F1;
+    opacity: 1; /* Firefox */
 }
 @media only screen and (max-width: 600px) {
     
@@ -95,9 +105,6 @@ textarea:hover {
     }
     textarea{
         width: 250px;
-    }
-    #submit{
-        width: 282px;
     }
 }
 </style>
