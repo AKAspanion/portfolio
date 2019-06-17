@@ -1,10 +1,9 @@
 <template>
-    <div class="container">
-        <div>
+    <div class="home-container">
+        <div class="home">
             <div class="name">
                 {{home.name}}
             </div>
-
             <div class="slash">
                 {{home.slash}}
             </div>
@@ -37,18 +36,27 @@ export default {
 }
 </script>
 <style scoped>
-    .container{        
+    .home-container{        
         text-align: center;
         font-size: 7vw;
         background: #3AAfA9;
         color: #DEF2F1;
+        padding: 0;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .home{        
+        margin: 10vh 0 0 0;
     }
     .name, .slash, .desc{
         font-family: "Hipstelvetica";
         font-weight: bold;
     }
     @media only screen and (max-width: 600px) {
-        .container{
+        .home-container{
             font-size: 7vh;
         }
     }

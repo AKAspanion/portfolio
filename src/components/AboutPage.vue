@@ -1,6 +1,6 @@
 <template> 
-    <div class="container">
-        <div class="about-container">
+    <div class="about-container">
+        <div class="about-main">
             <div class="hi seperated">
                 Hi
             </div>
@@ -46,12 +46,18 @@ export default {
 
 <style scoped>
     .about-container{
-        padding-top: 15vh;
-        padding-left: 15vw;
-        height: 85vh;
+        height: 100vh;
         width: 100vw;
         background: #2B7A78;
         color: #FEFFFF;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .about-main{
+        margin-top: 15vh;
+        width: 80vw;
+        height: 85vh;
         overflow-y: scroll;
     }
     .hi{
@@ -71,9 +77,13 @@ export default {
         text-decoration: none;
         color: #FEFFFF;
     }
+
     @media only screen and (max-width: 600px) {
-        .container{
+        .about-container{
             text-align: center;
+        }
+        .about-main{
+            width: 90vw;
         }
     }
 </style>

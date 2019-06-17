@@ -4,7 +4,7 @@ import axios from 'axios';
 
 class DataService{
     constructor(){    
-        axios.defaults.baseURL = 'http://localhost:8081/data.json';
+        axios.defaults.baseURL = 'http://localhost:8080/data.json';
         let service = axios.create();  
         this._service = service;
     }    

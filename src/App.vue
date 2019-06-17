@@ -1,7 +1,7 @@
 <template>
   <div id="app" >
     <v-app>
-    <!-- <HamBurger 
+    <HamBurger 
       :alive="isMenuActive" 
       @click.native="onHamClick"/>
     <MenuBar 
@@ -11,23 +11,23 @@
       <transition>
         <router-view>
         </router-view>
-      </transition> -->
-      <vuetify-playground v-on:dataFromSchedule="onChildClick"/>
+      </transition>
+      <!-- <vuetify-playground v-on:dataFromSchedule="onChildClick"/> -->
     </v-app>
   </div>
 </template>
 
 <script>
-// import MenuBar from './components/MenuBar.vue'
-// import HamBurger from './components/HamBurger.vue'
-import VuetifyPlayground from './VuetifyPlayground.vue'
+import MenuBar from './components/MenuBar.vue'
+import HamBurger from './components/HamBurger.vue'
+// import VuetifyPlayground from './VuetifyPlayground.vue'
 
 export default {
   name: 'app',
   components: {
-    // MenuBar,
-    // HamBurger,
-    VuetifyPlayground
+    MenuBar,
+    HamBurger,
+    // VuetifyPlayground
   },
   data(){
     return{      
@@ -70,6 +70,7 @@ body{
   margin: 0;
   padding: 0; 
   z-index: -1; 
+  transition: 0.5s ease;
 }
 #app {
   font-family: 'Rubik';
@@ -77,15 +78,7 @@ body{
   -moz-osx-font-smoothing: grayscale;
   color: rgb(65, 65, 65);
 }
-
-.container{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100vw;
-  height: 100vh;
-}
-/* ::-webkit-scrollbar {
+::-webkit-scrollbar {
       width: 0;
-} */
+}
 </style>

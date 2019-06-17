@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-        <div class="contact-container">
+    <div class="contact-container">
+        <div class="contact">
             <form id="form">		
                 <input id="name" type="text" placeholder="NAME">
                 <input id="email" type="text" placeholder="E-MAIL">
@@ -19,10 +19,11 @@ export default {
 
 <style scoped>
 .contact-container{
-    height: 60vh;
-    width: 80vw;
-    margin: 0 auto;
-    text-align: center;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 #form {
     width: 500px;
@@ -69,9 +70,9 @@ textarea:hover {
 }
 
 #submit {
-    width: 502px;    
+    width: 470px;    
     padding: 0;
-    margin: -5px 0px 0px 0px;    
+    margin: -6px 0px 0px 0px;    
     font-family: 'Andis';
     font-size: 0.875em;
     color: #b3aca7;    
