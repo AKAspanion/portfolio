@@ -15,6 +15,14 @@
         <router-view/>
       </transition>
       <!-- <vuetify-playground v-on:dataFromSchedule="onChildClick"/> -->
+      <div class="scroll-icon">
+        <div class="arrow-container">
+          <div v-show="routeIndex !== 0"  class="arrow-left"></div>
+        </div>
+        <div class="arrow-container">
+          <div v-show="routeIndex !== 2" class="arrow-right"></div>
+        </div>
+      </div>
     </v-app>
   </div>
 </template>
@@ -56,21 +64,23 @@ export default {
       },      
       handleScroll (event) {
         let path = '/';
-        if(event.deltaY < 0){
-          if(this.routeIndex !== 0){
-            path += this.menuItems[this.routeIndex-1];
-          }else{
-            path += this.menuItems[this.routeIndex];
+        if(!this.isMenuActive){
+          if(event.deltaY < 0){
+            if(this.routeIndex !== 0){
+              path += this.menuItems[this.routeIndex-1];
+            }else{
+              path += this.menuItems[this.routeIndex];
+            }
           }
-        }
-        else{
-          if(this.routeIndex !== 2){
-            path += this.menuItems[this.routeIndex+1];
-          }else{
-            path += this.menuItems[this.routeIndex];
+          else{
+            if(this.routeIndex !== 2){
+              path += this.menuItems[this.routeIndex+1];
+            }else{
+              path += this.menuItems[this.routeIndex];
+            }
           }
+          this.$router.push(path);
         }
-        this.$router.push(path);
       },
       changeScrollPos(event){
         if(event){
@@ -87,9 +97,9 @@ export default {
       this.$router.beforeEach((to, from, next) => { 
         this.routeIndex = to.meta.index; 
         if (to.meta) {
-          var transitionName = to.meta.index < from.meta.index ? 'slide-right' : 'slide-left';
+          var transition = to.meta.index < from.meta.index ? 'slide-right' : 'slide-left';
         }
-        this.transitionName = transitionName || DEFAULT_TRANSITION;
+        this.transitionName = transition || DEFAULT_TRANSITION;
         next();
       });
     },
@@ -126,6 +136,41 @@ body{
   -moz-osx-font-smoothing: grayscale;
   color: rgb(65, 65, 65);
 }
+.scroll-icon{
+  display: flex;
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-10px);
+  text-align: center;
+}
+.arrow-container{
+  width: 12px;
+}
+.arrow-left,.arrow-right {
+  width: 0; 
+  height: 0; 
+  margin: 1px;
+  border-top: 10px solid transparent;
+  transition: 0.5s ease;
+  border-bottom: 10px solid transparent; 
+}
+.arrow-left{
+  border-right:10px solid #DEF2F1; 
+}
+.arrow-right {
+  border-left: 10px solid #DEF2F1;
+}
+
+.link{
+    text-decoration: none;
+    color: #FEFFFF;
+    transition: 0.3s ease;
+}
+.link:hover{
+  box-shadow: inset 0px -15px 0 #FFF;
+}
+
 ::-webkit-scrollbar {
       width: 0;
 }

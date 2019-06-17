@@ -61,21 +61,17 @@ export default {
         overflow-y: scroll;
     }
     .hi{
-        font-size: 20vh;
+        font-size: 16.5vh;
     }
     .name{
-        font-size: 9vh;
+        font-size: 8.5vh;
     }
     .about{
-        font-size: 5vh;
+        font-size: 4vh;
     }
     .seperated{
         font-family: 'Andis';
         margin-bottom: 2vh;
-    }
-    .link{
-        text-decoration: none;
-        color: #FEFFFF;
     }
 
     @media only screen and (max-width: 600px) {

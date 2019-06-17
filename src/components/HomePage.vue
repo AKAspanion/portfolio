@@ -38,7 +38,7 @@ export default {
 <style scoped>
     .home-container{        
         text-align: center;
-        font-size: 7vw;
+        font-size: 6vw;
         background: #3AAfA9;
         color: #DEF2F1;
         padding: 0;
@@ -49,7 +49,7 @@ export default {
         justify-content: center;
     }
     .home{        
-        margin: 10vh 0 0 0;
+        margin: 5vh 0 0 0;
     }
     .name, .slash, .desc{
         font-family: "Hipstelvetica";

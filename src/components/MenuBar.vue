@@ -9,7 +9,7 @@
                 v-for="item in menuItems" 
                 :key="item"
                 :to="'/' + item">
-                    <div>{{item}}</div>
+                    <div><a class="link">{{item}}</a></div>
             </router-link>
         </div>
     </div>
