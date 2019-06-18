@@ -1,7 +1,7 @@
 <template>
   <div id="app" >
     <v-app>
-    <!-- <HamBurger 
+    <HamBurger 
       :alive="isMenuActive" 
       @click.native="onHamClick"/>
     <MenuBar 
@@ -16,29 +16,30 @@
       </transition>
       <div class="scroll-icon">
         <div class="arrow-container">
-          <div v-show="routeIndex !== 0"  class="arrow-left"></div>
+          <div v-show="routeIndex !== 0" @click="navigate('left')"  class=""><v-icon color="white">arrow_left</v-icon></div>
         </div>
+        <div class="scroll"> scroll </div>
         <div class="arrow-container">
-          <div v-show="routeIndex !== 2" class="arrow-right"></div>
+          <div v-show="routeIndex !== 2" @click="navigate('right')" class=""><v-icon color="white">arrow_right</v-icon></div>
         </div>
-      </div> -->
-      <vuetify-playground v-on:dataFromSchedule="onChildClick"/>
+      </div>
+      <!-- <vuetify-playground v-on:dataFromSchedule="onChildClick"/> -->
     </v-app>
   </div>
 </template>
 
 <script>
-// import MenuBar from './components/MenuBar.vue'
-// import HamBurger from './components/HamBurger.vue'
-import VuetifyPlayground from './VuetifyPlayground.vue'
+import MenuBar from './components/MenuBar.vue'
+import HamBurger from './components/HamBurger.vue'
+// import VuetifyPlayground from './VuetifyPlayground.vue'
 
 const DEFAULT_TRANSITION = 'slide-left';
 export default {
   name: 'app',
   components: {
-    // MenuBar,
-    // HamBurger,
-    VuetifyPlayground
+    MenuBar,
+    HamBurger,
+    // VuetifyPlayground
   },
   data(){
     return{      
@@ -63,24 +64,31 @@ export default {
         console.log(value);
       },      
       handleScroll (event) {
-        let path = '/';
         if(!this.isMenuActive){
           if(event.deltaY < 0){
-            if(this.routeIndex !== 0){
-              path += this.menuItems[this.routeIndex-1];
-            }else{
-              path += this.menuItems[this.routeIndex];
-            }
+            this.navigate('left');
           }
           else{
-            if(this.routeIndex !== 2){
-              path += this.menuItems[this.routeIndex+1];
-            }else{
-              path += this.menuItems[this.routeIndex];
-            }
+            this.navigate('right')
           }
-          this.$router.push(path);
         }
+      },
+      navigate(direction){        
+        let path = '/';
+        if(direction === 'left'){
+          if(this.routeIndex !== 0){
+            path += this.menuItems[this.routeIndex-1];
+          }else{
+            path += this.menuItems[this.routeIndex];
+          }
+        }else if(direction === 'right'){
+          if(this.routeIndex !== 2){
+            path += this.menuItems[this.routeIndex+1];
+          }else{
+            path += this.menuItems[this.routeIndex];
+          }
+        }
+        this.$router.push(path);
       },
       changeScrollPos(event){
         if(event){
@@ -123,6 +131,7 @@ export default {
 * {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 body{
   margin: 0;
@@ -141,25 +150,16 @@ body{
   position: absolute;
   bottom: 10px;
   left: 50%;
-  transform: translateX(-10px);
+  transform: translateX(-49%);
   text-align: center;
 }
+.scroll{
+  padding: 5px;
+  color: white; 
+  font-size: 10px
+}
 .arrow-container{
-  width: 12px;
-}
-.arrow-left,.arrow-right {
-  width: 0; 
-  height: 0; 
-  margin: 1px;
-  border-top: 10px solid transparent;
-  transition: 0.5s ease;
-  border-bottom: 10px solid transparent; 
-}
-.arrow-left{
-  border-right:10px solid #DEF2F1; 
-}
-.arrow-right {
-  border-left: 10px solid #DEF2F1;
+  width: 22px;
 }
 
 .link{
