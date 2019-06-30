@@ -5,10 +5,10 @@
                 {{home.name}}
             </div>
             <div class="slash">
-                {{home.slash}}
+                {{home.separator}}
             </div>
             <div class="desc">
-                {{home.description}}
+                {{home.designation}}
             </div>
         </div>
     </div>

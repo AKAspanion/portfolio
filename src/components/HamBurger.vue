@@ -22,6 +22,7 @@ export default {
 <style>
     .ham-burger-container{
         position: absolute;
+        cursor: pointer;
         left: 0;
         right: 0;
         margin: 0 auto;
@@ -37,7 +38,6 @@ export default {
     .ham-burger{
         width: 50px;
         height: 34px;
-        cursor: pointer;
     }
     .ham{
         width: 50px;
