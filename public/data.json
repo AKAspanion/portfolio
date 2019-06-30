@@ -7,15 +7,14 @@
     "about":{
         "name": "Ankit Kumar Pandit",
         "position": "Software/Web Developer",
-        "company": {
-            "title":"Global Ids",
-            "url":"http://google.com"
+        "company": { 
+            "title": "GLobal Ids", 
+            "url": "http://google.com"
         },
         "love": "I love making awesome web applications and websites.",
         "socialLinks": [
             { "title": "Github", "url": "https://github.com/AKAspanion"},
             { "title": "Instagram", "url": "http://google.com"},
-            { "title": "Facebook", "url": "http://google.com"},
             { "title": "Facebook", "url": "http://google.com"}
         ]
     },

@@ -14,7 +14,12 @@
                 </div>
                 <div class="scroll-title">{{menuItems[routeIndex]}}</div>
                 <div class="arrow-container">
-                    <div v-show="routeIndex !== menuItems.length-1" @click="navigate('right')" class>
+                    <div
+                        v-show="routeIndex !== menuItems.length-1"
+                        @click="navigate('right')"
+                        @keyup.left="navigate('left')"
+                        class
+                    >
                         <v-icon color="white">arrow_right</v-icon>
                     </div>
                 </div>
@@ -57,9 +62,6 @@ export default {
                 this.isMenuActive = false;
             }
         },
-        onChildClick(value) {
-            console.log(value);
-        },
         handleScroll(event) {
             if (!this.isMenuActive) {
                 if (event.deltaY < 0) {
@@ -67,8 +69,19 @@ export default {
                 } else {
                     this.navigate("right");
                 }
-                this.stopScrollForTime(500);
+                this.stopEvents(1000);
             }
+        },
+        handleKeyUp(e) {
+            switch (e.key) {
+                case "ArrowLeft":
+                    this.navigate("left");
+                    break;
+                case "ArrowRight":
+                    this.navigate("right");
+                    break;
+            }
+            this.stopEvents(1000);
         },
         navigate(direction) {
             let path = "/";
@@ -79,7 +92,7 @@ export default {
                     path += this.menuItems[this.routeIndex];
                 }
             } else if (direction === "right") {
-                if (this.routeIndex !== this.menuItems.length-1) {
+                if (this.routeIndex !== this.menuItems.length - 1) {
                     path += this.menuItems[this.routeIndex + 1];
                 } else {
                     path += this.menuItems[this.routeIndex];
@@ -96,15 +109,18 @@ export default {
                 }
             }
         },
-        stopScrollForTime(time) {
+        stopEvents(time) {
             window.removeEventListener("mousewheel", this.handleScroll);
+            window.removeEventListener("keyup", this.handleKeyUp);
             setTimeout(() => {
                 window.addEventListener("mousewheel", this.handleScroll);
+                window.addEventListener("keyup", this.handleKeyUp);
             }, time);
         }
     },
     created() {
         window.addEventListener("mousewheel", this.handleScroll);
+        window.addEventListener("keyup", this.handleKeyUp);
         this.routeIndex = this.$router.currentRoute.meta.index;
         this.$router.beforeEach((to, from, next) => {
             this.routeIndex = to.meta.index;
@@ -120,6 +136,7 @@ export default {
     },
     destroyed() {
         window.removeEventListener("mousewheel", this.handleScroll);
+        window.removeEventListener("keyup", this.handleKeyUp);
     }
 };
 </script>
@@ -207,7 +224,7 @@ body {
     opacity: 0;
     transform: translate(-2em, 0);
 }
-.test{
+.test {
     background: red;
 }
 </style>

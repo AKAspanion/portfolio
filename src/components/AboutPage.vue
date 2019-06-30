@@ -16,13 +16,13 @@
             <div class="about seperated">
                 You can follow me here -
                 <template v-for="(link,index) in about.socialLinks">
-                    <a class="link" :key="index" :href="link.url" target="_blank">{{link.title}}</a>
-                    <span v-if="index===about.socialLinks.length-1" :key="index">.</span>
+                    <a class="link" :key="['a-'+index]" :href="link" target="_blank">{{link.title}}</a>
+                    <span v-if="index===about.socialLinks.length-1" :key="['span-'+index]">.</span>
                     <span
                         v-else-if="index===about.socialLinks.length-2"
-                        :key="index"
+                        :key="['span-'+index]"
                     >&nbsp;and&nbsp;</span>
-                    <span v-else :key="index">,&nbsp;</span>
+                    <span v-else :key="['span-'+index]">,&nbsp;</span>
                 </template>
             </div>
         </div>
