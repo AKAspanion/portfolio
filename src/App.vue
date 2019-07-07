@@ -1,10 +1,17 @@
 <template>
     <div id="app">
-        <v-app>
-            <HamBurger :alive="isMenuActive" @click.native="onHamClick"/>
-            <MenuBar :alive="isMenuActive" :menuItems="menuItems" @click.native="onMenuClick"/>
+        <v-app
+            v-touch="{
+            left: () => swipe('right'),
+            right: () => swipe('left'),
+            up: () => swipe('up'),
+            down: () => swipe('down')
+            }"
+        >
+            <HamBurger :alive="isMenuActive" @click.native="onHamClick" />
+            <MenuBar :alive="isMenuActive" :menuItems="menuItems" @click.native="onMenuClick" />
             <transition :name="transitionName" mode="out-in">
-                <router-view/>
+                <router-view />
             </transition>
             <div class="scroll-icon">
                 <div class="arrow-container">
@@ -54,6 +61,23 @@ export default {
         };
     },
     methods: {
+        swipe(direction) {
+            switch(direction){
+                case 'left':
+                    this.navigate("left");
+                    break;
+                case 'right':
+                    this.navigate("right");
+                    break;
+                case 'up':
+                    this.isMenuActive = false;
+                    break;
+                case 'down':
+                    this.isMenuActive = true;
+                    break;
+                default :
+            }
+        },
         onHamClick() {
             this.isMenuActive = !this.isMenuActive;
         },
