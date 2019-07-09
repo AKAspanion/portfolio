@@ -8,7 +8,7 @@
             down: () => swipe('down')
             }"
         >
-            <HamBurger :alive="isMenuActive" @click.native="onHamClick" />
+            <!-- <HamBurger :alive="isMenuActive" @click.native="onHamClick" />
             <MenuBar :alive="isMenuActive" :menuItems="menuItems" @click.native="onMenuClick" />
             <transition :name="transitionName" mode="out-in">
                 <router-view />
@@ -30,25 +30,25 @@
                         <v-icon color="white">arrow_right</v-icon>
                     </div>
                 </div>
-            </div>
-            <!-- <vuetify-playground v-on:dataFromSchedule="onChildClick"/> -->
+            </div> -->
+            <vuetify-playground v-on:dataFromSchedule="onChildClick"/>
         </v-app>
     </div>
 </template>
 
 <script>
-import MenuBar from "./components/MenuBar.vue";
-import HamBurger from "./components/HamBurger.vue";
-import { setTimeout } from "timers";
-// import VuetifyPlayground from "./VuetifyPlayground.vue";
+// import MenuBar from "./components/MenuBar.vue";
+// import HamBurger from "./components/HamBurger.vue";
+// import { setTimeout } from "timers";
+import VuetifyPlayground from "./VuetifyPlayground.vue";
 
 const DEFAULT_TRANSITION = "slide-left";
 export default {
     name: "app",
     components: {
-        MenuBar,
-        HamBurger
-        // VuetifyPlayground
+        // MenuBar,
+        // HamBurger
+        VuetifyPlayground
     },
     data() {
         return {
