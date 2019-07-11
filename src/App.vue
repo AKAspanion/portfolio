@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div> -->
-            <vuetify-playground v-on:dataFromSchedule="onChildClick"/>
+            <login-page/>
         </v-app>
     </div>
 </template>
@@ -40,7 +40,7 @@
 // import MenuBar from "./components/MenuBar.vue";
 // import HamBurger from "./components/HamBurger.vue";
 // import { setTimeout } from "timers";
-import VuetifyPlayground from "./VuetifyPlayground.vue";
+import LoginPage from "./LoginPage.vue";
 
 const DEFAULT_TRANSITION = "slide-left";
 export default {
@@ -48,7 +48,7 @@ export default {
     components: {
         // MenuBar,
         // HamBurger
-        VuetifyPlayground
+        LoginPage
     },
     data() {
         return {
