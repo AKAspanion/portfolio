@@ -30,8 +30,25 @@
                         <v-icon color="white">arrow_right</v-icon>
                     </div>
                 </div>
-            </div> -->
-            <login-page/>
+            </div>-->
+            <!-- <login-page/> -->
+            <stat-bar :items="columns" selectable @selected="test">
+                <template #A>
+                    A
+                </template>
+                <template #B>
+                    A
+                </template>
+                <template #C>
+                    A
+                </template>
+                <template #D>
+                    A
+                </template>
+                <template #E>
+                    A
+                </template>
+            </stat-bar>
         </v-app>
     </div>
 </template>
@@ -40,7 +57,7 @@
 // import MenuBar from "./components/MenuBar.vue";
 // import HamBurger from "./components/HamBurger.vue";
 // import { setTimeout } from "timers";
-import LoginPage from "./LoginPage.vue";
+import StatBar from "./components/StatBar.vue";
 
 const DEFAULT_TRANSITION = "slide-left";
 export default {
@@ -48,10 +65,23 @@ export default {
     components: {
         // MenuBar,
         // HamBurger
-        LoginPage
+        // LoginPage
+        StatBar
     },
     data() {
         return {
+            columns: [
+                {
+                    slotName: "A",
+                    class: "selected"
+                },
+                {
+                    slotName: "B"
+                },
+                {
+                    slotName: "C"
+                }
+            ],
             routeIndex: 0,
             isMenuActive: false,
             menuItems: ["home", "about", "work", "contact"],
@@ -61,21 +91,24 @@ export default {
         };
     },
     methods: {
+        test(data) {
+            console.log(data);
+        },
         swipe(direction) {
-            switch(direction){
-                case 'left':
+            switch (direction) {
+                case "left":
                     this.navigate("left");
                     break;
-                case 'right':
+                case "right":
                     this.navigate("right");
                     break;
-                case 'up':
+                case "up":
                     this.isMenuActive = false;
                     break;
-                case 'down':
+                case "down":
                     this.isMenuActive = true;
                     break;
-                default :
+                default:
             }
         },
         onHamClick() {
