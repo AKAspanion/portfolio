@@ -11,7 +11,7 @@
             <HamBurger :alive="isMenuActive" @click.native="onHamClick" />
             <MenuBar :alive="isMenuActive" :menuItems="menuItems" @click.native="onMenuClick" />
             <transition :name="transitionName" mode="out-in">
-                <router-view />
+                <router-view></router-view>
             </transition>
             <div class="scroll-icon">
                 <div class="arrow-container">
@@ -54,6 +54,16 @@ export default {
             SCROLL_VALUE: 5,
             transitionName: DEFAULT_TRANSITION
         };
+    },
+    computed: {
+        themeModel: {
+            get() {
+                return this.$vuetify.theme.dark;
+            },
+            set(val) {
+                this.$vuetify.theme.dark = val;
+            }
+        },
     },
     methods: {
         test(data) {
