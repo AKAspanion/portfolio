@@ -16,7 +16,7 @@
 <script>
 import DataService  from '../dataproviders/DataService';
 export default {
-    name: 'HomePage',
+    name: 'SpanionHome',
     data() {
         return {        
             home: {}

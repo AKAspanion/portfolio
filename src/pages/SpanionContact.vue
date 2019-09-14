@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    name: 'ContactPage'
+    name: 'SpanionContact'
 }
 </script>
 

@@ -8,7 +8,7 @@
             down: () => swipe('down')
             }"
         >
-            <!-- <HamBurger :alive="isMenuActive" @click.native="onHamClick" />
+            <HamBurger :alive="isMenuActive" @click.native="onHamClick" />
             <MenuBar :alive="isMenuActive" :menuItems="menuItems" @click.native="onMenuClick" />
             <transition :name="transitionName" mode="out-in">
                 <router-view />
@@ -30,58 +30,23 @@
                         <v-icon color="white">arrow_right</v-icon>
                     </div>
                 </div>
-            </div>-->
-            <!-- <login-page/> -->
-            <stat-bar :items="columns" selectable @selected="test">
-                <template #A>
-                    A
-                </template>
-                <template #B>
-                    A
-                </template>
-                <template #C>
-                    A
-                </template>
-                <template #D>
-                    A
-                </template>
-                <template #E>
-                    A
-                </template>
-            </stat-bar>
+            </div>
         </v-app>
     </div>
 </template>
 
 <script>
-// import MenuBar from "./components/MenuBar.vue";
-// import HamBurger from "./components/HamBurger.vue";
-// import { setTimeout } from "timers";
-import StatBar from "./components/StatBar.vue";
-
+import MenuBar from "./components/MenuBar.vue";
+import HamBurger from "./components/HamBurger.vue";
 const DEFAULT_TRANSITION = "slide-left";
 export default {
     name: "app",
     components: {
-        // MenuBar,
-        // HamBurger
-        // LoginPage
-        StatBar
+        MenuBar,
+        HamBurger
     },
     data() {
         return {
-            columns: [
-                {
-                    slotName: "A",
-                    class: "selected"
-                },
-                {
-                    slotName: "B"
-                },
-                {
-                    slotName: "C"
-                }
-            ],
             routeIndex: 0,
             isMenuActive: false,
             menuItems: ["home", "about", "work", "contact"],

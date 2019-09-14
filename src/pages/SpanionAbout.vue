@@ -32,7 +32,7 @@
 <script>
 import DataService from "../dataproviders/DataService";
 export default {
-    name: "AboutPage",
+    name: "SpanionAbout",
     data() {
         return {
             about: {}
