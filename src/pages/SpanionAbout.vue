@@ -1,28 +1,32 @@
 <template>
     <div class="about-container">
         <div class="about-main">
-            <div class="hi seperated">Hi.</div>
-            <div class="name seperated">My name is {{about.name}}.</div>
+            <div class="hi seperated">{{$t('ui.about.hi')}}</div>
+            <div class="name seperated">{{$t('ui.about.name') + $t('about.name')}}.</div>
             <div class="about seperated">
-                I am a {{about.position}} currently working at
+                {{ $t('ui.about.about.start') + $t('about.position') +$t('ui.about.about.end') }}
                 <a
                     class="link"
                     target="_blank"
-                    :href="about.company.url"
-                >{{about.company.title}}</a>.
-                <br>
-                {{about.love}}
+                    :href="$t('about.company.url')"
+                >{{$t('about.company.title')}}</a>
+                {{$t('ui.common.fullStop')}}
+                <br />
+                {{$t('about.love')}}
             </div>
             <div class="about seperated">
-                You can follow me here -
-                <template v-for="(link,index) in about.socialLinks">
-                    <a class="link" :key="['a-'+index]" :href="link" target="_blank">{{link.title}}</a>
-                    <span v-if="index===about.socialLinks.length-1" :key="['span-'+index]">.</span>
+                {{$t('ui.about.follow') }}
+                <template v-for="(link,index) in $t('about.socialLinks')">
+                    <a class="link" :key="'title'+index" :href="link" target="_blank">{{link.title}}</a>
                     <span
-                        v-else-if="index===about.socialLinks.length-2"
-                        :key="['span-'+index]"
-                    >&nbsp;and&nbsp;</span>
-                    <span v-else :key="['span-'+index]">,&nbsp;</span>
+                        v-if="index === $t('about.socialLinks').length-1"
+                        :key="'link'+index"
+                    >{{$t('ui.common.fullStop')}}</span>
+                    <span
+                        v-else-if="index === $t('about.socialLinks').length-2"
+                        :key="'link'+index"
+                    >&nbsp;{{$t('ui.common.and')}}&nbsp;</span>
+                    <span v-else :key="'link'+index">,&nbsp;</span>
                 </template>
             </div>
         </div>
@@ -30,24 +34,8 @@
 </template>
 
 <script>
-import DataService from "../dataproviders/DataService";
 export default {
-    name: "SpanionAbout",
-    data() {
-        return {
-            about: {}
-        };
-    },
-    methods: {
-        fetchData() {
-            DataService.getAbout(data => {
-                this.about = data;
-            });
-        }
-    },
-    created() {
-        this.fetchData();
-    }
+    name: "SpanionAbout"
 };
 </script>
 

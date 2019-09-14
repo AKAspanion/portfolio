@@ -19,13 +19,12 @@
                         <v-icon color="white">arrow_left</v-icon>
                     </div>
                 </div>
-                <div class="scroll-title">{{menuItems[routeIndex]}}</div>
+                <div class="scroll-title">{{$t(`ui.menuItems.${routeIndex}`)}}</div>
                 <div class="arrow-container">
                     <div
                         v-show="routeIndex !== menuItems.length-1"
                         @click="navigate('right')"
                         @keyup.left="navigate('left')"
-                        class
                     >
                         <v-icon color="white">arrow_right</v-icon>
                     </div>
@@ -63,7 +62,7 @@ export default {
             set(val) {
                 this.$vuetify.theme.dark = val;
             }
-        },
+        }
     },
     methods: {
         test(data) {
@@ -213,7 +212,7 @@ body {
 .scroll-title {
     text-align: center;
     width: 50px;
-    padding: 5px;
+    padding: 7px 5px 5px 5px;
     color: white;
     font-size: 10px;
 }

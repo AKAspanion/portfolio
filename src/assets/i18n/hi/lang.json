@@ -1,3 +1,74 @@
 {
-    
+    "home": {
+        "name": "अंकित पंडित",
+        "separator": "/",
+        "designation": "डेवलपर"
+    },
+    "about": {
+        "name": "अंकित कुमार पंडित",
+        "position": "सॉफ्टवेयर / वेब डेवलपर",
+        "company": {
+            "title": "ग्लोबल ऑयडीस",
+            "url": "http://google.com"
+        },
+        "love": "मुझे भयावह वेब एप्लिकेशन और वेबसाइट बनाना बहुत पसंद है।",
+        "socialLinks": [
+            {
+                "title": "गिटहब",
+                "url": "https://github.com/AKAspanion"
+            },
+            {
+                "title": "इंस्टाग्राम",
+                "url": "http://google.com"
+            },
+            {
+                "title": "फेसबुक",
+                "url": "http://google.com"
+            }
+        ]
+    },
+    "work": [
+        {
+            "title": "Software Developer",
+            "period": "May 2019 - Current",
+            "company": "GLobal IDs, Kolkata",
+            "description": "As a Software Developer I build and revamp the UI of product along with my team using Vue.JS",
+            "technologies": [
+                "Vue.js",
+                "Swagger"
+            ]
+        },
+        {
+            "title": "Assistant Systems Engineer",
+            "period": "July 2018 - January 2019",
+            "company": "Tata Consultancy Services, Kolkata",
+            "description": "As a Trainee Backend Developer I built web application modules along with my team for a given project using Node.JS",
+            "technologies": [
+                "Angular",
+                "Node.JS"
+            ]
+        }
+    ],
+    "projects": [],
+    "ui": {
+        "common": {
+            "fullStop": "|",
+            "and": "और"
+        },
+        "menuItems": {
+            "0": "होम",
+            "1": "बारे में",
+            "2": "कार्य",
+            "3": "संपर्क"
+        },
+        "about": {
+            "hi": "नमस्ते।",
+            "name": "मेरा नाम ",
+            "about": {
+                "start": "मैं एक ",
+                "end": ", वर्त्तमान में यंहा पे काम कर रहा हूँ, "
+            },
+            "follow": "आप यहाँ मेरा अनुसरण कर सकते हैं -"
+        }
+    }
 }
