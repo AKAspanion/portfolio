@@ -3,51 +3,27 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import SpanionAbout from './pages/SpanionAbout.vue'
-import SpanionContact from './pages/SpanionContact.vue'
-import SpanionHome from './pages/SpanionHome.vue'
-import SpanionNotFound from './pages/SpanionNotFound.vue'
-import SpanionWork from './pages/SpanionWork.vue'
+import Home from './views/Home.vue'
+import NotFound from './views/NotFound.vue'
 
 
 const routes = [{
-        path: '/about',
-        component: SpanionAbout,
-        meta: {
-            index: 1
-        }
-    },
-    {
-        path: '/work',
-        component: SpanionWork,
-        meta: {
-            index: 2
-        }
-    },
-    {
-        path: '/contact',
-        component: SpanionContact,
-        meta: {
-            index: 3
-        }
-    },
-    {
         path: '/home',
-        component: SpanionHome,
+        component: Home,
         meta: {
             index: 0
         }
     },
     {
         path: '/',
-        component: SpanionHome,
+        component: Home,
         meta: {
             index: 0
         }
     },
     {
         path: '*',
-        component: SpanionNotFound,
+        component: NotFound,
         meta: {
             index: 0
         }

@@ -1,187 +1,27 @@
 <template>
     <div id="app">
-        <v-app
-            v-touch="{
-            left: () => swipe('right'),
-            right: () => swipe('left'),
-            up: () => swipe('up'),
-            down: () => swipe('down')
-            }"
-        >
-            <HamBurger :alive="isMenuActive" @click.native="onHamClick" />
-            <MenuBar :alive="isMenuActive" :menuItems="menuItems" @click.native="onMenuClick" />
-            <transition :name="transitionName" mode="out-in">
-                <router-view></router-view>
-            </transition>
-            <div class="scroll-icon">
-                <div class="arrow-container">
-                    <div v-show="routeIndex !== 0" @click="navigate('left')" class>
-                        <v-icon color="white">arrow_left</v-icon>
-                    </div>
-                </div>
-                <div class="scroll-title">{{$t(`ui.menuItems.${routeIndex}`)}}</div>
-                <div class="arrow-container">
-                    <div
-                        v-show="routeIndex !== menuItems.length-1"
-                        @click="navigate('right')"
-                        @keyup.left="navigate('left')"
-                    >
-                        <v-icon color="white">arrow_right</v-icon>
-                    </div>
-                </div>
-            </div>
+        <v-app>
+            <router-view></router-view>
         </v-app>
     </div>
 </template>
 
 <script>
-import MenuBar from "./components/MenuBar.vue";
-import HamBurger from "./components/HamBurger.vue";
-const DEFAULT_TRANSITION = "slide-left";
 export default {
-    name: "app",
-    components: {
-        MenuBar,
-        HamBurger
-    },
-    data() {
-        return {
-            routeIndex: 0,
-            isMenuActive: false,
-            menuItems: ["home", "about", "work", "contact"],
-            scrollPosition: 0,
-            SCROLL_VALUE: 5,
-            transitionName: DEFAULT_TRANSITION
-        };
-    },
-    computed: {
-        themeModel: {
-            get() {
-                return this.$vuetify.theme.dark;
-            },
-            set(val) {
-                this.$vuetify.theme.dark = val;
-            }
-        }
-    },
-    methods: {
-        test(data) {
-            console.log(data);
-        },
-        swipe(direction) {
-            switch (direction) {
-                case "left":
-                    this.navigate("left");
-                    break;
-                case "right":
-                    this.navigate("right");
-                    break;
-                case "up":
-                    this.isMenuActive = false;
-                    break;
-                case "down":
-                    this.isMenuActive = true;
-                    break;
-                default:
-            }
-        },
-        onHamClick() {
-            this.isMenuActive = !this.isMenuActive;
-        },
-        onMenuClick() {
-            if (this.isMenuActive) {
-                this.isMenuActive = false;
-            }
-        },
-        handleScroll(event) {
-            if (!this.isMenuActive) {
-                if (event.deltaY < 0) {
-                    this.navigate("left");
-                } else {
-                    this.navigate("right");
-                }
-                this.stopEvents(1000);
-            }
-        },
-        handleKeyUp(e) {
-            switch (e.key) {
-                case "ArrowLeft":
-                    this.navigate("left");
-                    break;
-                case "ArrowRight":
-                    this.navigate("right");
-                    break;
-            }
-            this.stopEvents(1000);
-        },
-        navigate(direction) {
-            let path = "/";
-            if (direction === "left") {
-                if (this.routeIndex !== 0) {
-                    path += this.menuItems[this.routeIndex - 1];
-                } else {
-                    path += this.menuItems[this.routeIndex];
-                }
-            } else if (direction === "right") {
-                if (this.routeIndex !== this.menuItems.length - 1) {
-                    path += this.menuItems[this.routeIndex + 1];
-                } else {
-                    path += this.menuItems[this.routeIndex];
-                }
-            }
-            this.$router.push(path);
-        },
-        changeScrollPos(event) {
-            if (event) {
-                this.scrollPosition += this.SCROLL_VALUE;
-            } else {
-                if (this.scrollPosition > 0) {
-                    this.scrollPosition -= this.SCROLL_VALUE;
-                }
-            }
-        },
-        stopEvents(time) {
-            window.removeEventListener("mousewheel", this.handleScroll);
-            window.removeEventListener("keyup", this.handleKeyUp);
-            setTimeout(() => {
-                window.addEventListener("mousewheel", this.handleScroll);
-                window.addEventListener("keyup", this.handleKeyUp);
-            }, time);
-        }
-    },
-    created() {
-        window.addEventListener("mousewheel", this.handleScroll);
-        window.addEventListener("keyup", this.handleKeyUp);
-        this.routeIndex = this.$router.currentRoute.meta.index;
-        this.$router.beforeEach((to, from, next) => {
-            this.routeIndex = to.meta.index;
-            if (to.meta) {
-                var transition =
-                    to.meta.index < from.meta.index
-                        ? "slide-right"
-                        : "slide-left";
-            }
-            this.transitionName = transition || DEFAULT_TRANSITION;
-            next();
-        });
-    },
-    destroyed() {
-        window.removeEventListener("mousewheel", this.handleScroll);
-        window.removeEventListener("keyup", this.handleKeyUp);
-    }
+    name: 'app',
 };
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Rubik&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 @font-face {
-    font-family: "Hipstelvetica";
-    src: url("./assets/fonts/Hipstelvetica.ttf");
+    font-family: 'Hipstelvetica';
+    src: url('./assets/fonts/Hipstelvetica.ttf');
 }
 
 @font-face {
-    font-family: "Andis";
-    src: url("./assets/fonts/Andis.ttf");
+    font-family: 'Andis';
+    src: url('./assets/fonts/Andis.ttf');
 }
 * {
     -webkit-font-smoothing: antialiased;
@@ -195,7 +35,7 @@ body {
     transition: 0.5s ease;
 }
 #app {
-    font-family: "Rubik";
+    font-family: 'Rubik';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     color: rgb(65, 65, 65);
