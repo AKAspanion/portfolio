@@ -1,7 +1,8 @@
 <template>
     <div class="about-container">
         <div class="about-main">
-            <div class="hi seperated">{{$t('ui.about.hi')}}</div>
+             
+            <!-- <div class="hi seperated" :class="isEnglish ? '':'.'">{{$t('ui.about.hi')}}</div> -->
             <div class="name seperated">{{$t('ui.about.name') + $t('about.name')}}.</div>
             <div class="about seperated">
                 {{ $t('ui.about.about.start') + $t('about.position') +$t('ui.about.about.end') }}
@@ -35,7 +36,12 @@
 
 <script>
 export default {
-    name: "SpanionAbout"
+    name: "SpanionAbout",
+    computed: {
+        isEnglish() {
+            return this.$i18n.locale === "en";
+        }
+    }
 };
 </script>
 

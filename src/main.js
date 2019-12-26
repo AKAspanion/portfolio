@@ -4,6 +4,7 @@ import store from './store.js'
 import router from './router.js'
 import vuetify from './vuetify.js'
 import i18n from './i18n.js'
+import "./assets/style.css"
 
 
 import App from './App.vue'

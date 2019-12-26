@@ -221,16 +221,6 @@ body {
     cursor: pointer;
 }
 
-.link {
-    text-decoration: none;
-    color: #feffff;
-    transition: 0.3s ease;
-    box-shadow: inset 0px -1px 0 #fff;
-}
-.link:hover {
-    box-shadow: inset 0px -16px 0 #fff;
-}
-
 ::-webkit-scrollbar {
     width: 0;
 }
