@@ -1,7 +1,10 @@
 <template>
     <div>
-        <cursor-animated :hovered="hovered"></cursor-animated>
-        <scroll-indicator></scroll-indicator>
+        <cursor-animated
+            :hovered="hovered"
+            :tooltip="message"
+        ></cursor-animated>
+        <scroll-progress></scroll-progress>
         <router-view></router-view>
         <div @mouseover="mouseOver" @mouseout="mouseOver">
             hey
@@ -24,16 +27,17 @@
 
 <script>
 import CursorAnimated from '@/components/CursorAnimated.vue';
-import ScrollIndicator from '@/components/ScrollIndicator.vue';
+import ScrollProgress from '@/components/ScrollProgress.vue';
 export default {
     name: '',
     components: {
         CursorAnimated,
-        ScrollIndicator,
+        ScrollProgress,
     },
     data() {
         return {
             hovered: false,
+            message: 'Hello',
         };
     },
     methods: {

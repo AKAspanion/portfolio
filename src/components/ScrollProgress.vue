@@ -1,9 +1,7 @@
 <template>
     <div
         class="scroll-indicator"
-        :class="[
-            percentage && percentage < 5 ? 'scroll-indicator--hidden' : '',
-        ]"
+        :class="[percentage < 5 ? 'scroll-indicator--hidden' : '']"
     >
         <v-progress-circular
             size="40"
@@ -15,7 +13,7 @@
 
 <script>
 export default {
-    name: 'ScrollIndicator',
+    name: 'ScrollProgress',
     data() {
         return {
             percentage: 0,
@@ -29,10 +27,14 @@ export default {
             let bottomPosition =
                 document.getElementById('app').scrollHeight -
                 window.innerHeight;
-            this.percentage = Math.floor((topPosition / bottomPosition) * 100);
+            this.percentage =
+                topPosition !== 0
+                    ? Math.floor((topPosition / bottomPosition) * 100)
+                    : 0;
         },
     },
-    created() {
+    mounted() {
+        this.handleScroll();
         window.addEventListener('mousewheel', this.handleScroll);
     },
     destroyed() {

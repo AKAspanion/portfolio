@@ -3,6 +3,11 @@
         class="cursor-animated"
         :class="[progress == 0 ? 'cursor-animated--hidden' : '']"
     >
+        <div v-if="tooltip && !tooltip == ''" class="cursor-animated--tooltip">
+            <v-card tile class="pa-3 px-8">
+                {{ tooltip }}
+            </v-card>
+        </div>
         <v-progress-circular
             size="48"
             width="2"
@@ -14,7 +19,7 @@
 <script>
 export default {
     name: 'CursorAnimated',
-    props: ['hovered'],
+    props: ['hovered', 'tooltip'],
     computed: {
         progress() {
             if (this.hovered) return 100;
@@ -26,20 +31,31 @@ export default {
         document.addEventListener('mousemove', (e) => {
             cursor.setAttribute(
                 'style',
-                `top: ${e.pageY - 24}px; left: ${e.pageX - 24}px;`
+                `transform: translate(${e.pageX}px,${e.pageY}px);`
             );
         });
+    },
+    destroyed() {
+        window.removeEventListener('mousemove', this.handleScroll);
     },
 };
 </script>
 
 <style>
 .cursor-animated {
+    top: -24px;
+    left: -24px;
     position: absolute;
     pointer-events: none;
+    will-change: transform;
 }
 .cursor-animated--hidden {
     opacity: 0;
     transition: opacity 1.5s ease;
+}
+.cursor-animated--tooltip {
+    position: absolute;
+    top: -48px;
+    left: 48px;
 }
 </style>
