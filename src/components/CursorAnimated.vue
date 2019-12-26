@@ -9,7 +9,7 @@
             </v-card>
         </div>
         <v-progress-circular
-            size="48"
+            size="56"
             width="2"
             :value="progress"
         ></v-progress-circular>
@@ -43,8 +43,8 @@ export default {
 
 <style>
 .cursor-animated {
-    top: -24px;
-    left: -24px;
+    top: -28px;
+    left: -28px;
     position: absolute;
     pointer-events: none;
     will-change: transform;
@@ -55,7 +55,7 @@ export default {
 }
 .cursor-animated--tooltip {
     position: absolute;
-    top: -48px;
-    left: 48px;
+    top: -56px;
+    left: 56px;
 }
 </style>
