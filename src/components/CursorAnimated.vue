@@ -8,11 +8,13 @@
                 {{ tooltip }}
             </v-card>
         </div>
-        <v-progress-circular
-            size="56"
-            width="2"
-            :value="progress"
-        ></v-progress-circular>
+        <div :class="progress == 100 ? 'cursor-animated--rotated' : ''">
+            <v-progress-circular
+                size="56"
+                width="2"
+                :value="progress"
+            ></v-progress-circular>
+        </div>
     </div>
 </template>
 
@@ -36,7 +38,7 @@ export default {
         });
     },
     destroyed() {
-        window.removeEventListener('mousemove', this.handleScroll);
+        window.removeEventListener('mousemove');
     },
 };
 </script>
@@ -52,6 +54,9 @@ export default {
 .cursor-animated--hidden {
     opacity: 0;
     transition: opacity 1.5s ease;
+}
+.cursor-animated--rotated {
+    transform: scaleX(-1) rotate(180deg);
 }
 .cursor-animated--tooltip {
     position: absolute;

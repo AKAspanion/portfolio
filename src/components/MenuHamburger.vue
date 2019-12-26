@@ -22,6 +22,34 @@ export default {
     props: {
         alive: Boolean,
     },
+    methods: {
+        handleMouseOver(e) {
+            let hamb = document.querySelector('.ham-burger-container');
+            let windowWidth = window.innerWidth;
+            let evalpageX = windowWidth - e.pageX;
+            let xPos = 0,
+                yPos = 0;
+            if (
+                e.pageY <= 86 &&
+                e.pageY >= 48 &&
+                evalpageX <= 90 &&
+                evalpageX >= 48
+            ) {
+                xPos = 68 - evalpageX;
+                yPos = e.pageY - 68;
+            }
+            hamb.setAttribute(
+                'style',
+                `transform: translate(${xPos}px, ${yPos}px)`
+            );
+        },
+    },
+    mounted() {
+        document.addEventListener('mousemove', this.handleMouseOver);
+    },
+    destroyed() {
+        document.removeEventListener('mousemove', this.handleMouseOver);
+    },
 };
 </script>
 
@@ -32,55 +60,52 @@ export default {
     top: 48px;
     right: 48px;
     margin: 0 auto;
+    transition: 0.3s;
     z-index: 2;
-    width: 29px;
+    width: 40px;
     height: 40px;
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
+    will-change: transform;
 }
-.ham-burger {
-    width: 29px;
-    height: 29px;
-    transition: 0.5s;
-}
+.ham-burger,
 .ham-burger--alive {
-    width: 20px;
-    height: 29px;
-    transition: 0.5s;
+    padding: 10px 5px;
+    transition: 0.3s;
 }
+
 .ham-burger:hover .ham-1 {
-    transform: translate(-5px, 0px);
+    transform: translate(5px, 0px);
 }
 .ham-burger:hover .ham-3 {
-    transform: translate(5px, 0px);
+    transform: translate(-5px, 0px);
 }
 .ham-burger--alive:hover .ham-alive-1 {
     width: 0;
-    transform: rotate(-45deg) skewX(45deg) translate(-12px, 7px);
+    transform: rotate(-45deg) skewX(45deg) translate(-14px, 8px);
 }
 .ham-burger--alive:hover .ham-alive-3 {
     width: 0;
-    transform: rotate(-45deg) skewX(45deg) translate(12px, 7px);
+    transform: rotate(-45deg) skewX(45deg) translate(14px, 13px);
 }
 .ham {
     width: 29px;
-    height: 3px;
-    margin-bottom: 5px;
+    height: 4px;
+    margin-bottom: 4px;
     background: #424242;
-    transition: 0.5s;
+    transition: 0.3s;
+}
+.ham:nth-child(3) {
+    margin-bottom: 0px;
 }
 .ham--alive {
-    width: 20px;
+    width: 29px;
 }
 .ham-alive-1 {
-    transform: rotate(-45deg) skewX(45deg) translate(-3px, 0px);
+    transform: rotate(-45deg) skewX(45deg) translate(0.5px, -2.5px);
 }
 .ham-alive-2 {
     transform: rotate(180deg) skewX(-45deg);
 }
 .ham-alive-3 {
-    transform: rotate(-45deg) skewX(45deg) translate(3px, 0px);
+    transform: rotate(-45deg) skewX(45deg) translate(-0.5px, 2.5px);
 }
 </style>
