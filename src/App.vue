@@ -1,14 +1,16 @@
 <template>
-    <div id="app">
-        <v-app>
-            <router-view></router-view>
-        </v-app>
-    </div>
+    <v-app>
+        <container-main></container-main>
+    </v-app>
 </template>
 
 <script>
+import ContainerMain from '@/containers/ContainerMain.vue';
 export default {
     name: 'app',
+    components: {
+        ContainerMain,
+    },
 };
 </script>
 
