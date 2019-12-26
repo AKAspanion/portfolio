@@ -1,9 +1,7 @@
 <template>
     <div>
-        <cursor-animated
-            :hovered="hovered"
-            :tooltip="message"
-        ></cursor-animated>
+        <nav-menu :alive="alive"></nav-menu>
+        <cursor-animated></cursor-animated>
         <menu-hamburger
             @mouseover="mouseOver()"
             @mouseout="
@@ -18,12 +16,14 @@
 </template>
 
 <script>
+import NavMenu from '@/views/NavMenu.vue';
 import CursorAnimated from '@/components/CursorAnimated.vue';
 // import ScrollProgress from '@/components/ScrollProgress.vue';
 import MenuHamburger from '@/components/MenuHamburger.vue';
 export default {
     name: '',
     components: {
+        NavMenu,
         CursorAnimated,
         // ScrollProgress,
         MenuHamburger,
@@ -38,6 +38,7 @@ export default {
     methods: {
         mouseOver() {
             this.hovered = !this.hovered;
+            this.$store.dispatch('SHOW_CURSOR', this.hovered);
         },
     },
 };

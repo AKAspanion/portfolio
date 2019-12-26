@@ -5,25 +5,36 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        darkTheme: false,
-        isHovered: false,
-        hoverTooltip: ""
+        cursor: {
+            hovered: false,
+            tooltip: ""
+        },
     },
     mutations: {
-        toggleTheme(state, payload) {
-            state.darkTheme = payload;
+        changeCursor(state, payload) {
+            state.cursor = payload;
         }
     },
     actions: {
-        TOGGLE_THEME({
+        SHOW_CURSOR({
             commit
         }, payload) {
-            commit('toggleTheme', payload)
+            if (typeof payload == 'object') {
+                commit('changeCursor', {
+                    hovered: payload.hovered || false,
+                    tooltip: !payload.hovered ? "" : payload.tooltip || ""
+                })
+            } else {
+                commit('changeCursor', {
+                    hovered: payload,
+                    tooltip: ""
+                })
+            }
         }
     },
     getters: {
-        loadTheme(state) {
-            return state.darkTheme
+        cursor(state) {
+            return state.cursor
         }
     }
 })

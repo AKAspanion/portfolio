@@ -55,7 +55,7 @@ export default {
 
 <style>
 .ham-burger-container {
-    position: absolute;
+    position: fixed;
     cursor: pointer;
     top: 48px;
     right: 48px;

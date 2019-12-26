@@ -1,11 +1,15 @@
 <template>
     <div
+        v-if="cursor"
         class="cursor-animated"
         :class="[progress == 0 ? 'cursor-animated--hidden' : '']"
     >
-        <div v-if="tooltip && !tooltip == ''" class="cursor-animated--tooltip">
+        <div
+            v-if="cursor.tooltip && cursor.tooltip !== ''"
+            class="cursor-animated--tooltip"
+        >
             <v-card tile class="pa-3 px-8">
-                {{ tooltip }}
+                {{ cursor.tooltip }}
             </v-card>
         </div>
         <div :class="progress == 100 ? 'cursor-animated--rotated' : ''">
@@ -21,24 +25,29 @@
 <script>
 export default {
     name: 'CursorAnimated',
-    props: ['hovered', 'tooltip'],
     computed: {
         progress() {
-            if (this.hovered) return 100;
+            if (this.cursor.hovered) return 100;
             else return 0;
         },
+        cursor() {
+            return this.$store.getters.cursor;
+        },
     },
-    mounted() {
-        const cursor = document.querySelector('.cursor-animated');
-        document.addEventListener('mousemove', (e) => {
+    methods: {
+        handleCursor(e) {
+            const cursor = document.querySelector('.cursor-animated');
             cursor.setAttribute(
                 'style',
                 `transform: translate(${e.pageX}px,${e.pageY}px);`
             );
-        });
+        },
+    },
+    mounted() {
+        document.addEventListener('mousemove', this.handleCursor);
     },
     destroyed() {
-        window.removeEventListener('mousemove');
+        window.removeEventListener('mousemove', this.handleCursor);
     },
 };
 </script>
@@ -49,6 +58,7 @@ export default {
     left: -28px;
     position: absolute;
     pointer-events: none;
+    transition: 0.3s;
     will-change: transform;
 }
 .cursor-animated--hidden {
