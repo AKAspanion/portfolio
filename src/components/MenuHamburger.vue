@@ -4,11 +4,12 @@
         class="ham-burger-container"
         @mouseover="$emit('mouseover')"
         @mouseout="$emit('mouseout')"
-        @click="$emit('click')"
+        @click="handleClick"
     >
         <div :class="[alive ? `ham-burger--alive` : 'ham-burger']">
             <div
                 class="ham"
+                :style="`background: ${dark ? '#FFFFFF' : '#202020'}`"
                 :class="[alive ? `ham--alive ham-alive-${n}` : `ham-${n}`]"
                 v-for="n in 3"
                 :key="n"
@@ -21,6 +22,7 @@
 export default {
     name: 'MenuHamburger',
     props: {
+        dark: Boolean,
         alive: Boolean,
         top: {
             type: Number,
@@ -30,6 +32,11 @@ export default {
             type: Number,
             default: 30,
         },
+    },
+    data() {
+        return {
+            animating: false,
+        };
     },
     methods: {
         handleMouseOver(e) {
@@ -50,6 +57,17 @@ export default {
                 xPos = this.right + 40 - evalpageX;
             }
             hamb.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
+        },
+        handleClick() {
+            if (this.animating) {
+                return;
+            } else {
+                this.$emit('click');
+                this.animating = true;
+                setTimeout(() => {
+                    this.animating = false;
+                }, 1000);
+            }
         },
     },
     mounted() {
@@ -98,7 +116,6 @@ export default {
     height: 4px;
     transition: 250ms;
     margin-bottom: 4px;
-    background: #424242;
 }
 .ham:nth-child(3) {
     margin-bottom: 0px;

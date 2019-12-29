@@ -1,12 +1,13 @@
 <template>
     <div>
         <nav-menu :alive="alive"></nav-menu>
-        <cursor-animated></cursor-animated>
+        <cursor-animated :dark="alive"></cursor-animated>
         <menu-hamburger
             @mouseover="mouseOver()"
             @mouseout="mouseOver()"
             @click="alive = !alive"
             :alive="alive"
+            :dark="alive"
         ></menu-hamburger>
         <router-view></router-view>
     </div>

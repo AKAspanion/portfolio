@@ -17,6 +17,7 @@
                 size="56"
                 width="2"
                 :value="progress"
+                :color="dark ? '#FFFFFF' : '#202020'"
             ></v-progress-circular>
         </div>
     </div>
@@ -25,6 +26,7 @@
 <script>
 export default {
     name: 'CursorAnimated',
+    props: ['dark'],
     computed: {
         progress() {
             if (this.cursor.hovered) return 100;
@@ -37,7 +39,7 @@ export default {
     methods: {
         handleCursor(e) {
             const cursor = document.querySelector('.cursor-animated');
-            cursor.style.trasnsform = `translate3d(${e.pageX}px,${e.pageY}px, 0px)`;
+            cursor.style.transform = `translate3d(${e.pageX}px,${e.pageY}px, 0px)`;
         },
     },
     mounted() {
