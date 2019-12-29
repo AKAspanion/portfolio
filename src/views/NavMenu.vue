@@ -12,7 +12,7 @@
                 <v-col cols="12" md="4">
                     <div class="name-item-container overline my-8">
                         <div class="name-item-wrapper">
-                            <span>spanion.xyz</span>
+                            <div class="d-inline-block">spanion.xyz</div>
                         </div>
                     </div>
                 </v-col>
@@ -24,16 +24,17 @@
                             :key="navItem.id"
                         >
                             <div class="nav-item-wrapper">
-                                <span
-                                    class="nav-item"
+                                <div
+                                    class="d-inline-block nav-item"
                                     @click="navigateTo(navItem)"
+                                    @mousemove="moveItems"
                                     @mouseover="
                                         onMenuMouseOver($event, navItem)
                                     "
                                     @mouseout="onMenuMouseOut($event, navItem)"
                                 >
                                     {{ navItem.name }}
-                                </span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -51,13 +52,14 @@
                             :key="link.id"
                         >
                             <div class="link-item-wrapper">
-                                <span
-                                    class="link-item"
+                                <div
+                                    class="d-inline-block link-item"
+                                    @mousemove="moveItems"
                                     @mouseover="onMenuMouseOver($event, link)"
                                     @mouseout="onMenuMouseOut($event, link)"
                                 >
                                     {{ link.name }}
-                                </span>
+                                </div>
                             </div>
                         </div>
                     </v-row>
@@ -101,8 +103,22 @@ export default {
                 tooltip: n.tooltip,
             });
         },
-        onMenuMouseOut() {
+        onMenuMouseOut(e) {
             this.$store.dispatch('SHOW_CURSOR', false);
+            e.target.style.transform = `translate3d(0px, 0px, 0px)`;
+        },
+        moveItems(e) {
+            let targetPos = e.target.getBoundingClientRect();
+            let xThresold =
+                    1 -
+                    (targetPos.x + targetPos.width - e.pageX) / targetPos.width,
+                yThresold =
+                    1 -
+                    (targetPos.y + targetPos.height - e.pageY) /
+                        targetPos.height;
+            e.target.style.transform = `translate3d(${Math.floor(
+                xThresold * (targetPos.width / 2)
+            )}px, ${Math.floor(yThresold * (targetPos.height / 2))}px, 0px)`;
         },
         animateItems(alive) {
             let navs = document.querySelectorAll('.nav-item-wrapper');
@@ -166,5 +182,7 @@ export default {
 .nav-item,
 .link-item {
     cursor: pointer;
+    will-change: transform;
+    transition: transform 150ms ease-out;
 }
 </style>
