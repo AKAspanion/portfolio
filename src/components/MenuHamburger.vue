@@ -9,7 +9,9 @@
         <div :class="[alive ? `ham-burger--alive` : 'ham-burger']">
             <div
                 class="ham"
-                :style="`background: ${dark ? '#FFFFFF' : '#202020'}`"
+                :style="
+                    `background: ${$vuetify.theme.dark ? '#FFFFFF' : '#000000'}`
+                "
                 :class="[alive ? `ham--alive ham-alive-${n}` : `ham-${n}`]"
                 v-for="n in 3"
                 :key="n"
@@ -22,7 +24,6 @@
 export default {
     name: 'MenuHamburger',
     props: {
-        dark: Boolean,
         alive: Boolean,
         top: {
             type: Number,
@@ -54,7 +55,7 @@ export default {
                 evalpageX >= this.right
             ) {
                 yPos = e.pageY - (this.top + 40);
-                xPos = this.right + 40 - evalpageX;
+                xPos = this.right + 45 - evalpageX;
             }
             hamb.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
         },
@@ -81,12 +82,12 @@ export default {
 
 <style>
 .ham-burger-container {
-    position: fixed;
-    cursor: pointer;
-    margin: 0 auto;
-    z-index: 2;
     width: 80px;
     height: 80px;
+    z-index: 100;
+    margin: 0 auto;
+    position: fixed;
+    cursor: pointer;
     will-change: transform;
     transition: transform 150ms ease-out;
     transform: translate3d(0px, 0px, 0px);

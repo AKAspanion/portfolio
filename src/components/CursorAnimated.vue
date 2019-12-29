@@ -4,21 +4,29 @@
         class="cursor-animated"
         :class="[progress == 0 ? 'cursor-animated--hidden' : '']"
     >
-        <div
-            v-if="cursor.tooltip && cursor.tooltip !== ''"
-            class="cursor-animated--tooltip"
-        >
-            <v-card tile class="pa-3 px-8">
-                {{ cursor.tooltip }}
-            </v-card>
-        </div>
         <div :class="progress == 100 ? 'cursor-animated--rotated' : ''">
             <v-progress-circular
                 size="56"
                 width="2"
                 :value="progress"
-                :color="dark ? '#FFFFFF' : '#202020'"
+                :color="$vuetify.theme.dark ? '#FFFFFF' : '#000000'"
             ></v-progress-circular>
+        </div>
+        <div
+            v-if="cursor.tooltip && cursor.tooltip !== ''"
+            class="cursor-animated--tooltip"
+        >
+            <v-card
+                tile
+                class="pa-3 px-8"
+                :color="$vuetify.theme.dark ? '#FFFFFF' : '#000000'"
+            >
+                <span
+                    :class="$vuetify.theme.dark ? 'black--text' : 'white--text'"
+                >
+                    {{ cursor.tooltip }}
+                </span>
+            </v-card>
         </div>
     </div>
 </template>
@@ -26,7 +34,6 @@
 <script>
 export default {
     name: 'CursorAnimated',
-    props: ['dark'],
     computed: {
         progress() {
             if (this.cursor.hovered) return 100;
@@ -55,6 +62,7 @@ export default {
 .cursor-animated {
     top: -28px;
     left: -28px;
+    z-index: 200;
     position: absolute;
     pointer-events: none;
     will-change: transform;
@@ -68,8 +76,7 @@ export default {
     transform: scaleX(-1) rotate(180deg);
 }
 .cursor-animated--tooltip {
-    position: absolute;
-    top: -56px;
+    position: relative;
     left: 56px;
 }
 </style>

@@ -64,7 +64,17 @@ body {
 }
 
 ::-webkit-scrollbar {
-    width: 0;
+    width: 5px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #424242;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #000000;
 }
 .slide-left-enter-active,
 .slide-left-leave-active,
