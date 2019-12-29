@@ -1,33 +1,42 @@
 <template>
-    <div class="pa-4" :style="`background: ${theme ? '#000000' : '#FFFFFF'};`">
-        <v-switch v-model="theme"></v-switch>
-        <div class="home-container"></div>
-        <div class="home-container"></div>
+    <div class="home-container">
+        <div class="home">
+            <div class="name">{{ $t('home.name') }}</div>
+            <div class="slash">{{ $t('home.separator') }}</div>
+            <div class="desc">{{ $t('home.designation') }}</div>
+        </div>
     </div>
 </template>
-
 <script>
 export default {
-    name: 'Home',
-    data() {
-        return {};
-    },
-    computed: {
-        theme: {
-            get() {
-                return this.$vuetify.theme.dark;
-            },
-            set(val) {
-                this.$vuetify.theme.dark = val;
-            },
-        },
-    },
+    name: 'SpanionHome',
 };
 </script>
-
-<style>
+<style scoped>
 .home-container {
-    width: 100vw;
+    text-align: center;
+    font-size: 6vw;
+    background: #3aafa9;
+    color: #def2f1;
+    padding: 0;
     height: 100vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.home {
+    margin: 5vh 0 0 0;
+}
+.name,
+.slash,
+.desc {
+    font-family: 'Roboto';
+    font-weight: bold;
+}
+@media only screen and (max-width: 600px) {
+    .home-container {
+        font-size: 7vh;
+    }
 }
 </style>

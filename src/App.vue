@@ -1,15 +1,25 @@
 <template>
     <v-app>
-        <container-main></container-main>
+        <nav-menu></nav-menu>
+        <scroll-progress></scroll-progress>
+        <cursor-animated></cursor-animated>
+        <menu-hamburger></menu-hamburger>
+        <router-view></router-view>
     </v-app>
 </template>
 
 <script>
-import ContainerMain from '@/containers/ContainerMain.vue';
+import NavMenu from '@/views/NavMenu.vue';
+import CursorAnimated from '@/components/CursorAnimated.vue';
+import ScrollProgress from '@/components/ScrollProgress.vue';
+import MenuHamburger from '@/components/MenuHamburger.vue';
 export default {
     name: 'app',
     components: {
-        ContainerMain,
+        NavMenu,
+        CursorAnimated,
+        ScrollProgress,
+        MenuHamburger,
     },
 };
 </script>

@@ -26,6 +26,7 @@
                             <div class="nav-item-wrapper">
                                 <span
                                     class="nav-item"
+                                    @click="navigateTo(navItem)"
                                     @mouseover="
                                         onMenuMouseOver($event, navItem)
                                     "
@@ -89,6 +90,11 @@ export default {
         immediate: true,
     },
     methods: {
+        navigateTo(page) {
+            this.$router.push(`/${page.name}`);
+            this.$store.dispatch('SHOW_CURSOR', false);
+            this.$store.dispatch('SHOW_NAV_MENU', false);
+        },
         onMenuMouseOver(e, n) {
             this.$store.dispatch('SHOW_CURSOR', {
                 hovered: true,
@@ -109,7 +115,7 @@ export default {
                 alive ? '(0px, 0px, 0px)' : '(0px, 16px, 0px)'
             }`;
             let _timeout = alive ? 120 : 60;
-            let _delay = alive ? 300 : 0;
+            let _delay = alive ? 600 : 0;
             navs.forEach((nav, index) => {
                 setTimeout(() => {
                     nav.style.transform = _navStyle;
@@ -122,7 +128,7 @@ export default {
             });
             setTimeout(() => {
                 name[0].style.transform = _linkStyle;
-            }, _delay * 3);
+            }, _delay * 2);
         },
     },
     mounted() {
