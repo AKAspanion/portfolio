@@ -4,29 +4,27 @@
         class="cursor-animated"
         :class="[progress == 0 ? 'cursor-animated--hidden' : '']"
     >
-        <div :class="progress == 100 ? 'cursor-animated--rotated' : ''">
-            <v-progress-circular
-                size="56"
-                width="2"
-                :value="progress"
-                :color="$vuetify.theme.dark ? '#FFFFFF' : '#000000'"
-            ></v-progress-circular>
-        </div>
+        <v-progress-circular
+            size="56"
+            width="2"
+            :value="progress"
+            :color="$vuetify.theme.dark ? '#FFFFFF' : '#000000'"
+            :class="progress == 100 ? 'cursor-animated--rotated' : ''"
+        ></v-progress-circular>
         <div
-            v-if="cursor.tooltip && cursor.tooltip !== ''"
-            class="cursor-animated--tooltip"
+            class="cursor-tooltip"
+            :class="[
+                cursor.tooltip && cursor.tooltip !== ''
+                    ? ''
+                    : 'cursor-tooltip--hidden',
+                $vuetify.theme.dark
+                    ? 'cursor-tooltip--dark'
+                    : 'cursor-tooltip--white',
+            ]"
         >
-            <v-card
-                tile
-                class="pa-3 px-8"
-                :color="$vuetify.theme.dark ? '#FFFFFF' : '#000000'"
-            >
-                <span
-                    :class="$vuetify.theme.dark ? 'black--text' : 'white--text'"
-                >
-                    {{ cursor.tooltip }}
-                </span>
-            </v-card>
+            <span>
+                {{ cursor.tooltip }}
+            </span>
         </div>
     </div>
 </template>
@@ -70,13 +68,29 @@ export default {
 }
 .cursor-animated--hidden {
     opacity: 0;
-    transition: opacity 1.5s;
+    transition: opacity 1s;
+    transition-delay: 0.5s;
 }
 .cursor-animated--rotated {
     transform: scaleX(-1) rotate(180deg);
 }
-.cursor-animated--tooltip {
-    position: relative;
+.cursor-tooltip {
     left: 56px;
+    height: 56px;
+    padding: 16px 32px;
+    position: relative;
+    box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+        0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.cursor-tooltip--dark {
+    background: white;
+    color: black;
+}
+.cursor-tooltip--white {
+    background: black;
+    color: white;
+}
+.cursor-tooltip--hidden {
+    display: none;
 }
 </style>
