@@ -2,8 +2,8 @@
     <div
         :style="`top: ${top}px;right: ${right}px;`"
         class="ham-burger-container"
-        @mouseover="$emit('mouseover')"
-        @mouseout="$emit('mouseout')"
+        @mouseover="onMouseOver()"
+        @mouseout="onMouseOut()"
         @click="handleClick"
     >
         <div :class="[alive ? `ham-burger--alive` : 'ham-burger']">
@@ -24,7 +24,6 @@
 export default {
     name: 'MenuHamburger',
     props: {
-        alive: Boolean,
         top: {
             type: Number,
             default: 30,
@@ -38,6 +37,16 @@ export default {
         return {
             animating: false,
         };
+    },
+    computed: {
+        alive: {
+            get() {
+                return this.$store.getters.navMenu;
+            },
+            set(val) {
+                this.$store.dispatch('SHOW_NAV_MENU', val);
+            },
+        },
     },
     methods: {
         handleMouseOver(e) {
@@ -63,12 +72,18 @@ export default {
             if (this.animating) {
                 return;
             } else {
-                this.$emit('click');
                 this.animating = true;
+                this.alive = !this.alive;
                 setTimeout(() => {
                     this.animating = false;
                 }, 1000);
             }
+        },
+        onMouseOver() {
+            this.$store.dispatch('SHOW_CURSOR', true);
+        },
+        onMouseOut() {
+            this.$store.dispatch('SHOW_CURSOR', false);
         },
     },
     mounted() {

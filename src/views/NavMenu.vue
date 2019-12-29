@@ -68,42 +68,16 @@
 
 <script>
 export default {
-    props: ['alive'],
-    data() {
-        return {
-            navItems: [
-                {
-                    id: 0,
-                    name: 'home',
-                    tooltip: 'go to home',
-                },
-                {
-                    id: 1,
-                    name: 'about',
-                    tooltip: 'know about me',
-                },
-                {
-                    id: 2,
-                    name: 'experience',
-                    tooltip: 'look into my experience',
-                },
-                {
-                    id: 3,
-                    name: 'contact',
-                    tooltip: 'get in touch with me',
-                },
-            ],
-            socialLinks: [
-                { id: 1, name: 'Github', url: 'https://github.com/AKAspanion' },
-                {
-                    id: 2,
-                    name: 'Linkedin',
-                    url: 'https://www.linkedin.com/in/spanion/',
-                },
-                { id: 3, name: 'Instagram', url: 'http://google.com' },
-                { id: 4, name: 'Facebook', url: 'http://google.com' },
-            ],
-        };
+    computed: {
+        alive() {
+            return this.$store.getters.navMenu;
+        },
+        socialLinks() {
+            return this.$store.getters.socialLinks;
+        },
+        navItems() {
+            return this.$store.getters.navItems;
+        },
     },
     watch: {
         alive: {
@@ -111,6 +85,7 @@ export default {
                 this.animateItems(newV);
             },
         },
+        deep: true,
         immediate: true,
     },
     methods: {
@@ -149,6 +124,9 @@ export default {
                 name[0].style.transform = _linkStyle;
             }, _delay * 3);
         },
+    },
+    mounted() {
+        this.animateItems(false);
     },
 };
 </script>

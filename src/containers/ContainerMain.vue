@@ -1,14 +1,9 @@
 <template>
     <div>
+        <nav-menu></nav-menu>
         <scroll-progress></scroll-progress>
         <cursor-animated></cursor-animated>
-        <nav-menu :alive="alive"></nav-menu>
-        <menu-hamburger
-            @mouseover="mouseOver()"
-            @mouseout="mouseOver()"
-            @click="alive = !alive"
-            :alive="alive"
-        ></menu-hamburger>
+        <menu-hamburger></menu-hamburger>
         <router-view></router-view>
     </div>
 </template>
@@ -25,19 +20,6 @@ export default {
         CursorAnimated,
         ScrollProgress,
         MenuHamburger,
-    },
-    data() {
-        return {
-            hovered: false,
-            message: 'Hello',
-            alive: true,
-        };
-    },
-    methods: {
-        mouseOver() {
-            this.hovered = !this.hovered;
-            this.$store.dispatch('SHOW_CURSOR', this.hovered);
-        },
     },
 };
 </script>
