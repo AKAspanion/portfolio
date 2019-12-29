@@ -22,12 +22,12 @@ export default {
     will-change: transform;
     -webkit-transition: all 1s cubic-bezier(1, 0, 0, 1);
     transition: all 1s cubic-bezier(1, 0, 0, 1);
-    transform: translate(100vw, 0px);
+    transform: translate3d(100vw, 0px, 0px);
     position: fixed;
     right: 0;
     top: 0;
 }
 .nav-menu-container--active {
-    transform: translate(0px, 0px);
+    transform: translate3d(0px, 0px, 0px);
 }
 </style>

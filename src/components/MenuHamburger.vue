@@ -1,5 +1,6 @@
 <template>
     <div
+        :style="`top: ${top}px;right: ${right}px;`"
         class="ham-burger-container"
         @mouseover="$emit('mouseover')"
         @mouseout="$emit('mouseout')"
@@ -21,27 +22,34 @@ export default {
     name: 'MenuHamburger',
     props: {
         alive: Boolean,
+        top: {
+            type: Number,
+            default: 30,
+        },
+        right: {
+            type: Number,
+            default: 30,
+        },
     },
     methods: {
         handleMouseOver(e) {
-            let hamb = document.querySelector('.ham-burger-container');
             let windowWidth = window.innerWidth;
-            let evalpageX = windowWidth - e.pageX;
-            let xPos = 0,
+            let hamb = document.querySelector('.ham-burger-container');
+            let evalpageX = windowWidth - e.pageX,
+                xLimit = this.right + 80,
+                yLimit = this.top + 80,
+                xPos = 0,
                 yPos = 0;
             if (
-                e.pageY <= 86 &&
-                e.pageY >= 48 &&
-                evalpageX <= 90 &&
-                evalpageX >= 48
+                e.pageY <= yLimit &&
+                e.pageY >= this.top &&
+                evalpageX <= xLimit &&
+                evalpageX >= this.right
             ) {
-                xPos = 68 - evalpageX;
-                yPos = e.pageY - 68;
+                yPos = e.pageY - (this.top + 40);
+                xPos = this.right + 40 - evalpageX;
             }
-            hamb.setAttribute(
-                'style',
-                `transform: translate(${xPos}px, ${yPos}px)`
-            );
+            hamb.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
         },
     },
     mounted() {
@@ -57,41 +65,40 @@ export default {
 .ham-burger-container {
     position: fixed;
     cursor: pointer;
-    top: 48px;
-    right: 48px;
     margin: 0 auto;
-    transition: 0.3s;
     z-index: 2;
-    width: 40px;
-    height: 40px;
+    width: 80px;
+    height: 80px;
     will-change: transform;
+    transition: transform 150ms ease-out;
+    transform: translate3d(0px, 0px, 0px);
 }
 .ham-burger,
 .ham-burger--alive {
-    padding: 10px 5px;
-    transition: 0.3s;
+    padding: 30px 25px;
+    transition: 250ms;
 }
 
 .ham-burger:hover .ham-1 {
-    transform: translate(5px, 0px);
+    transform: translate3d(5px, 0px, 0px);
 }
 .ham-burger:hover .ham-3 {
-    transform: translate(-5px, 0px);
+    transform: translate3d(-5px, 0px, 0px);
 }
 .ham-burger--alive:hover .ham-alive-1 {
     width: 0;
-    transform: rotate(-45deg) skewX(45deg) translate(-14px, 8px);
+    transform: rotate(-45deg) skewX(45deg) translate3d(-14px, 8px, 0px);
 }
 .ham-burger--alive:hover .ham-alive-3 {
     width: 0;
-    transform: rotate(-45deg) skewX(45deg) translate(14px, 13px);
+    transform: rotate(-45deg) skewX(45deg) translate3d(14px, 13px, 0px);
 }
 .ham {
     width: 29px;
     height: 4px;
+    transition: 250ms;
     margin-bottom: 4px;
     background: #424242;
-    transition: 0.3s;
 }
 .ham:nth-child(3) {
     margin-bottom: 0px;
@@ -100,12 +107,12 @@ export default {
     width: 29px;
 }
 .ham-alive-1 {
-    transform: rotate(-45deg) skewX(45deg) translate(0.5px, -2.5px);
+    transform: rotate(-45deg) skewX(45deg) translate3d(0.5px, -2.5px, 0px);
 }
 .ham-alive-2 {
     transform: rotate(180deg) skewX(-45deg);
 }
 .ham-alive-3 {
-    transform: rotate(-45deg) skewX(45deg) translate(-0.5px, 2.5px);
+    transform: rotate(-45deg) skewX(45deg) translate3d(-0.5px, 2.5px, 0px);
 }
 </style>

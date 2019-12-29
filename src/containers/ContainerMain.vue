@@ -4,12 +4,9 @@
         <cursor-animated></cursor-animated>
         <menu-hamburger
             @mouseover="mouseOver()"
-            @mouseout="
-                message = '';
-                mouseOver();
-            "
-            :alive="alive"
+            @mouseout="mouseOver()"
             @click="alive = !alive"
+            :alive="alive"
         ></menu-hamburger>
         <router-view></router-view>
     </div>

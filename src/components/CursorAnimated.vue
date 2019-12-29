@@ -37,10 +37,7 @@ export default {
     methods: {
         handleCursor(e) {
             const cursor = document.querySelector('.cursor-animated');
-            cursor.setAttribute(
-                'style',
-                `transform: translate(${e.pageX}px,${e.pageY}px);`
-            );
+            cursor.style.trasnsform = `translate3d(${e.pageX}px,${e.pageY}px, 0px)`;
         },
     },
     mounted() {
@@ -58,12 +55,12 @@ export default {
     left: -28px;
     position: absolute;
     pointer-events: none;
-    transition: 0.3s;
     will-change: transform;
+    transition: transform 200ms ease-out;
 }
 .cursor-animated--hidden {
     opacity: 0;
-    transition: opacity 1.5s ease;
+    transition: opacity 1.5s;
 }
 .cursor-animated--rotated {
     transform: scaleX(-1) rotate(180deg);
