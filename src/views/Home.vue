@@ -1,42 +1,55 @@
 <template>
-    <div class="home-container">
-        <div class="home">
-            <div class="name">{{ $t('home.name') }}</div>
-            <div class="slash">{{ $t('home.separator') }}</div>
-            <div class="desc">{{ $t('home.designation') }}</div>
+    <div class="home-container" :style="style">
+        <div class="home-text">
+            Hello.<br />
+            I, Ankit Pandit - <br />
+            Software and <br />
+            Web developer
         </div>
     </div>
 </template>
 <script>
 export default {
     name: 'SpanionHome',
+    computed: {
+        style() {
+            if (this.$vuetify.theme.dark) {
+                return {
+                    background: '#000000',
+                    color: '#FFFFFF',
+                };
+            } else {
+                return {
+                    background: '#FFFFFF',
+                    color: '#000000',
+                };
+            }
+        },
+    },
 };
 </script>
 <style scoped>
 .home-container {
-    text-align: center;
-    font-size: 6vw;
-    background: #3aafa9;
-    color: #def2f1;
     padding: 0;
-    height: 100vh;
     width: 100vw;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    text-align: left;
+    min-height: 100vh;
+    padding: 120px 10vw 120px 20vw;
 }
-.home {
-    margin: 5vh 0 0 0;
-}
-.name,
-.slash,
-.desc {
-    font-family: 'Roboto';
-    font-weight: bold;
+.home-text {
+    font-size: 8vw;
+    font-weight: 100 !important;
+    line-height: 8vw;
+    text-transform: uppercase;
+    font-family: Roboto, sans-serif !important;
 }
 @media only screen and (max-width: 600px) {
     .home-container {
-        font-size: 7vh;
+        padding: 140px 10vw 120px 10vw;
+    }
+    .home-text {
+        font-size: 8vh;
+        line-height: 8vh;
     }
 }
 </style>

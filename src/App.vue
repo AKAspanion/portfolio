@@ -11,7 +11,9 @@
             :top="hamPosition.top"
             :right="hamPosition.right"
         ></menu-hamburger>
-        <router-view></router-view>
+        <transition name="page" mode="out-in">
+            <router-view></router-view>
+        </transition>
     </v-app>
 </template>
 
@@ -76,26 +78,6 @@ body {
     -moz-osx-font-smoothing: grayscale;
     color: rgb(65, 65, 65);
 }
-.scroll-icon {
-    display: flex;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    justify-content: space-between;
-    align-items: stretch;
-    transform: translateX(-50%);
-}
-.scroll-title {
-    text-align: center;
-    width: 50px;
-    padding: 7px 5px 5px 5px;
-    color: white;
-    font-size: 10px;
-}
-.arrow-container {
-    width: 22px;
-    cursor: pointer;
-}
 
 ::-webkit-scrollbar {
     width: 5px;
@@ -110,28 +92,13 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: #000000;
 }
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active {
-    transition-duration: 0.5s;
-    transition-property: height, opacity, transform;
-    transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-    overflow: hidden;
+.page-enter-active,
+.page-leave-active {
+    transition: transform 1s cubic-bezier(1, 0, 0, 1);
 }
-
-.slide-left-enter,
-.slide-right-leave-active {
-    opacity: 0;
-    transform: translate(2em, 0);
-}
-
-.slide-left-leave-active,
-.slide-right-enter {
-    opacity: 0;
-    transform: translate(-2em, 0);
-}
-.test {
-    background: red;
+.page-enter,
+.page-leave-to {
+    transform: translateX(100vw);
+    transition-timing-function: cubic-bezier(1, 0, 0, 1);
 }
 </style>

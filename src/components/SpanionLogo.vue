@@ -1,6 +1,7 @@
 <template>
     <div
         :style="`top: ${top}px;left: ${left}px;`"
+        @click="navigateTo('/home')"
         @mousemove="handleMouseOver"
         @mouseover="onMouseOver()"
         @mouseout="onMouseOut()"
@@ -34,6 +35,9 @@ export default {
         },
     },
     methods: {
+        navigateTo(link) {
+            this.$router.push(link);
+        },
         handleMouseOver(e) {
             let hamb = document.querySelector('.logo-container');
             let xLimit = this.left + 80,
