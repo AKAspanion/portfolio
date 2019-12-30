@@ -3,7 +3,10 @@
         <nav-menu></nav-menu>
         <scroll-progress></scroll-progress>
         <cursor-animated></cursor-animated>
-        <menu-hamburger></menu-hamburger>
+        <menu-hamburger
+            :top="hamPosition.top"
+            :right="hamPosition.right"
+        ></menu-hamburger>
         <router-view></router-view>
     </v-app>
 </template>
@@ -20,6 +23,21 @@ export default {
         CursorAnimated,
         ScrollProgress,
         MenuHamburger,
+    },
+    computed: {
+        hamPosition() {
+            if (this.$vuetify.breakpoint.xsOnly) {
+                return {
+                    top: 23,
+                    right: 20,
+                };
+            } else {
+                return {
+                    top: 103,
+                    right: 100,
+                };
+            }
+        },
     },
 };
 </script>

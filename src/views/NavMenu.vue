@@ -10,7 +10,10 @@
         <div class="mb-auto">
             <v-row dense>
                 <v-col cols="12" md="4">
-                    <div class="name-item-container overline my-8">
+                    <div
+                        :class="$vuetify.breakpoint.xsOnly ? 'my-3' : 'my-8'"
+                        class="name-item-container overline"
+                    >
                         <div class="name-item-wrapper">
                             <div class="d-inline-block">spanion.xyz</div>
                         </div>
@@ -42,12 +45,36 @@
             </v-row>
         </div>
         <div class="mt-auto">
-            <v-row dense>
-                <v-spacer></v-spacer>
+            <v-row dense align="center">
+                <v-col cols="12" md="4" class="theme-item-container">
+                    <div class="theme-item-wrapper">
+                        <v-btn-toggle
+                            class="my-4"
+                            v-model="theme"
+                            :background-color="
+                                theme === 1 ? '#000000' : '#FFFFFF'
+                            "
+                        >
+                            <v-btn x-small text>
+                                <v-icon x-small>mdi-white-balance-sunny</v-icon>
+                            </v-btn>
+                            <v-btn x-small text>
+                                <v-icon
+                                    x-small
+                                    style="transform: rotate(-45deg)"
+                                    >mdi-moon-waning-crescent</v-icon
+                                >
+                            </v-btn>
+                        </v-btn-toggle>
+                    </div>
+                </v-col>
                 <v-col cols="12" md="8">
                     <v-row no-gutters align="center">
                         <div
-                            class="overline my-8 pr-8 link-item-container"
+                            :class="
+                                $vuetify.breakpoint.xsOnly ? 'mb-3' : 'my-8'
+                            "
+                            class="overline pr-8 link-item-container"
                             v-for="link in socialLinks"
                             :key="link.id"
                         >
@@ -55,6 +82,7 @@
                                 <div
                                     class="d-inline-block link-item"
                                     @mousemove="moveItems"
+                                    @click="openLink(link)"
                                     @mouseover="onMenuMouseOver($event, link)"
                                     @mouseout="onMenuMouseOut($event, link)"
                                 >
@@ -81,6 +109,14 @@ export default {
         navItems() {
             return this.$store.getters.navItems;
         },
+        theme: {
+            get() {
+                return this.$vuetify.theme.dark ? 1 : 0;
+            },
+            set(val) {
+                this.$vuetify.theme.dark = val === 1 ? true : false;
+            },
+        },
     },
     watch: {
         alive: {
@@ -96,6 +132,9 @@ export default {
             this.$router.push(`/${page.name}`);
             this.$store.dispatch('SHOW_CURSOR', false);
             this.$store.dispatch('SHOW_NAV_MENU', false);
+        },
+        openLink(link) {
+            window.open(link.url, '_blank');
         },
         onMenuMouseOver(e, n) {
             this.$store.dispatch('SHOW_CURSOR', {
@@ -123,6 +162,7 @@ export default {
         animateItems(alive) {
             let navs = document.querySelectorAll('.nav-item-wrapper');
             let name = document.querySelectorAll('.name-item-wrapper');
+            let theme = document.querySelectorAll('.theme-item-wrapper');
             let links = document.querySelectorAll('.link-item-wrapper');
             let _navStyle = `translate3d${
                 alive ? '(0px, 0px, 0px)' : '(0px, 80px, 0px)'
@@ -145,6 +185,9 @@ export default {
             setTimeout(() => {
                 name[0].style.transform = _linkStyle;
             }, _delay * 2);
+            setTimeout(() => {
+                theme[0].style.transform = _navStyle;
+            }, _delay * 3);
         },
     },
     mounted() {
@@ -157,7 +200,7 @@ export default {
 .nav-menu-container {
     transition: transform 1s cubic-bezier(1, 0, 0, 1);
     transform: translate3d(100vw, 0px, 0px);
-    padding: 100px 80px 0px 80px;
+    padding: 100px 100px 0px 100px;
     will-change: transform;
     position: fixed;
     z-index: 100;
@@ -169,11 +212,13 @@ export default {
     transform: translate3d(0px, 0px, 0px);
 }
 .nav-item-container,
+.theme-item-container,
 .name-item-container,
 .link-item-container {
     overflow: hidden;
 }
 .nav-item-wrapper,
+.theme-item-wrapper,
 .name-item-wrapper,
 .link-item-wrapper {
     transition: transform 0.5s cubic-bezier(1, 0, 0, 1);
@@ -184,5 +229,10 @@ export default {
     cursor: pointer;
     will-change: transform;
     transition: transform 150ms ease-out;
+}
+@media only screen and (max-width: 600px) {
+    .nav-menu-container {
+        padding: 40px 40px 10px 40px;
+    }
 }
 </style>

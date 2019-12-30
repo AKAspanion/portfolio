@@ -18,17 +18,17 @@ export default new Vuex.Store({
             {
                 id: 2,
                 name: 'Linkedin',
-                url: 'https://www.linkedin.com/in/spanion/',
+                url: 'https://www.linkedin.com/in/spanion',
             },
             {
                 id: 3,
                 name: 'Instagram',
-                url: 'http://google.com'
+                url: 'https://www.instagram.com/spanionkumar'
             },
             {
                 id: 4,
                 name: 'Facebook',
-                url: 'http://google.com'
+                url: 'https://www.facebook.com/AKAspanion'
             },
         ],
         navItems: [{
