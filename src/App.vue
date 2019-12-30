@@ -94,7 +94,7 @@ body {
 }
 .page-enter-active,
 .page-leave-active {
-    transition: transform 1s cubic-bezier(1, 0, 0, 1);
+    transition: transform 0.9s cubic-bezier(1, 0, 0, 1);
 }
 .page-enter,
 .page-leave-to {
