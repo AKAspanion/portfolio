@@ -2,11 +2,14 @@
     <div class="home-container" :style="style">
         <div class="home-text-container pa-12">
             <div class="home-text d-inline-block">
-                Hello.
+                Hi.
             </div>
             <br />
             <div class="home-text d-inline-block">
-                I,
+                My name is,
+            </div>
+            <br />
+            <div class="home-text d-inline-block">
                 <div
                     class="home-text--name d-inline-block"
                     @mouseover="showCursor('know about me')"
@@ -63,17 +66,16 @@ export default {
 </script>
 <style scoped>
 .home-container {
-    padding: 0;
     width: 100vw;
     text-align: left;
     min-height: 100vh;
     overflow: hidden;
     padding: 64px 10vw 64px 15vw;
 }
-.home-text {
-    font-size: 8.5vw;
+.home-text-container {
+    font-size: 8vw;
     font-weight: 100 !important;
-    line-height: 8.5vw;
+    line-height: 8vw;
     text-transform: uppercase;
     font-family: Roboto, sans-serif !important;
 }
