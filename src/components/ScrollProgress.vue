@@ -1,12 +1,13 @@
 <template>
     <div
         class="scroll-indicator"
-        :class="[percentage < 5 ? 'scroll-indicator--hidden' : '']"
+        :style="`bottom: ${bottom}px;right: ${right}px;`"
+        :class="[percentage < 10 || navMenu ? 'scroll-indicator--hidden' : '']"
     >
         <v-progress-circular
             size="40"
             width="2"
-            :value="percentage"
+            :value="percentage <= 99 && percentage >= 95 ? 100 : percentage"
         ></v-progress-circular>
     </div>
 </template>
@@ -14,10 +15,27 @@
 <script>
 export default {
     name: 'ScrollProgress',
+    props: {
+        bottom: {
+            type: Number,
+            default: 40,
+        },
+        right: {
+            type: Number,
+            default: 110,
+        },
+    },
     data() {
         return {
             percentage: 0,
         };
+    },
+    computed: {
+        navMenu: {
+            get() {
+                return this.$store.getters.navMenu;
+            },
+        },
     },
     methods: {
         handleScroll() {

@@ -43,13 +43,6 @@ export default {
                     color: '#FFFFFF',
                 };
             }
-            if (this.$store.getters.navMenu) {
-                _style = {
-                    ..._style,
-                    overflow: 'hidden',
-                    height: '100vh',
-                };
-            }
             return _style;
         },
     },
