@@ -6,8 +6,12 @@ import vuetify from './vuetify.js'
 import i18n from './i18n.js'
 import "./assets/style.css"
 
-
 import App from './App.vue'
+import hover from './mixin/hover'
+import cursor from './mixin/cursor'
+
+Vue.mixin(hover)
+Vue.mixin(cursor)
 
 Vue.config.productionTip = false
 

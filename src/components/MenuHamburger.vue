@@ -3,8 +3,8 @@
         :style="`top: ${top}px;right: ${right}px;`"
         class="ham-burger-container"
         @mousemove="handleMouseOver"
-        @mouseover="onMouseOver()"
-        @mouseout="onMouseOut()"
+        @mouseover="showCursor()"
+        @mouseout="hideCursor()"
         @click="handleClick"
     >
         <div :class="[alive ? `ham-burger--alive` : 'ham-burger']">
@@ -79,12 +79,6 @@ export default {
                     this.animating = false;
                 }, 1000);
             }
-        },
-        onMouseOver() {
-            this.$store.dispatch('SHOW_CURSOR', true);
-        },
-        onMouseOut() {
-            this.$store.dispatch('SHOW_CURSOR', false);
         },
     },
 };

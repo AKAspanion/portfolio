@@ -30,11 +30,12 @@
                                 <div
                                     class="d-inline-block nav-item"
                                     @click="navigateTo(navItem)"
-                                    @mousemove="moveItems"
-                                    @mouseover="
-                                        onMenuMouseOver($event, navItem)
+                                    @mousemove="textHover"
+                                    @mouseover="showCursor(navItem.tooltip)"
+                                    @mouseout="
+                                        hideCursor();
+                                        textHover($event, true);
                                     "
-                                    @mouseout="onMenuMouseOut($event, navItem)"
                                 >
                                     {{ navItem.name }}
                                 </div>
@@ -82,10 +83,13 @@
                             <div class="link-item-wrapper">
                                 <div
                                     class="d-inline-block link-item"
-                                    @mousemove="moveItems"
+                                    @mousemove="textHover"
                                     @click="openLink(link)"
-                                    @mouseover="onMenuMouseOver($event, link)"
-                                    @mouseout="onMenuMouseOut($event, link)"
+                                    @mouseover="showCursor()"
+                                    @mouseout="
+                                        hideCursor();
+                                        textHover($event, true);
+                                    "
                                 >
                                     {{ link.name }}
                                 </div>
@@ -131,34 +135,11 @@ export default {
     methods: {
         navigateTo(page) {
             this.$router.push(`/${page.name}`);
-            this.$store.dispatch('SHOW_CURSOR', false);
+            this.hideCursor();
             this.$store.dispatch('SHOW_NAV_MENU', false);
         },
         openLink(link) {
             window.open(link.url, '_blank');
-        },
-        onMenuMouseOver(e, n) {
-            this.$store.dispatch('SHOW_CURSOR', {
-                hovered: true,
-                tooltip: n.tooltip,
-            });
-        },
-        onMenuMouseOut(e) {
-            this.$store.dispatch('SHOW_CURSOR', false);
-            e.target.style.transform = `translate3d(0px, 0px, 0px)`;
-        },
-        moveItems(e) {
-            let targetPos = e.target.getBoundingClientRect();
-            let xThresold =
-                    1 -
-                    (targetPos.x + targetPos.width - e.pageX) / targetPos.width,
-                yThresold =
-                    1 -
-                    (targetPos.y + targetPos.height - e.pageY) /
-                        targetPos.height;
-            e.target.style.transform = `translate3d(${Math.floor(
-                xThresold * (targetPos.width / 2)
-            )}px, ${Math.floor(yThresold * (targetPos.height / 2))}px, 0px)`;
         },
         animateItems(alive) {
             let navs = document.querySelectorAll('.nav-item-wrapper');

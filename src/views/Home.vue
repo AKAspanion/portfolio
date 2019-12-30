@@ -2,10 +2,23 @@
     <div class="home-container" :style="style">
         <div class="home-text">
             Hello.<br />
-            I, Ankit Pandit - <br />
+            I,
+            <div
+                class="home-text--name d-inline-block"
+                @mouseover="showCursor('know about me')"
+                @mousemove="textHover"
+                @mouseout="
+                    hideCursor();
+                    textHover($event, true);
+                "
+            >
+                Ankit Pandit
+            </div>
+            - <br />
             Software and <br />
-            Web developer
+            Web developer.
         </div>
+        <div></div>
     </div>
 </template>
 <script>
@@ -42,6 +55,11 @@ export default {
     line-height: 8vw;
     text-transform: uppercase;
     font-family: Roboto, sans-serif !important;
+}
+.home-text--name {
+    cursor: pointer;
+    will-change: transform;
+    transition: transform 150ms ease-out;
 }
 @media only screen and (max-width: 600px) {
     .home-container {

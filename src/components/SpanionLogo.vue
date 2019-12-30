@@ -3,8 +3,8 @@
         :style="`top: ${top}px;left: ${left}px;`"
         @click="navigateTo('/home')"
         @mousemove="handleMouseOver"
-        @mouseover="onMouseOver()"
-        @mouseout="onMouseOut()"
+        @mouseover="showCursor()"
+        @mouseout="hideCursor()"
         class="logo-container"
     >
         <div class="logo-wrapper">
@@ -54,12 +54,6 @@ export default {
                 xPos = e.pageX - (this.left + 40);
             }
             hamb.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
-        },
-        onMouseOver() {
-            this.$store.dispatch('SHOW_CURSOR', true);
-        },
-        onMouseOut() {
-            this.$store.dispatch('SHOW_CURSOR', false);
         },
     },
 };
