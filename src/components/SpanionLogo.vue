@@ -2,9 +2,12 @@
     <div
         :style="`top: ${top}px;left: ${left}px;`"
         @click="navigateTo('/home')"
-        @mousemove="handleMouseOver"
+        @mousemove="iconHover($event, '.logo-container', '.logo-wrapper')"
         @mouseover="showCursor()"
-        @mouseout="hideCursor()"
+        @mouseout="
+            iconHover($event, '.logo-container', '.logo-wrapper', true);
+            hideCursor();
+        "
         class="logo-container"
     >
         <div class="logo-wrapper">

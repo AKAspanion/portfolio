@@ -1,13 +1,16 @@
 <template>
     <div
+        @mousemove="iconHover($event, '.ham-burger-container', '.ham-burger')"
         :style="`top: ${top}px;right: ${right}px;`"
         class="ham-burger-container"
-        @mousemove="handleMouseOver"
         @mouseover="showCursor()"
-        @mouseout="hideCursor()"
+        @mouseout="
+            iconHover($event, '.ham-burger-container', '.ham-burger', true);
+            hideCursor();
+        "
         @click="handleClick"
     >
-        <div :class="[alive ? `ham-burger--alive` : 'ham-burger']">
+        <div :class="[alive ? `ham-burger ham-burger--alive` : 'ham-burger']">
             <div
                 class="ham"
                 :style="
@@ -50,25 +53,6 @@ export default {
         },
     },
     methods: {
-        handleMouseOver(e) {
-            let windowWidth = window.innerWidth;
-            let hamb = document.querySelector('.ham-burger-container');
-            let evalpageX = windowWidth - e.pageX,
-                xLimit = this.right + 80,
-                yLimit = this.top + 80,
-                xPos = 0,
-                yPos = 0;
-            if (
-                e.pageY <= yLimit &&
-                e.pageY >= this.top &&
-                evalpageX <= xLimit &&
-                evalpageX >= this.right
-            ) {
-                yPos = e.pageY - (this.top + 40);
-                xPos = this.right + 45 - evalpageX;
-            }
-            hamb.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
-        },
         handleClick() {
             if (this.animating) {
                 return;
@@ -96,8 +80,7 @@ export default {
     transition: transform 150ms ease-out;
     transform: translate3d(0px, 0px, 0px);
 }
-.ham-burger,
-.ham-burger--alive {
+.ham-burger {
     padding: 30px 25px;
     transition: 250ms;
 }

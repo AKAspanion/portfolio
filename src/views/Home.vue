@@ -1,5 +1,5 @@
 <template>
-    <div class="home-container" :style="style">
+    <div class="home-container" :style="containerStyle">
         <div class="home-text-container pa-12">
             <div class="home-text d-inline-block">
                 Hi.
@@ -34,18 +34,23 @@
 export default {
     name: 'SpanionHome',
     computed: {
-        style() {
+        containerStyle() {
+            let _style = { background: '#FFFFFF', color: '#000000' };
             if (this.$vuetify.theme.dark) {
-                return {
+                _style = {
+                    ..._style,
                     background: '#000000',
                     color: '#FFFFFF',
                 };
-            } else {
-                return {
-                    background: '#FFFFFF',
-                    color: '#000000',
+            }
+            if (this.$store.getters.navMenu) {
+                _style = {
+                    ..._style,
+                    overflow: 'hidden',
+                    height: '100vh',
                 };
             }
+            return _style;
         },
     },
     methods: {
@@ -69,14 +74,14 @@ export default {
     width: 100vw;
     text-align: left;
     min-height: 100vh;
-    overflow: hidden;
     padding: 64px 10vw 64px 15vw;
 }
 .home-text-container {
     font-size: 8vw;
-    font-weight: 100 !important;
     line-height: 8vw;
+    overflow: hidden;
     text-transform: uppercase;
+    font-weight: 100 !important;
     font-family: Roboto, sans-serif !important;
 }
 .home-text--name {

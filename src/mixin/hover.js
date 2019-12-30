@@ -5,21 +5,41 @@ export default {
             let windowTop = document.documentElement.scrollTop || document.body.scrollTop;
             if (!end) {
                 let targetPos = event.target.getBoundingClientRect();
-                let xThresold =
+                let xThreshold =
                     1 -
                     (targetPos.x + targetPos.width - event.pageX) /
                     targetPos.width,
-                    yThresold =
+                    yThreshold =
                     1 -
                     (targetPos.y + windowTop + targetPos.height - event.pageY) /
                     targetPos.height;
                 _style = `translate3d(${Math.floor(
-                    xThresold * (targetPos.width / 4)
+                    xThreshold * (targetPos.width / 4)
                 )}px, ${Math.floor(
-                    yThresold * (targetPos.height / 2)
+                    yThreshold * (targetPos.height / 2)
                 )}px, 0px)`;
             }
             event.target.style.transform = _style;
+        },
+        iconHover(e, _container, _main, end = false) {
+            let windowTop =
+                document.documentElement.scrollTop || document.body.scrollTop;
+            let containerDom = document.querySelector(_container);
+            let mainDom = document.querySelector(_main);
+            let targetPos = containerDom.getBoundingClientRect();
+            let xPos = 0,
+                yPos = 0;
+            if (
+                !end &&
+                e.pageX >= targetPos.left &&
+                e.pageY - windowTop >= targetPos.top &&
+                e.pageX <= Math.floor(targetPos.left + targetPos.width) &&
+                e.pageY - windowTop <= Math.floor(targetPos.top + targetPos.height)
+            ) {
+                xPos = e.pageX - targetPos.right + 40;
+                yPos = e.pageY - windowTop - targetPos.height - 62.5;
+            }
+            mainDom.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
         },
     }
 };
