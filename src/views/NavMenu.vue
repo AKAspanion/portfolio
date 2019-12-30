@@ -49,6 +49,7 @@
                 <v-col cols="12" md="4" class="theme-item-container">
                     <div class="theme-item-wrapper">
                         <v-btn-toggle
+                            tile
                             class="my-4"
                             v-model="theme"
                             :background-color="

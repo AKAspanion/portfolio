@@ -2,6 +2,7 @@
     <div
         :style="`top: ${top}px;right: ${right}px;`"
         class="ham-burger-container"
+        @mousemove="handleMouseOver"
         @mouseover="onMouseOver()"
         @mouseout="onMouseOut()"
         @click="handleClick"
@@ -85,12 +86,6 @@ export default {
         onMouseOut() {
             this.$store.dispatch('SHOW_CURSOR', false);
         },
-    },
-    mounted() {
-        document.addEventListener('mousemove', this.handleMouseOver);
-    },
-    destroyed() {
-        document.removeEventListener('mousemove', this.handleMouseOver);
     },
 };
 </script>
