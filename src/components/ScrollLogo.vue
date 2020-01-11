@@ -1,48 +1,37 @@
 <template>
     <v-fab-transition>
         <div
-            :style="`bottom: ${bottom}px;right: ${right}px;`"
+            :style="`bottom: ${bottom}px;left: ${left}px;`"
             @mousemove="
                 iconHover(
                     $event,
-                    '.scroll-arrow-container',
-                    '.scroll-arrow-wrapper'
+                    '.scroll-logo-container',
+                    '.scroll-logo-wrapper'
                 )
             "
             @mouseout="
                 iconHover(
                     $event,
-                    '.scroll-arrow-container',
-                    '.scroll-arrow-wrapper'
+                    '.scroll-logo-container',
+                    '.scroll-logo-wrapper'
                 );
                 hideCursor();
             "
-            @mouseover="showCursor('scroll to top')"
-            class="scroll-arrow-container"
-            v-if="percentage > 10 && !navMenu"
+            @click="scrollDown"
+            @mouseover="showCursor('scroll to see more')"
+            class="scroll-logo-container"
+            v-if="percentage < 10 && !navMenu"
         >
-            <div class="scroll-arrow-container">
-                <div class="scroll-arrow-wrapper">
-                    <v-progress-circular
-                        size="40"
-                        width="2"
-                        :color="$vuetify.theme.dark ? '#FFFFFF' : '#000000'"
-                        :value="
-                            percentage <= 99 && percentage >= 95
-                                ? 100
-                                : percentage
+            <div class="scroll-logo-container">
+                <div class="scroll-logo-wrapper">
+                    <div
+                        class="mouse-icon"
+                        :class="
+                            $vuetify.theme.dark
+                                ? 'mouse-icon--dark'
+                                : 'mouse-icon--white'
                         "
-                    >
-                        <v-btn
-                            icon
-                            @click="scrollUp"
-                            :color="$vuetify.theme.dark ? '#FFFFFF' : '#000000'"
-                        >
-                            <v-icon>
-                                keyboard_arrow_up
-                            </v-icon>
-                        </v-btn>
-                    </v-progress-circular>
+                    ></div>
                 </div>
             </div>
         </div>
@@ -51,13 +40,13 @@
 
 <script>
 export default {
-    name: 'ScrollProgress',
+    name: 'ScrollLogo',
     props: {
         bottom: {
             type: Number,
             default: 80,
         },
-        right: {
+        left: {
             type: Number,
             default: 110,
         },
@@ -75,11 +64,11 @@ export default {
         },
     },
     methods: {
-        scrollUp() {
+        scrollDown() {
             this.hideCursor();
-            this.$vuetify.goTo(0);
+            this.$vuetify.goTo(100);
             setTimeout(() => {
-                this.percentage = 0;
+                this.percentage = 100;
             }, 200);
         },
         handleScroll() {
@@ -106,7 +95,7 @@ export default {
 </script>
 
 <style scoped>
-.scroll-arrow-container {
+.scroll-logo-container {
     width: 80px;
     height: 80px;
     z-index: 50;
@@ -117,8 +106,37 @@ export default {
     transition: transform 150ms ease-out;
     transform: translate3d(0px, 0px, 0px);
 }
-.scroll-arrow-wrapper {
-    padding: 20px 20px;
+.scroll-logo-wrapper {
+    padding: 22px 28px;
     transition: 250ms;
+}
+.mouse-icon {
+    height: 36px;
+    width: 24px;
+    mix-blend-mode: difference;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+}
+.mouse-icon--dark {
+    border: solid 2px white;
+}
+.mouse-icon--white {
+    border: solid 2px #000000;
+}
+.mouse-icon--dark::after {
+    background: white;
+}
+.mouse-icon--white::after {
+    background: #000000;
+}
+.mouse-icon::after {
+    content: '';
+    width: 3px;
+    height: 6px;
+    border-radius: 12px;
+    position: absolute;
+    left: 9px;
+    top: 7px;
 }
 </style>

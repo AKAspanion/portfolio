@@ -5,6 +5,7 @@
             :top="hamPosition.top"
             :left="hamPosition.right"
         ></spanion-logo>
+        <scroll-logo></scroll-logo>
         <scroll-progress></scroll-progress>
         <cursor-animated></cursor-animated>
         <menu-hamburger
@@ -21,12 +22,14 @@
 import NavMenu from '@/views/NavMenu.vue';
 import CursorAnimated from '@/components/CursorAnimated.vue';
 import ScrollProgress from '@/components/ScrollProgress.vue';
+import ScrollLogo from '@/components/ScrollLogo.vue';
 import SpanionLogo from '@/components/SpanionLogo.vue';
 import MenuHamburger from '@/components/MenuHamburger.vue';
 export default {
     name: 'app',
     components: {
         NavMenu,
+        ScrollLogo,
         SpanionLogo,
         CursorAnimated,
         ScrollProgress,

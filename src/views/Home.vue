@@ -1,7 +1,7 @@
 <template>
     <div class="home-container" :style="containerStyle">
         <div class="home-text-container pa-12">
-            <div class="home-text d-inline-block">
+            <div class="d-inline-block">
                 Hi.
             </div>
             <br />
@@ -34,6 +34,7 @@
             <br />
             <div class="home-text d-inline-block">Web developer.</div>
         </div>
+        <v-divider></v-divider>
     </div>
 </template>
 <script>

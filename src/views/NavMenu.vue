@@ -120,6 +120,10 @@ export default {
             },
             set(val) {
                 this.$vuetify.theme.dark = val === 1 ? true : false;
+                localStorage.setItem(
+                    'dark',
+                    JSON.stringify(this.$vuetify.theme.dark)
+                );
             },
         },
     },
@@ -174,6 +178,8 @@ export default {
     },
     mounted() {
         this.animateItems(false);
+        this.$vuetify.theme.dark =
+            localStorage.getItem('dark') == 'true' ? true : false;
     },
 };
 </script>

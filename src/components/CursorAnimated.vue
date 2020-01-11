@@ -21,6 +21,7 @@
                 $vuetify.theme.dark
                     ? 'cursor-tooltip--dark'
                     : 'cursor-tooltip--white',
+                cursor.link ? 'cursor-tooltip--photo' : '',
             ]"
         >
             <template v-if="cursor.link && cursor.link !== ''">
@@ -91,11 +92,14 @@ export default {
     left: 56px;
     height: auto;
     width: auto;
-    padding: 32px;
+    padding: 16px;
     position: relative;
     overflow: hidden;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
         0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+.cursor-tooltip--photo {
+    padding: 32px;
 }
 .cursor-tooltip--dark {
     background: white;
