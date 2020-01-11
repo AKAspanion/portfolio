@@ -5,7 +5,7 @@
         class="ham-burger-container"
         @mouseover="showCursor()"
         @mouseout="
-            iconHover($event, '.ham-burger-container', '.ham-burger', true);
+            iconHover($event, '.ham-burger-container', '.ham-burger');
             hideCursor();
         "
         @click="handleClick"

@@ -21,23 +21,22 @@ export default {
             }
             event.target.style.transform = _style;
         },
-        iconHover(e, _container, _main, end = false) {
+        iconHover(e, _container, _main) {
             let windowTop =
                 document.documentElement.scrollTop || document.body.scrollTop;
-            let containerDom = document.querySelector(_container);
             let mainDom = document.querySelector(_main);
+            let containerDom = document.querySelector(_container);
             let targetPos = containerDom.getBoundingClientRect();
             let xPos = 0,
                 yPos = 0;
             if (
-                !end &&
                 e.pageX >= targetPos.left &&
                 e.pageY - windowTop >= targetPos.top &&
                 e.pageX <= Math.floor(targetPos.left + targetPos.width) &&
                 e.pageY - windowTop <= Math.floor(targetPos.top + targetPos.height)
             ) {
                 xPos = e.pageX - targetPos.right + 40;
-                yPos = e.pageY - windowTop - targetPos.height - 62.5;
+                yPos = e.pageY - windowTop - targetPos.bottom + 40;
             }
             mainDom.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
         },

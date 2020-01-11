@@ -1,13 +1,13 @@
 <template>
     <div
         :style="`top: ${top}px;left: ${left}px;`"
-        @click="navigateTo('/home')"
         @mousemove="iconHover($event, '.logo-container', '.logo-wrapper')"
-        @mouseover="showCursor()"
         @mouseout="
-            iconHover($event, '.logo-container', '.logo-wrapper', true);
+            iconHover($event, '.logo-container', '.logo-wrapper');
             hideCursor();
         "
+        @click="navigateTo('/home')"
+        @mouseover="showCursor()"
         class="logo-container"
     >
         <div class="logo-wrapper">

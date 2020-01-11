@@ -15,7 +15,7 @@
                     @mouseover="
                         showCursor(
                             'know about me',
-                            'https://cdn.vox-cdn.com/thumbor/VThb31FgP4avHBic3zDTmBUIrCY=/0x0:3368x3368/920x613/filters:focal(1188x715:1726x1253):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/62994726/AJ_Finn_author_photo_color_photo_courtesy_of_the_author.0.jpg'
+                            'https://firebasestorage.googleapis.com/v0/b/spanion-portfolio.appspot.com/o/profile.jpeg?alt=media&token=a121422d-c2bb-44d1-9e8f-30140dd31ce1'
                         )
                     "
                     @mousemove="textHover"
@@ -23,6 +23,7 @@
                         hideCursor();
                         textHover($event, true);
                     "
+                    @click="goToAbout"
                 >
                     Ankit Pandit
                 </div>
@@ -52,6 +53,10 @@ export default {
         },
     },
     methods: {
+        goToAbout() {
+            this.$router.push(`/about`);
+            this.hideCursor();
+        },
         animateItems() {
             let texts = document.querySelectorAll('.home-text');
             let _style = `translate3d(0px, 0vh, 0px)`;

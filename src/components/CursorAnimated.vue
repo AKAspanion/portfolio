@@ -24,11 +24,17 @@
             ]"
         >
             <template v-if="cursor.link && cursor.link !== ''">
-                <img :src="cursor.link" width="250" />
+                <v-img
+                    :src="cursor.link"
+                    width="250"
+                    height="200"
+                    class="cursor-photo"
+                    lazy-src="lazy.jpeg"
+                ></v-img>
             </template>
             <div
                 class="text-center"
-                :class="cursor.tooltip && cursor.tooltip !== '' ? 'pt-6' : ''"
+                :class="cursor.link && cursor.link !== '' ? 'pt-8' : ''"
             >
                 {{ cursor.tooltip }}
             </div>
@@ -88,7 +94,6 @@ export default {
     padding: 32px;
     position: relative;
     overflow: hidden;
-    transition: all 400ms ease;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
         0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
@@ -104,6 +109,10 @@ export default {
     width: 0px;
     height: 0px;
     padding: 0px;
+}
+.cursor-photo,
+.cursor-tooltip,
+.cursor-tooltip--hidden {
     transition: all 400ms ease;
 }
 </style>
