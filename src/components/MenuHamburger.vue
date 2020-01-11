@@ -14,7 +14,7 @@
             <div
                 class="ham"
                 :style="
-                    `background: ${$vuetify.theme.dark ? '#FFFFFF' : '#000000'}`
+                    `background: ${$vuetify.theme.dark ? '#e0e0e0' : '#212121'}`
                 "
                 :class="[alive ? `ham--alive ham-alive-${n}` : `ham-${n}`]"
                 v-for="n in 3"

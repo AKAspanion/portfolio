@@ -42,12 +42,12 @@ export default {
     name: 'SpanionHome',
     computed: {
         containerStyle() {
-            let _style = { background: '#FFFFFF', color: '#000000' };
+            let _style = { background: '#e0e0e0', color: '#212121' };
             if (this.$vuetify.theme.dark) {
                 _style = {
                     ..._style,
-                    background: '#000000',
-                    color: '#FFFFFF',
+                    background: '#212121',
+                    color: '#e0e0e0',
                 };
             }
             return _style;

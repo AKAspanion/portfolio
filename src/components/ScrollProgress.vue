@@ -26,7 +26,7 @@
                     <v-progress-circular
                         size="40"
                         width="2"
-                        :color="$vuetify.theme.dark ? '#FFFFFF' : '#000000'"
+                        :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
                         :value="
                             percentage <= 99 && percentage >= 95
                                 ? 100
@@ -36,7 +36,7 @@
                         <v-btn
                             icon
                             @click="scrollUp"
-                            :color="$vuetify.theme.dark ? '#FFFFFF' : '#000000'"
+                            :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
                         >
                             <v-icon>
                                 keyboard_arrow_up

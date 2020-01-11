@@ -8,7 +8,7 @@
             size="56"
             width="2"
             :value="progress"
-            :color="$vuetify.theme.dark ? '#FFFFFF' : '#000000'"
+            :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
             :class="progress == 100 ? 'cursor-animated--rotated' : ''"
         ></v-progress-circular>
         <div
@@ -102,12 +102,12 @@ export default {
     padding: 32px;
 }
 .cursor-tooltip--dark {
-    background: white;
-    color: black;
+    background: #e0e0e0;
+    color: #212121;
 }
 .cursor-tooltip--white {
-    background: black;
-    color: white;
+    background: #212121;
+    color: #e0e0e0;
 }
 .cursor-tooltip--hidden {
     width: 0px;

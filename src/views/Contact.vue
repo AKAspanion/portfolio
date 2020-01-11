@@ -45,13 +45,13 @@ export default {
         containerStyle() {
             if (this.$vuetify.theme.dark) {
                 return {
-                    background: '#000000',
-                    color: '#FFFFFF',
+                    background: '#212121',
+                    color: '#e0e0e0',
                 };
             } else {
                 return {
-                    background: '#FFFFFF',
-                    color: '#000000',
+                    background: '#e0e0e0',
+                    color: '#212121',
                 };
             }
         },
@@ -91,14 +91,14 @@ input {
     background: transparent;
     outline: none;
     color: #fff;
-    border: solid 1px #000000;
+    border: solid 1px #212121;
     border-bottom: none;
     transition: all 0.3s ease-in-out;
 }
 
 input:hover {
     background: #17252a;
-    color: #ffffff;
+    color: #e0e0e0;
 }
 
 textarea {
@@ -112,13 +112,13 @@ textarea {
     color: #fff;
     font-family: 'Roboto', sans-serif;
     font-size: 0.675rem;
-    border: solid 1px #000000;
+    border: solid 1px #212121;
     transition: all 0.3s ease-in-out;
 }
 
 textarea:hover {
     background: #17252a;
-    color: #ffffff;
+    color: #e0e0e0;
 }
 
 #submit {
@@ -127,10 +127,10 @@ textarea:hover {
     margin: -6px 0px 0px 0px;
     font-family: 'Roboto';
     font-size: 0.675rem;
-    color: #000000;
+    color: #212121;
     outline: none;
     cursor: pointer;
-    border: solid 1px #000000;
+    border: solid 1px #212121;
     border-top: none;
 }
 
@@ -138,7 +138,7 @@ textarea:hover {
     color: #fff;
 }
 ::placeholder {
-    color: #000000;
+    color: #212121;
     opacity: 1;
 }
 @media only screen and (max-width: 600px) {

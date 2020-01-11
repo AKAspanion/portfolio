@@ -14,7 +14,7 @@
             <div
                 class="logo-bar"
                 :style="
-                    `background: ${$vuetify.theme.dark ? '#FFFFFF' : '#000000'}`
+                    `background: ${$vuetify.theme.dark ? '#e0e0e0' : '#212121'}`
                 "
                 :class="`logo-bar-${n}`"
                 v-for="n in 3"

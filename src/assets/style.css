@@ -1,0 +1,8 @@
+/* global override */
+.theme--light.v-application {
+    background: #ffffff !important;
+}
+
+.theme--dark.v-application {
+    background: #000000 !important;
+}

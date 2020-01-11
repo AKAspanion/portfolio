@@ -54,6 +54,7 @@ export default {
 </script>
 
 <style>
+@import url('/assets/style.css');
 @import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 @font-face {
     font-family: 'Hipstelvetica';
@@ -93,7 +94,7 @@ body {
     background: #424242;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #000000;
+    background: #212121;
 }
 .page-enter-active,
 .page-leave-active {

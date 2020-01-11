@@ -119,16 +119,16 @@ export default {
     cursor: pointer;
 }
 .mouse-icon--dark {
-    border: solid 2px white;
+    border: solid 2px #e0e0e0;
 }
 .mouse-icon--white {
-    border: solid 2px #000000;
+    border: solid 2px #212121;
 }
 .mouse-icon--dark::after {
-    background: white;
+    background: #e0e0e0;
 }
 .mouse-icon--white::after {
-    background: #000000;
+    background: #212121;
 }
 .mouse-icon::after {
     content: '';
