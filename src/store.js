@@ -53,6 +53,7 @@ export default new Vuex.Store({
                 tooltip: 'get in touch with me',
             },
         ],
+        scrollPos: 0
     },
     mutations: {
         changeCursor(state, payload) {
@@ -60,6 +61,9 @@ export default new Vuex.Store({
         },
         changeNavMenu(state, payload) {
             state.navMenu = payload;
+        },
+        changeScrollPos(state, payload) {
+            state.scrollPos = payload;
         }
     },
     actions: {
@@ -84,6 +88,11 @@ export default new Vuex.Store({
             commit
         }, payload) {
             commit('changeNavMenu', payload)
+        },
+        SET_SCROLL_POS({
+            commit
+        }, payload) {
+            commit('changeScrollPos', payload)
         }
     },
     getters: {
@@ -98,6 +107,9 @@ export default new Vuex.Store({
         },
         socialLinks(state) {
             return state.socialLinks
+        },
+        scrollPos(state) {
+            return state.scrollPos
         }
     }
 })

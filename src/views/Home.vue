@@ -1,6 +1,6 @@
 <template>
     <div class="home-container" :style="containerStyle">
-        <div class="home-text-container pa-12">
+        <div class="home-text-container home-padding">
             <div class="d-inline-block">
                 Hi.
             </div>
@@ -35,6 +35,45 @@
             <div class="home-text d-inline-block">Web developer.</div>
         </div>
         <v-divider></v-divider>
+        <div class="home-about-container home-padding">
+            <v-row>
+                <v-col cols="12" sm="4" class="overflow-hidden">
+                    <div class="home-about-item title fill-height">
+                        A little about me.
+                    </div>
+                </v-col>
+                <v-col cols="12" sm="8" class="overflow-hidden">
+                    <div class="home-about-item fill-height">
+                        I am a Kolkata based Software/Web Developer, currently
+                        working at Global Ids. <br />I love making awesome web
+                        applications and websites. <br />I am always on a
+                        lookout for new and exciting challenges. <br />If you
+                        have any projects or suggestions, or you just want to
+                        say "hi", contact me.
+                    </div>
+                </v-col>
+            </v-row>
+        </div>
+        <v-divider></v-divider>
+        <div class="home-project-container home-padding">
+            <v-row>
+                <v-col cols="12" sm="4" class="overflow-hidden">
+                    <div class="home-project-item title fill-height">
+                        A little project me.
+                    </div>
+                </v-col>
+                <v-col cols="12" sm="8" class="overflow-hidden">
+                    <div class="home-project-item fill-height">
+                        I am a Kolkata based Software/Web Developer, currently
+                        working at Global Ids. <br />I love making awesome web
+                        applications and websites. <br />I am always on a
+                        lookout for new and exciting challenges. <br />If you
+                        have any projects or suggestions, or you just want to
+                        say "hi", contact me.
+                    </div>
+                </v-col>
+            </v-row>
+        </div>
     </div>
 </template>
 <script>
@@ -51,6 +90,31 @@ export default {
                 };
             }
             return _style;
+        },
+        scrollPosition() {
+            return this.$store.getters.scrollPos;
+        },
+    },
+    watch: {
+        scrollPosition: {
+            handler() {
+                let aboutItems = document.querySelectorAll('.home-about-item');
+                let projectItems = document.querySelectorAll(
+                    '.home-project-item'
+                );
+                const changeItems = (items, _style) => {
+                    for (let item of items) {
+                        item.style.transform = _style;
+                    }
+                };
+                if (this.isInViewport('.home-about-container', 120)) {
+                    changeItems(aboutItems, 'translate3d(0px, 0px, 0px)');
+                }
+                if (this.isInViewport('.home-project-container', 120)) {
+                    changeItems(projectItems, 'translate3d(0px, 0px, 0px)');
+                }
+            },
+            immediate: true,
         },
     },
     methods: {
@@ -78,7 +142,9 @@ export default {
     width: 100vw;
     text-align: left;
     min-height: 100vh;
-    padding: 64px 15vw;
+}
+.home-padding {
+    padding: 100px 18vw;
 }
 .home-text-container {
     font-size: 8vw;
@@ -99,12 +165,19 @@ export default {
     transform: translate3d(0px, 100vh, 0px) rotate(15deg) scale(1.5);
     transition: transform 1s cubic-bezier(1, 0, 0, 1);
 }
+.home-about-item,
+.home-project-item {
+    text-align: justify;
+    transform-origin: top left;
+    transform: translate3d(0px, 96px, 0px) rotate(10deg);
+    transition: transform 1s ease;
+}
 @media only screen and (max-width: 600px) {
-    .home-container {
-        padding: 64px 0px;
+    .home-padding {
+        padding: 100px 24px;
     }
-    .home-text {
-        font-size: 8vh;
+    .home-text-container {
+        font-size: 7vh;
         line-height: 8vh;
     }
 }

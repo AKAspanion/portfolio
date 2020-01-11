@@ -5,8 +5,14 @@
             :top="hamPosition.top"
             :left="hamPosition.right"
         ></spanion-logo>
-        <scroll-logo></scroll-logo>
-        <scroll-progress></scroll-progress>
+        <scroll-logo
+            :bottom="hamPosition.top"
+            :left="hamPosition.right"
+        ></scroll-logo>
+        <scroll-progress
+            :bottom="hamPosition.top"
+            :right="hamPosition.right"
+        ></scroll-progress>
         <cursor-animated></cursor-animated>
         <menu-hamburger
             :top="hamPosition.top"
@@ -39,12 +45,12 @@ export default {
         hamPosition() {
             if (this.$vuetify.breakpoint.xsOnly) {
                 return {
-                    top: 23,
-                    right: 20,
+                    top: 0,
+                    right: 0,
                 };
             } else {
                 return {
-                    top: 103,
+                    top: 100,
                     right: 100,
                 };
             }
@@ -94,7 +100,7 @@ body {
     background: #424242;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #212121;
+    background: #000000;
 }
 .page-enter-active,
 .page-leave-active {

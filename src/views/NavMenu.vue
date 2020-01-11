@@ -220,7 +220,7 @@ export default {
 }
 @media only screen and (max-width: 600px) {
     .nav-menu-container {
-        padding: 40px 40px 10px 40px;
+        padding: 16px 24px 4px 24px;
     }
 }
 </style>

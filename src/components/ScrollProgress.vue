@@ -86,9 +86,13 @@ export default {
             let topPosition = Math.floor(
                 document.documentElement.scrollTop || document.body.scrollTop
             );
+
             let bottomPosition =
                 document.getElementById('app').scrollHeight -
                 window.innerHeight;
+
+            this.$store.dispatch('SET_SCROLL_POS', topPosition);
+
             this.percentage =
                 topPosition !== 0
                     ? Math.floor((topPosition / bottomPosition) * 100)

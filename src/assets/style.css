@@ -6,3 +6,7 @@
 .theme--dark.v-application {
     background: #000000 !important;
 }
+
+.overflow-hidden {
+    overflow: hidden;
+}

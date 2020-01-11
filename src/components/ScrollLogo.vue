@@ -20,7 +20,7 @@
             @click="scrollDown"
             @mouseover="showCursor('scroll to see more')"
             class="scroll-logo-container"
-            v-if="percentage < 10 && !navMenu"
+            v-if="canShow && !navMenu"
         >
             <div class="scroll-logo-container">
                 <div class="scroll-logo-wrapper">
@@ -57,10 +57,11 @@ export default {
         };
     },
     computed: {
-        navMenu: {
-            get() {
-                return this.$store.getters.navMenu;
-            },
+        navMenu() {
+            return this.$store.getters.navMenu;
+        },
+        canShow() {
+            return this.$store.getters.scrollPos < 20;
         },
     },
     methods: {
@@ -71,25 +72,6 @@ export default {
                 this.percentage = 100;
             }, 200);
         },
-        handleScroll() {
-            let topPosition = Math.floor(
-                document.documentElement.scrollTop || document.body.scrollTop
-            );
-            let bottomPosition =
-                document.getElementById('app').scrollHeight -
-                window.innerHeight;
-            this.percentage =
-                topPosition !== 0
-                    ? Math.floor((topPosition / bottomPosition) * 100)
-                    : 0;
-        },
-    },
-    mounted() {
-        this.handleScroll();
-        window.addEventListener('mousewheel', this.handleScroll);
-    },
-    destroyed() {
-        window.removeEventListener('mousewheel', this.handleScroll);
     },
 };
 </script>

@@ -40,5 +40,24 @@ export default {
             }
             mainDom.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
         },
+        isInViewport(e, padding = 48) {
+            const scroll = window.scrollY || window.pageYOffset
+            let el = document.querySelector(e);
+            if (el) {
+                const boundsTop = el.getBoundingClientRect().top + scroll
+                const viewport = {
+                    top: scroll,
+                    bottom: scroll + window.innerHeight,
+                }
+                const bounds = {
+                    top: boundsTop + padding,
+                    bottom: boundsTop + el.clientHeight,
+                }
+                return (bounds.bottom >= viewport.top && bounds.bottom <= viewport.bottom) ||
+                    (bounds.top <= viewport.bottom && bounds.top >= viewport.top);
+            } else {
+                return false;
+            }
+        }
     }
 };
