@@ -1,10 +1,11 @@
 export default {
     methods: {
-        showCursor(tooltip) {
+        showCursor(tooltip, link) {
             this.$store.dispatch('SHOW_CURSOR',
-                tooltip ? {
+                tooltip || link ? {
                     hovered: true,
-                    tooltip
+                    tooltip,
+                    link
                 } : true
             );
         },

@@ -7,7 +7,8 @@ export default new Vuex.Store({
     state: {
         cursor: {
             hovered: false,
-            tooltip: ""
+            tooltip: "",
+            link: ""
         },
         navMenu: false,
         socialLinks: [{
@@ -68,12 +69,14 @@ export default new Vuex.Store({
             if (typeof payload == 'object') {
                 commit('changeCursor', {
                     hovered: payload.hovered || false,
-                    tooltip: !payload.hovered ? "" : payload.tooltip || ""
+                    tooltip: !payload.hovered ? "" : payload.tooltip || "",
+                    link: payload.link
                 })
             } else {
                 commit('changeCursor', {
                     hovered: payload,
-                    tooltip: ""
+                    tooltip: "",
+                    link: ""
                 })
             }
         },

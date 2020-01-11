@@ -22,7 +22,7 @@ export default {
         },
         right: {
             type: Number,
-            default: 110,
+            default: 120,
         },
     },
     data() {

@@ -12,7 +12,12 @@
             <div class="home-text d-inline-block">
                 <div
                     class="home-text--name d-inline-block"
-                    @mouseover="showCursor('know about me')"
+                    @mouseover="
+                        showCursor(
+                            'know about me',
+                            'https://cdn.vox-cdn.com/thumbor/VThb31FgP4avHBic3zDTmBUIrCY=/0x0:3368x3368/920x613/filters:focal(1188x715:1726x1253):format(webp)/cdn.vox-cdn.com/uploads/chorus_image/image/62994726/AJ_Finn_author_photo_color_photo_courtesy_of_the_author.0.jpg'
+                        )
+                    "
                     @mousemove="textHover"
                     @mouseout="
                         hideCursor();
@@ -67,7 +72,7 @@ export default {
     width: 100vw;
     text-align: left;
     min-height: 100vh;
-    padding: 64px 10vw 64px 15vw;
+    padding: 64px 15vw;
 }
 .home-text-container {
     font-size: 8vw;

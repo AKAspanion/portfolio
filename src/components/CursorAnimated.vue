@@ -14,7 +14,8 @@
         <div
             class="cursor-tooltip"
             :class="[
-                cursor.tooltip && cursor.tooltip !== ''
+                (cursor.tooltip && cursor.tooltip !== '') ||
+                (cursor.link && cursor.link !== '')
                     ? ''
                     : 'cursor-tooltip--hidden',
                 $vuetify.theme.dark
@@ -22,9 +23,15 @@
                     : 'cursor-tooltip--white',
             ]"
         >
-            <span>
+            <template v-if="cursor.link && cursor.link !== ''">
+                <img :src="cursor.link" width="250" />
+            </template>
+            <div
+                class="text-center"
+                :class="cursor.tooltip && cursor.tooltip !== '' ? 'pt-6' : ''"
+            >
                 {{ cursor.tooltip }}
-            </span>
+            </div>
         </div>
     </div>
 </template>
@@ -76,9 +83,12 @@ export default {
 }
 .cursor-tooltip {
     left: 56px;
-    height: 56px;
-    padding: 16px 32px;
+    height: auto;
+    width: auto;
+    padding: 32px;
     position: relative;
+    overflow: hidden;
+    transition: all 400ms ease;
     box-shadow: 0 3px 1px -2px rgba(0, 0, 0, 0.2),
         0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
@@ -91,6 +101,9 @@ export default {
     color: white;
 }
 .cursor-tooltip--hidden {
-    display: none;
+    width: 0px;
+    height: 0px;
+    padding: 0px;
+    transition: all 400ms ease;
 }
 </style>
