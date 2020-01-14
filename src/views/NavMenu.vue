@@ -15,7 +15,7 @@
                         class="name-item-container overline"
                     >
                         <div class="name-item-wrapper">
-                            <div class="d-inline-block">spanion.xyz</div>
+                            <div class="d-inline-block">ankitpandit.xyz</div>
                         </div>
                     </div>
                 </v-col>
@@ -27,18 +27,13 @@
                             :key="navItem.id"
                         >
                             <div class="nav-item-wrapper">
-                                <div
-                                    class="d-inline-block nav-item"
+                                <hover-text
+                                    classes="nav-item"
+                                    :text="navItem.tooltip"
                                     @click="navigateTo(navItem)"
-                                    @mousemove="textHover"
-                                    @mouseover="showCursor(navItem.tooltip)"
-                                    @mouseout="
-                                        hideCursor();
-                                        textHover($event, true);
-                                    "
                                 >
                                     {{ navItem.name }}
-                                </div>
+                                </hover-text>
                             </div>
                         </div>
                     </div>
@@ -81,18 +76,12 @@
                             :key="link.id"
                         >
                             <div class="link-item-wrapper">
-                                <div
-                                    class="d-inline-block link-item"
-                                    @mousemove="textHover"
+                                <hover-text
+                                    classes="link-item"
                                     @click="openLink(link)"
-                                    @mouseover="showCursor()"
-                                    @mouseout="
-                                        hideCursor();
-                                        textHover($event, true);
-                                    "
                                 >
                                     {{ link.name }}
-                                </div>
+                                </hover-text>
                             </div>
                         </div>
                     </v-row>
@@ -103,7 +92,11 @@
 </template>
 
 <script>
+import HoverText from '@/components/HoverText.vue';
 export default {
+    components: {
+        HoverText,
+    },
     computed: {
         alive() {
             return this.$store.getters.navMenu;

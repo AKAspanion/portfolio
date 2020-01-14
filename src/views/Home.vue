@@ -10,23 +10,14 @@
             </div>
             <br />
             <div class="home-text d-inline-block">
-                <div
-                    class="home-text--name d-inline-block"
-                    @mouseover="
-                        showCursor(
-                            'know about me',
-                            'https://firebasestorage.googleapis.com/v0/b/spanion-portfolio.appspot.com/o/profile.jpeg?alt=media&token=a121422d-c2bb-44d1-9e8f-30140dd31ce1'
-                        )
-                    "
-                    @mousemove="textHover"
-                    @mouseout="
-                        hideCursor();
-                        textHover($event, true);
-                    "
-                    @click="goToAbout"
+                <hover-text
+                    text="know about me"
+                    classes="home-text--name"
+                    link="images/profile.jpeg"
+                    @click="goToRoute('/about')"
                 >
                     Ankit Pandit
-                </div>
+                </hover-text>
                 -
             </div>
             <br />
@@ -45,11 +36,27 @@
                 <v-col cols="12" sm="8" class="overflow-hidden">
                     <div class="home-about-item fill-height">
                         I am a Kolkata based Software/Web Developer, currently
-                        working at Global Ids. <br />I love making awesome web
-                        applications and websites. <br />I am always on a
-                        lookout for new and exciting challenges. <br />If you
-                        have any projects or suggestions, or you just want to
-                        say "hi", contact me.
+                        working at
+                        <hover-text
+                            text="go to globalids website"
+                            classes="cursor-item-text"
+                            link="images/globalids.jpg"
+                        >
+                            Global Ids
+                        </hover-text>
+                        . <br />I love making awesome web applications and
+                        websites, and always on a lookout for new and exciting
+                        challenges. <br />
+                        <br />If you have any projects or suggestions, or you
+                        just want to say "hi",
+                        <hover-text
+                            text="contact me"
+                            classes="cursor-item-text"
+                            @click="goToRoute('/contact')"
+                        >
+                            contact
+                        </hover-text>
+                        .
                     </div>
                 </v-col>
             </v-row>
@@ -77,8 +84,12 @@
     </div>
 </template>
 <script>
+import HoverText from '@/components/HoverText.vue';
 export default {
     name: 'SpanionHome',
+    components: {
+        HoverText,
+    },
     computed: {
         containerStyle() {
             let _style = { background: '#e0e0e0', color: '#212121' };
@@ -118,8 +129,8 @@ export default {
         },
     },
     methods: {
-        goToAbout() {
-            this.$router.push(`/about`);
+        goToRoute(path) {
+            this.$router.push(path);
             this.hideCursor();
         },
         animateItems() {
@@ -169,7 +180,7 @@ export default {
 .home-project-item {
     text-align: justify;
     transform-origin: top left;
-    transform: translate3d(0px, 96px, 0px) rotate(10deg);
+    transform: translate3d(0px, 96px, 0px) rotate(5deg);
     transition: transform 1s ease;
 }
 @media only screen and (max-width: 600px) {

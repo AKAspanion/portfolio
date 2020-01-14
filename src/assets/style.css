@@ -1,3 +1,10 @@
+.cursor-item-text {
+    cursor: pointer;
+    font-weight: bold;
+    will-change: transform;
+    transition: transform 150ms ease-out;
+}
+
 /* global override */
 .theme--light.v-application {
     background: #ffffff !important;
