@@ -150,6 +150,7 @@ export default {
         },
         animateItems(alive) {
             let navs = document.querySelectorAll('.nav-item-wrapper');
+            let name = document.querySelectorAll('.name-item-wrapper');
             let theme = document.querySelectorAll('.theme-item-wrapper');
             let links = document.querySelectorAll('.link-item-wrapper');
             let copy = document.querySelectorAll('.copy-item-wrapper');
@@ -172,7 +173,10 @@ export default {
                 }, _timeout * index + _delay);
             });
             setTimeout(() => {
-                copy[0].style.transform = _navStyle;
+                name[0].style.transform = _linkStyle;
+            }, _delay);
+            setTimeout(() => {
+                copy[0].style.transform = _linkStyle;
                 theme[0].style.transform = _navStyle;
             }, _delay * 2);
         },
