@@ -1,5 +1,5 @@
 <template>
-    <div v-if="cursor">
+    <div v-if="cursor && $vuetify.breakpoint.smAndUp">
         <div
             id="animatedcursor"
             class="cursor-animated"
@@ -111,7 +111,8 @@ export default {
     transform: scaleX(-1) rotate(180deg);
 }
 .cursor-tooltip {
-    left: 56px;
+    top: 28px;
+    left: 28px;
     width: auto;
     height: auto;
     padding: 16px;

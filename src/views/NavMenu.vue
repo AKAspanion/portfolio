@@ -65,13 +65,15 @@
                         </v-btn-toggle>
                     </div>
                 </v-col>
-                <v-col cols="12" md="8">
+                <v-col cols="12" md="4">
                     <v-row no-gutters align="center">
                         <div
                             :class="
-                                $vuetify.breakpoint.xsOnly ? 'mb-3' : 'my-8'
+                                $vuetify.breakpoint.xsOnly
+                                    ? 'mb-3 pr-4'
+                                    : 'my-8 pr-8 '
                             "
-                            class="overline pr-8 link-item-container"
+                            class="overline link-item-container"
                             v-for="link in socialLinks"
                             :key="link.id"
                         >
@@ -85,6 +87,14 @@
                             </div>
                         </div>
                     </v-row>
+                </v-col>
+                <v-col cols="12" md="4">
+                    <div
+                        :class="$vuetify.breakpoint.xsOnly ? 'mb-4' : ''"
+                        class="overline text-sm-right copy-item-wrapper"
+                    >
+                        © 2020 Ankit Pandit
+                    </div>
                 </v-col>
             </v-row>
         </div>
@@ -140,9 +150,9 @@ export default {
         },
         animateItems(alive) {
             let navs = document.querySelectorAll('.nav-item-wrapper');
-            let name = document.querySelectorAll('.name-item-wrapper');
             let theme = document.querySelectorAll('.theme-item-wrapper');
             let links = document.querySelectorAll('.link-item-wrapper');
+            let copy = document.querySelectorAll('.copy-item-wrapper');
             let _navStyle = `translate3d${
                 alive ? '(0px, 0px, 0px)' : '(0px, 80px, 0px)'
             }`;
@@ -150,7 +160,7 @@ export default {
                 alive ? '(0px, 0px, 0px)' : '(0px, 16px, 0px)'
             }`;
             let _timeout = alive ? 120 : 60;
-            let _delay = alive ? 600 : 0;
+            let _delay = alive ? 800 : 0;
             navs.forEach((nav, index) => {
                 setTimeout(() => {
                     nav.style.transform = _navStyle;
@@ -162,11 +172,9 @@ export default {
                 }, _timeout * index + _delay);
             });
             setTimeout(() => {
-                name[0].style.transform = _linkStyle;
-            }, _delay * 2);
-            setTimeout(() => {
+                copy[0].style.transform = _navStyle;
                 theme[0].style.transform = _navStyle;
-            }, _delay * 3);
+            }, _delay * 2);
         },
     },
     mounted() {
@@ -181,7 +189,7 @@ export default {
 .nav-menu-container {
     transition: transform 1s cubic-bezier(1, 0, 0, 1);
     transform: translate3d(100vw, 0px, 0px);
-    padding: 100px 100px 0px 100px;
+    padding: 24px 48px 0px 48px;
     will-change: transform;
     position: fixed;
     z-index: 100;
@@ -200,6 +208,7 @@ export default {
 }
 .nav-item-wrapper,
 .theme-item-wrapper,
+.copy-item-wrapper,
 .name-item-wrapper,
 .link-item-wrapper {
     transition: transform 0.5s cubic-bezier(1, 0, 0, 1);

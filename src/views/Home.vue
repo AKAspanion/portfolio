@@ -1,29 +1,31 @@
 <template>
     <div class="home-container" :style="containerStyle">
-        <div class="home-text-container home-padding">
-            <div class="d-inline-block">
-                Hi.
+        <div class="home-text-wrapper">
+            <div class="home-text-container home-padding-y">
+                <div class="d-inline-block">
+                    Hi.
+                </div>
+                <br />
+                <div class="home-text d-inline-block">
+                    My name is,
+                </div>
+                <br />
+                <div class="home-text d-inline-block">
+                    <hover-text
+                        text="know about me"
+                        classes="home-text--name"
+                        link="images/profile.jpeg"
+                        @click="goToRoute('/about')"
+                    >
+                        Ankit Pandit
+                    </hover-text>
+                    -
+                </div>
+                <br />
+                <div class="home-text d-inline-block">Software and</div>
+                <br />
+                <div class="home-text d-inline-block">Web developer.</div>
             </div>
-            <br />
-            <div class="home-text d-inline-block">
-                My name is,
-            </div>
-            <br />
-            <div class="home-text d-inline-block">
-                <hover-text
-                    text="know about me"
-                    classes="home-text--name"
-                    link="images/profile.jpeg"
-                    @click="goToRoute('/about')"
-                >
-                    Ankit Pandit
-                </hover-text>
-                -
-            </div>
-            <br />
-            <div class="home-text d-inline-block">Software and</div>
-            <br />
-            <div class="home-text d-inline-block">Web developer.</div>
         </div>
         <v-divider></v-divider>
         <div class="home-about-container home-padding">
@@ -156,6 +158,12 @@ export default {
 }
 .home-padding {
     padding: 100px 18vw;
+}
+.home-text-wrapper {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .home-text-container {
     font-size: 8vw;

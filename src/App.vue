@@ -5,10 +5,6 @@
             :top="hamPosition.top"
             :left="hamPosition.right"
         ></spanion-logo>
-        <scroll-logo
-            :bottom="hamPosition.top"
-            :left="hamPosition.right"
-        ></scroll-logo>
         <scroll-progress
             :bottom="hamPosition.top"
             :right="hamPosition.right"
@@ -28,14 +24,12 @@
 import NavMenu from '@/views/NavMenu.vue';
 import CursorAnimated from '@/components/CursorAnimated.vue';
 import ScrollProgress from '@/components/ScrollProgress.vue';
-import ScrollLogo from '@/components/ScrollLogo.vue';
 import SpanionLogo from '@/components/SpanionLogo.vue';
 import MenuHamburger from '@/components/MenuHamburger.vue';
 export default {
     name: 'app',
     components: {
         NavMenu,
-        ScrollLogo,
         SpanionLogo,
         CursorAnimated,
         ScrollProgress,
@@ -50,8 +44,8 @@ export default {
                 };
             } else {
                 return {
-                    top: 100,
-                    right: 100,
+                    top: 24,
+                    right: 24,
                 };
             }
         },

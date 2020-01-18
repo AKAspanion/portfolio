@@ -1,52 +1,54 @@
 <template>
-    <v-fab-transition>
-        <div
-            :style="`bottom: ${bottom}px;right: ${right}px;`"
-            @mousemove="
-                iconHover(
-                    $event,
-                    '.scroll-arrow-container',
-                    '.scroll-arrow-wrapper'
-                )
-            "
-            @mouseout="
-                iconHover(
-                    $event,
-                    '.scroll-arrow-container',
-                    '.scroll-arrow-wrapper'
-                );
-                hideCursor();
-            "
-            @mouseover="showCursor('scroll to top')"
-            class="scroll-arrow-container"
-            v-if="percentage > 10 && !navMenu"
-        >
-            <div class="scroll-arrow-container">
-                <div class="scroll-arrow-wrapper">
-                    <v-progress-circular
-                        size="40"
-                        width="2"
+    <div
+        :style="`bottom: ${bottom}px;left: ${left}px;`"
+        @mousemove="
+            iconHover(
+                $event,
+                '.scroll-arrow-container',
+                '.scroll-arrow-wrapper'
+            )
+        "
+        @mouseout="
+            iconHover(
+                $event,
+                '.scroll-arrow-container',
+                '.scroll-arrow-wrapper'
+            );
+            hideCursor();
+        "
+        @mouseover="
+            showCursor(percentage > 10 ? 'scroll to top' : 'scroll to see more')
+        "
+        class="scroll-arrow-container"
+        v-if="!navMenu"
+    >
+        <div class="scroll-arrow-container">
+            <div class="scroll-arrow-wrapper">
+                <v-progress-circular
+                    size="40"
+                    width="2"
+                    :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
+                    :value="
+                        percentage <= 99 && percentage >= 95 ? 100 : percentage
+                    "
+                >
+                    <v-btn
+                        icon
+                        @click="onScroll"
                         :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
-                        :value="
-                            percentage <= 99 && percentage >= 95
-                                ? 100
-                                : percentage
-                        "
                     >
-                        <v-btn
-                            icon
-                            @click="scrollUp"
-                            :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
-                        >
-                            <v-icon>
-                                keyboard_arrow_up
-                            </v-icon>
-                        </v-btn>
-                    </v-progress-circular>
-                </div>
+                        <v-icon>
+                            {{
+                                percentage > 10
+                                    ? 'keyboard_arrow_up'
+                                    : 'keyboard_arrow_down'
+                            }}
+                        </v-icon>
+                    </v-btn>
+                </v-progress-circular>
             </div>
         </div>
-    </v-fab-transition>
+    </div>
 </template>
 
 <script>
@@ -55,11 +57,11 @@ export default {
     props: {
         bottom: {
             type: Number,
-            default: 80,
+            default: 24,
         },
-        right: {
+        left: {
             type: Number,
-            default: 110,
+            default: 24,
         },
     },
     data() {
@@ -75,12 +77,15 @@ export default {
         },
     },
     methods: {
-        scrollUp() {
+        onScroll() {
             this.hideCursor();
-            this.$vuetify.goTo(0);
-            setTimeout(() => {
+            if (this.percentage < 10) {
+                this.$vuetify.goTo(200);
+                this.percentage = 11;
+            } else {
+                this.$vuetify.goTo(0);
                 this.percentage = 0;
-            }, 200);
+            }
         },
         handleScroll() {
             let topPosition = Math.floor(
