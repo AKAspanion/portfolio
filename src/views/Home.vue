@@ -2,29 +2,43 @@
     <div class="home-container" :style="containerStyle">
         <div class="home-text-wrapper">
             <div class="home-text-container home-padding-y">
-                <div class="d-inline-block">
-                    Hi.
+                <div class="home-text d-inline-block my-1 pb-2">
+                    <mask-text :delay="maskDelay">
+                        Hi.
+                    </mask-text>
                 </div>
                 <br />
-                <div class="home-text d-inline-block">
-                    My name is,
+                <div class="home-text d-inline-block my-1 pb-2">
+                    <mask-text :delay="maskDelay + 150">
+                        My name is,
+                    </mask-text>
                 </div>
                 <br />
-                <div class="home-text d-inline-block">
-                    <hover-text
-                        text="know about me"
-                        classes="home-text--name"
-                        link="images/profile.jpeg"
-                        @click="goToRoute('/about')"
+                <div class="home-text d-inline-block my-1 pb-2">
+                    <mask-text :delay="maskDelay + 300">
+                        <hover-text
+                            text="know about me"
+                            classes="home-text--name"
+                            link="images/profile.jpeg"
+                            @click="goToRoute('/about')"
+                        >
+                            Ankit Pandit
+                        </hover-text>
+                        -
+                    </mask-text>
+                </div>
+                <br />
+                <div class="home-text d-inline-block my-1 pb-2">
+                    <mask-text :delay="maskDelay + 450">
+                        Software and
+                    </mask-text>
+                </div>
+                <br />
+                <div class="home-text d-inline-block my-1 pb-2">
+                    <mask-text :delay="maskDelay + 600"
+                        >Web developer.</mask-text
                     >
-                        Ankit Pandit
-                    </hover-text>
-                    -
                 </div>
-                <br />
-                <div class="home-text d-inline-block">Software and</div>
-                <br />
-                <div class="home-text d-inline-block">Web developer.</div>
             </div>
         </div>
         <v-divider></v-divider>
@@ -87,10 +101,17 @@
 </template>
 <script>
 import HoverText from '@/components/HoverText.vue';
+import MaskText from '@/components/MaskText.vue';
 export default {
     name: 'SpanionHome',
     components: {
         HoverText,
+        MaskText,
+    },
+    data() {
+        return {
+            maskDelay: 400,
+        };
     },
     computed: {
         containerStyle() {
@@ -167,7 +188,7 @@ export default {
 }
 .home-text-container {
     font-size: 8vw;
-    line-height: 8vw;
+    line-height: 7vw;
     overflow: hidden;
     text-transform: uppercase;
     font-weight: 100 !important;
@@ -181,7 +202,7 @@ export default {
 .home-text {
     will-change: transform;
     transform-origin: bottom;
-    transform: translate3d(0px, 100vh, 0px) rotate(15deg) scale(1.5);
+    /* transform: translate3d(0px, 100vh, 0px) rotate(15deg) scale(1.5); */
     transition: transform 1s cubic-bezier(1, 0, 0, 1);
 }
 .home-about-item,
@@ -198,6 +219,7 @@ export default {
     .home-text-container {
         font-size: 7vh;
         line-height: 8vh;
+        padding: 100px 24px;
     }
 }
 </style>

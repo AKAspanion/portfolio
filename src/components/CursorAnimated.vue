@@ -105,7 +105,7 @@ export default {
 .cursor-animated--small,
 .cursor-animated--large {
     will-change: transform, width, height;
-    transition: all 200ms ease-out;
+    transition: all 300ms ease-out;
 }
 .cursor-animated--rotated {
     transform: scaleX(-1) rotate(180deg);
@@ -139,6 +139,6 @@ export default {
 }
 .cursor-photo,
 .cursor-tooltip {
-    transition: all 200ms ease-out;
+    transition: all 300ms ease-out;
 }
 </style>

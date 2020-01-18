@@ -1,6 +1,6 @@
 <template>
     <div
-        :style="`bottom: ${bottom}px;left: ${left}px;`"
+        :style="`bottom: ${bottom}px;right: ${right}px;`"
         @mousemove="
             iconHover(
                 $event,
@@ -16,9 +16,7 @@
             );
             hideCursor();
         "
-        @mouseover="
-            showCursor(percentage > 10 ? 'scroll to top' : 'scroll to see more')
-        "
+        @mouseover="showCursor(percentage > 10 ? 'go up' : 'scroll')"
         class="scroll-arrow-container"
         v-if="!navMenu"
     >
@@ -59,7 +57,7 @@ export default {
             type: Number,
             default: 24,
         },
-        left: {
+        right: {
             type: Number,
             default: 24,
         },

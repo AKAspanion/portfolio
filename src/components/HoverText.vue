@@ -87,18 +87,17 @@ export default {
     content: '';
     height: 50%;
     position: absolute;
-    transition: width 400ms cubic-bezier(1, 0, 0, 1);
+    transition: width 600ms cubic-bezier(1, 0, 0, 1);
 }
 .hover--text.dark--hover.right--hover:before,
 .hover--text.white--hover.right--hover:before {
     left: 100%;
-    width: 60%;
     content: '';
     height: 50%;
     width: 0%;
     position: absolute;
     transform: translate3d(-100%, 0, 0);
-    transition: width 400ms cubic-bezier(1, 0, 0, 1);
+    transition: width 600ms cubic-bezier(1, 0, 0, 1);
 }
 
 .hover--text.dark--hover:before {
@@ -110,6 +109,6 @@ export default {
 .hover--text.dark--hover:hover:before,
 .hover--text.white--hover:hover:before {
     width: 100%;
-    transition: width 400ms cubic-bezier(1, 0, 0, 1);
+    transition: width 600ms cubic-bezier(1, 0, 0, 1);
 }
 </style>
