@@ -176,7 +176,7 @@ export default {
                 name[0].style.transform = _linkStyle;
             }, _delay);
             setTimeout(() => {
-                copy[0].style.transform = _linkStyle;
+                copy[0].style.transform = _navStyle;
                 theme[0].style.transform = _navStyle;
             }, _delay * 2);
         },

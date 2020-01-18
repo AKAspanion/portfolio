@@ -69,6 +69,7 @@ export default {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+    transition: all 200ms ease-out;
 }
 body {
     margin: 0;
