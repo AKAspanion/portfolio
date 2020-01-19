@@ -12,8 +12,8 @@
 <script>
 export default {
     props: {
+        value: Boolean,
         delay: Number,
-        appear: Boolean,
     },
     data() {
         return {
@@ -27,6 +27,14 @@ export default {
                 return this.$store.getters.navMenu;
             },
         },
+        appear: {
+            get() {
+                return this.value;
+            },
+            set(val) {
+                this.$emit('input', val);
+            },
+        },
     },
     watch: {
         navMenu(val) {
@@ -38,9 +46,19 @@ export default {
                 }, 400);
             }
         },
+        appear: {
+            handler(val) {
+                if (val) {
+                    this.animateText();
+                }
+            },
+            immediate: true,
+            deep: true,
+        },
     },
     methods: {
         animateText() {
+            this.appear = true;
             let _delay = this.delay || 400;
             setTimeout(() => {
                 this.maskClass = 'mask--show';
@@ -49,12 +67,10 @@ export default {
                 this.showText = true;
             }, _delay + 600);
             setTimeout(() => {
+                this.appear = false;
                 this.maskClass = 'mask--leave';
             }, _delay + 700);
         },
-    },
-    mounted() {
-        this.animateText();
     },
 };
 </script>

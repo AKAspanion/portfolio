@@ -9,7 +9,7 @@
     >
         <div class="mb-auto">
             <v-row dense>
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="3">
                     <div
                         :class="$vuetify.breakpoint.xsOnly ? 'my-3' : 'my-8'"
                         class="name-item-container overline"
@@ -19,7 +19,7 @@
                         </div>
                     </div>
                 </v-col>
-                <v-col cols="12" md="8">
+                <v-col cols="12" md="9">
                     <div class="nav-container">
                         <div
                             class="nav-item-container display-3 font-weight-thin my-4"
@@ -42,7 +42,7 @@
         </div>
         <div class="mt-auto">
             <v-row dense align="center">
-                <v-col cols="12" md="4" class="theme-item-container">
+                <v-col cols="12" md="3" class="theme-item-container">
                     <div class="theme-item-wrapper">
                         <v-btn-toggle
                             tile
@@ -65,7 +65,7 @@
                         </v-btn-toggle>
                     </div>
                 </v-col>
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="6">
                     <v-row no-gutters align="center">
                         <div
                             :class="
@@ -88,7 +88,7 @@
                         </div>
                     </v-row>
                 </v-col>
-                <v-col cols="12" md="4">
+                <v-col cols="12" md="3">
                     <div
                         :class="$vuetify.breakpoint.xsOnly ? 'mb-4' : ''"
                         class="overline text-sm-right copy-item-wrapper"

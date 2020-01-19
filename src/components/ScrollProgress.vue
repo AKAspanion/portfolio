@@ -36,11 +36,7 @@
                         :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
                     >
                         <v-icon>
-                            {{
-                                percentage > 10
-                                    ? 'keyboard_arrow_up'
-                                    : 'keyboard_arrow_down'
-                            }}
+                            {{ percentage > 10 ? 'mdi-arrow-up' : 'mdi-arrow-down' }}
                         </v-icon>
                     </v-btn>
                 </v-progress-circular>

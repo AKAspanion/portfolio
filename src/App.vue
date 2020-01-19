@@ -14,6 +14,10 @@
             :top="hamPosition.top"
             :right="hamPosition.right"
         ></menu-hamburger>
+        <social-links
+            :bottom="hamPosition.top"
+            :left="hamPosition.right"
+        ></social-links>
         <transition name="page" mode="out-in">
             <router-view></router-view>
         </transition>
@@ -25,12 +29,14 @@ import NavMenu from '@/views/NavMenu.vue';
 import CursorAnimated from '@/components/CursorAnimated.vue';
 import ScrollProgress from '@/components/ScrollProgress.vue';
 import SpanionLogo from '@/components/SpanionLogo.vue';
+import SocialLinks from '@/components/SocialLinks.vue';
 import MenuHamburger from '@/components/MenuHamburger.vue';
 export default {
     name: 'app',
     components: {
         NavMenu,
         SpanionLogo,
+        SocialLinks,
         CursorAnimated,
         ScrollProgress,
         MenuHamburger,
@@ -44,8 +50,8 @@ export default {
                 };
             } else {
                 return {
-                    top: 24,
-                    right: 24,
+                    top: 56,
+                    right: 56,
                 };
             }
         },

@@ -1,21 +1,27 @@
 <template>
     <div class="home-container" :style="containerStyle">
         <div class="home-text-wrapper">
-            <div class="home-text-container home-padding-y">
+            <div class="home-text-container home-padding">
                 <div class="home-text d-inline-block my-1 pb-2">
-                    <mask-text :delay="maskDelay">
+                    <mask-text v-model="showLandingMask" :delay="maskDelay">
                         Hi.
                     </mask-text>
                 </div>
                 <br />
                 <div class="home-text d-inline-block my-1 pb-2">
-                    <mask-text :delay="maskDelay + 150">
+                    <mask-text
+                        v-model="showLandingMask"
+                        :delay="maskDelay + 2000"
+                    >
                         My name is,
                     </mask-text>
                 </div>
                 <br />
                 <div class="home-text d-inline-block my-1 pb-2">
-                    <mask-text :delay="maskDelay + 300">
+                    <mask-text
+                        v-model="showLandingMask"
+                        :delay="maskDelay + 3000"
+                    >
                         <hover-text
                             text="know about me"
                             classes="home-text--name"
@@ -29,15 +35,21 @@
                 </div>
                 <br />
                 <div class="home-text d-inline-block my-1 pb-2">
-                    <mask-text :delay="maskDelay + 450">
+                    <mask-text
+                        v-model="showLandingMask"
+                        :delay="maskDelay + 4000"
+                    >
                         Software and
                     </mask-text>
                 </div>
                 <br />
                 <div class="home-text d-inline-block my-1 pb-2">
-                    <mask-text :delay="maskDelay + 600"
-                        >Web developer.</mask-text
+                    <mask-text
+                        v-model="showLandingMask"
+                        :delay="maskDelay + 4000"
                     >
+                        Web developer.
+                    </mask-text>
                 </div>
             </div>
         </div>
@@ -111,6 +123,7 @@ export default {
     data() {
         return {
             maskDelay: 400,
+            showLandingMask: true,
         };
     },
     computed: {
@@ -178,17 +191,17 @@ export default {
     min-height: 100vh;
 }
 .home-padding {
-    padding: 100px 18vw;
+    padding: 64px 18vw;
 }
 .home-text-wrapper {
     min-height: 100vh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    align-items: flex-end;
+    justify-content: start;
 }
 .home-text-container {
-    font-size: 8vw;
-    line-height: 7vw;
+    font-size: 7vw;
+    line-height: 6vw;
     overflow: hidden;
     text-transform: uppercase;
     font-weight: 100 !important;
