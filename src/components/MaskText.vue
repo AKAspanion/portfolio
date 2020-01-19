@@ -76,6 +76,10 @@ export default {
 </script>
 
 <style scoped>
+.mask--text {
+    will-change: transform;
+    transform-origin: bottom;
+}
 .mask--text.mask--enter:before,
 .mask--text.mask--leave:before,
 .mask--text.mask--show:before {

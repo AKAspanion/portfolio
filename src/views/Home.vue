@@ -2,13 +2,13 @@
     <div class="home-container" :style="containerStyle">
         <div class="home-text-wrapper">
             <div class="home-text-container home-padding">
-                <div class="home-text d-inline-block my-1 pb-2">
+                <div class="d-inline-block my-1 pb-2">
                     <mask-text v-model="showLandingMask" :delay="maskDelay">
                         Hi.
                     </mask-text>
                 </div>
                 <br />
-                <div class="home-text d-inline-block my-1 pb-2">
+                <div class="d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
                         :delay="maskDelay + 1500"
@@ -17,7 +17,7 @@
                     </mask-text>
                 </div>
                 <br />
-                <div class="home-text d-inline-block my-1 pb-2">
+                <div class="d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
                         :delay="maskDelay + 2000"
@@ -34,7 +34,7 @@
                     </mask-text>
                 </div>
                 <br />
-                <div class="home-text d-inline-block my-1 pb-2">
+                <div class="d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
                         :delay="maskDelay + 3500"
@@ -43,7 +43,7 @@
                     </mask-text>
                 </div>
                 <br />
-                <div class="home-text d-inline-block my-1 pb-2">
+                <div class="d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
                         :delay="maskDelay + 4000"
@@ -53,6 +53,35 @@
                 </div>
             </div>
         </div>
+        <template v-if="loaded">
+            <div class="about-text-wrapper">
+                <div class="about-headline home-padding">
+                    <div class="d-inline-block my-1 pb-2">
+                        <mask-text v-model="aboutHead" :delay="maskDelay">
+                            A LITTLE ABOUT ME.
+                        </mask-text>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text-wrapper-2">
+                <div class="about-headline home-padding">
+                    <div class="d-inline-block my-1 pb-2">
+                        <mask-text v-model="aboutHead" :delay="maskDelay">
+                            A LITTLE ABOUT ME.
+                        </mask-text>
+                    </div>
+                </div>
+            </div>
+            <div class="about-text-wrapper-3">
+                <div class="about-headline home-padding">
+                    <div class="d-inline-block my-1 pb-2">
+                        <mask-text v-model="aboutHead" :delay="maskDelay">
+                            A LITTLE ABOUT ME.
+                        </mask-text>
+                    </div>
+                </div>
+            </div>
+        </template>
     </div>
 </template>
 <script>
@@ -67,6 +96,7 @@ export default {
     data() {
         return {
             maskDelay: 400,
+            aboutHead: true,
             showLandingMask: true,
         };
     },
@@ -116,18 +146,8 @@ export default {
             this.$router.push(path);
             this.hideCursor();
         },
-        animateItems() {
-            let texts = document.querySelectorAll('.home-text');
-            let _style = `translate3d(0px, 0vh, 0px)`;
-            texts.forEach((text, index) => {
-                setTimeout(() => {
-                    text.style.transform = _style;
-                }, 150 * index + 250);
-            });
-        },
     },
     mounted() {
-        this.animateItems(true);
         setTimeout(() => {
             this.$store.dispatch('LOADED', true);
         }, 6000);
@@ -162,18 +182,30 @@ export default {
     font-weight: 300 !important;
     transition: transform 150ms ease-out;
 }
-.home-text {
-    will-change: transform;
-    transform-origin: bottom;
-    /* transform: translate3d(0px, 100vh, 0px) rotate(15deg) scale(1.5); */
-    transition: transform 1s cubic-bezier(1, 0, 0, 1);
-}
 .home-about-item,
 .home-project-item {
     text-align: justify;
     transform-origin: top left;
     transform: translate3d(0px, 96px, 0px) rotate(5deg);
     transition: transform 1s ease;
+}
+.theme--dark .about-text-wrapper {
+    background: #424242;
+}
+.theme--dark .about-text-wrapper-2 {
+    background: #616161;
+}
+.theme--dark .about-text-wrapper-3 {
+    background: #757575;
+}
+.theme--light .about-text-wrapper {
+    background: #eeeeee;
+}
+.theme--light .about-text-wrapper-2 {
+    background: #f5f5f5;
+}
+.theme--light .about-text-wrapper-3 {
+    background: #fafafa;
 }
 @media only screen and (max-width: 600px) {
     .home-padding {
