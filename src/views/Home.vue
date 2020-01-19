@@ -11,7 +11,7 @@
                 <div class="home-text d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
-                        :delay="maskDelay + 2000"
+                        :delay="maskDelay + 1500"
                     >
                         My name is,
                     </mask-text>
@@ -20,7 +20,7 @@
                 <div class="home-text d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
-                        :delay="maskDelay + 3000"
+                        :delay="maskDelay + 2000"
                     >
                         <hover-text
                             text="know about me"
@@ -37,7 +37,7 @@
                 <div class="home-text d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
-                        :delay="maskDelay + 4000"
+                        :delay="maskDelay + 3500"
                     >
                         Software and
                     </mask-text>
@@ -52,62 +52,6 @@
                     </mask-text>
                 </div>
             </div>
-        </div>
-        <v-divider></v-divider>
-        <div class="home-about-container home-padding">
-            <v-row>
-                <v-col cols="12" sm="4" class="overflow-hidden">
-                    <div class="home-about-item title fill-height">
-                        A little about me.
-                    </div>
-                </v-col>
-                <v-col cols="12" sm="8" class="overflow-hidden">
-                    <div class="home-about-item fill-height">
-                        I am a Kolkata based Software/Web Developer, currently
-                        working at
-                        <hover-text
-                            text="go to globalids website"
-                            classes="cursor-item-text"
-                            link="images/globalids.jpg"
-                        >
-                            Global Ids
-                        </hover-text>
-                        . <br />I love making awesome web applications and
-                        websites, and always on a lookout for new and exciting
-                        challenges. <br />
-                        <br />If you have any projects or suggestions, or you
-                        just want to say "hi",
-                        <hover-text
-                            text="contact me"
-                            classes="cursor-item-text"
-                            @click="goToRoute('/contact')"
-                        >
-                            contact
-                        </hover-text>
-                        .
-                    </div>
-                </v-col>
-            </v-row>
-        </div>
-        <v-divider></v-divider>
-        <div class="home-project-container home-padding">
-            <v-row>
-                <v-col cols="12" sm="4" class="overflow-hidden">
-                    <div class="home-project-item title fill-height">
-                        A little project me.
-                    </div>
-                </v-col>
-                <v-col cols="12" sm="8" class="overflow-hidden">
-                    <div class="home-project-item fill-height">
-                        I am a Kolkata based Software/Web Developer, currently
-                        working at Global Ids. <br />I love making awesome web
-                        applications and websites. <br />I am always on a
-                        lookout for new and exciting challenges. <br />If you
-                        have any projects or suggestions, or you just want to
-                        say "hi", contact me.
-                    </div>
-                </v-col>
-            </v-row>
         </div>
     </div>
 </template>
@@ -140,6 +84,9 @@ export default {
         },
         scrollPosition() {
             return this.$store.getters.scrollPos;
+        },
+        loaded() {
+            return this.$store.getters.loaded;
         },
     },
     watch: {
@@ -181,6 +128,9 @@ export default {
     },
     mounted() {
         this.animateItems(true);
+        setTimeout(() => {
+            this.$store.dispatch('LOADED', true);
+        }, 6000);
     },
 };
 </script>
@@ -200,8 +150,8 @@ export default {
     justify-content: start;
 }
 .home-text-container {
-    font-size: 7vw;
-    line-height: 6vw;
+    font-size: 8vw;
+    line-height: 7vw;
     overflow: hidden;
     text-transform: uppercase;
     font-weight: 100 !important;
@@ -230,9 +180,8 @@ export default {
         padding: 100px 24px;
     }
     .home-text-container {
-        font-size: 7vh;
-        line-height: 8vh;
-        padding: 100px 24px;
+        font-size: 6vh;
+        line-height: 7vh;
     }
 }
 </style>

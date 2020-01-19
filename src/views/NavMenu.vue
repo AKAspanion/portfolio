@@ -9,7 +9,7 @@
     >
         <div class="mb-auto">
             <v-row dense>
-                <v-col cols="12" md="3">
+                <v-col cols="12" md="2">
                     <div
                         :class="$vuetify.breakpoint.xsOnly ? 'my-3' : 'my-8'"
                         class="name-item-container overline"
@@ -19,10 +19,10 @@
                         </div>
                     </div>
                 </v-col>
-                <v-col cols="12" md="9">
+                <v-col cols="12" md="10">
                     <div class="nav-container">
                         <div
-                            class="nav-item-container display-3 font-weight-thin my-4"
+                            class="nav-item-container display-4 font-weight-thin my-4"
                             v-for="navItem in navItems"
                             :key="navItem.id"
                         >
@@ -42,7 +42,7 @@
         </div>
         <div class="mt-auto">
             <v-row dense align="center">
-                <v-col cols="12" md="3" class="theme-item-container">
+                <v-col cols="12" md="2" class="theme-item-container">
                     <div class="theme-item-wrapper">
                         <v-btn-toggle
                             tile
@@ -65,7 +65,7 @@
                         </v-btn-toggle>
                     </div>
                 </v-col>
-                <v-col cols="12" md="6">
+                <v-col cols="12" md="7">
                     <v-row no-gutters align="center">
                         <div
                             :class="
@@ -155,7 +155,7 @@ export default {
             let links = document.querySelectorAll('.link-item-wrapper');
             let copy = document.querySelectorAll('.copy-item-wrapper');
             let _navStyle = `translate3d${
-                alive ? '(0px, 0px, 0px)' : '(0px, 80px, 0px)'
+                alive ? '(0px, 0px, 0px)' : '(0px, 100px, 0px)'
             }`;
             let _linkStyle = `translate3d${
                 alive ? '(0px, 0px, 0px)' : '(0px, 16px, 0px)'
@@ -224,9 +224,15 @@ export default {
     will-change: transform;
     transition: transform 150ms ease-out;
 }
+.nav-container {
+    margin-top: 24px;
+}
 @media only screen and (max-width: 600px) {
     .nav-menu-container {
         padding: 16px 24px 4px 24px;
+    }
+    .nav-container {
+        margin-top: 0px;
     }
 }
 </style>

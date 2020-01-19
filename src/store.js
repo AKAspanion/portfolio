@@ -10,6 +10,7 @@ export default new Vuex.Store({
             tooltip: "",
             link: ""
         },
+        loaded: false,
         navMenu: false,
         socialLinks: [{
                 id: 1,
@@ -64,6 +65,9 @@ export default new Vuex.Store({
         },
         changeScrollPos(state, payload) {
             state.scrollPos = payload;
+        },
+        setLoaded(state, payload) {
+            state.loaded = payload;
         }
     },
     actions: {
@@ -93,7 +97,13 @@ export default new Vuex.Store({
             commit
         }, payload) {
             commit('changeScrollPos', payload)
-        }
+        },
+        LOADED({
+            commit
+        }, payload) {
+            commit('setLoaded', payload)
+        },
+
     },
     getters: {
         cursor(state) {
@@ -110,6 +120,9 @@ export default new Vuex.Store({
         },
         scrollPos(state) {
             return state.scrollPos
+        },
+        loaded(state) {
+            return state.loaded
         }
     }
 })

@@ -1,6 +1,7 @@
 <template>
     <v-app>
         <nav-menu></nav-menu>
+        <cursor-animated></cursor-animated>
         <spanion-logo
             :top="hamPosition.top"
             :left="hamPosition.right"
@@ -9,7 +10,6 @@
             :bottom="hamPosition.top"
             :right="hamPosition.right"
         ></scroll-progress>
-        <cursor-animated></cursor-animated>
         <menu-hamburger
             :top="hamPosition.top"
             :right="hamPosition.right"
