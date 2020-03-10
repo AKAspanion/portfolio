@@ -22,7 +22,12 @@
                 <v-col cols="12" md="10">
                     <div class="nav-container">
                         <div
-                            class="nav-item-container display-4 font-weight-thin my-4"
+                            :class="
+                                $vuetify.breakpoint.xsOnly
+                                    ? 'display-3'
+                                    : 'display-4'
+                            "
+                            class="nav-item-container font-weight-thin my-4"
                             v-for="navItem in navItems"
                             :key="navItem.id"
                         >

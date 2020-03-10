@@ -1,12 +1,14 @@
 <template>
     <div
-        @mousemove="iconHover($event, '.ham-burger-container', '.ham-burger')"
+        @mousemove="
+            iconHover($event, '.ham-burger-container', '.ham-burger', mobile)
+        "
         :style="`top: ${top}px;right: ${right}px;`"
         class="ham-burger-container"
-        @mouseover="showCursor()"
+        @mouseover="showCursor(null, null, mobile)"
         @mouseout="
-            iconHover($event, '.ham-burger-container', '.ham-burger');
-            hideCursor();
+            iconHover($event, '.ham-burger-container', '.ham-burger', mobile);
+            hideCursor(mobile);
         "
         @click="handleClick"
     >
@@ -50,6 +52,9 @@ export default {
             set(val) {
                 this.$store.dispatch('SHOW_NAV_MENU', val);
             },
+        },
+        mobile() {
+            return this.$vuetify.breakpoint.xsOnly;
         },
     },
     methods: {

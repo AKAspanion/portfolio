@@ -2,6 +2,17 @@
     <v-app :class="loaded ? '' : 'disable-cursor'">
         <nav-menu></nav-menu>
         <cursor-animated></cursor-animated>
+        <v-fade-transition>
+            <div
+                v-show="scrollPosition > 1 && !hamPosition.top"
+                :style="
+                    `background: ${
+                        $vuetify.theme.dark ? '#000000' : '#FFFFFF'
+                    };`
+                "
+                class="nav-shadow"
+            ></div>
+        </v-fade-transition>
         <spanion-logo
             :top="hamPosition.top"
             :left="loaded ? hamPosition.right : -80"
@@ -15,6 +26,7 @@
             :right="loaded ? hamPosition.right : -80"
         ></menu-hamburger>
         <social-links
+            v-if="hamPosition.top"
             :bottom="hamPosition.top"
             :left="loaded ? hamPosition.right : -80"
         ></social-links>
@@ -54,6 +66,9 @@ export default {
                     right: 56,
                 };
             }
+        },
+        scrollPosition() {
+            return this.$store.getters.scrollPos;
         },
         loaded() {
             return this.$store.getters.loaded;
@@ -116,5 +131,11 @@ body {
 }
 .disable-cursor {
     pointer-events: none;
+}
+.nav-shadow {
+    width: 100vw;
+    height: 80px;
+    z-index: 48;
+    position: fixed;
 }
 </style>

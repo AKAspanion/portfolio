@@ -104,7 +104,7 @@ export default {
     },
     data() {
         return {
-            maskDelay: 400,
+            maskDelay: 0,
             aboutHead: true,
             showLandingMask: true,
         };
@@ -126,28 +126,6 @@ export default {
         },
         loaded() {
             return this.$store.getters.loaded;
-        },
-    },
-    watch: {
-        scrollPosition: {
-            handler() {
-                let aboutItems = document.querySelectorAll('.home-about-item');
-                let projectItems = document.querySelectorAll(
-                    '.home-project-item'
-                );
-                const changeItems = (items, _style) => {
-                    for (let item of items) {
-                        item.style.transform = _style;
-                    }
-                };
-                if (this.isInViewport('.home-about-container', 120)) {
-                    changeItems(aboutItems, 'translate3d(0px, 0px, 0px)');
-                }
-                if (this.isInViewport('.home-project-container', 120)) {
-                    changeItems(projectItems, 'translate3d(0px, 0px, 0px)');
-                }
-            },
-            immediate: true,
         },
     },
     methods: {
@@ -218,11 +196,11 @@ export default {
 }
 @media only screen and (max-width: 600px) {
     .home-padding {
-        padding: 100px 24px;
+        padding: 148px 24px;
     }
     .home-text-container {
-        font-size: 6vh;
-        line-height: 7vh;
+        font-size: 5.5vh;
+        line-height: 6vh;
     }
 }
 </style>

@@ -5,18 +5,22 @@
             iconHover(
                 $event,
                 '.scroll-arrow-container',
-                '.scroll-arrow-wrapper'
+                '.scroll-arrow-wrapper',
+                mobile
             )
         "
         @mouseout="
             iconHover(
                 $event,
                 '.scroll-arrow-container',
-                '.scroll-arrow-wrapper'
+                '.scroll-arrow-wrapper',
+                mobile
             );
-            hideCursor();
+            hideCursor(mobile);
         "
-        @mouseover="showCursor(percentage > 10 ? 'go up' : 'scroll')"
+        @mouseover="
+            showCursor(percentage > 10 ? 'go up' : 'scroll', null, mobile)
+        "
         class="scroll-arrow-container"
         v-if="!navMenu"
     >
@@ -74,23 +78,23 @@ export default {
                 return this.$store.getters.navMenu;
             },
         },
+        mobile() {
+            return this.$vuetify.breakpoint.xsOnly;
+        },
     },
     methods: {
         onScroll() {
             this.hideCursor();
             if (this.percentage < 10) {
                 this.$vuetify.goTo(200);
-                this.percentage = 11;
             } else {
                 this.$vuetify.goTo(0);
-                this.percentage = 0;
             }
         },
         handleScroll() {
             let topPosition = Math.floor(
                 document.documentElement.scrollTop || document.body.scrollTop
             );
-
             let bottomPosition =
                 document.getElementById('app').scrollHeight -
                 window.innerHeight;
@@ -105,10 +109,10 @@ export default {
     },
     mounted() {
         this.handleScroll();
-        window.addEventListener('mousewheel', this.handleScroll);
+        window.addEventListener('scroll', this.handleScroll);
     },
     destroyed() {
-        window.removeEventListener('mousewheel', this.handleScroll);
+        window.removeEventListener('scroll', this.handleScroll);
     },
 };
 </script>

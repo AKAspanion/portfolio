@@ -1,13 +1,15 @@
 <template>
     <div
         :style="`top: ${top}px;left: ${left}px;`"
-        @mousemove="iconHover($event, '.logo-container', '.logo-wrapper')"
+        @mousemove="
+            iconHover($event, '.logo-container', '.logo-wrapper', mobile)
+        "
         @mouseout="
-            iconHover($event, '.logo-container', '.logo-wrapper');
-            hideCursor();
+            iconHover($event, '.logo-container', '.logo-wrapper', mobile);
+            hideCursor(mobile);
         "
         @click="navigateTo('/home')"
-        @mouseover="showCursor()"
+        @mouseover="showCursor(mobile)"
         class="logo-container"
     >
         <div class="logo-wrapper">
@@ -35,6 +37,11 @@ export default {
         left: {
             type: Number,
             default: 30,
+        },
+    },
+    computed: {
+        mobile() {
+            return this.$vuetify.breakpoint.xsOnly;
         },
     },
     methods: {

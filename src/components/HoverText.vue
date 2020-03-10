@@ -1,6 +1,6 @@
 <template>
     <div
-        @mousemove="textHover"
+        @mousemove="textHover($event, false, mobile)"
         class="hover--text"
         :class="[
             classes,
@@ -10,12 +10,12 @@
         ]"
         @mouseover="
             onHover($event);
-            showCursor(text, link);
+            showCursor(text, link, mobile);
         "
         @mouseout="
-            hideCursor();
             onHover($event);
-            textHover($event, true);
+            hideCursor(mobile);
+            textHover($event, true, mobile);
         "
         @click="$emit('click', $event)"
     >
@@ -34,6 +34,11 @@ export default {
         return {
             hoverClass: 'left--hover',
         };
+    },
+    computed: {
+        mobile() {
+            return this.$vuetify.breakpoint.xsOnly;
+        },
     },
     methods: {
         onHover(e) {

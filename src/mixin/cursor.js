@@ -1,6 +1,9 @@
 export default {
     methods: {
-        showCursor(tooltip, link) {
+        showCursor(tooltip, link, _mobile) {
+            if (_mobile) {
+                return;
+            }
             this.$store.dispatch('SHOW_CURSOR',
                 tooltip || link ? {
                     hovered: true,
@@ -9,7 +12,10 @@ export default {
                 } : true
             );
         },
-        hideCursor() {
+        hideCursor(_mobile) {
+            if (_mobile) {
+                return;
+            }
             this.$store.dispatch('SHOW_CURSOR', false);
         },
     }
