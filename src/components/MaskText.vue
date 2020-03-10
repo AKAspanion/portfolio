@@ -1,5 +1,6 @@
 <template>
     <div
+        :id="maskTextId"
         class="mask--text d-inline-block"
         :class="[$vuetify.theme.dark ? 'dark--mask' : 'white--mask', maskClass]"
     >
@@ -12,27 +13,22 @@
 <script>
 export default {
     props: {
-        value: Boolean,
-        delay: Number,
+        delay: {
+            type: Number,
+            default: 100,
+        },
     },
     data() {
         return {
             showText: false,
             maskClass: 'mask--enter',
+            maskTextId: `mask_${this.uid()}`,
         };
     },
     computed: {
         navMenu: {
             get() {
                 return this.$store.getters.navMenu;
-            },
-        },
-        appear: {
-            get() {
-                return this.value;
-            },
-            set(val) {
-                this.$emit('input', val);
             },
         },
     },
@@ -58,19 +54,36 @@ export default {
     },
     methods: {
         animateText() {
-            this.appear = true;
-            let _delay = this.delay || 400;
+            if (this.showText) {
+                return;
+            }
             setTimeout(() => {
                 this.maskClass = 'mask--show';
-            }, _delay);
+            }, this.delay);
             setTimeout(() => {
                 this.showText = true;
-            }, _delay + 600);
+            }, this.delay + 600);
             setTimeout(() => {
-                this.appear = false;
                 this.maskClass = 'mask--leave';
-            }, _delay + 700);
+            }, this.delay + 700);
         },
+        handleIntersection(o) {
+            let intersectionObj = o[0];
+            let { target, isIntersecting } = intersectionObj;
+            if (isIntersecting && target.id === this.maskTextId) {
+                this.animateText();
+            }
+        },
+        uid() {
+            return Math.random()
+                .toString(36)
+                .substring(2);
+        },
+    },
+    mounted() {
+        let observer = new IntersectionObserver(this.handleIntersection);
+        let target = document.getElementById(this.maskTextId);
+        observer.observe(target);
     },
 };
 </script>
