@@ -71,7 +71,7 @@ export default {
     position: fixed;
     cursor: pointer;
     will-change: transform;
-    transition: transform 150ms ease-out;
+    transition: transform 150ms ease-out, left 450ms ease;
     transform: translate3d(0px, 0px, 0px);
 }
 .logo-wrapper {

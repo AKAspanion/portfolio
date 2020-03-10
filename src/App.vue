@@ -1,22 +1,22 @@
 <template>
-    <v-app>
+    <v-app :class="loaded ? '' : 'disable-cursor'">
         <nav-menu></nav-menu>
         <cursor-animated></cursor-animated>
         <spanion-logo
             :top="hamPosition.top"
-            :left="hamPosition.right"
+            :left="loaded ? hamPosition.right : -80"
         ></spanion-logo>
         <scroll-progress
             :bottom="hamPosition.top"
-            :right="hamPosition.right"
+            :right="loaded ? hamPosition.right : -80"
         ></scroll-progress>
         <menu-hamburger
             :top="hamPosition.top"
-            :right="hamPosition.right"
+            :right="loaded ? hamPosition.right : -80"
         ></menu-hamburger>
         <social-links
             :bottom="hamPosition.top"
-            :left="hamPosition.right"
+            :left="loaded ? hamPosition.right : -80"
         ></social-links>
         <transition name="page" mode="out-in">
             <router-view></router-view>
@@ -54,6 +54,9 @@ export default {
                     right: 56,
                 };
             }
+        },
+        loaded() {
+            return this.$store.getters.loaded;
         },
     },
 };
@@ -110,5 +113,8 @@ body {
 .page-leave-to {
     transform: translateX(100vw);
     transition-timing-function: cubic-bezier(1, 0, 0, 1);
+}
+.disable-cursor {
+    pointer-events: none;
 }
 </style>

@@ -11,7 +11,7 @@
                 <div class="d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
-                        :delay="maskDelay + 1500"
+                        :delay="loaded ? maskDelay : maskDelay + 1500"
                     >
                         My name is,
                     </mask-text>
@@ -20,7 +20,7 @@
                 <div class="d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
-                        :delay="maskDelay + 2000"
+                        :delay="loaded ? maskDelay : maskDelay + 2000"
                     >
                         <hover-text
                             text="know about me"
@@ -37,7 +37,7 @@
                 <div class="d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
-                        :delay="maskDelay + 3500"
+                        :delay="loaded ? maskDelay : maskDelay + 3500"
                     >
                         Software and
                     </mask-text>
@@ -46,7 +46,7 @@
                 <div class="d-inline-block my-1 pb-2">
                     <mask-text
                         v-model="showLandingMask"
-                        :delay="maskDelay + 4000"
+                        :delay="loaded ? maskDelay : maskDelay + 4000"
                     >
                         Web developer.
                     </mask-text>
