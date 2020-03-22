@@ -166,7 +166,7 @@ export default {
                 alive ? '(0px, 0px, 0px)' : '(0px, 16px, 0px)'
             }`;
             let _timeout = alive ? 120 : 60;
-            let _delay = alive ? 800 : 0;
+            let _delay = alive ? 500 : 0;
             navs.forEach((nav, index) => {
                 setTimeout(() => {
                     nav.style.transform = _navStyle;
