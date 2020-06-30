@@ -145,8 +145,8 @@ export default {
         immediate: true,
     },
     methods: {
-        navigateTo(page) {
-            this.$router.push(`/${page.name}`);
+        navigateTo() {
+            // this.$router.push(`/${page.name}`);
             this.hideCursor();
             this.$store.dispatch('SHOW_NAV_MENU', false);
         },

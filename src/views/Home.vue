@@ -3,19 +3,17 @@
         <div class="home-text-wrapper">
             <div class="home-text-container home-padding">
                 <div class="d-inline-block my-1 pb-2">
-                    <mask-text :delay="maskDelay">
-                        Hi.
-                    </mask-text>
+                    Hi.
                 </div>
                 <br />
                 <div class="d-inline-block my-1 pb-2">
-                    <mask-text :delay="loaded ? maskDelay : maskDelay + 1500">
+                    <mask-text :delay="loaded ? maskDelay : maskDelay + 1000">
                         My name is,
                     </mask-text>
                 </div>
                 <br />
                 <div class="d-inline-block my-1 pb-2">
-                    <mask-text :delay="loaded ? maskDelay : maskDelay + 2000">
+                    <mask-text :delay="loaded ? maskDelay : maskDelay + 1500">
                         <hover-text
                             text="know about me"
                             classes="home-text--name"
@@ -29,13 +27,13 @@
                 </div>
                 <br />
                 <div class="d-inline-block my-1 pb-2">
-                    <mask-text :delay="loaded ? maskDelay : maskDelay + 3500">
+                    <mask-text :delay="loaded ? maskDelay : maskDelay + 3000">
                         Software and
                     </mask-text>
                 </div>
                 <br />
                 <div class="d-inline-block my-1 pb-2">
-                    <mask-text :delay="loaded ? maskDelay : maskDelay + 4000">
+                    <mask-text :delay="loaded ? maskDelay : maskDelay + 3500">
                         Web developer.
                     </mask-text>
                 </div>
@@ -44,49 +42,91 @@
         <template v-if="loaded">
             <div class="about-text-wrapper">
                 <div class="about-headline home-padding">
-                    <div class="d-inline-block my-1 pb-2">
+                    <div class="d-inline-block my-1 pb-2 title">
                         <mask-text v-model="aboutHead" :delay="maskDelay">
-                            A LITTLE ABOUT ME.
+                            UNDER CONSTRUCTION
                         </mask-text>
-                        <div>
-                            Lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit. Voluptatibus sequi est hic delectus esse vero
-                            nisi velit eaque mollitia. Minus dolor quos aliquam
-                            fugiat quae in cupiditate rerum deserunt optio.
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Non repellendus ratione deserunt tempore,
-                            cumque similique dicta sed repudiandae aliquid
-                            pariatur neque magnam consequuntur, dolorum sapiente
-                            minus fugiat architecto atque aperiam! Lorem ipsum
-                            dolor, sit amet consectetur adipisicing elit. Quod
-                            possimus ipsa dolorem neque quo, odio corporis
-                            debitis. Blanditiis dolore ullam aperiam
-                            exercitationem, fugiat officiis corrupti nostrum
-                            facilis assumenda necessitatibus sint. Lorem ipsum
-                            dolor sit amet consectetur adipisicing elit.
-                            Aspernatur ipsam quis, nam earum, delectus voluptate
-                            molestiae sequi iste totam saepe eveniet dignissimos
-                            sit magni minima libero, quae quasi natus
-                            voluptatum.
-                        </div>
+                    </div>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Voluptatibus sequi est hic delectus esse vero
+                        nisi velit eaque mollitia. Minus dolor quos aliquam
+                        fugiat quae in cupiditate rerum deserunt optio.
+                        Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit. Non repellendus ratione deserunt tempore,
+                        cumque similique dicta sed repudiandae aliquid
+                        pariatur neque magnam consequuntur, dolorum sapiente
+                        minus fugiat architecto atque aperiam! Lorem ipsum
+                        dolor, sit amet consectetur adipisicing elit. Quod
+                        possimus ipsa dolorem neque quo, odio corporis
+                        debitis. Blanditiis dolore ullam aperiam
+                        exercitationem, fugiat officiis corrupti nostrum
+                        facilis assumenda necessitatibus sint. Lorem ipsum
+                        dolor sit amet consectetur adipisicing elit.
+                        Aspernatur ipsam quis, nam earum, delectus voluptate
+                        molestiae sequi iste totam saepe eveniet dignissimos
+                        sit magni minima libero, quae quasi natus
+                        voluptatum.
                     </div>
                 </div>
             </div>
             <div class="about-text-wrapper-2">
                 <div class="about-headline home-padding">
-                    <div class="d-inline-block my-1 pb-2">
+                    <div class="d-inline-block my-1 pb-2 title">
                         <mask-text v-model="aboutHead" :delay="maskDelay">
-                            A LITTLE ABOUT ME.
+                            UNDER CONSTRUCTION
                         </mask-text>
+                    </div>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Voluptatibus sequi est hic delectus esse vero
+                        nisi velit eaque mollitia. Minus dolor quos aliquam
+                        fugiat quae in cupiditate rerum deserunt optio.
+                        Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit. Non repellendus ratione deserunt tempore,
+                        cumque similique dicta sed repudiandae aliquid
+                        pariatur neque magnam consequuntur, dolorum sapiente
+                        minus fugiat architecto atque aperiam! Lorem ipsum
+                        dolor, sit amet consectetur adipisicing elit. Quod
+                        possimus ipsa dolorem neque quo, odio corporis
+                        debitis. Blanditiis dolore ullam aperiam
+                        exercitationem, fugiat officiis corrupti nostrum
+                        facilis assumenda necessitatibus sint. Lorem ipsum
+                        dolor sit amet consectetur adipisicing elit.
+                        Aspernatur ipsam quis, nam earum, delectus voluptate
+                        molestiae sequi iste totam saepe eveniet dignissimos
+                        sit magni minima libero, quae quasi natus
+                        voluptatum.
                     </div>
                 </div>
             </div>
             <div class="about-text-wrapper-3">
                 <div class="about-headline home-padding">
-                    <div class="d-inline-block my-1 pb-2">
+                    <div class="d-inline-block my-1 pb-2 title">
                         <mask-text v-model="aboutHead" :delay="maskDelay">
-                            A LITTLE ABOUT ME.
+                            UNDER CONSTRUCTION
                         </mask-text>
+                    </div>
+                    <div>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Voluptatibus sequi est hic delectus esse vero
+                        nisi velit eaque mollitia. Minus dolor quos aliquam
+                        fugiat quae in cupiditate rerum deserunt optio.
+                        Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit. Non repellendus ratione deserunt tempore,
+                        cumque similique dicta sed repudiandae aliquid
+                        pariatur neque magnam consequuntur, dolorum sapiente
+                        minus fugiat architecto atque aperiam! Lorem ipsum
+                        dolor, sit amet consectetur adipisicing elit. Quod
+                        possimus ipsa dolorem neque quo, odio corporis
+                        debitis. Blanditiis dolore ullam aperiam
+                        exercitationem, fugiat officiis corrupti nostrum
+                        facilis assumenda necessitatibus sint. Lorem ipsum
+                        dolor sit amet consectetur adipisicing elit.
+                        Aspernatur ipsam quis, nam earum, delectus voluptate
+                        molestiae sequi iste totam saepe eveniet dignissimos
+                        sit magni minima libero, quae quasi natus
+                        voluptatum.
                     </div>
                 </div>
             </div>
@@ -129,8 +169,8 @@ export default {
         },
     },
     methods: {
-        goToRoute(path) {
-            this.$router.push(path);
+        goToRoute() {
+            // this.$router.push(path);
             this.hideCursor();
         },
     },
