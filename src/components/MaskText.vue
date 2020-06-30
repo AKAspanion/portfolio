@@ -20,7 +20,6 @@ export default {
     },
     data() {
         return {
-            state: true,
             showText: false,
             maskClass: 'mask--enter',
             maskTextId: `mask_${this.uid()}`,
@@ -55,23 +54,18 @@ export default {
     },
     methods: {
         animateText() {
-            if (this.state) {
-                if (this.showText) {
-                    return;
-                }
-                setTimeout(() => {
-                    this.maskClass = 'mask--show';
-                }, this.delay);
-                setTimeout(() => {
-                    this.showText = true;
-                }, this.delay + 600);
-                setTimeout(() => {
-                    this.maskClass = 'mask--leave';
-                }, this.delay + 700);
-            } else {
-                this.showText = true;
-                this.maskClass = 'mask--leave';
+            if (this.showText) {
+                return;
             }
+            setTimeout(() => {
+                this.maskClass = 'mask--show';
+            }, this.delay);
+            setTimeout(() => {
+                this.showText = true;
+            }, this.delay + 600);
+            setTimeout(() => {
+                this.maskClass = 'mask--leave';
+            }, this.delay + 700);
         },
         handleIntersection(o) {
             let intersectionObj = o[0];
@@ -79,21 +73,6 @@ export default {
             if (isIntersecting && target.id === this.maskTextId) {
                 this.animateText();
             }
-        },
-        setComponentState(component) {
-            let _component = component;
-            while (_component) {
-                if (
-                    _component.classList &&
-                    _component.classList.contains('main-view-3d')
-                ) {
-                    this.state = false;
-                    this.animateText();
-                    break;
-                }
-                _component = _component.parentElement;
-            }
-            this.state = true;
         },
         uid() {
             return Math.random()
@@ -104,7 +83,6 @@ export default {
     mounted() {
         let observer = new IntersectionObserver(this.handleIntersection);
         let target = document.getElementById(this.maskTextId);
-        this.setComponentState(target);
         observer.observe(target);
     },
 };

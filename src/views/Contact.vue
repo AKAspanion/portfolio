@@ -1,45 +1,36 @@
 <template>
     <div class="contact-container" :style="containerStyle">
-        <div class="contact-wrapper">
-            <div class="px-12 mx-2">To get in touch with me.</div>
-            <div class="contact-block pa-12">
-                <div class="d-flex align-center ml-2">
-                    <div style="width: 20vw;">Please email me:</div>
-                    <div style="width: calc(100% - 20vw);">EMail</div>
-                </div>
-                <div class="d-flex align-center ml-2">
-                    <div style="width: 20vw;">or call me at:</div>
-                    <div style="width: calc(100% - 20vw);">EMail</div>
-                </div>
-                <div class="d-flex align-start ml-2">
-                    <div style="width: 20vw;">
-                        or send me a message right now:
-                    </div>
-                    <div style="width: calc(100% - 20vw);">
-                        <div class="contact">
-                            <form id="form">
-                                <input
-                                    id="name"
-                                    type="text"
-                                    placeholder="NAME"
-                                />
-                                <input
-                                    id="email"
-                                    type="text"
-                                    placeholder="E-MAIL"
-                                />
-                                <textarea
-                                    id="message"
-                                    type="text"
-                                    placeholder="MESSAGE"
-                                ></textarea>
-                                <input
-                                    id="submit"
-                                    type="submit"
-                                    value="CONNECT!"
-                                />
-                            </form>
-                        </div>
+        <div class="contact-text pa-12">
+            Contact
+        </div>
+        <div class="px-12 mx-2">To get in touch with me.</div>
+        <div class="contact-block pa-12">
+            <div class="d-flex align-center ml-2">
+                <div style="width: 20vw;">Please email me:</div>
+                <div style="width: calc(100% - 20vw);">EMail</div>
+            </div>
+            <div class="d-flex align-center ml-2">
+                <div style="width: 20vw;">or call me at:</div>
+                <div style="width: calc(100% - 20vw);">EMail</div>
+            </div>
+            <div class="d-flex align-start ml-2">
+                <div style="width: 20vw;">or send me a message right now:</div>
+                <div style="width: calc(100% - 20vw);">
+                    <div class="contact">
+                        <form id="form">
+                            <input id="name" type="text" placeholder="NAME" />
+                            <input
+                                id="email"
+                                type="text"
+                                placeholder="E-MAIL"
+                            />
+                            <textarea
+                                id="message"
+                                type="text"
+                                placeholder="MESSAGE"
+                            ></textarea>
+                            <input id="submit" type="submit" value="CONNECT!" />
+                        </form>
                     </div>
                 </div>
             </div>
@@ -72,16 +63,8 @@ export default {
 .contact-container {
     width: 100vw;
     text-align: left;
-    height: 100%;
     min-height: 100vh;
     padding: 64px 10vw 64px 15vw;
-}
-.contact-wrapper {
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    align-items: flex-end;
-    justify-content: flex-end;
 }
 .contact-text {
     font-size: 10vw;

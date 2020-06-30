@@ -5,6 +5,11 @@
         <v-fade-transition>
             <div
                 v-show="scrollPosition > 1 && !hamPosition.top"
+                :style="
+                    `background: ${
+                        $vuetify.theme.dark ? '#000000' : '#FFFFFF'
+                    };`
+                "
                 class="nav-shadow"
             ></div>
         </v-fade-transition>
@@ -67,60 +72,6 @@ export default {
         },
         loaded() {
             return this.$store.getters.loaded;
-        },
-        mobile() {
-            return this.$vuetify.breakpoint.xsOnly;
-        },
-        dark() {
-            return this.$vuetify.theme.dark;
-        },
-    },
-    watch: {
-        scrollPosition: {
-            handler(v) {
-                if (v && this.mobile) {
-                    let offset = v + 80;
-                    let navShadow = document.querySelector('.nav-shadow');
-                    let container = document.querySelector(
-                        '.about-text-wrapper'
-                    );
-                    let container2 = document.querySelector(
-                        '.about-text-wrapper-2'
-                    );
-                    let container3 = document.querySelector(
-                        '.about-text-wrapper-3'
-                    );
-
-                    if (0 <= offset && offset <= container.offsetTop) {
-                        navShadow.style.backgroundColor = this.dark
-                            ? '#212121'
-                            : '#E0E0E0';
-                    } else if (
-                        container.offsetTop < offset &&
-                        offset <= container2.offsetTop
-                    ) {
-                        navShadow.style.backgroundColor = window.getComputedStyle(
-                            container
-                        ).backgroundColor;
-                    } else if (
-                        container2.offsetTop < offset &&
-                        offset <= container3.offsetTop
-                    ) {
-                        navShadow.style.backgroundColor = window.getComputedStyle(
-                            container2
-                        ).backgroundColor;
-                    } else {
-                        navShadow.style.backgroundColor = window.getComputedStyle(
-                            container3
-                        ).backgroundColor;
-                    }
-                    if (v > 1) {
-                        // navShadow.classList.add('elevation-3');
-                        navShadow.style.boxShadow = `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)`;
-                    }
-                }
-            },
-            immediate: true,
         },
     },
 };
@@ -186,6 +137,5 @@ body {
     height: 80px;
     z-index: 48;
     position: fixed;
-    transition: all 0.3s ease;
 }
 </style>
