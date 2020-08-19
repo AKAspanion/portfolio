@@ -1,0 +1,22 @@
+[
+  {
+    "id": 0,
+    "name": "home",
+    "tooltip": "go to home"
+  },
+  {
+    "id": 1,
+    "name": "about",
+    "tooltip": "know about me"
+  },
+  {
+    "id": 2,
+    "name": "experience",
+    "tooltip": "look into my experience"
+  },
+  {
+    "id": 3,
+    "name": "contact",
+    "tooltip": "get in touch with me"
+  }
+]

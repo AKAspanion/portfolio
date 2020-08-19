@@ -1,0 +1,20 @@
+[
+  {
+    "name": "Global IDs",
+    "role": "Web Software Developer",
+    "location": "Kolkata, India",
+    "time": "MAY 2019 - Present",
+    "img": "gids",
+    "link": "https://www.globalids.com/",
+    "desc": "As a Web/Software Developer, I build reusable web components and UI framework from scratch, for the product using Vue.js and Vuetify.js."
+  },
+  {
+    "name": "TCS",
+    "role": "Assistant Systems Engineer",
+    "location": "Kolkata, India",
+    "time": "JUNE 2018 - FEBRUARY 2019",
+    "img": "tcs",
+    "link": "https://www.tcs.com/",
+    "desc": "As a Trainee Developer, I built backend web application/REST API modules along with my team for the project using Node/Mongoose."
+  }
+]

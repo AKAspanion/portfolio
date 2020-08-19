@@ -1,8 +1,18 @@
 {
+    "hi": "Hi.",
+    "projects": {
+        "title": "Projects",
+        "go-to": "Visit site"
+    },
+    "experience": {
+        "title": "EXPERIENCE"
+    },
     "home": {
         "name": "ANKIT PANDIT",
-        "separator": "/",
-        "designation": "DEVELOPER"
+        "salute": "My name is",
+        "designation-1": "Software and",
+        "designation-2": "Web developer.",
+        "know-me": "KNOW ABOUT ME"
     },
     "about": {
         "name": "Ankit Kumar Pandit",
@@ -49,7 +59,6 @@
             ]
         }
     ],
-    "projects": [],
     "ui": {
         "common": {
             "fullStop": ".",

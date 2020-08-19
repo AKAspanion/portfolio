@@ -1,8 +1,18 @@
 {
+    "hi": "नमस्ते।",
+    "projects": {
+        "title": "प्रोजेक्ट्स",
+        "go-to": "जाये यंहा पे"
+    },
+    "experience": {
+        "title": "अनुभव"
+    },
     "home": {
+        "salute": "मेरा नाम है",
         "name": "अंकित पंडित",
-        "separator": "/",
-        "designation": "डेवलपर"
+        "designation-1": "सॉफ्टवेयर और",
+        "designation-2": "वेब डेवलपर।",
+        "know-me": "मेरे बारे में जाने"
     },
     "about": {
         "name": "अंकित कुमार पंडित",
@@ -49,7 +59,6 @@
             ]
         }
     ],
-    "projects": [],
     "ui": {
         "common": {
             "fullStop": "|",
