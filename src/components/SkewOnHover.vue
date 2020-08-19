@@ -83,8 +83,14 @@ export default {
 <style>
 .perspective-outer {
   perspective: 18px;
+  transition: transform 0.5s;
 }
 .perspective-inner {
   transition: transform 0.3s;
+}
+.perspective-outer:hover {
+  transform: scale(1.15);
+  transform-origin: center center;
+  transition: transform 0.5s;
 }
 </style>
