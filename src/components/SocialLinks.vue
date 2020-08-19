@@ -1,7 +1,7 @@
 <template>
     <div
         class="social-links-wrapper text-center"
-        :style="`bottom: ${bottom}px;left: ${left}px;`"
+        :style="`bottom: ${bottom}px;right: ${right}px;`"
     >
         <div
             class="link-logo-container-gh"
@@ -117,7 +117,7 @@ export default {
             type: Number,
             default: 24,
         },
-        left: {
+        right: {
             type: Number,
             default: 24,
         },
@@ -137,7 +137,7 @@ export default {
     margin: 0 auto;
     position: fixed;
     will-change: transform;
-    transition: transform 150ms ease-out, left 450ms ease;
+    transition: transform 150ms ease-out, right 450ms ease;
     transform: translate3d(0px, 0px, 0px);
 }
 .link-logo-container-fb,

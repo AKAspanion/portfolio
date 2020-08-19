@@ -5,13 +5,13 @@
     <v-fade-transition>
       <div v-show="scrollPosition > 1 && !hamPosition.top" :style="background" class="nav-shadow"></div>
     </v-fade-transition>
-    <spanion-logo :top="hamPosition.top" :left="loaded ? hamPosition.right : -80"></spanion-logo>
-    <scroll-progress :bottom="hamPosition.top" :right="loaded ? hamPosition.right : -80"></scroll-progress>
+    <!-- <spanion-logo :top="hamPosition.top" :left="loaded ? hamPosition.right : -80"></spanion-logo> -->
+    <!-- <scroll-progress :bottom="hamPosition.top" :right="loaded ? hamPosition.right : -80"></scroll-progress> -->
     <menu-hamburger :top="hamPosition.top" :right="loaded ? hamPosition.right : -80"></menu-hamburger>
     <social-links
       v-if="hamPosition.top"
       :bottom="hamPosition.top"
-      :left="loaded ? hamPosition.right : -80"
+      :right="loaded ? hamPosition.right : -80"
     ></social-links>
     <transition name="page" mode="out-in">
       <router-view></router-view>
@@ -22,18 +22,16 @@
 <script>
 import NavMenu from "@/views/NavMenu.vue";
 import CursorAnimated from "@/components/CursorAnimated.vue";
-import ScrollProgress from "@/components/ScrollProgress.vue";
-import SpanionLogo from "@/components/SpanionLogo.vue";
+// import ScrollProgress from "@/components/ScrollProgress.vue";
+// import SpanionLogo from "@/components/SpanionLogo.vue";
 import SocialLinks from "@/components/SocialLinks.vue";
 import MenuHamburger from "@/components/MenuHamburger.vue";
 export default {
   name: "app",
   components: {
     NavMenu,
-    SpanionLogo,
     SocialLinks,
     CursorAnimated,
-    ScrollProgress,
     MenuHamburger,
   },
   computed: {

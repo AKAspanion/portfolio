@@ -1,65 +1,84 @@
 <template>
   <div class="home-container" :style="containerStyle">
-    <div class="home-text-wrapper fixed-wrapper">
+    <div class="home-text-wrapper">
       <div class="home-text-container home-padding">
-        <div class="d-inline-block my-1 pb-2">Hi.</div>
-        <br />
-        <div class="d-inline-block my-1 pb-2">
-          <mask-text :delay="delay(1000)">My name is,</mask-text>
-        </div>
-        <br />
-        <div class="d-inline-block my-1 pb-2">
-          <mask-text :delay="delay(2500)">
-            <hover-text
-              text="know about me"
-              classes="home-text--name"
-              link="images/profile.jpeg"
-              @click="goToRoute('/about')"
-            >Ankit Pandit</hover-text>-
-          </mask-text>
-        </div>
-        <br />
-        <div class="d-inline-block my-1 pb-2">
-          <mask-text :delay="delay(3000)">Software and</mask-text>
-        </div>
-        <br />
-        <div class="d-inline-block my-1 pb-2">
-          <mask-text :delay="delay(3500)">Web developer.</mask-text>
+        <div class="fixed-wrapper">
+          <div class="d-inline-block my-1 pb-2">Hi.</div>
+          <br />
+          <div class="d-inline-block my-1 pb-2">
+            <mask-text :delay="delay(1000)">My name is,</mask-text>
+          </div>
+          <br />
+          <div class="d-inline-block my-1 pb-2">
+            <mask-text :delay="delay(2500)">
+              <hover-text
+                text="know about me"
+                classes="home-text--name"
+                link="images/profile.jpeg"
+                @click="goToRoute('/about')"
+              >Ankit Pandit</hover-text>-
+            </mask-text>
+          </div>
+          <br />
+          <div class="d-inline-block my-1 pb-2">
+            <mask-text :delay="delay(3000)">Software and</mask-text>
+          </div>
+          <br />
+          <div class="d-inline-block my-1 pb-2">
+            <mask-text :delay="delay(3500)">Web developer.</mask-text>
+          </div>
         </div>
       </div>
     </div>
     <template v-if="loaded">
       <div class="about-text-wrapper">
-        <div class="about-headline fixed-wrapper home-padding">
-          <div class="text-center mb-2">
-            <div class="d-inline-block mb-12 display-2 font-weight-light">
-              <mask-text v-model="aboutHead" :delay="maskDelay">PROJECTS</mask-text>
+        <div class="about-headline home-padding">
+          <div class="fixed-wrapper">
+            <div class="text-center mb-2 mt-6">
+              <div class="d-inline-block mb-12 display-2 font-weight-light">
+                <mask-text v-model="aboutHead" :delay="maskDelay">PROJECTS</mask-text>
+              </div>
+            </div>
+            <div class="work-grid">
+              <div
+                class="work-grid__item"
+                v-for="({name, img, link, icons}, i) in expItems"
+                :key="i"
+              >
+                <div class="work-grid__img">
+                  <img :src="`images/${img}.png`" />
+                </div>
+                <div>
+                  <div class="d-inline-block pt-4 title font-weight-medium">
+                    <mask-text v-model="aboutHead" :delay="maskDelay">{{name}}</mask-text>
+                  </div>
+                </div>
+                <div class="work-grid__view-link title">
+                  <hover-text class="text-center" text="Go to project" @click="navigateTo(link)">
+                    VIEW
+                    <br />&rarr;
+                  </hover-text>
+                </div>
+                <span v-for="(icon, i) in icons" :key="i">
+                  <v-icon
+                    small
+                    :color="icon.color"
+                  >{{ icon.icon.startsWith('M') ? icon.icon : `mdi-${icon.icon}`}}</v-icon>
+                  <span class="ml-2 mr-4 overline">{{icon.name}}</span>
+                </span>
+                <div class="work-grid__hover-item"></div>
+              </div>
             </div>
           </div>
-          <div class="work-grid">
-            <div class="work-grid__item" v-for="({name, img, link, icons}, i) in expItems" :key="i">
-              <div class="work-grid__img">
-                <!-- <img :src="`images/${img}.png`" /> -->
+        </div>
+      </div>
+      <div class="exp-text-wrapper">
+        <div class="home-padding">
+          <div class="fixed-wrapper">
+            <div class="text-center mb-2 mt-6">
+              <div class="d-inline-block mb-12 display-2 font-weight-light">
+                <mask-text v-model="aboutHead" :delay="maskDelay">EXPERIENCE</mask-text>
               </div>
-              <div>
-                <div class="d-inline-block pt-4 title font-weight-medium">
-                  <mask-text v-model="aboutHead" :delay="maskDelay">{{name}}</mask-text>
-                </div>
-              </div>
-              <div class="work-grid__view-link title">
-                <hover-text class="text-center" text="View more details " @click="navigateTo(link)">
-                  VIEW
-                  <br />&rarr;
-                </hover-text>
-              </div>
-              <span v-for="(icon, i) in icons" :key="i">
-                <v-icon
-                  small
-                  :color="icon.color"
-                >{{ icon.icon.startsWith('M') ? icon.icon : `mdi-${icon.icon}`}}</v-icon>
-                <span class="ml-2 mr-4 overline">{{icon.name}}</span>
-              </span>
-              <div class="work-grid__hover-item"></div>
             </div>
           </div>
         </div>
@@ -84,8 +103,8 @@ export default {
       expItems: [
         {
           name: "UI NEUMORPHISM",
-          img: "neu-fs",
-          link: "",
+          img: "neu",
+          link: "https://akaspanion.github.io/ui-neumorphism/",
           icons: [
             { name: "React", icon: "react", color: "#61DAFB" },
             {
@@ -97,8 +116,8 @@ export default {
         },
         {
           name: "FLASH CARDS",
-          img: "ss/flash",
-          link: "",
+          img: "fc",
+          link: "https://spanion-flash-cards.web.app/",
           icons: [
             { name: "Vue", icon: "vuejs", color: "#4FC08D" },
             { name: "Vuetify", icon: "vuetify", color: "#1867C0" },
@@ -108,8 +127,8 @@ export default {
         },
         {
           name: "TASK MANAGER",
-          img: "ss/task",
-          link: "",
+          img: "task",
+          link: "https://spanion-todo.web.app/",
           icons: [
             { name: "Vue", icon: "vuejs", color: "#4FC08D" },
             { name: "Vuetify", icon: "vuetify", color: "#1867C0" },
@@ -118,8 +137,8 @@ export default {
         },
         {
           name: "LENS-N-LIGHT",
-          img: "lnl-fs",
-          link: "",
+          img: "lnl",
+          link: "https://lens-n-light.web.app/",
           icons: [
             { name: "Vue", icon: "vuejs", color: "#4FC08D" },
             { name: "Vuetify", icon: "vuetify", color: "#1867C0" },
@@ -127,8 +146,8 @@ export default {
         },
         {
           name: "NOTES APP",
-          img: "lnl-fs",
-          link: "",
+          img: "note",
+          link: "https://ankitkumarspanion.github.io/iarani-test/",
           icons: [
             { name: "React", icon: "react", color: "#61DAFB" },
             {
@@ -147,8 +166,8 @@ export default {
         },
         {
           name: "FEATURE PHONE CLONE",
-          img: "lnl-fs",
-          link: "",
+          img: "phone",
+          link: "https://ankitkumarspanion.github.io/ownerstown-test-app/",
           icons: [
             {
               name: "HTML",
@@ -166,8 +185,8 @@ export default {
         },
         {
           name: "VIDEO CHAT ROOM",
-          img: "lnl-fs",
-          link: "",
+          img: "chat",
+          link: "https://spanion-video-chat.herokuapp.com/",
           icons: [
             { name: "Node", icon: "nodejs", color: "#339933" },
             {
@@ -180,8 +199,8 @@ export default {
         },
         {
           name: "SNAKE GAME",
-          img: "snake-fs",
-          link: "",
+          img: "snake",
+          link: "https://akaspanion.github.io/react-redux-snake/",
           icons: [
             { name: "React", icon: "react", color: "#61DAFB" },
             {
@@ -193,9 +212,9 @@ export default {
           ],
         },
         {
-          name: "WEBSITE FOR A STARTUP",
-          img: "snake-fs",
-          link: "",
+          name: "DOG TRAINING STARTUP WEBSITE",
+          img: "paw",
+          link: "https://akaspanion.github.io/Dog-Training-Academy-Start-Up",
           icons: [
             {
               name: "HTML",
@@ -235,7 +254,7 @@ export default {
       return this.$store.getters.scrollPos;
     },
     loaded() {
-      return true;
+      return this.$store.getters.loaded;
     },
   },
   methods: {
@@ -245,6 +264,9 @@ export default {
     },
     delay(time) {
       return this.loaded ? this.maskDelay : this.maskDelay + time;
+    },
+    navigateTo(link) {
+      window.open(link, "_blank");
     },
   },
   mounted() {
@@ -261,7 +283,7 @@ export default {
   min-height: 100vh;
 }
 .home-padding {
-  padding: 64px 18vw;
+  padding: 64px max(11vw, 128px);
 }
 .home-text-wrapper {
   display: flex;
@@ -271,9 +293,10 @@ export default {
 }
 .fixed-wrapper {
   margin: 0 auto;
-  /* max-width: 1280px; */
+  max-width: 1220px;
 }
 .home-text-container {
+  width: 100%;
   font-size: 8vw;
   line-height: 7vw;
   overflow: hidden;
@@ -295,7 +318,7 @@ export default {
 .theme--dark .about-text-wrapper {
   background: #424242;
 }
-.theme--dark .about-text-wrapper-2 {
+.theme--dark .exp-text-wrapper {
   background: #616161;
 }
 .theme--dark .about-text-wrapper-3 {
@@ -304,7 +327,7 @@ export default {
 .theme--light .about-text-wrapper {
   background: #eeeeee;
 }
-.theme--light .about-text-wrapper-2 {
+.theme--light .exp-text-wrapper {
   background: #f5f5f5;
 }
 .theme--light .about-text-wrapper-3 {
@@ -312,15 +335,10 @@ export default {
 }
 
 .work-grid {
-  display: flex;
-  flex-wrap: wrap;
-  cursor: pointer;
-  margin: 0px -24px;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
 }
 .work-grid__img {
-  width: 360px;
   height: 203px;
   overflow: hidden;
   object-fit: cover;
@@ -331,7 +349,7 @@ export default {
   position: relative;
 }
 img {
-  width: 360px;
+  width: 100%;
   height: 203px;
   object-fit: cover;
 }
@@ -348,7 +366,7 @@ img {
   top: 0;
   z-index: 1;
   opacity: 0.1;
-  width: 360px;
+  width: 100%;
   height: 203px;
   position: absolute;
   pointer-events: none;
