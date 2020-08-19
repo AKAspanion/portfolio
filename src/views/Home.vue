@@ -31,7 +31,7 @@
       </div>
     </div>
     <template v-if="loaded">
-      <div class="about-text-wrapper">
+      <div class="project-text-wrapper pb-8">
         <div class="about-headline home-padding">
           <div class="fixed-wrapper">
             <div class="text-center mb-2 mt-6">
@@ -42,7 +42,7 @@
             <div class="work-grid">
               <div
                 class="work-grid__item"
-                v-for="({name, img, link, icons}, i) in expItems"
+                v-for="({name, img, link, icons}, i) in projectItems"
                 :key="i"
               >
                 <skew-on-hover classes="work-grid__img">
@@ -73,12 +73,57 @@
           </div>
         </div>
       </div>
-      <div class="exp-text-wrapper">
+      <div class="exp-text-wrapper pb-8">
         <div class="home-padding">
           <div class="fixed-wrapper">
             <div class="text-center mb-2 mt-6">
               <div class="d-inline-block mb-12 display-2 font-weight-light">
                 <mask-text v-model="aboutHead" :delay="maskDelay">EXPERIENCE</mask-text>
+              </div>
+            </div>
+            <div class="exp-grid">
+              <div
+                :key="i"
+                class="exp-grid__item"
+                v-for="({name, role, time,img, location, desc}, i) in expItems"
+              >
+                <div>
+                  <div class="d-inline-block font-weight-light display-1">
+                    <hover-text
+                      :text="name"
+                      classes="home-text--name"
+                      :link="`images/${img}.png`"
+                      @click="goToRoute('/about')"
+                    >{{name}}</hover-text>,
+                  </div>&nbsp;
+                  <div class="d-inline-block headline font-weight-thin">{{role}}</div>
+                </div>
+                <div class="pt-3 title font-weight-light">{{desc}}</div>
+                <div class="pt-8 font-weight-light">{{location}}</div>
+                <div class="overline">{{time}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-text-wrapper">
+        <div class="home-padding">
+          <div class="fixed-wrapper">
+            <div class="text-center mb-2 mt-6">
+              <div class="d-inline-block mb-12 display-2 font-weight-light">
+                <mask-text v-model="aboutHead" :delay="maskDelay">SKILLS</mask-text>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="skills-text-wrapper">
+        <div class="home-padding">
+          <div class="fixed-wrapper">
+            <div class="text-center mb-2 mt-6">
+              <div class="d-inline-block mb-12 display-2 font-weight-light">
+                <mask-text v-model="aboutHead" :delay="maskDelay">CONTACT</mask-text>
               </div>
             </div>
           </div>
@@ -104,6 +149,26 @@ export default {
       aboutHead: true,
       showLandingMask: true,
       expItems: [
+        {
+          name: 'Global IDs',
+          role: 'Web Software Developer',
+          location: 'Kolkata, India',
+          time: 'MAY 2019 - Present',
+          img: 'gids',
+          desc:
+            'As a Web/Software Developer, I build reusable web components and UI framework from scratch, for the product using Vue.js and Vuetify.js.',
+        },
+        {
+          name: 'TCS',
+          role: 'Assistant Systems Engineer',
+          location: 'Kolkata, India',
+          time: 'JUNE 2018 - FEBRUARY 2019',
+          img: 'tcs',
+          desc:
+            'As a Trainee Developer, I built backend web application/REST API modules along with my team for the project using Node/Mongoose.',
+        },
+      ],
+      projectItems: [
         {
           name: 'UI NEUMORPHISM',
           img: 'neu',
@@ -257,7 +322,8 @@ export default {
       return this.$store.getters.scrollPos;
     },
     loaded() {
-      return this.$store.getters.loaded;
+      // return this.$store.getters.loaded;
+      return true;
     },
   },
   methods: {
@@ -275,10 +341,19 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$store.dispatch('LOADED', true);
-    }, 4000);
+      // }, 4000);
+    }, 0);
   },
 };
 </script>
+<style >
+.work-grid__img {
+  height: 203px;
+  object-fit: cover;
+  position: relative;
+  background: #d9d9d9;
+}
+</style>
 <style scoped>
 .home-container {
   width: 100vw;
@@ -318,37 +393,32 @@ export default {
   transform: translate3d(0px, 96px, 0px) rotate(5deg);
   transition: transform 1s ease;
 }
-.theme--dark .about-text-wrapper {
+.theme--dark .project-text-wrapper {
   background: #424242;
 }
 .theme--dark .exp-text-wrapper {
   background: #616161;
 }
-.theme--dark .about-text-wrapper-3 {
+.theme--dark .contact-text-wrapper {
   background: #757575;
 }
-.theme--light .about-text-wrapper {
+.theme--light .project-text-wrapper {
   background: #eeeeee;
 }
 .theme--light .exp-text-wrapper {
   background: #f5f5f5;
 }
-.theme--light .about-text-wrapper-3 {
+.theme--light .contact-text-wrapper {
   background: #fafafa;
 }
 
-.work-grid {
+.work-grid,
+.exp-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
-.work-grid__img {
-  height: 203px;
-  object-fit: cover;
-  position: relative;
-  background: #d9d9d9;
-}
 .work-grid__item {
-  margin: 48px 24px;
+  padding: 48px 24px;
   position: relative;
 }
 img {
@@ -368,7 +438,7 @@ img {
 .work-grid__hover-item {
   top: 0;
   z-index: 1;
-  opacity: 0.1;
+  opacity: 0;
   width: 100%;
   height: 203px;
   position: absolute;
@@ -385,6 +455,10 @@ img {
   position: absolute;
   transition: all 0.3s ease-in-out;
   transform: translate3d(-50%, 100%, 0px);
+}
+
+.exp-grid__item {
+  padding: 48px 24px;
 }
 @media only screen and (max-width: 600px) {
   .home-padding {
