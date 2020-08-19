@@ -1,6 +1,6 @@
 <template>
   <div class="home-container" :style="containerStyle">
-    <div class="home-text-wrapper">
+    <div class="home-text-wrapper fixed-wrapper">
       <div class="home-text-container home-padding">
         <div class="d-inline-block my-1 pb-2">Hi.</div>
         <br />
@@ -30,86 +30,37 @@
     </div>
     <template v-if="loaded">
       <div class="about-text-wrapper">
-        <div class="about-headline home-padding">
-          <div class="d-inline-block my-1 pb-2 title">
-            <mask-text v-model="aboutHead" :delay="maskDelay">UNDER CONSTRUCTION</mask-text>
+        <div class="about-headline fixed-wrapper home-padding">
+          <div class="text-center mb-2">
+            <div class="d-inline-block mb-12 display-2 font-weight-light">
+              <mask-text v-model="aboutHead" :delay="maskDelay">PROJECTS</mask-text>
+            </div>
           </div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing
-            elit. Voluptatibus sequi est hic delectus esse vero
-            nisi velit eaque mollitia. Minus dolor quos aliquam
-            fugiat quae in cupiditate rerum deserunt optio.
-            Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Non repellendus ratione deserunt tempore,
-            cumque similique dicta sed repudiandae aliquid
-            pariatur neque magnam consequuntur, dolorum sapiente
-            minus fugiat architecto atque aperiam! Lorem ipsum
-            dolor, sit amet consectetur adipisicing elit. Quod
-            possimus ipsa dolorem neque quo, odio corporis
-            debitis. Blanditiis dolore ullam aperiam
-            exercitationem, fugiat officiis corrupti nostrum
-            facilis assumenda necessitatibus sint. Lorem ipsum
-            dolor sit amet consectetur adipisicing elit.
-            Aspernatur ipsam quis, nam earum, delectus voluptate
-            molestiae sequi iste totam saepe eveniet dignissimos
-            sit magni minima libero, quae quasi natus
-            voluptatum.
-          </div>
-        </div>
-      </div>
-      <div class="about-text-wrapper-2">
-        <div class="about-headline home-padding">
-          <div class="d-inline-block my-1 pb-2 title">
-            <mask-text v-model="aboutHead" :delay="maskDelay">UNDER CONSTRUCTION</mask-text>
-          </div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing
-            elit. Voluptatibus sequi est hic delectus esse vero
-            nisi velit eaque mollitia. Minus dolor quos aliquam
-            fugiat quae in cupiditate rerum deserunt optio.
-            Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Non repellendus ratione deserunt tempore,
-            cumque similique dicta sed repudiandae aliquid
-            pariatur neque magnam consequuntur, dolorum sapiente
-            minus fugiat architecto atque aperiam! Lorem ipsum
-            dolor, sit amet consectetur adipisicing elit. Quod
-            possimus ipsa dolorem neque quo, odio corporis
-            debitis. Blanditiis dolore ullam aperiam
-            exercitationem, fugiat officiis corrupti nostrum
-            facilis assumenda necessitatibus sint. Lorem ipsum
-            dolor sit amet consectetur adipisicing elit.
-            Aspernatur ipsam quis, nam earum, delectus voluptate
-            molestiae sequi iste totam saepe eveniet dignissimos
-            sit magni minima libero, quae quasi natus
-            voluptatum.
-          </div>
-        </div>
-      </div>
-      <div class="about-text-wrapper-3">
-        <div class="about-headline home-padding">
-          <div class="d-inline-block my-1 pb-2 title">
-            <mask-text v-model="aboutHead" :delay="maskDelay">UNDER CONSTRUCTION</mask-text>
-          </div>
-          <div>
-            Lorem ipsum dolor sit amet, consectetur adipisicing
-            elit. Voluptatibus sequi est hic delectus esse vero
-            nisi velit eaque mollitia. Minus dolor quos aliquam
-            fugiat quae in cupiditate rerum deserunt optio.
-            Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Non repellendus ratione deserunt tempore,
-            cumque similique dicta sed repudiandae aliquid
-            pariatur neque magnam consequuntur, dolorum sapiente
-            minus fugiat architecto atque aperiam! Lorem ipsum
-            dolor, sit amet consectetur adipisicing elit. Quod
-            possimus ipsa dolorem neque quo, odio corporis
-            debitis. Blanditiis dolore ullam aperiam
-            exercitationem, fugiat officiis corrupti nostrum
-            facilis assumenda necessitatibus sint. Lorem ipsum
-            dolor sit amet consectetur adipisicing elit.
-            Aspernatur ipsam quis, nam earum, delectus voluptate
-            molestiae sequi iste totam saepe eveniet dignissimos
-            sit magni minima libero, quae quasi natus
-            voluptatum.
+          <div class="work-grid">
+            <div class="work-grid__item" v-for="({name, img, link, icons}, i) in expItems" :key="i">
+              <div class="work-grid__img">
+                <!-- <img :src="`images/${img}.png`" /> -->
+              </div>
+              <div>
+                <div class="d-inline-block pt-4 title font-weight-medium">
+                  <mask-text v-model="aboutHead" :delay="maskDelay">{{name}}</mask-text>
+                </div>
+              </div>
+              <div class="work-grid__view-link title">
+                <hover-text class="text-center" text="View more details " @click="navigateTo(link)">
+                  VIEW
+                  <br />&rarr;
+                </hover-text>
+              </div>
+              <span v-for="(icon, i) in icons" :key="i">
+                <v-icon
+                  small
+                  :color="icon.color"
+                >{{ icon.icon.startsWith('M') ? icon.icon : `mdi-${icon.icon}`}}</v-icon>
+                <span class="ml-2 mr-4 overline">{{icon.name}}</span>
+              </span>
+              <div class="work-grid__hover-item"></div>
+            </div>
           </div>
         </div>
       </div>
@@ -130,6 +81,142 @@ export default {
       maskDelay: 0,
       aboutHead: true,
       showLandingMask: true,
+      expItems: [
+        {
+          name: "UI NEUMORPHISM",
+          img: "neu-fs",
+          link: "",
+          icons: [
+            { name: "React", icon: "react", color: "#61DAFB" },
+            {
+              name: "Component Library",
+              icon: "notebook-multiple",
+              color: "#2979FF",
+            },
+          ],
+        },
+        {
+          name: "FLASH CARDS",
+          img: "ss/flash",
+          link: "",
+          icons: [
+            { name: "Vue", icon: "vuejs", color: "#4FC08D" },
+            { name: "Vuetify", icon: "vuetify", color: "#1867C0" },
+            { name: "Android", icon: "android", color: "#3DDC84" },
+            { name: "Firebase", icon: "firebase", color: "#FFCA28" },
+          ],
+        },
+        {
+          name: "TASK MANAGER",
+          img: "ss/task",
+          link: "",
+          icons: [
+            { name: "Vue", icon: "vuejs", color: "#4FC08D" },
+            { name: "Vuetify", icon: "vuetify", color: "#1867C0" },
+            { name: "Firebase", icon: "firebase", color: "#FFCA28" },
+          ],
+        },
+        {
+          name: "LENS-N-LIGHT",
+          img: "lnl-fs",
+          link: "",
+          icons: [
+            { name: "Vue", icon: "vuejs", color: "#4FC08D" },
+            { name: "Vuetify", icon: "vuetify", color: "#1867C0" },
+          ],
+        },
+        {
+          name: "NOTES APP",
+          img: "lnl-fs",
+          link: "",
+          icons: [
+            { name: "React", icon: "react", color: "#61DAFB" },
+            {
+              name: "Redux",
+              icon:
+                "M16.633 16.504c.869-.075 1.543-.84 1.499-1.754-.046-.914-.795-1.648-1.708-1.648h-.061c-.943.031-1.678.824-1.648 1.769.03.479.226.869.494 1.153-1.048 2.038-2.621 3.536-5.004 4.795-1.603.838-3.296 1.154-4.944.929-1.378-.194-2.456-.81-3.116-1.798-.988-1.499-1.078-3.116-.255-4.734.601-1.169 1.499-2.023 2.099-2.443-.15-.389-.33-1.048-.42-1.542-4.436 3.177-3.985 7.521-2.637 9.574 1.004 1.498 3.057 2.456 5.304 2.456.599 0 1.229-.044 1.843-.194 3.896-.749 6.847-3.086 8.54-6.532l.014-.031zM21.981 12.758c-2.321-2.727-5.738-4.225-9.634-4.225h-.51c-.253-.554-.837-.899-1.497-.899h-.045c-.943 0-1.678.81-1.647 1.753.03.898.794 1.648 1.708 1.648h.074c.675-.03 1.259-.45 1.498-1.049h.555c2.309 0 4.495.674 6.488 1.992 1.527 1.004 2.622 2.322 3.236 3.896.538 1.288.509 2.547-.045 3.597-.854 1.647-2.293 2.517-4.195 2.517-1.199 0-2.367-.375-2.967-.644-.359.298-.959.793-1.394 1.093 1.318.598 2.652.943 3.94.943 2.922 0 5.093-1.647 5.918-3.236.898-1.798.824-4.824-1.469-7.416l-.014.03zM6.49 17.042c.029.899.793 1.648 1.708 1.648h.06c.959-.03 1.693-.823 1.648-1.768 0-.899-.779-1.647-1.693-1.647h-.061c-.06 0-.149 0-.225.029-1.243-2.098-1.768-4.346-1.572-6.771.119-1.828.719-3.417 1.797-4.735.899-1.124 2.592-1.679 3.746-1.708 3.236-.061 4.585 3.971 4.689 5.574l1.498.449c-.345-4.914-3.4-7.492-6.322-7.492-2.742 0-5.273 1.993-6.293 4.915-1.393 3.896-.479 7.641 1.229 10.638-.149.195-.239.539-.209.868z",
+              color: "#764ABC",
+            },
+            {
+              name: "Bootstrap",
+              icon:
+                "M20 0H4C1.793.006.006 1.793 0 4v16c0 2.2 1.8 4 4 4h16c2.2 0 4-1.8 4-4V4c0-2.2-1.8-4-4-4zm-2.187 16.855c-.2.482-.517.907-.923 1.234-.42.34-.952.62-1.607.82-.654.203-1.432.305-2.333.305H6.518v-14h6.802c1.258 0 2.266.283 3.02.86.76.58 1.138 1.444 1.138 2.61 0 .705-.172 1.31-.518 1.81-.344.497-.84.886-1.48 1.156v.046c.854.18 1.515.585 1.95 1.215s.658 1.426.658 2.387c0 .538-.104 1.05-.3 1.528l.025.027zm-2.776-3.45c-.41-.375-.986-.558-1.73-.558H8.985v4.368h4.334c.74 0 1.32-.192 1.73-.58.41-.385.62-.934.62-1.64-.007-.69-.21-1.224-.62-1.59h-.017zm-.6-2.823c.396-.336.59-.817.59-1.444 0-.704-.175-1.204-.53-1.49-.352-.285-.86-.433-1.528-.433h-4v3.863h4c.583 0 1.08-.17 1.464-.496z",
+              color: "#563D7C",
+            },
+          ],
+        },
+        {
+          name: "FEATURE PHONE CLONE",
+          img: "lnl-fs",
+          link: "",
+          icons: [
+            {
+              name: "HTML",
+              icon:
+                "M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z",
+              color: "#E34F26",
+            },
+            {
+              name: "CSS",
+              icon:
+                "M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z",
+              color: "#1572B6",
+            },
+          ],
+        },
+        {
+          name: "VIDEO CHAT ROOM",
+          img: "lnl-fs",
+          link: "",
+          icons: [
+            { name: "Node", icon: "nodejs", color: "#339933" },
+            {
+              name: "Socket.io",
+              icon:
+                "M11.936.016a12.17 12.17 0 0 0-2.975.378C4.281 1.557.567 5.797.091 10.604c-.59 4.549 1.708 9.286 5.644 11.635 3.861 2.418 9.093 2.32 12.874-.223 3.397-2.206 5.512-6.228 5.386-10.285-.058-4.016-2.31-7.917-5.759-9.98C16.354.59 14.143.007 11.936.016zm-.063 1.696c4.945-.007 9.789 3.814 10.282 8.925.945 5.66-3.753 11.413-9.488 11.58-5.454.544-10.725-4.08-10.88-9.557C1.38 8.226 4.303 3.825 8.485 2.36a9.113 9.113 0 0 1 3.388-.647zm5.091 3.225c-2.687 2.085-5.26 4.308-7.889 6.457 1.203.017 2.412.016 3.621.01 1.41-2.165 2.859-4.301 4.268-6.467zm-5.665 7.654c-1.41 2.166-2.86 4.309-4.27 6.474 2.693-2.08 5.255-4.32 7.902-6.456a255.425 255.425 0 0 0-3.632-.018z",
+              color: "#010101",
+            },
+          ],
+        },
+        {
+          name: "SNAKE GAME",
+          img: "snake-fs",
+          link: "",
+          icons: [
+            { name: "React", icon: "react", color: "#61DAFB" },
+            {
+              name: "Redux",
+              icon:
+                "M16.633 16.504c.869-.075 1.543-.84 1.499-1.754-.046-.914-.795-1.648-1.708-1.648h-.061c-.943.031-1.678.824-1.648 1.769.03.479.226.869.494 1.153-1.048 2.038-2.621 3.536-5.004 4.795-1.603.838-3.296 1.154-4.944.929-1.378-.194-2.456-.81-3.116-1.798-.988-1.499-1.078-3.116-.255-4.734.601-1.169 1.499-2.023 2.099-2.443-.15-.389-.33-1.048-.42-1.542-4.436 3.177-3.985 7.521-2.637 9.574 1.004 1.498 3.057 2.456 5.304 2.456.599 0 1.229-.044 1.843-.194 3.896-.749 6.847-3.086 8.54-6.532l.014-.031zM21.981 12.758c-2.321-2.727-5.738-4.225-9.634-4.225h-.51c-.253-.554-.837-.899-1.497-.899h-.045c-.943 0-1.678.81-1.647 1.753.03.898.794 1.648 1.708 1.648h.074c.675-.03 1.259-.45 1.498-1.049h.555c2.309 0 4.495.674 6.488 1.992 1.527 1.004 2.622 2.322 3.236 3.896.538 1.288.509 2.547-.045 3.597-.854 1.647-2.293 2.517-4.195 2.517-1.199 0-2.367-.375-2.967-.644-.359.298-.959.793-1.394 1.093 1.318.598 2.652.943 3.94.943 2.922 0 5.093-1.647 5.918-3.236.898-1.798.824-4.824-1.469-7.416l-.014.03zM6.49 17.042c.029.899.793 1.648 1.708 1.648h.06c.959-.03 1.693-.823 1.648-1.768 0-.899-.779-1.647-1.693-1.647h-.061c-.06 0-.149 0-.225.029-1.243-2.098-1.768-4.346-1.572-6.771.119-1.828.719-3.417 1.797-4.735.899-1.124 2.592-1.679 3.746-1.708 3.236-.061 4.585 3.971 4.689 5.574l1.498.449c-.345-4.914-3.4-7.492-6.322-7.492-2.742 0-5.273 1.993-6.293 4.915-1.393 3.896-.479 7.641 1.229 10.638-.149.195-.239.539-.209.868z",
+              color: "#764ABC",
+            },
+          ],
+        },
+        {
+          name: "WEBSITE FOR A STARTUP",
+          img: "snake-fs",
+          link: "",
+          icons: [
+            {
+              name: "HTML",
+              icon:
+                "M1.5 0h21l-1.91 21.563L11.977 24l-8.564-2.438L1.5 0zm7.031 9.75l-.232-2.718 10.059.003.23-2.622L5.412 4.41l.698 8.01h9.126l-.326 3.426-2.91.804-2.955-.81-.188-2.11H6.248l.33 4.171L12 19.351l5.379-1.443.744-8.157H8.531z",
+              color: "#E34F26",
+            },
+            {
+              name: "CSS",
+              icon:
+                "M1.5 0h21l-1.91 21.563L11.977 24l-8.565-2.438L1.5 0zm17.09 4.413L5.41 4.41l.213 2.622 10.125.002-.255 2.716h-6.64l.24 2.573h6.182l-.366 3.523-2.91.804-2.956-.81-.188-2.11h-2.61l.29 3.855L12 19.288l5.373-1.53L18.59 4.414z",
+              color: "#1572B6",
+            },
+            {
+              name: "jQuery",
+              icon: "jquery",
+              color: "#0769AD",
+            },
+          ],
+        },
+      ],
     };
   },
   computed: {
@@ -148,7 +235,7 @@ export default {
       return this.$store.getters.scrollPos;
     },
     loaded() {
-      return this.$store.getters.loaded;
+      return true;
     },
   },
   methods: {
@@ -177,10 +264,14 @@ export default {
   padding: 64px 18vw;
 }
 .home-text-wrapper {
-  min-height: 100vh;
   display: flex;
+  min-height: 100vh;
   align-items: flex-end;
   justify-content: start;
+}
+.fixed-wrapper {
+  margin: 0 auto;
+  /* max-width: 1280px; */
 }
 .home-text-container {
   font-size: 8vw;
@@ -191,7 +282,6 @@ export default {
   font-family: Roboto, sans-serif !important;
 }
 .home-text--name {
-  cursor: pointer;
   font-weight: 300 !important;
   transition: transform 150ms ease-out;
 }
@@ -219,6 +309,61 @@ export default {
 }
 .theme--light .about-text-wrapper-3 {
   background: #fafafa;
+}
+
+.work-grid {
+  display: flex;
+  flex-wrap: wrap;
+  cursor: pointer;
+  margin: 0px -24px;
+  align-items: center;
+  justify-content: space-between;
+}
+.work-grid__img {
+  width: 360px;
+  height: 203px;
+  overflow: hidden;
+  object-fit: cover;
+}
+.work-grid__item {
+  margin: 48px 24px;
+  overflow: hidden;
+  position: relative;
+}
+img {
+  width: 360px;
+  height: 203px;
+  object-fit: cover;
+}
+.work-grid__item:hover .work-grid__hover-item {
+  opacity: 0.6;
+  transition: all 0.3s ease-in-out;
+}
+.work-grid__item:hover .work-grid__view-link {
+  transform: translate3d(-50%, -50%, 0px);
+  transition: all 0.3s ease-in-out;
+  opacity: 1;
+}
+.work-grid__hover-item {
+  top: 0;
+  z-index: 1;
+  opacity: 0.1;
+  width: 360px;
+  height: 203px;
+  position: absolute;
+  pointer-events: none;
+  background: #000000;
+  transition: all 0.3s ease-in-out;
+}
+.work-grid__view-link {
+  top: 36%;
+  left: 50%;
+  opacity: 0;
+  z-index: 2;
+  color: white;
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  transform: translate3d(-50%, 100%, 0px);
 }
 @media only screen and (max-width: 600px) {
   .home-padding {
