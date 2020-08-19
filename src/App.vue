@@ -5,8 +5,8 @@
     <v-fade-transition>
       <div v-show="scrollPosition > 1 && !hamPosition.top" :style="background" class="nav-shadow"></div>
     </v-fade-transition>
-    <!-- <spanion-logo :top="hamPosition.top" :left="loaded ? hamPosition.right : -80"></spanion-logo> -->
-    <!-- <scroll-progress :bottom="hamPosition.top" :right="loaded ? hamPosition.right : -80"></scroll-progress> -->
+    <spanion-logo :top="hamPosition.top" :left="loaded ? hamPosition.right : -80"></spanion-logo>
+    <scroll-progress :bottom="hamPosition.top" :left="loaded ? hamPosition.right : -80"></scroll-progress>
     <menu-hamburger :top="hamPosition.top" :right="loaded ? hamPosition.right : -80"></menu-hamburger>
     <social-links
       v-if="hamPosition.top"
@@ -20,19 +20,21 @@
 </template>
 
 <script>
-import NavMenu from "@/views/NavMenu.vue";
-import CursorAnimated from "@/components/CursorAnimated.vue";
-// import ScrollProgress from "@/components/ScrollProgress.vue";
-// import SpanionLogo from "@/components/SpanionLogo.vue";
-import SocialLinks from "@/components/SocialLinks.vue";
-import MenuHamburger from "@/components/MenuHamburger.vue";
+import NavMenu from '@/views/NavMenu.vue';
+import CursorAnimated from '@/components/CursorAnimated.vue';
+import ScrollProgress from '@/components/ScrollProgress.vue';
+import SpanionLogo from '@/components/SpanionLogo.vue';
+import SocialLinks from '@/components/SocialLinks.vue';
+import MenuHamburger from '@/components/MenuHamburger.vue';
 export default {
-  name: "app",
+  name: 'app',
   components: {
     NavMenu,
     SocialLinks,
-    CursorAnimated,
+    SpanionLogo,
     MenuHamburger,
+    CursorAnimated,
+    ScrollProgress,
   },
   computed: {
     hamPosition() {
@@ -49,7 +51,7 @@ export default {
       }
     },
     background() {
-      return `background: ${this.$vuetify.theme.dark ? "#212121" : "#E0E0E0"};`;
+      return `background: ${this.$vuetify.theme.dark ? '#212121' : '#E0E0E0'};`;
     },
     scrollPosition() {
       return this.$store.getters.scrollPos;
@@ -69,29 +71,29 @@ export default {
       handler(v) {
         if (v && this.mobile) {
           let offset = v + 80;
-          let navShadow = document.querySelector(".nav-shadow");
-          let container = document.querySelector(".about-text-wrapper");
-          let container2 = document.querySelector(".about-text-wrapper-2");
-          let container3 = document.querySelector(".about-text-wrapper-3");
+          let navShadow = document.querySelector('.nav-shadow');
+          let container = document.querySelector('.about-text-wrapper');
+          let container2 = document.querySelector('.about-text-wrapper-2');
+          let container3 = document.querySelector('.about-text-wrapper-3');
           if (0 <= offset && offset <= container.offsetTop) {
-            navShadow.style.backgroundColor = this.dark ? "#212121" : "#E0E0E0";
+            navShadow.style.backgroundColor = this.dark ? '#212121' : '#E0E0E0';
           } else if (
             container.offsetTop < offset &&
             offset <= container2.offsetTop
           ) {
             navShadow.style.backgroundColor = window.getComputedStyle(
-              container
+              container,
             ).backgroundColor;
           } else if (
             container2.offsetTop < offset &&
             offset <= container3.offsetTop
           ) {
             navShadow.style.backgroundColor = window.getComputedStyle(
-              container2
+              container2,
             ).backgroundColor;
           } else {
             navShadow.style.backgroundColor = window.getComputedStyle(
-              container3
+              container3,
             ).backgroundColor;
           }
           if (v && v > 1) {
@@ -107,16 +109,16 @@ export default {
 </script>
 
 <style>
-@import url("/assets/style.css");
-@import url("https://fonts.googleapis.com/css?family=Rubik&display=swap");
+@import url('/assets/style.css');
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 @font-face {
-  font-family: "Hipstelvetica";
-  src: url("./assets/fonts/Hipstelvetica.ttf");
+  font-family: 'Hipstelvetica';
+  src: url('./assets/fonts/Hipstelvetica.ttf');
 }
 
 @font-face {
-  font-family: "Andis";
-  src: url("./assets/fonts/Andis.ttf");
+  font-family: 'Andis';
+  src: url('./assets/fonts/Andis.ttf');
 }
 * {
   -webkit-font-smoothing: antialiased;
@@ -130,7 +132,7 @@ body {
   transition: 0.5s ease;
 }
 #app {
-  font-family: "Rubik";
+  font-family: 'Rubik';
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: rgb(65, 65, 65);

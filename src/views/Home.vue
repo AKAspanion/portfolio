@@ -59,7 +59,7 @@
                     <br />&rarr;
                   </hover-text>
                 </div>
-                <span v-for="(icon, i) in icons" :key="i">
+                <span v-for="(icon, i) in icons" :key="i" class="d-inline-block">
                   <v-icon
                     small
                     :color="icon.color"
@@ -336,12 +336,13 @@ export default {
 
 .work-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
 .work-grid__img {
   height: 203px;
   overflow: hidden;
   object-fit: cover;
+  background: #d9d9d9;
 }
 .work-grid__item {
   margin: 48px 24px;

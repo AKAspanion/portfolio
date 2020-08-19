@@ -1,6 +1,8 @@
 // Thanks for the script
 // https://stackoverflow.com/questions/47011055/smooth-vertical-scrolling-on-mouse-wheel-in-vanilla-javascript
 
+import store from '../store.js';
+
 export default function SmoothScroll(target) {
   const speed = 100;
   const smooth = 20;
@@ -19,8 +21,8 @@ export default function SmoothScroll(target) {
       ? document.documentElement
       : target;
 
-  target.addEventListener("mousewheel", scrolled, { passive: false });
-  target.addEventListener("DOMMouseScroll", scrolled, { passive: false });
+  target.addEventListener('mousewheel', scrolled, { passive: false });
+  target.addEventListener('DOMMouseScroll', scrolled, { passive: false });
 
   function scrolled(e) {
     e.preventDefault();
@@ -42,7 +44,13 @@ export default function SmoothScroll(target) {
   }
 
   function update() {
-    moving = true;
+    if (store.getters.scrolling) {
+      moving = false;
+      pos = 0;
+      return;
+    } else {
+      moving = true;
+    }
 
     var delta = (pos - target.scrollTop) / smooth;
 
