@@ -12,7 +12,7 @@
           <div class="d-inline-block my-1 pb-2">
             <mask-text :delay="delay(1500)">
               <hover-text
-                text="know about me"
+                text="KNOW ABOUT ME"
                 classes="home-text--name"
                 link="images/profile.jpeg"
                 @click="goToRoute('/about')"
@@ -50,10 +50,10 @@
 
                   <div class="work-grid__view-link title">
                     <hover-text
-                      class="text-center"
                       :text="`GO TO ${name}`"
-                      link="images/profile.jpeg"
                       @click="navigateTo(link)"
+                      :link="`images/ss/${img}.jpg`"
+                      class="text-center home-text--name"
                     >
                       VIEW
                       <br />&rarr;
@@ -291,7 +291,7 @@ export default {
         {
           name: 'DOG TRAINING STARTUP WEBSITE',
           img: 'paw',
-          link: 'https://akaspanion.github.io/Dog-Training-Academy-Start-Up',
+          link: 'https://akaspanion.github.io/dog-training-academy-start-up/',
           icons: [
             {
               name: 'HTML',

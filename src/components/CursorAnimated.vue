@@ -25,9 +25,9 @@
         >
             <template v-if="cursor.link && cursor.link !== ''">
                 <v-img
+                    width="360"
+                    height="203"
                     :src="cursor.link"
-                    width="250"
-                    height="200"
                     class="cursor-photo"
                     lazy-src="lazy.jpeg"
                 ></v-img>
