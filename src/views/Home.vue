@@ -6,11 +6,11 @@
           <div class="d-inline-block my-1 pb-2">Hi.</div>
           <br />
           <div class="d-inline-block my-1 pb-2">
-            <mask-text :delay="delay(500)">My name is,</mask-text>
+            <mask-text :delay="maskDelay">My name is,</mask-text>
           </div>
           <br />
           <div class="d-inline-block my-1 pb-2">
-            <mask-text :delay="delay(1500)">
+            <mask-text :delay="maskDelay">
               <hover-text
                 text="KNOW ABOUT ME"
                 classes="home-text--name"
@@ -21,21 +21,21 @@
           </div>
           <br />
           <div class="d-inline-block my-1 pb-2">
-            <mask-text :delay="delay(2000)">Software and</mask-text>
+            <mask-text :delay="maskDelay">Software and</mask-text>
           </div>
           <br />
           <div class="d-inline-block my-1 pb-2">
-            <mask-text :delay="delay(2500)">Web developer.</mask-text>
+            <mask-text :delay="maskDelay">Web developer.</mask-text>
           </div>
         </div>
       </div>
     </div>
     <template v-if="loaded">
-      <div class="project-text-wrapper pb-8">
+      <div class="project-text-wrapper">
         <div class="about-headline home-padding">
-          <div class="fixed-wrapper">
-            <div class="text-center mb-2 mt-6">
-              <div class="d-inline-block mb-12 display-2 font-weight-light">
+          <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
+            <div class="text-center mb-12 pb-12">
+              <div class="d-inline-block display-2 font-weight-light">
                 <mask-text v-model="aboutHead" :delay="maskDelay">PROJECTS</mask-text>
               </div>
             </div>
@@ -78,11 +78,11 @@
           </div>
         </div>
       </div>
-      <div class="exp-text-wrapper pb-8">
+      <div class="exp-text-wrapper">
         <div class="home-padding">
-          <div class="fixed-wrapper">
-            <div class="text-center mb-2 mt-6">
-              <div class="d-inline-block mb-12 display-2 font-weight-light">
+          <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
+            <div class="text-center mb-12 pb-12">
+              <div class="d-inline-block display-2 font-weight-light">
                 <mask-text v-model="aboutHead" :delay="maskDelay">EXPERIENCE</mask-text>
               </div>
             </div>
@@ -116,9 +116,9 @@
 
       <div class="contact-text-wrapper">
         <div class="home-padding">
-          <div class="fixed-wrapper">
-            <div class="text-center mb-2 mt-6">
-              <div class="d-inline-block mb-12 display-2 font-weight-light">
+          <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
+            <div class="text-center mb-12 pb-12">
+              <div class="d-inline-block display-2 font-weight-light">
                 <mask-text v-model="aboutHead" :delay="maskDelay">SKILLS</mask-text>
               </div>
             </div>
@@ -127,7 +127,7 @@
       </div>
       <div class="skills-text-wrapper">
         <div class="home-padding">
-          <div class="fixed-wrapper">
+          <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
             <div class="text-center mb-2 mt-6">
               <div class="d-inline-block mb-12 display-2 font-weight-light">
                 <mask-text v-model="aboutHead" :delay="maskDelay">CONTACT</mask-text>
@@ -331,17 +331,16 @@ export default {
       return this.$store.getters.scrollPos;
     },
     loaded() {
-      // return this.$store.getters.loaded;
-      return true;
+      return this.$store.getters.loaded;
+    },
+    mobile() {
+      return this.$vuetify.breakpoint.xsOnly;
     },
   },
   methods: {
     goToRoute() {
       // this.$router.push(path);
       this.hideCursor();
-    },
-    delay(time) {
-      return this.loaded ? this.maskDelay : this.maskDelay + time;
     },
     navigateTo(link) {
       window.open(link, '_blank');
@@ -350,8 +349,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$store.dispatch('LOADED', true);
-      // }, 4000);
-    }, 0);
+    }, 1000);
   },
 };
 </script>
@@ -371,7 +369,7 @@ export default {
 }
 @media only screen and (max-width: 600px) {
   .home-padding {
-    padding: 148px 24px;
+    padding: 148px 32px;
   }
   .home-text-container {
     font-size: 5.5vh;
@@ -393,8 +391,8 @@ export default {
 }
 .home-text-container {
   width: 100%;
-  font-size: 8vw;
-  line-height: 7vw;
+  font-size: max(8vw, 40px);
+  line-height: max(7vw, 30px);
   overflow: hidden;
   text-transform: uppercase;
   font-weight: 100 !important;
@@ -434,10 +432,12 @@ export default {
 .work-grid,
 .exp-grid {
   display: grid;
+  gap: 0px 48px;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
 }
-.work-grid__item {
-  padding: 48px 24px;
+.work-grid__item,
+.exp-grid__item {
+  margin: 48px 0px;
   position: relative;
 }
 img {
@@ -474,9 +474,5 @@ img {
   position: absolute;
   transition: all 0.3s ease-in-out;
   transform: translate3d(-50%, 100%, 0px);
-}
-
-.exp-grid__item {
-  padding: 48px 24px;
 }
 </style>

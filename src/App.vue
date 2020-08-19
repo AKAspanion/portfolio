@@ -41,7 +41,7 @@ export default {
       if (this.$vuetify.breakpoint.xsOnly) {
         return {
           top: 0,
-          right: 0,
+          right: 12,
         };
       } else {
         return {
@@ -72,9 +72,9 @@ export default {
         if (v && this.mobile) {
           let offset = v + 80;
           let navShadow = document.querySelector('.nav-shadow');
-          let container = document.querySelector('.about-text-wrapper');
-          let container2 = document.querySelector('.about-text-wrapper-2');
-          let container3 = document.querySelector('.about-text-wrapper-3');
+          let container = document.querySelector('.project-text-wrapper');
+          let container2 = document.querySelector('.exp-text-wrapper');
+          let container3 = document.querySelector('.contact-text-wrapper');
           if (0 <= offset && offset <= container.offsetTop) {
             navShadow.style.backgroundColor = this.dark ? '#212121' : '#E0E0E0';
           } else if (

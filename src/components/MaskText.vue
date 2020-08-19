@@ -100,7 +100,7 @@ export default {
     content: '';
     height: 100%;
     position: absolute;
-    transition: width 600ms cubic-bezier(1, 0, 0, 1);
+    transition: width 500ms cubic-bezier(1, 0, 0, 1);
 }
 .mask--text.mask--enter:before {
     width: 0%;
