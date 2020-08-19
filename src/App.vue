@@ -121,6 +121,8 @@ export default {
   src: url('./assets/fonts/Andis.ttf');
 }
 * {
+  margin: 0px;
+  padding: 0px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;

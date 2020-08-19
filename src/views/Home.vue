@@ -49,7 +49,12 @@
                   <img :src="`images/${img}.png`" />
 
                   <div class="work-grid__view-link title">
-                    <hover-text class="text-center" text="Go to project" @click="navigateTo(link)">
+                    <hover-text
+                      class="text-center"
+                      :text="`GO TO ${name}`"
+                      link="images/profile.jpeg"
+                      @click="navigateTo(link)"
+                    >
                       VIEW
                       <br />&rarr;
                     </hover-text>
@@ -85,16 +90,18 @@
               <div
                 :key="i"
                 class="exp-grid__item"
-                v-for="({name, role, time,img, location, desc}, i) in expItems"
+                v-for="({name, role, time, img, link, location, desc}, i) in expItems"
               >
                 <div>
                   <div class="d-inline-block font-weight-light display-1">
-                    <hover-text
-                      :text="name"
-                      classes="home-text--name"
-                      :link="`images/${img}.png`"
-                      @click="goToRoute('/about')"
-                    >{{name}}</hover-text>,
+                    <mask-text v-model="aboutHead" :delay="maskDelay">
+                      <hover-text
+                        :text="name"
+                        classes="home-text--name"
+                        :link="`images/${img}.png`"
+                        @click="navigateTo(link)"
+                      >{{name}}</hover-text>,
+                    </mask-text>
                   </div>&nbsp;
                   <div class="d-inline-block headline font-weight-thin">{{role}}</div>
                 </div>
@@ -155,6 +162,7 @@ export default {
           location: 'Kolkata, India',
           time: 'MAY 2019 - Present',
           img: 'gids',
+          link: 'https://www.globalids.com/',
           desc:
             'As a Web/Software Developer, I build reusable web components and UI framework from scratch, for the product using Vue.js and Vuetify.js.',
         },
@@ -164,6 +172,7 @@ export default {
           location: 'Kolkata, India',
           time: 'JUNE 2018 - FEBRUARY 2019',
           img: 'tcs',
+          link: 'https://www.tcs.com/',
           desc:
             'As a Trainee Developer, I built backend web application/REST API modules along with my team for the project using Node/Mongoose.',
         },
@@ -353,6 +362,22 @@ export default {
   position: relative;
   background: #d9d9d9;
 }
+.fixed-wrapper {
+  margin: 0 auto;
+  max-width: 1220px;
+}
+.home-padding {
+  padding: 64px max(11vw, 128px);
+}
+@media only screen and (max-width: 600px) {
+  .home-padding {
+    padding: 148px 24px;
+  }
+  .home-text-container {
+    font-size: 5.5vh;
+    line-height: 6vh;
+  }
+}
 </style>
 <style scoped>
 .home-container {
@@ -360,18 +385,11 @@ export default {
   text-align: left;
   min-height: 100vh;
 }
-.home-padding {
-  padding: 64px max(11vw, 128px);
-}
 .home-text-wrapper {
   display: flex;
   min-height: 100vh;
   align-items: flex-end;
   justify-content: start;
-}
-.fixed-wrapper {
-  margin: 0 auto;
-  max-width: 1220px;
 }
 .home-text-container {
   width: 100%;
@@ -383,6 +401,7 @@ export default {
   font-family: Roboto, sans-serif !important;
 }
 .home-text--name {
+  cursor: pointer;
   font-weight: 300 !important;
   transition: transform 150ms ease-out;
 }
@@ -459,14 +478,5 @@ img {
 
 .exp-grid__item {
   padding: 48px 24px;
-}
-@media only screen and (max-width: 600px) {
-  .home-padding {
-    padding: 148px 24px;
-  }
-  .home-text-container {
-    font-size: 5.5vh;
-    line-height: 6vh;
-  }
 }
 </style>

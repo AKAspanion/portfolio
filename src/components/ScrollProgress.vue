@@ -19,7 +19,7 @@
             hideCursor(mobile);
         "
     @mouseover="
-            showCursor(percentage > 10 ? 'go up' : 'scroll', null, mobile)
+            showCursor(percentage > 10 ? 'GO UP' : 'scroll', null, mobile)
         "
     class="scroll-arrow-container"
     v-if="!navMenu"
