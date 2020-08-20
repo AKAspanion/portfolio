@@ -158,8 +158,45 @@
         <div class="home-padding">
           <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
             <div class="text-center mb-2 mt-6">
-              <div class="d-inline-block mb-12 display-2 font-weight-light">
-                <mask-text v-model="aboutHead" :delay="maskDelay">CONTACT</mask-text>
+              <div class="d-inline-block display-2 font-weight-light">
+                <mask-text v-model="aboutHead" :delay="maskDelay">GET IN TOUCH</mask-text>
+              </div>
+            </div>
+            <div class="text-center pt-12 mt-12">
+              <div class="d-inline-block headline font-weight-light">panditankit1995@gmail.com</div>
+            </div>
+            <div class="text-center pt-6 mb-12 pb-8">
+              <div
+                @mouseout="hideCursor()"
+                @mouseover="showCursor()"
+                class="d-inline-block mx-4 cursor-pointer"
+                @click="navigateTo('https://github.com/AKAspanion')"
+              >
+                <v-icon size="32" color="#181717">mdi-github-circle</v-icon>
+              </div>
+              <div
+                @mouseout="hideCursor()"
+                @mouseover="showCursor()"
+                class="d-inline-block mx-4 cursor-pointer"
+                @click="navigateTo('https://www.linkedin.com/in/spanion')"
+              >
+                <v-icon size="32" color="#0077B5">mdi-linkedin-box</v-icon>
+              </div>
+              <div
+                @mouseout="hideCursor()"
+                @mouseover="showCursor()"
+                class="d-inline-block mx-4 cursor-pointer"
+                @click="navigateTo('https://www.instagram.com/spanionkumar')"
+              >
+                <v-icon size="32" color="#E4405F">mdi-instagram</v-icon>
+              </div>
+              <div
+                @mouseout="hideCursor()"
+                @mouseover="showCursor()"
+                class="d-inline-block mx-4 cursor-pointer"
+                @click="navigateTo('https://www.facebook.com/AKAspanion')"
+              >
+                <v-icon size="32" color="#1877F2">mdi-facebook</v-icon>
               </div>
             </div>
           </div>
@@ -398,5 +435,8 @@ img {
   width: 32px;
   height: 32px;
   text-align: center;
+}
+.cursor-pointer {
+  cursor: pointer;
 }
 </style>
