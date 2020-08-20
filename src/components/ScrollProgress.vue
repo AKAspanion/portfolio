@@ -1,50 +1,25 @@
 <template>
   <div
+    @mouseout="iconHover($event,'.scroll-arrow-container','.scroll-arrow-wrapper',mobile);hideCursor(mobile);"
+    @mousemove="iconHover($event,'.scroll-arrow-container','.scroll-arrow-wrapper',mobile)"
+    @mouseover="showCursor(percentage > 10 ? 'GO UP' : 'SCROLL', null, mobile)"
     :style="`bottom: ${bottom}px;left: ${left}px;`"
-    @mousemove="
-            iconHover(
-                $event,
-                '.scroll-arrow-container',
-                '.scroll-arrow-wrapper',
-                mobile
-            )
-        "
-    @mouseout="
-            iconHover(
-                $event,
-                '.scroll-arrow-container',
-                '.scroll-arrow-wrapper',
-                mobile
-            );
-            hideCursor(mobile);
-        "
-    @mouseover="
-            showCursor(percentage > 10 ? 'GO UP' : 'scroll', null, mobile)
-        "
     class="scroll-arrow-container"
     v-if="!navMenu"
   >
-    <div class="scroll-arrow-container">
-      <div class="scroll-arrow-wrapper">
-        <v-progress-circular
-          size="40"
-          width="2"
-          :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
-          :value="
-                        percentage <= 99 && percentage >= 95 ? 100 : percentage
-                    "
-        >
-          <v-btn icon @click="onScroll" :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'">
-            <v-icon
-              :style="
-                                `transform: rotate(${
-                                    percentage > 10 ? '135' : '-45'
-                                }deg)`
-                            "
-            >mdi-arrow-bottom-left</v-icon>
-          </v-btn>
-        </v-progress-circular>
-      </div>
+    <div class="scroll-arrow-wrapper">
+      <v-progress-circular
+        size="40"
+        width="2"
+        :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
+        :value="percentage <= 99 && percentage >= 95 ? 100 : percentage"
+      >
+        <v-btn icon @click="onScroll" :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'">
+          <v-icon
+            :style="`transform: rotate(${percentage > 10 ? '135' : '-45'}deg)`"
+          >mdi-arrow-bottom-left</v-icon>
+        </v-btn>
+      </v-progress-circular>
     </div>
   </div>
 </template>

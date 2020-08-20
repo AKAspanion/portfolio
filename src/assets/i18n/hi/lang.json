@@ -1,90 +1,84 @@
 {
-    "hi": "नमस्ते।",
-    "view": "देखे",
-    "projects": {
-        "title": "प्रोजेक्ट्स",
-        "subtitle": "यहां उन प्रोजेक्ट्स का चयन किया गया है, जिन पर मैंने हाल ही में काम किया है",
-        "go-to": "जाये यंहा पे"
+  "hi": "नमस्ते।",
+  "view": "देखे",
+  "projects": {
+    "title": "प्रोजेक्ट्स",
+    "subtitle": "यहां उन प्रोजेक्ट्स का चयन किया गया है, जिन पर मैंने हाल ही में काम किया है",
+    "go-to": "जाये यंहा पे"
+  },
+  "experience": {
+    "title": "अनुभव",
+    "subtitle": "मैं इन मस्त कंपनियों का सहयोगी रहा हूं"
+  },
+  "skills": {
+    "title": "कौशल",
+    "subtitle": "यहाँ मेरे तकनीकी स्टैक की एक सूची है"
+  },
+  "home": {
+    "salute": "मेरा नाम है",
+    "name": "अंकित पंडित",
+    "designation-1": "सॉफ्टवेयर और",
+    "designation-2": "वेब डेवलपर।",
+    "know-me": "मेरे बारे में जाने"
+  },
+  "about": {
+    "name": "अंकित कुमार पंडित",
+    "position": "सॉफ्टवेयर / वेब डेवलपर",
+    "company": {
+      "title": "ग्लोबल ऑयडीस",
+      "url": "http://google.com"
     },
-    "experience": {
-        "title": "अनुभव",
-        "subtitle": "मैं इन मस्त कंपनियों के साथ जुड़ा रह चूका हूं"
+    "love": "मुझे भयावह वेब एप्लिकेशन और वेबसाइट बनाना बहुत पसंद है।",
+    "socialLinks": [
+      {
+        "title": "गिटहब",
+        "url": "https://github.com/AKAspanion"
+      },
+      {
+        "title": "इंस्टाग्राम",
+        "url": "http://google.com"
+      },
+      {
+        "title": "फेसबुक",
+        "url": "http://google.com"
+      }
+    ]
+  },
+  "work": [
+    {
+      "title": "Software Developer",
+      "period": "May 2019 - Current",
+      "company": "GLobal IDs, Kolkata",
+      "description": "As a Software Developer I build and revamp the UI of product along with my team using Vue.JS",
+      "technologies": ["Vue.js", "Swagger"]
     },
-    "skills": {
-      "title": "कौशल",
-      "subtitle": "यहाँ मेरे तकनीकी स्टैक की एक सूची है"
+    {
+      "title": "Assistant Systems Engineer",
+      "period": "July 2018 - January 2019",
+      "company": "Tata Consultancy Services, Kolkata",
+      "description": "As a Trainee Backend Developer I built web application modules along with my team for a given project using Node.JS",
+      "technologies": ["Angular", "Node.JS"]
+    }
+  ],
+  "ui": {
+    "common": {
+      "fullStop": "|",
+      "and": "और"
     },
-    "home": {
-        "salute": "मेरा नाम है",
-        "name": "अंकित पंडित",
-        "designation-1": "सॉफ्टवेयर और",
-        "designation-2": "वेब डेवलपर।",
-        "know-me": "मेरे बारे में जाने"
+    "menuItems": {
+      "0": "होम",
+      "1": "बारे में",
+      "2": "कार्य",
+      "3": "संपर्क"
     },
     "about": {
-        "name": "अंकित कुमार पंडित",
-        "position": "सॉफ्टवेयर / वेब डेवलपर",
-        "company": {
-            "title": "ग्लोबल ऑयडीस",
-            "url": "http://google.com"
-        },
-        "love": "मुझे भयावह वेब एप्लिकेशन और वेबसाइट बनाना बहुत पसंद है।",
-        "socialLinks": [
-            {
-                "title": "गिटहब",
-                "url": "https://github.com/AKAspanion"
-            },
-            {
-                "title": "इंस्टाग्राम",
-                "url": "http://google.com"
-            },
-            {
-                "title": "फेसबुक",
-                "url": "http://google.com"
-            }
-        ]
-    },
-    "work": [
-        {
-            "title": "Software Developer",
-            "period": "May 2019 - Current",
-            "company": "GLobal IDs, Kolkata",
-            "description": "As a Software Developer I build and revamp the UI of product along with my team using Vue.JS",
-            "technologies": [
-                "Vue.js",
-                "Swagger"
-            ]
-        },
-        {
-            "title": "Assistant Systems Engineer",
-            "period": "July 2018 - January 2019",
-            "company": "Tata Consultancy Services, Kolkata",
-            "description": "As a Trainee Backend Developer I built web application modules along with my team for a given project using Node.JS",
-            "technologies": [
-                "Angular",
-                "Node.JS"
-            ]
-        }
-    ],
-    "ui": {
-        "common": {
-            "fullStop": "|",
-            "and": "और"
-        },
-        "menuItems": {
-            "0": "होम",
-            "1": "बारे में",
-            "2": "कार्य",
-            "3": "संपर्क"
-        },
-        "about": {
-            "hi": "नमस्ते।",
-            "name": "मेरा नाम ",
-            "about": {
-                "start": "मैं हूँ एक ",
-                "end": ", वर्त्तमान में यंहा पे काम कर रहा हूँ, "
-            },
-            "follow": "आप यहाँ मेरा अनुसरण कर सकते हैं -"
-        }
+      "hi": "नमस्ते।",
+      "name": "मेरा नाम ",
+      "about": {
+        "start": "मैं हूँ एक ",
+        "end": ", वर्त्तमान में यंहा पे काम कर रहा हूँ, "
+      },
+      "follow": "आप यहाँ मेरा अनुसरण कर सकते हैं -"
     }
+  }
 }

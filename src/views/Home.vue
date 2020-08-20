@@ -123,7 +123,7 @@
         </div>
       </div>
 
-      <div class="contact-text-wrapper">
+      <div class="skills-text-wrapper">
         <div class="home-padding">
           <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
             <div class="text-center">
@@ -152,7 +152,7 @@
           </div>
         </div>
       </div>
-      <div class="skills-text-wrapper">
+      <div class="contact-text-wrapper">
         <div class="home-padding">
           <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
             <div class="text-center mb-2 mt-6">
@@ -162,6 +162,11 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="footer-text-wrapper py-12">
+        <div
+          class="pt-9 pb-10 title text-center font-weight-light text-uppercase"
+        >© 2020 ANKIT PANDIT</div>
       </div>
     </template>
   </div>
@@ -238,7 +243,7 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$store.dispatch('LOADED', true);
-    }, 1000);
+    }, 1500);
   },
 };
 </script>
@@ -284,7 +289,7 @@ export default {
   text-transform: uppercase;
   font-weight: 100 !important;
   font-size: max(7.8vw, 40px);
-  line-height: max(7.5vw, 30px);
+  line-height: max(6.4vw, 30px);
   font-family: Roboto, sans-serif !important;
 }
 .home-text--name {
@@ -305,8 +310,11 @@ export default {
 .theme--dark .exp-text-wrapper {
   background: #616161;
 }
-.theme--dark .contact-text-wrapper {
+.theme--dark .skills-text-wrapper {
   background: #757575;
+}
+.theme--dark .contact-text-wrapper {
+  background: #424242;
 }
 .theme--light .project-text-wrapper {
   background: #eeeeee;
@@ -314,8 +322,11 @@ export default {
 .theme--light .exp-text-wrapper {
   background: #f5f5f5;
 }
-.theme--light .contact-text-wrapper {
+.theme--light .skills-text-wrapper {
   background: #fafafa;
+}
+.theme--light .contact-text-wrapper {
+  background: #eeeeee;
 }
 
 .work-grid,

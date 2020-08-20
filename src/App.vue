@@ -45,8 +45,8 @@ export default {
         };
       } else {
         return {
-          top: 56,
-          right: 56,
+          top: 40,
+          right: 40,
         };
       }
     },
