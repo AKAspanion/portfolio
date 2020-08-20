@@ -6,12 +6,12 @@
       <div v-show="scrollPosition > 1 && !hamPosition.top" :style="background" class="nav-shadow"></div>
     </v-fade-transition>
     <spanion-logo :top="hamPosition.top" :left="loaded ? hamPosition.right : -80"></spanion-logo>
-    <scroll-progress :bottom="hamPosition.top" :left="loaded ? hamPosition.right : -80"></scroll-progress>
+    <scroll-progress :bottom="hamPosition.top" :right="loaded ? hamPosition.right : -80"></scroll-progress>
     <menu-hamburger :top="hamPosition.top" :right="loaded ? hamPosition.right : -80"></menu-hamburger>
     <social-links
       v-if="hamPosition.top"
       :bottom="hamPosition.top"
-      :right="loaded ? hamPosition.right : -80"
+      :left="loaded ? hamPosition.right : -80"
     ></social-links>
     <transition name="page" mode="out-in">
       <router-view></router-view>

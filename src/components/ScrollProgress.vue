@@ -3,7 +3,7 @@
     @mouseout="iconHover($event,'.scroll-arrow-container','.scroll-arrow-wrapper',mobile);hideCursor(mobile);"
     @mousemove="iconHover($event,'.scroll-arrow-container','.scroll-arrow-wrapper',mobile)"
     @mouseover="showCursor(percentage > 10 ? 'GO UP' : 'SCROLL', null, mobile)"
-    :style="`bottom: ${bottom}px;left: ${left}px;`"
+    :style="`bottom: ${bottom}px;right: ${right}px;`"
     class="scroll-arrow-container"
     v-if="!navMenu"
   >
@@ -32,7 +32,7 @@ export default {
       type: Number,
       default: 24,
     },
-    left: {
+    right: {
       type: Number,
       default: 24,
     },
@@ -100,7 +100,7 @@ export default {
   position: fixed;
   cursor: pointer;
   will-change: transform;
-  transition: transform 150ms ease-out, left 450ms ease;
+  transition: transform 150ms ease-out, right 450ms ease;
   transform: translate3d(0px, 0px, 0px);
 }
 .scroll-arrow-wrapper {

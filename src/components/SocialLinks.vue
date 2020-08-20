@@ -1,5 +1,5 @@
 <template>
-  <div class="social-links-wrapper text-center" :style="`bottom: ${bottom}px;right: ${right}px;`">
+  <div class="social-links-wrapper text-center" :style="`bottom: ${bottom}px;left: ${left}px;`">
     <div class="social-links-content-wrapper">
       <div
         @click="toggle()"
@@ -16,7 +16,7 @@
             :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
           >
             <v-btn icon @click="onScroll" :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'">
-              <v-icon :style="`transform: rotate(${hide ? '135':'90'}deg)`">mdi-chevron-left</v-icon>
+              <v-icon :style="`transform: rotate(${hide ? '45':'90'}deg)`">mdi-chevron-left</v-icon>
             </v-btn>
           </v-progress-circular>
         </div>
@@ -80,7 +80,7 @@ export default {
       type: Number,
       default: 24,
     },
-    right: {
+    left: {
       type: Number,
       default: 24,
     },
@@ -108,7 +108,7 @@ export default {
   margin: 0 auto;
   position: fixed;
   will-change: transform;
-  transition: transform 150ms ease-out, right 450ms ease;
+  transition: transform 150ms ease-out, left 450ms ease;
   transform: translate3d(0px, 0px, 0px);
 }
 .speedial-container,
@@ -140,7 +140,7 @@ export default {
 .link-logo-container-li {
   position: absolute;
   transition: 250ms;
-  right: 0px;
+  left: 0px;
 }
 
 .link-logo-container-gh {
@@ -160,7 +160,7 @@ export default {
 }
 .hide-icon {
   opacity: 0;
-  right: -100%;
+  left: -100%;
   transition: 250ms;
   pointer-events: none;
 }
