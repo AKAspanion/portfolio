@@ -97,7 +97,7 @@
           <div
             :class="$vuetify.breakpoint.xsOnly ? 'mb-4' : ''"
             class="overline text-sm-right copy-item-wrapper"
-          >© 2020 Ankit Pandit</div>
+          >{{$t("copyright")}}</div>
         </v-col>
       </v-row>
     </div>

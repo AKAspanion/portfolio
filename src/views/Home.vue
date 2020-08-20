@@ -159,7 +159,7 @@
           <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
             <div class="text-center mb-2 mt-6">
               <div class="d-inline-block display-2 font-weight-light">
-                <mask-text v-model="aboutHead" :delay="maskDelay">GET IN TOUCH</mask-text>
+                <mask-text v-model="aboutHead" :delay="maskDelay">{{$t("contact.title")}}</mask-text>
               </div>
             </div>
             <div class="text-center pt-12 mt-12">
@@ -205,7 +205,7 @@
       <div class="footer-text-wrapper py-12">
         <div
           class="pt-9 pb-10 title text-center font-weight-light text-uppercase"
-        >© 2020 ANKIT PANDIT</div>
+        >{{$t("copyright")}}</div>
       </div>
     </template>
   </div>

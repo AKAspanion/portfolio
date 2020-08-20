@@ -1,11 +1,11 @@
 [
   {
     "name": "जावास्क्रिप्ट",
-    "icon": "javaScript"
+    "icon": "javascript-i"
   },
   {
     "name": "टाइपसक्रिप्ट",
-    "icon": "typeScript"
+    "icon": "typescript-i"
   },
   {
     "name": "भीयू",
@@ -32,20 +32,12 @@
     "icon": "jest"
   },
   {
-    "name": "नोड",
-    "icon": "node-dot-js"
+    "name": "बूटस्ट्रैप",
+    "icon": "bootstrap"
   },
   {
     "name": "गिट",
     "icon": "git"
-  },
-  {
-    "name": "जक्वेरी",
-    "icon": "jquery"
-  },
-  {
-    "name": "बूटस्ट्रैप",
-    "icon": "bootstrap"
   },
   {
     "name": "भीयूटीफाई",
@@ -54,6 +46,14 @@
   {
     "name": "स्टोरीबूक",
     "icon": "storybook"
+  },
+  {
+    "name": "नोड",
+    "icon": "node-dot-js"
+  },
+  {
+    "name": "जक्वेरी",
+    "icon": "jquery"
   },
   {
     "name": "मोंगो डीबी",
@@ -82,5 +82,33 @@
   {
     "name": "पाइथन",
     "icon": "python"
+  },
+  {
+    "name": "डी3nuxt ",
+    "icon": "d3-dot-js"
+  },
+  {
+    "name": "सवेल्त",
+    "icon": "svelte"
+  },
+  {
+    "name": "नक्स्ट",
+    "icon": "nuxt-dot-js"
+  },
+  {
+    "name": "नेक्स्ट",
+    "icon": "next-dot-js"
+  },
+  {
+    "name": "एनपीएम",
+    "icon": "npm"
+  },
+  {
+    "name": "जीरा",
+    "icon": "jira"
+  },
+  {
+    "name": "फिग्मा",
+    "icon": "figma"
   }
 ]

@@ -2,7 +2,7 @@
   <div
     @mouseout="iconHover($event,'.scroll-arrow-container','.scroll-arrow-wrapper',mobile);hideCursor(mobile);"
     @mousemove="iconHover($event,'.scroll-arrow-container','.scroll-arrow-wrapper',mobile)"
-    @mouseover="showCursor(percentage > 10 ? 'GO UP' : 'SCROLL', null, mobile)"
+    @mouseover="showCursor(percentage > 10 ? $t('go-up') : $t('scroll'), null, mobile)"
     :style="`bottom: ${bottom}px;right: ${right}px;`"
     class="scroll-arrow-container"
     v-if="!navMenu"

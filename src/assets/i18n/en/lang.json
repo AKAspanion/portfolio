@@ -1,6 +1,10 @@
 {
   "hi": "Hi.",
   "view": "VIEW",
+  "links": "LINKS",
+  "go-up": "GO UP",
+  "scroll": "SCROLL",
+  "copyright": "© 2020 ANKIT PANDIT",
   "projects": {
     "title": "PROJECTS",
     "subtitle": "Here's a selection of projects I've worked on recently",
@@ -13,6 +17,9 @@
   "skills": {
     "title": "SKILLS",
     "subtitle": "Here's a list of my tech stack"
+  },
+  "contact": {
+    "title": "GET IN TOUCH"
   },
   "home": {
     "name": "ANKIT PANDIT",

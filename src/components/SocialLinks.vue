@@ -3,7 +3,7 @@
     <div class="social-links-content-wrapper">
       <div
         @click="toggle()"
-        @mouseover="showCursor('LINKS')"
+        @mouseover="showCursor($t('links'))"
         class="speedial-container white--text"
         @mousemove="iconHover($event,'.speedial-container','.speedial-wrapper')"
         @mouseout="iconHover($event,'.speedial-container','.speedial-wrapper');hideCursor();"
