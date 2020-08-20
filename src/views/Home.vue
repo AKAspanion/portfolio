@@ -81,6 +81,38 @@
           </div>
         </div>
       </div>
+      <div class="skills-text-wrapper">
+        <div class="home-padding">
+          <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
+            <div class="text-center">
+              <div class="d-inline-block display-2 font-weight-light">
+                <mask-text v-model="aboutHead" :delay="maskDelay">{{$t("skills.title")}}</mask-text>
+              </div>
+            </div>
+            <div class="text-center pt-4 mb-12 pb-12">
+              <div class="d-inline-block title font-weight-light">{{$t("skills.subtitle")}}</div>
+            </div>
+            <div class="skill-grid pt-12 pb-12 mb-12">
+              <div
+                :key="i"
+                class="skill-grid__item"
+                @mouseout="hideCursor()"
+                @mouseover="showCursor()"
+                v-for="({name, icon, top}, i) in skillItems"
+                :style="{
+                  background: dark ? '#424242':'#EEEEEE',
+                  borderBottom: `2px solid ${top ? '#4FC08D':'#FFCA28'}`
+                }"
+              >
+                <img :src="`images/icons/${icon}.svg`" />
+                <div
+                  :class="['subtitle-1 font-weight-light pt-3', dark ? 'white--text':'black--text']"
+                >{{name}}</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="exp-text-wrapper">
         <div class="home-padding">
           <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
@@ -98,7 +130,7 @@
                 class="exp-grid__item"
                 @mouseout="hideCursor()"
                 @mouseover="showCursor()"
-                :style="`background: ${dark ? '#424242':'#EEEEEE'}`"
+                :style="`background: ${dark ? '#616161':'#f5f5f5'}`"
                 v-for="({name, role, time, img, link, location, desc}, i) in expItems"
               >
                 <div>
@@ -117,36 +149,6 @@
                 <div class="pt-3 title font-weight-light">{{desc}}</div>
                 <div class="pt-8 font-weight-light">{{location}}</div>
                 <div class="overline">{{time}}</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="skills-text-wrapper">
-        <div class="home-padding">
-          <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
-            <div class="text-center">
-              <div class="d-inline-block display-2 font-weight-light">
-                <mask-text v-model="aboutHead" :delay="maskDelay">{{$t("skills.title")}}</mask-text>
-              </div>
-            </div>
-            <div class="text-center pt-4 mb-12 pb-12">
-              <div class="d-inline-block title font-weight-light">{{$t("skills.subtitle")}}</div>
-            </div>
-            <div class="skill-grid pt-12 pb-12 mb-12">
-              <div
-                :key="i"
-                class="skill-grid__item"
-                @mouseout="hideCursor()"
-                @mouseover="showCursor()"
-                v-for="({name, icon}, i) in skillItems"
-                :style="`background: ${dark ? '#616161':'#F5F5F5'}`"
-              >
-                <img :src="`images/icons/${icon}.svg`" />
-                <div
-                  :class="['subtitle-1 font-weight-light pt-3', dark ? 'white--text':'black--text']"
-                >{{name}}</div>
               </div>
             </div>
           </div>
@@ -308,10 +310,10 @@ export default {
   background: #424242;
 }
 .theme--dark .exp-text-wrapper {
-  background: #616161;
+  background: #757575;
 }
 .theme--dark .skills-text-wrapper {
-  background: #757575;
+  background: #616161;
 }
 .theme--dark .contact-text-wrapper {
   background: #424242;
@@ -320,10 +322,10 @@ export default {
   background: #eeeeee;
 }
 .theme--light .exp-text-wrapper {
-  background: #f5f5f5;
+  background: #fafafa;
 }
 .theme--light .skills-text-wrapper {
-  background: #fafafa;
+  background: #f5f5f5;
 }
 .theme--light .contact-text-wrapper {
   background: #eeeeee;

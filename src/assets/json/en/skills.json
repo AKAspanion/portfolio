@@ -1,59 +1,73 @@
 [
   {
     "name": "JavaScript",
-    "icon": "javaScript"
+    "icon": "javascript-i",
+    "top": true
   },
   {
     "name": "TypeScript",
-    "icon": "typeScript"
+    "icon": "typescript-i",
+    "top": true
   },
   {
     "name": "Vue",
-    "icon": "vue-dot-js"
+    "icon": "vue-dot-js",
+    "top": true
   },
   {
     "name": "React",
-    "icon": "react"
+    "icon": "react",
+    "top": true
   },
   {
     "name": "Redux",
-    "icon": "redux"
+    "icon": "redux",
+    "top": true
   },
   {
     "name": "HTML",
-    "icon": "html5"
+    "icon": "html5",
+    "top": true
   },
   {
     "name": "CSS",
-    "icon": "css3"
+    "icon": "css3",
+    "top": true
   },
   {
     "name": "Jest",
-    "icon": "jest"
-  },
-  {
-    "name": "Node",
-    "icon": "node-dot-js"
-  },
-  {
-    "name": "Git",
-    "icon": "git"
-  },
-  {
-    "name": "jQuery",
-    "icon": "jquery"
+    "icon": "jest",
+    "top": true
   },
   {
     "name": "Bootstrap",
-    "icon": "bootstrap"
+    "icon": "bootstrap",
+    "top": true
+  },
+  {
+    "name": "Git",
+    "icon": "git",
+    "top": true
   },
   {
     "name": "Vuetify",
-    "icon": "vuetify"
+    "icon": "vuetify",
+    "top": true
   },
   {
     "name": "Storybook",
-    "icon": "storybook"
+    "icon": "storybook",
+    "top": true
+  },
+  {
+    "name": "Node",
+    "icon": "node-dot-js",
+    "top": true
+  },
+  {
+    "name": "jQuery",
+    "icon": "jquery",
+    "top": true
   },
   {
     "name": "Mongo DB",
@@ -82,5 +96,33 @@
   {
     "name": "Python",
     "icon": "python"
+  },
+  {
+    "name": "D3",
+    "icon": "d3-dot-js"
+  },
+  {
+    "name": "Svelte",
+    "icon": "svelte"
+  },
+  {
+    "name": "Nuxt",
+    "icon": "nuxt-dot-js"
+  },
+  {
+    "name": "Next",
+    "icon": "next-dot-js"
+  },
+  {
+    "name": "NPM",
+    "icon": "npm"
+  },
+  {
+    "name": "Jira",
+    "icon": "jira"
+  },
+  {
+    "name": "Figma",
+    "icon": "figma"
   }
 ]
