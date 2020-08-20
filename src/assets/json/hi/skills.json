@@ -1,0 +1,86 @@
+[
+  {
+    "name": "जावास्क्रिप्ट",
+    "icon": "javaScript"
+  },
+  {
+    "name": "टाइपसक्रिप्ट",
+    "icon": "typeScript"
+  },
+  {
+    "name": "भीयू",
+    "icon": "vue-dot-js"
+  },
+  {
+    "name": "रियेक्ट",
+    "icon": "react"
+  },
+  {
+    "name": "रिडअक्स",
+    "icon": "redux"
+  },
+  {
+    "name": "एचटीएम्ल",
+    "icon": "html5"
+  },
+  {
+    "name": "सीएसएस",
+    "icon": "css3"
+  },
+  {
+    "name": "जेस्ट",
+    "icon": "jest"
+  },
+  {
+    "name": "नोड",
+    "icon": "node-dot-js"
+  },
+  {
+    "name": "गिट",
+    "icon": "git"
+  },
+  {
+    "name": "जक्वेरी",
+    "icon": "jquery"
+  },
+  {
+    "name": "बूटस्ट्रैप",
+    "icon": "bootstrap"
+  },
+  {
+    "name": "भीयूटीफाई",
+    "icon": "vuetify"
+  },
+  {
+    "name": "स्टोरीबूक",
+    "icon": "storybook"
+  },
+  {
+    "name": "मोंगो डीबी",
+    "icon": "mongodb"
+  },
+  {
+    "name": "फायरबेस",
+    "icon": "firebase"
+  },
+  {
+    "name": "स्वैगर",
+    "icon": "swagger"
+  },
+  {
+    "name": "सैस",
+    "icon": "sass"
+  },
+  {
+    "name": "एंगुलर",
+    "icon": "angular"
+  },
+  {
+    "name": "रियेक्ट राऊटर",
+    "icon": "reactrouter"
+  },
+  {
+    "name": "पाइथन",
+    "icon": "python"
+  }
+]

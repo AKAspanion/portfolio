@@ -34,10 +34,13 @@
       <div class="project-text-wrapper">
         <div class="about-headline home-padding">
           <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
-            <div class="text-center mb-12 pb-12">
+            <div class="text-center">
               <div class="d-inline-block display-2 font-weight-light">
                 <mask-text v-model="aboutHead" :delay="maskDelay">{{$t("projects.title")}}</mask-text>
               </div>
+            </div>
+            <div class="text-center pt-4 mb-12 pb-12">
+              <div class="d-inline-block title font-weight-light">{{$t("projects.subtitle")}}</div>
             </div>
             <div class="work-grid">
               <div
@@ -55,7 +58,7 @@
                       class="text-center home-text--name"
                       :text="`${$t('projects.go-to')}, ${name}`"
                     >
-                      VIEW
+                      {{$t("view")}}
                       <br />&rarr;
                     </hover-text>
                   </div>
@@ -81,15 +84,21 @@
       <div class="exp-text-wrapper">
         <div class="home-padding">
           <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
-            <div class="text-center mb-12 pb-12">
+            <div class="text-center">
               <div class="d-inline-block display-2 font-weight-light">
                 <mask-text v-model="aboutHead" :delay="maskDelay">{{$t("experience.title")}}</mask-text>
               </div>
             </div>
-            <div class="exp-grid">
+            <div class="text-center pt-4 mb-12 pb-8">
+              <div class="d-inline-block title font-weight-light">{{$t("experience.subtitle")}}</div>
+            </div>
+            <div class="exp-grid pb-12">
               <div
                 :key="i"
                 class="exp-grid__item"
+                @mouseout="hideCursor()"
+                @mouseover="showCursor()"
+                :style="`background: ${dark ? '#424242':'#EEEEEE'}`"
                 v-for="({name, role, time, img, link, location, desc}, i) in expItems"
               >
                 <div>
@@ -117,9 +126,27 @@
       <div class="contact-text-wrapper">
         <div class="home-padding">
           <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
-            <div class="text-center mb-12 pb-12">
+            <div class="text-center">
               <div class="d-inline-block display-2 font-weight-light">
-                <mask-text v-model="aboutHead" :delay="maskDelay">SKILLS</mask-text>
+                <mask-text v-model="aboutHead" :delay="maskDelay">{{$t("skills.title")}}</mask-text>
+              </div>
+            </div>
+            <div class="text-center pt-4 mb-12 pb-12">
+              <div class="d-inline-block title font-weight-light">{{$t("skills.subtitle")}}</div>
+            </div>
+            <div class="skill-grid pt-12 pb-12 mb-12">
+              <div
+                :key="i"
+                class="skill-grid__item"
+                @mouseout="hideCursor()"
+                @mouseover="showCursor()"
+                v-for="({name, icon}, i) in skillItems"
+                :style="`background: ${dark ? '#616161':'#F5F5F5'}`"
+              >
+                <img :src="`images/icons/${icon}.svg`" />
+                <div
+                  :class="['subtitle-1 font-weight-light pt-3', dark ? 'white--text':'black--text']"
+                >{{name}}</div>
               </div>
             </div>
           </div>
@@ -146,6 +173,8 @@ import SkewOnHover from '@/components/SkewOnHover.vue';
 
 import expEn from '../assets/json/en/experience.json';
 import expHi from '../assets/json/hi/experience.json';
+import skillsEn from '../assets/json/en/skills.json';
+import skillsHi from '../assets/json/hi/skills.json';
 import projectsEn from '../assets/json/en/projects.json';
 import projectsHi from '../assets/json/hi/projects.json';
 
@@ -166,6 +195,9 @@ export default {
   computed: {
     expItems() {
       return this.$i18n.locale === 'en' ? expEn : expHi;
+    },
+    skillItems() {
+      return this.$i18n.locale === 'en' ? skillsEn : skillsHi;
     },
     projectItems() {
       return this.$i18n.locale === 'en' ? projectsEn : projectsHi;
@@ -189,6 +221,9 @@ export default {
     },
     mobile() {
       return this.$vuetify.breakpoint.xsOnly;
+    },
+    dark() {
+      return this.$vuetify.theme.dark;
     },
   },
   methods: {
@@ -246,10 +281,10 @@ export default {
 .home-text-container {
   width: 100%;
   overflow: hidden;
-  font-size: max(8vw, 40px);
-  line-height: max(7.8vw, 30px);
   text-transform: uppercase;
   font-weight: 100 !important;
+  font-size: max(7.8vw, 40px);
+  line-height: max(7.5vw, 30px);
   font-family: Roboto, sans-serif !important;
 }
 .home-text--name {
@@ -294,6 +329,9 @@ export default {
   margin: 48px 0px;
   position: relative;
 }
+.exp-grid__item {
+  padding: 32px;
+}
 img {
   width: 100%;
   height: 203px;
@@ -328,5 +366,24 @@ img {
   position: absolute;
   transition: all 0.3s ease-in-out;
   transform: translate3d(-50%, 100%, 0px);
+}
+
+.skill-grid {
+  display: grid;
+  gap: 48px 48px;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+}
+.skill-grid__item {
+  display: flex;
+  padding: 24px 0px;
+  align-items: center;
+  background: #9b9292;
+  flex-direction: column;
+  justify-content: center;
+}
+.skill-grid__item img {
+  width: 32px;
+  height: 32px;
+  text-align: center;
 }
 </style>

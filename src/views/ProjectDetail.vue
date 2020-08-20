@@ -1,8 +1,11 @@
 <template>
-  <div v-if="current">
-    <div class="details__cover" :style="dark ? 'filter: brightness(40%)':''">
-      <img :src="`/images/${current.coverImg}.png`" />
-    </div>
+  <div v-if="current" :style="containerStyle">
+    <skew-on-hover :no-zoom="true">
+      <div class="details__cover">
+        <img :src="`/images/${current.coverImg}.png`" />
+      </div>
+    </skew-on-hover>
+
     <div class="home-padding">
       <div class="fixed-wrapper">help</div>
     </div>
@@ -11,7 +14,11 @@
 </template>
 
 <script>
+import SkewOnHover from '@/components/SkewOnHover.vue';
 export default {
+  components: {
+    SkewOnHover,
+  },
   data() {
     return {
       projects: {
@@ -34,6 +41,17 @@ export default {
     current() {
       return this.projects[this.$route.params.id];
     },
+    containerStyle() {
+      let _style = { background: '#d9d9d9', color: '#212121' };
+      if (this.$vuetify.theme.dark) {
+        _style = {
+          ..._style,
+          background: '#212121',
+          color: '#d9d9d9',
+        };
+      }
+      return _style;
+    },
   },
   mounted() {
     setTimeout(() => {
@@ -46,10 +64,18 @@ export default {
 <style scope>
 .details__cover {
   width: 100vw;
-  overflow: hidden;
   object-fit: cover;
   object-position: center;
 }
+
+.theme--light .details__cover {
+  background: #eeeeee;
+}
+
+.theme--dark .details__cover {
+  background: #424242;
+}
+
 img {
   width: 100%;
 }

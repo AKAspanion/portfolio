@@ -5,6 +5,7 @@
     @mousemove="onMouseMoveHandler"
     @mouseout="onMouseLeaveHandler"
     @mouseenter="onMouseEnterHandler"
+    :class="noZoom ? '' : 'perspective-zoom'"
   >
     <div :id="innerId" :class="classes" class="perspective-inner">
       <slot></slot>
@@ -18,7 +19,7 @@ var refreshRate = 10;
 var inner = null;
 var container = null;
 export default {
-  props: ['classes'],
+  props: ['classes', 'noZoom'],
   data() {
     return {
       x: 0,
@@ -81,14 +82,15 @@ export default {
 </script>
   
 <style>
-.perspective-outer {
-  perspective: 18px;
+.perspective-outer,
+.perspective-zoom {
+  perspective: 24px;
   transition: transform 0.5s;
 }
 .perspective-inner {
-  transition: transform 0.3s;
+  transition: transform 0.5s;
 }
-.perspective-outer:hover {
+.perspective-zoom:hover {
   transform: scale(1.15);
   transform-origin: center center;
   transition: transform 0.5s;

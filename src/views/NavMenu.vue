@@ -200,7 +200,7 @@ export default {
     this.animateItems(false);
     this.$vuetify.theme.dark =
       localStorage.getItem('dark') == 'true' ? true : false;
-    this.$i18n.locale = localStorage.getItem('lang') == 'en' ? 'en' : 'hi';
+    this.$i18n.locale = localStorage.getItem('lang') == 'hi' ? 'hi' : 'en';
   },
 };
 </script>

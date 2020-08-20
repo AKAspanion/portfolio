@@ -1,0 +1,86 @@
+[
+  {
+    "name": "JavaScript",
+    "icon": "javaScript"
+  },
+  {
+    "name": "TypeScript",
+    "icon": "typeScript"
+  },
+  {
+    "name": "Vue",
+    "icon": "vue-dot-js"
+  },
+  {
+    "name": "React",
+    "icon": "react"
+  },
+  {
+    "name": "Redux",
+    "icon": "redux"
+  },
+  {
+    "name": "HTML",
+    "icon": "html5"
+  },
+  {
+    "name": "CSS",
+    "icon": "css3"
+  },
+  {
+    "name": "Jest",
+    "icon": "jest"
+  },
+  {
+    "name": "Node",
+    "icon": "node-dot-js"
+  },
+  {
+    "name": "Git",
+    "icon": "git"
+  },
+  {
+    "name": "jQuery",
+    "icon": "jquery"
+  },
+  {
+    "name": "Bootstrap",
+    "icon": "bootstrap"
+  },
+  {
+    "name": "Vuetify",
+    "icon": "vuetify"
+  },
+  {
+    "name": "Storybook",
+    "icon": "storybook"
+  },
+  {
+    "name": "Mongo DB",
+    "icon": "mongodb"
+  },
+  {
+    "name": "Firebase",
+    "icon": "firebase"
+  },
+  {
+    "name": "Swagger",
+    "icon": "swagger"
+  },
+  {
+    "name": "SASS",
+    "icon": "sass"
+  },
+  {
+    "name": "Angular",
+    "icon": "angular"
+  },
+  {
+    "name": "React Router",
+    "icon": "reactrouter"
+  },
+  {
+    "name": "Python",
+    "icon": "python"
+  }
+]
