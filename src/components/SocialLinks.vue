@@ -15,7 +15,7 @@
             :value="hide ? 0 : 100"
             :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
           >
-            <v-btn icon @click="onScroll" :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'">
+            <v-btn icon :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'">
               <v-icon :style="`transform: rotate(${hide ? '45':'90'}deg)`">mdi-chevron-left</v-icon>
             </v-btn>
           </v-progress-circular>

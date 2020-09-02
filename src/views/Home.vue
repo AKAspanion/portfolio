@@ -104,7 +104,7 @@
                   borderBottom: `2px solid ${top ? '#4FC08D':'#FFCA28'}`
                 }"
               >
-                <img :src="`images/icons/${icon}.svg`" />
+                <img class="skill-grid__img" :src="`images/icons/${icon}.svg`" />
                 <div
                   :class="['subtitle-1 font-weight-light pt-3', dark ? 'white--text':'black--text']"
                 >{{name}}</div>
@@ -128,8 +128,6 @@
               <div
                 :key="i"
                 class="exp-grid__item"
-                @mouseout="hideCursor()"
-                @mouseover="showCursor()"
                 :style="`background: ${dark ? '#616161':'#f5f5f5'}`"
                 v-for="({name, role, time, img, link, location, desc}, i) in expItems"
               >
@@ -146,7 +144,13 @@
                   </div>&nbsp;
                   <div class="d-inline-block headline font-weight-thin">{{role}}</div>
                 </div>
-                <div class="pt-3 title font-weight-light">{{desc}}</div>
+                <div 
+                  @mouseout="hideCursor()"
+                  @mouseover="showCursor()"
+                  class="pt-3 title font-weight-light" 
+                >
+                  {{desc}}
+                </div>
                 <div class="pt-8 font-weight-light">{{location}}</div>
                 <div class="overline">{{time}}</div>
               </div>
@@ -434,7 +438,12 @@ img {
 .skill-grid__item img {
   width: 32px;
   height: 32px;
+  transition: 0.5s;
   text-align: center;
+}
+.skill-grid__img:hover {
+  transform: scale(1.4);
+  transition: 0.5s;
 }
 .cursor-pointer {
   cursor: pointer;

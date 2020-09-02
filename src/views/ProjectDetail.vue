@@ -64,6 +64,11 @@ export default {
 <style scope>
 .details__cover {
   width: 100vw;
+  height: 100vh;
+}
+.details__cover img {
+  width: 100%;
+  height: 100vh;
   object-fit: cover;
   object-position: center;
 }
@@ -74,9 +79,5 @@ export default {
 
 .theme--dark .details__cover {
   background: #424242;
-}
-
-img {
-  width: 100%;
 }
 </style>
