@@ -108,6 +108,10 @@
     "icon": "jira"
   },
   {
+    "name": "स्ट्रैपी",
+    "icon": "strapi"
+  },
+  {
     "name": "फिग्मा",
     "icon": "figma"
   }

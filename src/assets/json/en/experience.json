@@ -1,12 +1,21 @@
 [
   {
+    "name": "GeekyAnts",
+    "role": "Software Engineer",
+    "location": "Bengaluru, India",
+    "time": "October 2020 - Present",
+    "img": "geekyants",
+    "link": "https://www.geekyants.com/",
+    "desc": "Currently working as a full time Software Engineer."
+  },
+  {
     "name": "Global IDs",
     "role": "Web Software Developer",
     "location": "Kolkata, India",
-    "time": "MAY 2019 - Present",
+    "time": "MAY 2019 - September 2020",
     "img": "gids",
     "link": "https://www.globalids.com/",
-    "desc": "As a Web/Software Developer, I build reusable web components and UI framework from scratch, for the product using Vue.js and Vuetify.js."
+    "desc": "As a Web/Software Developer, I built reusable web components and UI framework from scratch, for the product using Vue.js and Vuetify.js."
   },
   {
     "name": "TCS",
@@ -15,6 +24,6 @@
     "time": "JUNE 2018 - FEBRUARY 2019",
     "img": "tcs",
     "link": "https://www.tcs.com/",
-    "desc": "As a Trainee Developer, I built backend web application/REST API modules along with my team for the project using Node/Mongoose."
+    "desc": "As a Trainee Developer, I built backend web application / REST API modules along with my team for the project using Node/Mongoose."
   }
 ]

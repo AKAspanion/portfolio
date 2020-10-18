@@ -1,12 +1,12 @@
 <template>
   <div class="home-container" :style="containerStyle">
     <div class="home-text-wrapper">
-      <div class="home-text-container home-padding">
+      <div id="home" class="home-text-container home-padding">
         <div class="fixed-wrapper">
-          <div class="d-inline-block my-1 pb-2">{{$t("hi")}}</div>
+          <div class="d-inline-block my-1 pb-2">{{ $t('hi') }}</div>
           <br />
           <div class="d-inline-block my-1 pb-2">
-            <mask-text :delay="maskDelay">{{$t("home.salute")}},</mask-text>
+            <mask-text :delay="maskDelay">{{ $t('home.salute') }},</mask-text>
           </div>
           <br />
           <div class="d-inline-block my-1 pb-2">
@@ -16,36 +16,45 @@
                 classes="home-text--name"
                 link="images/profile.jpeg"
                 @click="goToRoute('/about')"
-              >{{$t("home.name")}}</hover-text>-
+                >{{ $t('home.name') }}</hover-text
+              >-
             </mask-text>
           </div>
           <br />
           <div class="d-inline-block my-1 pb-2">
-            <mask-text :delay="maskDelay">{{$t("home.designation-1")}}</mask-text>
+            <mask-text :delay="maskDelay">{{
+              $t('home.designation-1')
+            }}</mask-text>
           </div>
           <br />
           <div class="d-inline-block my-1 pb-2">
-            <mask-text :delay="maskDelay">{{$t("home.designation-2")}}</mask-text>
+            <mask-text :delay="maskDelay">{{
+              $t('home.designation-2')
+            }}</mask-text>
           </div>
         </div>
       </div>
     </div>
     <template v-if="loaded">
-      <div class="project-text-wrapper">
+      <div id="projects" class="project-text-wrapper">
         <div class="about-headline home-padding">
-          <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
+          <div class="fixed-wrapper" :class="mobile ? '' : 'pt-12 mt-4'">
             <div class="text-center">
               <div class="d-inline-block display-2 font-weight-light">
-                <mask-text v-model="aboutHead" :delay="maskDelay">{{$t("projects.title")}}</mask-text>
+                <mask-text v-model="aboutHead" :delay="maskDelay">{{
+                  $t('projects.title')
+                }}</mask-text>
               </div>
             </div>
             <div class="text-center pt-4 mb-12 pb-12">
-              <div class="d-inline-block title font-weight-light">{{$t("projects.subtitle")}}</div>
+              <div class="d-inline-block title font-weight-light">
+                {{ $t('projects.subtitle') }}
+              </div>
             </div>
             <div class="work-grid">
               <div
                 class="work-grid__item"
-                v-for="({name, img, link, icons}, i) in projectItems"
+                v-for="({ name, img, link, icons }, i) in projectItems"
                 :key="i"
               >
                 <skew-on-hover classes="work-grid__img">
@@ -58,7 +67,7 @@
                       class="text-center home-text--name"
                       :text="`${$t('projects.go-to')}, ${name}`"
                     >
-                      {{$t("view")}}
+                      {{ $t('view') }}
                       <br />&rarr;
                     </hover-text>
                   </div>
@@ -66,31 +75,40 @@
                 </skew-on-hover>
                 <div>
                   <div class="d-inline-block pt-4 title font-weight-medium">
-                    <mask-text v-model="aboutHead" :delay="maskDelay">{{name}}</mask-text>
+                    <mask-text v-model="aboutHead" :delay="maskDelay">{{
+                      name
+                    }}</mask-text>
                   </div>
                 </div>
-                <span v-for="(icon, i) in icons" :key="i" class="d-inline-block">
-                  <v-icon
-                    small
-                    :color="icon.color"
-                  >{{ icon.icon.startsWith('M') ? icon.icon : `mdi-${icon.icon}`}}</v-icon>
-                  <span class="ml-2 mr-4 overline">{{icon.name}}</span>
+                <span
+                  v-for="(icon, i) in icons"
+                  :key="i"
+                  class="d-inline-block"
+                >
+                  <v-icon small :color="icon.color">{{
+                    icon.icon.startsWith('M') ? icon.icon : `mdi-${icon.icon}`
+                  }}</v-icon>
+                  <span class="ml-2 mr-4 overline">{{ icon.name }}</span>
                 </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="skills-text-wrapper">
+      <div id="skills" class="skills-text-wrapper">
         <div class="home-padding">
-          <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
+          <div class="fixed-wrapper" :class="mobile ? '' : 'pt-12 mt-4'">
             <div class="text-center">
               <div class="d-inline-block display-2 font-weight-light">
-                <mask-text v-model="aboutHead" :delay="maskDelay">{{$t("skills.title")}}</mask-text>
+                <mask-text v-model="aboutHead" :delay="maskDelay">{{
+                  $t('skills.title')
+                }}</mask-text>
               </div>
             </div>
             <div class="text-center pt-4 mb-12 pb-12">
-              <div class="d-inline-block title font-weight-light">{{$t("skills.subtitle")}}</div>
+              <div class="d-inline-block title font-weight-light">
+                {{ $t('skills.subtitle') }}
+              </div>
             </div>
             <div class="skill-grid pt-12 pb-12 mb-12">
               <div
@@ -98,38 +116,51 @@
                 class="skill-grid__item"
                 @mouseout="hideCursor()"
                 @mouseover="showCursor()"
-                v-for="({name, icon, top}, i) in skillItems"
+                v-for="({ name, icon, top }, i) in skillItems"
                 :style="{
-                  background: dark ? '#424242':'#EEEEEE',
-                  borderBottom: `2px solid ${top ? '#4FC08D':'#FFCA28'}`
+                  background: dark ? '#424242' : '#EEEEEE',
+                  borderBottom: `2px solid ${top ? '#4FC08D' : '#FFCA28'}`,
                 }"
               >
-                <img class="skill-grid__img" :src="`images/icons/${icon}.svg`" />
+                <img
+                  class="skill-grid__img"
+                  :src="`images/icons/${icon}.svg`"
+                />
                 <div
-                  :class="['subtitle-1 font-weight-light pt-3', dark ? 'white--text':'black--text']"
-                >{{name}}</div>
+                  :class="[
+                    'subtitle-1 font-weight-light pt-3',
+                    dark ? 'white--text' : 'black--text',
+                  ]"
+                >
+                  {{ name }}
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="exp-text-wrapper">
+      <div id="experience" class="exp-text-wrapper">
         <div class="home-padding">
-          <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
+          <div class="fixed-wrapper" :class="mobile ? '' : 'pt-12 mt-4'">
             <div class="text-center">
               <div class="d-inline-block display-2 font-weight-light">
-                <mask-text v-model="aboutHead" :delay="maskDelay">{{$t("experience.title")}}</mask-text>
+                <mask-text v-model="aboutHead" :delay="maskDelay">{{
+                  $t('experience.title')
+                }}</mask-text>
               </div>
             </div>
             <div class="text-center pt-4 mb-12 pb-8">
-              <div class="d-inline-block title font-weight-light">{{$t("experience.subtitle")}}</div>
+              <div class="d-inline-block title font-weight-light">
+                {{ $t('experience.subtitle') }}
+              </div>
             </div>
             <div class="exp-grid pb-12">
               <div
                 :key="i"
                 class="exp-grid__item"
-                :style="`background: ${dark ? '#616161':'#f5f5f5'}`"
-                v-for="({name, role, time, img, link, location, desc}, i) in expItems"
+                :style="`background: ${dark ? '#616161' : '#f5f5f5'}`"
+                v-for="({ name, role, time, img, link, location, desc },
+                i) in expItems"
               >
                 <div>
                   <div class="d-inline-block font-weight-light display-1">
@@ -139,35 +170,45 @@
                         classes="home-text--name"
                         :link="`images/${img}.png`"
                         @click="navigateTo(link)"
-                      >{{name}}</hover-text>,
+                        >{{ name }}</hover-text
+                      >,
                     </mask-text>
-                  </div>&nbsp;
-                  <div class="d-inline-block headline font-weight-thin">{{role}}</div>
+                  </div>
+                  &nbsp;
+                  <div class="d-inline-block headline font-weight-thin">
+                    {{ role }}
+                  </div>
+                  <div
+                    @mouseout="hideCursor()"
+                    @mouseover="showCursor()"
+                    class="pt-3 title font-weight-light"
+                  >
+                    {{ desc }}
+                  </div>
                 </div>
-                <div 
-                  @mouseout="hideCursor()"
-                  @mouseover="showCursor()"
-                  class="pt-3 title font-weight-light" 
-                >
-                  {{desc}}
+                <div>
+                  <div class="pt-8 font-weight-light">{{ location }}</div>
+                  <div class="overline">{{ time }}</div>
                 </div>
-                <div class="pt-8 font-weight-light">{{location}}</div>
-                <div class="overline">{{time}}</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="contact-text-wrapper">
+      <div id="contact" class="contact-text-wrapper">
         <div class="home-padding">
-          <div class="fixed-wrapper" :class="mobile ? '':'pt-12 mt-4'">
+          <div class="fixed-wrapper" :class="mobile ? '' : 'pt-12 mt-4'">
             <div class="text-center mb-2 mt-6">
               <div class="d-inline-block display-2 font-weight-light">
-                <mask-text v-model="aboutHead" :delay="maskDelay">{{$t("contact.title")}}</mask-text>
+                <mask-text v-model="aboutHead" :delay="maskDelay">{{
+                  $t('contact.title')
+                }}</mask-text>
               </div>
             </div>
             <div class="text-center pt-12 mt-12">
-              <div class="d-inline-block headline font-weight-light">panditankit1995@gmail.com</div>
+              <div class="d-inline-block headline font-weight-light">
+                panditankit1995@gmail.com
+              </div>
             </div>
             <div class="text-center pt-6 mb-12 pb-8">
               <div
@@ -209,7 +250,9 @@
       <div class="footer-text-wrapper py-12">
         <div
           class="pt-9 pb-10 title text-center font-weight-light text-uppercase"
-        >{{$t("copyright")}}</div>
+        >
+          {{ $t('copyright') }}
+        </div>
       </div>
     </template>
   </div>
@@ -290,7 +333,7 @@ export default {
   },
 };
 </script>
-<style >
+<style>
 .work-grid__img {
   height: 203px;
   object-fit: cover;
@@ -385,6 +428,10 @@ export default {
 }
 .exp-grid__item {
   padding: 32px;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-between;
 }
 img {
   width: 100%;

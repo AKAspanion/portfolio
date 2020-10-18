@@ -22,11 +22,7 @@
         <v-col cols="12" md="10">
           <div class="nav-container">
             <div
-              :class="
-                $vuetify.breakpoint.xsOnly
-                    ? 'display-3'
-                    : 'display-4'
-              "
+              :class="$vuetify.breakpoint.xsOnly ? 'display-2' : 'display-3'"
               class="nav-item-container font-weight-thin my-4"
               v-for="navItem in navItems"
               :key="navItem.id"
@@ -36,7 +32,8 @@
                   classes="nav-item"
                   :text="navItem.tooltip"
                   @click="navigateTo(navItem)"
-                >{{ navItem.name }}</hover-text>
+                  >{{ navItem.name }}</hover-text
+                >
               </div>
             </div>
           </div>
@@ -51,24 +48,22 @@
               tile
               class="my-4"
               v-model="theme"
-              :background-color="
-                theme === 1 ? '#000000' : '#FFFFFF'
-              "
+              :background-color="theme === 1 ? '#000000' : '#FFFFFF'"
             >
               <v-btn x-small text>
                 <v-icon x-small>mdi-white-balance-sunny</v-icon>
               </v-btn>
               <v-btn x-small text>
-                <v-icon x-small style="transform: rotate(-45deg)">mdi-moon-waning-crescent</v-icon>
+                <v-icon x-small style="transform: rotate(-45deg)"
+                  >mdi-moon-waning-crescent</v-icon
+                >
               </v-btn>
             </v-btn-toggle>
             <v-btn-toggle
               tile
               class="my-4 ml-4"
               v-model="lang"
-              :background-color="
-                theme === 1 ? '#000000' : '#FFFFFF'
-              "
+              :background-color="theme === 1 ? '#000000' : '#FFFFFF'"
             >
               <v-btn x-small text>EN</v-btn>
               <v-btn x-small text>HI</v-btn>
@@ -78,17 +73,15 @@
         <v-col cols="12" md="7">
           <v-row no-gutters align="center">
             <div
-              :class="
-                $vuetify.breakpoint.xsOnly
-                    ? 'mb-3 pr-4'
-                    : 'my-8 pr-8 '
-              "
+              :class="$vuetify.breakpoint.xsOnly ? 'mb-3 pr-4' : 'my-8 pr-8 '"
               class="overline link-item-container"
               v-for="link in socialLinks"
               :key="link.id"
             >
               <div class="link-item-wrapper">
-                <hover-text classes="link-item" @click="openLink(link)">{{ link.name }}</hover-text>
+                <hover-text classes="link-item" @click="openLink(link)">{{
+                  link.name
+                }}</hover-text>
               </div>
             </div>
           </v-row>
@@ -97,7 +90,9 @@
           <div
             :class="$vuetify.breakpoint.xsOnly ? 'mb-4' : ''"
             class="overline text-sm-right copy-item-wrapper"
-          >{{$t("copyright")}}</div>
+          >
+            {{ $t('copyright') }}
+          </div>
         </v-col>
       </v-row>
     </div>
@@ -155,10 +150,11 @@ export default {
     immediate: true,
   },
   methods: {
-    navigateTo() {
+    navigateTo({ domId }) {
       // this.$router.push(`/${page.name}`);
       this.hideCursor();
       this.$store.dispatch('SHOW_NAV_MENU', false);
+      this.$vuetify.goTo(`#${domId}`);
     },
     openLink(link) {
       window.open(link.url, '_blank');
