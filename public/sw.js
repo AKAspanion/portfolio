@@ -10,14 +10,12 @@ const staticAssets = [
   './fonts/',
 ];
 
-self.addEventListener('install', async event => {
-  console.log('install event', event);
+self.addEventListener('install', async () => {
   const cache = await caches.open(cacheName);
   await cache.addAll(staticAssets);
 });
 
 self.addEventListener('fetch', async event => {
-  console.log('fetch event', event);
   const req = event.request;
   event.respondWith(cacheFirst(req));
 });

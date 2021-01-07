@@ -29,7 +29,7 @@
                     height="203"
                     :src="cursor.link"
                     class="cursor-photo"
-                    lazy-src="lazy.jpeg"
+                    lazy-src="icons/lazy.jpeg"
                 ></v-img>
             </template>
             <div

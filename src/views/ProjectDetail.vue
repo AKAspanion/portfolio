@@ -2,7 +2,7 @@
   <div v-if="current" :style="containerStyle">
     <skew-on-hover :no-zoom="true">
       <div class="details__cover">
-        <img :alt="current.coverImg" :src="`/images/${current.coverImg}.png`" />
+        <img :alt="current.coverImg" :src="`/images/${current.coverImg}.webp`" />
       </div>
     </skew-on-hover>
 

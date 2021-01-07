@@ -14,7 +14,7 @@
               <hover-text
                 :text="$t('home.know-me')"
                 classes="home-text--name"
-                link="images/profile.jpeg"
+                link="images/profile.webp"
                 @click="goToRoute('/about')"
                 >{{ $t('home.name') }}</hover-text
               >-
@@ -58,12 +58,12 @@
                 :key="i"
               >
                 <skew-on-hover classes="work-grid__img">
-                  <img :alt="img" :src="`images/${img}.png`" />
+                  <img :alt="img" :src="`images/${img}.webp`" />
 
                   <div class="work-grid__view-link title">
                     <hover-text
                       @click="navigateTo(link)"
-                      :link="`images/ss/${img}.jpg`"
+                      :link="`images/ss/${img}.webp`"
                       class="text-center home-text--name"
                       :text="`${$t('projects.go-to')}, ${name}`"
                     >
@@ -169,7 +169,7 @@
                       <hover-text
                         :text="name"
                         classes="home-text--name"
-                        :link="`images/${img}.png`"
+                        :link="`images/${img}.webp`"
                         @click="navigateTo(link)"
                         >{{ name }}</hover-text
                       >,
