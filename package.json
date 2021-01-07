@@ -7,6 +7,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "predeploy": "npm run build",
+    "login": "firebase login",
     "deploy": "firebase deploy --only hosting"
   },
   "dependencies": {
@@ -27,6 +28,7 @@
     "babel-eslint": "^10.0.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "firebase-tools": "^9.1.2",
     "vue-template-compiler": "^2.5.21"
   },
   "eslintConfig": {

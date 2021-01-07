@@ -58,7 +58,7 @@
                 :key="i"
               >
                 <skew-on-hover classes="work-grid__img">
-                  <img :src="`images/${img}.png`" />
+                  <img :alt="img" :src="`images/${img}.png`" />
 
                   <div class="work-grid__view-link title">
                     <hover-text
@@ -123,6 +123,7 @@
                 }"
               >
                 <img
+                  :alt="icon"
                   class="skill-grid__img"
                   :src="`images/icons/${icon}.svg`"
                 />
