@@ -15,7 +15,7 @@
             class="name-item-container overline"
           >
             <div class="name-item-wrapper">
-              <div class="d-inline-block">ankitpandit.xyz</div>
+              <div class="d-inline-block">ankitkumar.xyz</div>
             </div>
           </div>
         </v-col>
