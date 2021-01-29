@@ -1,29 +1,14 @@
-# vue-spanion
+# [ankitkumar.xyz](https://ankitkumar.xyz/)
+My personal/portfolio website.
 
-## Project setup
-```
+## Website
+See the production site [here](https://ankitkumar.xyz/).  
+[*If the above link is broken go [here](https://spanion-portfolio.web.app/)*.]
+
+## Run locally
+```bash
+git clone https://github.com/AKAspanion/portfolio.git
+cd portfolio
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
 npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
