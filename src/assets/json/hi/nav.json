@@ -18,13 +18,13 @@
     "tooltip": "मेरे तकनीकी स्टैक देखे"
   },
   {
-    "id": 2,
+    "id": 3,
     "name": "अनुभव",
     "domId": "experience",
     "tooltip": "मेरे अनुभव में देखे"
   },
   {
-    "id": 3,
+    "id": 4,
     "name": "संपर्क",
     "domId": "contact",
     "tooltip": "मेरे साथ संपर्क करे"
