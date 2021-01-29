@@ -114,5 +114,13 @@
   {
     "name": "फिग्मा",
     "icon": "figma"
+  },
+  {
+    "name": "फ्लटर",
+    "icon": "flutter"
+  },
+  {
+    "name": "डार्ट",
+    "icon": "dart"
   }
 ]

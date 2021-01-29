@@ -128,5 +128,13 @@
   {
     "name": "Figma",
     "icon": "figma"
+  },
+  {
+    "name": "Flutter",
+    "icon": "flutter"
+  },
+  {
+    "name": "Dart",
+    "icon": "dart"
   }
 ]
