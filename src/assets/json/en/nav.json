@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "name": "home",
+    "domId": "home",
+    "tooltip": "go to home"
+  },
+  {
+    "id": 1,
+    "name": "projects",
+    "domId": "projects",
+    "tooltip": "see my projects"
+  },
+  {
+    "id": 4,
+    "name": "skills",
+    "domId": "skills",
+    "tooltip": "know my tech stack"
+  },
+  {
+    "id": 2,
+    "name": "experience",
+    "domId": "experience",
+    "tooltip": "look into my experience"
+  },
+  {
+    "id": 3,
+    "name": "contact",
+    "domId": "contact",
+    "tooltip": "get in touch with me"
+  }
+]

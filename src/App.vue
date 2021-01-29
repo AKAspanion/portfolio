@@ -1,251 +1,174 @@
 <template>
-    <div id="app">
-        <v-app
-            v-touch="{
-            left: () => swipe('right'),
-            right: () => swipe('left'),
-            up: () => swipe('up'),
-            down: () => swipe('down')
-            }"
-        >
-            <HamBurger :alive="isMenuActive" @click.native="onHamClick" />
-            <MenuBar :alive="isMenuActive" :menuItems="menuItems" @click.native="onMenuClick" />
-            <transition :name="transitionName" mode="out-in">
-                <router-view></router-view>
-            </transition>
-            <div class="scroll-icon">
-                <div class="arrow-container">
-                    <div v-show="routeIndex !== 0" @click="navigate('left')" class>
-                        <v-icon color="white">arrow_left</v-icon>
-                    </div>
-                </div>
-                <div class="scroll-title">{{$t(`ui.menuItems.${routeIndex}`)}}</div>
-                <div class="arrow-container">
-                    <div
-                        v-show="routeIndex !== menuItems.length-1"
-                        @click="navigate('right')"
-                        @keyup.left="navigate('left')"
-                    >
-                        <v-icon color="white">arrow_right</v-icon>
-                    </div>
-                </div>
-            </div>
-        </v-app>
-    </div>
+  <v-app :class="loaded ? '' : 'disable-cursor'">
+    <nav-menu></nav-menu>
+    <cursor-animated></cursor-animated>
+    <v-fade-transition>
+      <div v-show="scrollPosition > 1 && !hamPosition.top" :style="background" class="nav-shadow"></div>
+    </v-fade-transition>
+    <spanion-logo :top="hamPosition.top" :left="loaded ? hamPosition.right : -80"></spanion-logo>
+    <scroll-progress :bottom="hamPosition.top" :right="loaded ? hamPosition.right : -80"></scroll-progress>
+    <menu-hamburger :top="hamPosition.top" :right="loaded ? hamPosition.right : -80"></menu-hamburger>
+    <social-links
+      v-if="hamPosition.top"
+      :bottom="hamPosition.top"
+      :left="loaded ? hamPosition.right : -80"
+    ></social-links>
+    <transition name="page" mode="out-in">
+      <router-view></router-view>
+    </transition>
+  </v-app>
 </template>
 
 <script>
-import MenuBar from "./components/MenuBar.vue";
-import HamBurger from "./components/HamBurger.vue";
-const DEFAULT_TRANSITION = "slide-left";
+import NavMenu from '@/views/NavMenu.vue';
+import CursorAnimated from '@/components/CursorAnimated.vue';
+import ScrollProgress from '@/components/ScrollProgress.vue';
+import SpanionLogo from '@/components/SpanionLogo.vue';
+import SocialLinks from '@/components/SocialLinks.vue';
+import MenuHamburger from '@/components/MenuHamburger.vue';
 export default {
-    name: "app",
-    components: {
-        MenuBar,
-        HamBurger
-    },
-    data() {
+  name: 'app',
+  components: {
+    NavMenu,
+    SocialLinks,
+    SpanionLogo,
+    MenuHamburger,
+    CursorAnimated,
+    ScrollProgress,
+  },
+  computed: {
+    hamPosition() {
+      if (this.$vuetify.breakpoint.xsOnly) {
         return {
-            routeIndex: 0,
-            isMenuActive: false,
-            menuItems: ["home", "about", "work", "contact"],
-            scrollPosition: 0,
-            SCROLL_VALUE: 5,
-            transitionName: DEFAULT_TRANSITION
+          top: 0,
+          right: 12,
         };
+      } else {
+        return {
+          top: 40,
+          right: 40,
+        };
+      }
     },
-    computed: {
-        themeModel: {
-            get() {
-                return this.$vuetify.theme.dark;
-            },
-            set(val) {
-                this.$vuetify.theme.dark = val;
-            }
+    background() {
+      return `background: ${this.$vuetify.theme.dark ? '#212121' : '#E0E0E0'};`;
+    },
+    scrollPosition() {
+      return this.$store.getters.scrollPos;
+    },
+    loaded() {
+      return this.$store.getters.loaded;
+    },
+    mobile() {
+      return this.$vuetify.breakpoint.xsOnly;
+    },
+    dark() {
+      return this.$vuetify.theme.dark;
+    },
+  },
+  watch: {
+    scrollPosition: {
+      handler(v) {
+        if (v && this.mobile) {
+          let offset = v + 80;
+          let navShadow = document.querySelector('.nav-shadow');
+          let container = document.querySelector('.project-text-wrapper');
+          let container2 = document.querySelector('.exp-text-wrapper');
+          let container3 = document.querySelector('.contact-text-wrapper');
+          if (0 <= offset && offset <= container.offsetTop) {
+            navShadow.style.backgroundColor = this.dark ? '#212121' : '#E0E0E0';
+          } else if (
+            container.offsetTop < offset &&
+            offset <= container2.offsetTop
+          ) {
+            navShadow.style.backgroundColor = window.getComputedStyle(
+              container,
+            ).backgroundColor;
+          } else if (
+            container2.offsetTop < offset &&
+            offset <= container3.offsetTop
+          ) {
+            navShadow.style.backgroundColor = window.getComputedStyle(
+              container2,
+            ).backgroundColor;
+          } else {
+            navShadow.style.backgroundColor = window.getComputedStyle(
+              container3,
+            ).backgroundColor;
+          }
+          if (v && v > 1) {
+            // navShadow.classList.add('elevation-3');
+            navShadow.style.boxShadow = `0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)`;
+          }
         }
+      },
+      immediate: true,
     },
-    methods: {
-        test(data) {
-            console.log(data);
-        },
-        swipe(direction) {
-            switch (direction) {
-                case "left":
-                    this.navigate("left");
-                    break;
-                case "right":
-                    this.navigate("right");
-                    break;
-                case "up":
-                    this.isMenuActive = false;
-                    break;
-                case "down":
-                    this.isMenuActive = true;
-                    break;
-                default:
-            }
-        },
-        onHamClick() {
-            this.isMenuActive = !this.isMenuActive;
-        },
-        onMenuClick() {
-            if (this.isMenuActive) {
-                this.isMenuActive = false;
-            }
-        },
-        handleScroll(event) {
-            if (!this.isMenuActive) {
-                if (event.deltaY < 0) {
-                    this.navigate("left");
-                } else {
-                    this.navigate("right");
-                }
-                this.stopEvents(1000);
-            }
-        },
-        handleKeyUp(e) {
-            switch (e.key) {
-                case "ArrowLeft":
-                    this.navigate("left");
-                    break;
-                case "ArrowRight":
-                    this.navigate("right");
-                    break;
-            }
-            this.stopEvents(1000);
-        },
-        navigate(direction) {
-            let path = "/";
-            if (direction === "left") {
-                if (this.routeIndex !== 0) {
-                    path += this.menuItems[this.routeIndex - 1];
-                } else {
-                    path += this.menuItems[this.routeIndex];
-                }
-            } else if (direction === "right") {
-                if (this.routeIndex !== this.menuItems.length - 1) {
-                    path += this.menuItems[this.routeIndex + 1];
-                } else {
-                    path += this.menuItems[this.routeIndex];
-                }
-            }
-            this.$router.push(path);
-        },
-        changeScrollPos(event) {
-            if (event) {
-                this.scrollPosition += this.SCROLL_VALUE;
-            } else {
-                if (this.scrollPosition > 0) {
-                    this.scrollPosition -= this.SCROLL_VALUE;
-                }
-            }
-        },
-        stopEvents(time) {
-            window.removeEventListener("mousewheel", this.handleScroll);
-            window.removeEventListener("keyup", this.handleKeyUp);
-            setTimeout(() => {
-                window.addEventListener("mousewheel", this.handleScroll);
-                window.addEventListener("keyup", this.handleKeyUp);
-            }, time);
-        }
-    },
-    created() {
-        window.addEventListener("mousewheel", this.handleScroll);
-        window.addEventListener("keyup", this.handleKeyUp);
-        this.routeIndex = this.$router.currentRoute.meta.index;
-        this.$router.beforeEach((to, from, next) => {
-            this.routeIndex = to.meta.index;
-            if (to.meta) {
-                var transition =
-                    to.meta.index < from.meta.index
-                        ? "slide-right"
-                        : "slide-left";
-            }
-            this.transitionName = transition || DEFAULT_TRANSITION;
-            next();
-        });
-    },
-    destroyed() {
-        window.removeEventListener("mousewheel", this.handleScroll);
-        window.removeEventListener("keyup", this.handleKeyUp);
-    }
+  },
 };
 </script>
 
 <style>
-@import url("https://fonts.googleapis.com/css?family=Rubik&display=swap");
+@import url('/assets/style.css');
+@import url('https://fonts.googleapis.com/css?family=Rubik&display=swap');
 @font-face {
-    font-family: "Hipstelvetica";
-    src: url("./assets/fonts/Hipstelvetica.ttf");
+  font-family: 'Hipstelvetica';
+  src: url('./assets/fonts/Hipstelvetica.ttf');
 }
 
 @font-face {
-    font-family: "Andis";
-    src: url("./assets/fonts/Andis.ttf");
+  font-family: 'Andis';
+  src: url('./assets/fonts/Andis.ttf');
 }
 * {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    text-rendering: optimizeLegibility;
+  margin: 0px;
+  padding: 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 body {
-    margin: 0;
-    padding: 0;
-    z-index: -1;
-    transition: 0.5s ease;
+  margin: 0;
+  padding: 0;
+  z-index: -1;
+  transition: 0.5s ease;
 }
 #app {
-    font-family: "Rubik";
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    color: rgb(65, 65, 65);
-}
-.scroll-icon {
-    display: flex;
-    position: absolute;
-    bottom: 10px;
-    left: 50%;
-    justify-content: space-between;
-    align-items: stretch;
-    transform: translateX(-50%);
-}
-.scroll-title {
-    text-align: center;
-    width: 50px;
-    padding: 7px 5px 5px 5px;
-    color: white;
-    font-size: 10px;
-}
-.arrow-container {
-    width: 22px;
-    cursor: pointer;
+  font-family: 'Rubik';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: rgb(65, 65, 65);
 }
 
 ::-webkit-scrollbar {
-    width: 0;
+  width: 5px;
 }
-.slide-left-enter-active,
-.slide-left-leave-active,
-.slide-right-enter-active,
-.slide-right-leave-active {
-    transition-duration: 0.5s;
-    transition-property: height, opacity, transform;
-    transition-timing-function: cubic-bezier(0.55, 0, 0.1, 1);
-    overflow: hidden;
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
 }
 
-.slide-left-enter,
-.slide-right-leave-active {
-    opacity: 0;
-    transform: translate(2em, 0);
+::-webkit-scrollbar-thumb {
+  background: #424242;
 }
-
-.slide-left-leave-active,
-.slide-right-enter {
-    opacity: 0;
-    transform: translate(-2em, 0);
+::-webkit-scrollbar-thumb:hover {
+  background: #000000;
 }
-.test {
-    background: red;
+.page-enter-active,
+.page-leave-active {
+  transition: transform 0.9s cubic-bezier(1, 0, 0, 1);
+}
+.page-enter,
+.page-leave-to {
+  transform: translateX(100vw);
+  transition-timing-function: cubic-bezier(1, 0, 0, 1);
+}
+.disable-cursor {
+  pointer-events: none;
+}
+.nav-shadow {
+  width: 100vw;
+  height: 80px;
+  z-index: 48;
+  position: fixed;
 }
 </style>

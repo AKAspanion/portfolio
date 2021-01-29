@@ -1,60 +1,83 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
-import SpanionAbout from './pages/SpanionAbout.vue'
-import SpanionContact from './pages/SpanionContact.vue'
-import SpanionHome from './pages/SpanionHome.vue'
-import SpanionNotFound from './pages/SpanionNotFound.vue'
-import SpanionWork from './pages/SpanionWork.vue'
+import Home from './views/Home.vue';
+import About from './views/About.vue';
+import Contact from './views/Contact.vue';
+import Project from './views/Project.vue';
+import ProjectDetail from './views/ProjectDetail.vue';
+import Experience from './views/Experience.vue';
+import NotFound from './views/NotFound.vue';
 
-
-const routes = [{
-        path: '/about',
-        component: SpanionAbout,
-        meta: {
-            index: 1
-        }
+const routes = [
+  {
+    path: '/home',
+    component: Home,
+    meta: {
+      index: 0,
     },
-    {
-        path: '/work',
-        component: SpanionWork,
-        meta: {
-            index: 2
-        }
+  },
+  {
+    path: '/',
+    component: Home,
+    meta: {
+      index: 0,
     },
-    {
-        path: '/contact',
-        component: SpanionContact,
-        meta: {
-            index: 3
-        }
+  },
+  {
+    path: '/about',
+    component: About,
+    meta: {
+      index: 1,
     },
-    {
-        path: '/home',
-        component: SpanionHome,
-        meta: {
-            index: 0
-        }
+  },
+  {
+    path: '/experience',
+    component: Experience,
+    meta: {
+      index: 2,
     },
-    {
-        path: '/',
-        component: SpanionHome,
-        meta: {
-            index: 0
-        }
+  },
+  {
+    path: '/projects',
+    component: Project,
+    meta: {
+      index: 2,
     },
-    {
-        path: '*',
-        component: SpanionNotFound,
-        meta: {
-            index: 0
-        }
-    }
-]
+  },
+  {
+    path: '/projects/:id',
+    component: ProjectDetail,
+    meta: {
+      index: 2,
+    },
+  },
+  {
+    path: '/contact',
+    component: Contact,
+    meta: {
+      index: 3,
+    },
+  },
+  {
+    path: '/exp',
+    component: Contact,
+    meta: {
+      index: 3,
+    },
+  },
+  {
+    path: '*',
+    component: NotFound,
+    meta: {
+      index: 0,
+    },
+  },
+];
 
 export default new VueRouter({
-    mode: 'history',
-    routes
-})
+  mode: 'history',
+  routes,
+});

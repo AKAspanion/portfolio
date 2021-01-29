@@ -1,0 +1,17 @@
+{
+    "name": "Ankit Kumar Pandit",
+    "short_name": "spanion",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "orientation": "any",
+    "background_color": "#000000",
+    "description": "Portfolio website of Ankit Kumar Pandit.",
+    "theme_color": "#ffffff",
+    "icons": [
+        {
+            "src": "images/logo/logo-512x512.webp",
+            "sizes": "512x512",
+            "type": "image/webp"
+        }
+    ]
+}

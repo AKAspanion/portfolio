@@ -1,74 +1,91 @@
 {
-    "home": {
-        "name": "ANKIT PANDIT",
-        "separator": "/",
-        "designation": "DEVELOPER"
+  "hi": "Hi.",
+  "view": "VIEW",
+  "links": "LINKS",
+  "go-up": "GO UP",
+  "scroll": "SCROLL",
+  "copyright": "© 2020 ANKIT KUMAR",
+  "projects": {
+    "title": "PROJECTS",
+    "subtitle": "Here's a selection of projects I've worked on recently",
+    "go-to": "Visit site"
+  },
+  "experience": {
+    "title": "EXPERIENCE",
+    "subtitle": "I have been an associate of these awesome companies"
+  },
+  "skills": {
+    "title": "SKILLS",
+    "subtitle": "Here's a list of my tech stack"
+  },
+  "contact": {
+    "title": "CONTACT"
+  },
+  "home": {
+    "name": "ANKIT KUMAR",
+    "salute": "My name is",
+    "designation-1": "Software and",
+    "designation-2": "Web developer.",
+    "know-me": "THIS IS ME"
+  },
+  "about": {
+    "name": "Ankit Kumar Pandit",
+    "position": "Software/Web Developer",
+    "company": {
+      "title": "Global Ids",
+      "url": "http://google.com"
+    },
+    "love": "I love making awesome web applications and websites.",
+    "socialLinks": [
+      {
+        "title": "Github",
+        "url": "https://github.com/AKAspanion"
+      },
+      {
+        "title": "Instagram",
+        "url": "http://google.com"
+      },
+      {
+        "title": "Facebook",
+        "url": "http://google.com"
+      }
+    ]
+  },
+  "work": [
+    {
+      "title": "Software Developer",
+      "period": "May 2019 - Current",
+      "company": "GLobal IDs, Kolkata",
+      "description": "As a Software Developer I build and revamp the UI of product along with my team using Vue.JS",
+      "technologies": ["Vue.js", "Swagger"]
+    },
+    {
+      "title": "Assistant Systems Engineer",
+      "period": "July 2018 - January 2019",
+      "company": "Tata Consultancy Services, Kolkata",
+      "description": "As a Trainee Backend Developer I built web application modules along with my team for a given project using Node.JS",
+      "technologies": ["Angular", "Node.JS"]
+    }
+  ],
+  "ui": {
+    "common": {
+      "fullStop": ".",
+      "and": "and"
+    },
+    "menuItems": {
+      "0": "home",
+      "1": "about",
+      "2": "work",
+      "3": "contact"
     },
     "about": {
-        "name": "Ankit Kumar Pandit",
-        "position": "Software/Web Developer",
-        "company": {
-            "title": "Global Ids",
-            "url": "http://google.com"
-        },
-        "love": "I love making awesome web applications and websites.",
-        "socialLinks": [
-            {
-                "title": "Github",
-                "url": "https://github.com/AKAspanion"
-            },
-            {
-                "title": "Instagram",
-                "url": "http://google.com"
-            },
-            {
-                "title": "Facebook",
-                "url": "http://google.com"
-            }
-        ]
-    },
-    "work": [
-        {
-            "title": "Software Developer",
-            "period": "May 2019 - Current",
-            "company": "GLobal IDs, Kolkata",
-            "description": "As a Software Developer I build and revamp the UI of product along with my team using Vue.JS",
-            "technologies": [
-                "Vue.js",
-                "Swagger"
-            ]
-        },
-        {
-            "title": "Assistant Systems Engineer",
-            "period": "July 2018 - January 2019",
-            "company": "Tata Consultancy Services, Kolkata",
-            "description": "As a Trainee Backend Developer I built web application modules along with my team for a given project using Node.JS",
-            "technologies": [
-                "Angular",
-                "Node.JS"
-            ]
-        }
-    ],
-    "projects": [],
-    "ui": {
-        "common": {
-            "fullStop": ".",
-            "and": "and"
-        },
-        "menuItems": {
-            "0": "home",
-            "1": "about",
-            "2": "work",
-            "3": "contact"
-        },
-        "about": {
-            "hi": "Hi.",
-            "name": "My name is ",
-            "about": {
-                "start": "I am a ",
-                "end": ", currently working at"
-            },
-            "follow": "You can follow me here -"
-        }
+      "hi": "Hi.",
+      "name": "My name is ",
+      "about": {
+        "start": "I am a ",
+        "end": ", currently working at"
+      },
+      "follow": "You can follow me here -"
     }
+  }
 }

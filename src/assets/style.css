@@ -1,10 +1,19 @@
-.link {
-    text-decoration: none;
-    color: #ffffff !important;
-    transition: 0.3s ease;
-    box-shadow: inset 0px -1px 0 #fff;
+.cursor-item-text {
+    cursor: pointer;
+    font-weight: bold;
+    will-change: transform;
+    transition: transform 150ms ease-out;
 }
 
-.link:hover {
-    box-shadow: inset 0px -16px 0 #fff;
+/* global override */
+.theme--light.v-application {
+    background: #ffffff !important;
+}
+
+.theme--dark.v-application {
+    background: #000000 !important;
+}
+
+.overflow-hidden {
+    overflow: hidden;
 }

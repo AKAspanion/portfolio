@@ -1,0 +1,140 @@
+[
+  {
+    "name": "JavaScript",
+    "icon": "javascript-i",
+    "top": true
+  },
+  {
+    "name": "TypeScript",
+    "icon": "typescript-i",
+    "top": true
+  },
+  {
+    "name": "Vue",
+    "icon": "vue-dot-js",
+    "top": true
+  },
+  {
+    "name": "React",
+    "icon": "react",
+    "top": true
+  },
+  {
+    "name": "Redux",
+    "icon": "redux",
+    "top": true
+  },
+  {
+    "name": "HTML",
+    "icon": "html5",
+    "top": true
+  },
+  {
+    "name": "CSS",
+    "icon": "css3",
+    "top": true
+  },
+  {
+    "name": "Jest",
+    "icon": "jest",
+    "top": true
+  },
+  {
+    "name": "Bootstrap",
+    "icon": "bootstrap",
+    "top": true
+  },
+  {
+    "name": "Git",
+    "icon": "git",
+    "top": true
+  },
+  {
+    "name": "Vuetify",
+    "icon": "vuetify",
+    "top": true
+  },
+  {
+    "name": "Storybook",
+    "icon": "storybook",
+    "top": true
+  },
+  {
+    "name": "Node",
+    "icon": "node-dot-js",
+    "top": true
+  },
+  {
+    "name": "jQuery",
+    "icon": "jquery",
+    "top": true
+  },
+  {
+    "name": "Mongo DB",
+    "icon": "mongodb"
+  },
+  {
+    "name": "Firebase",
+    "icon": "firebase"
+  },
+  {
+    "name": "Swagger",
+    "icon": "swagger"
+  },
+  {
+    "name": "SASS",
+    "icon": "sass"
+  },
+  {
+    "name": "Angular",
+    "icon": "angular"
+  },
+  {
+    "name": "React Router",
+    "icon": "reactrouter"
+  },
+  {
+    "name": "Python",
+    "icon": "python"
+  },
+  {
+    "name": "D3",
+    "icon": "d3-dot-js"
+  },
+  {
+    "name": "Svelte",
+    "icon": "svelte"
+  },
+  {
+    "name": "Nuxt",
+    "icon": "nuxt-dot-js"
+  },
+  {
+    "name": "Next",
+    "icon": "next-dot-js"
+  },
+  {
+    "name": "NPM",
+    "icon": "npm"
+  },
+  {
+    "name": "Jira",
+    "icon": "jira"
+  },
+  {
+    "name": "Strapi",
+    "icon": "strapi"
+  },
+  {
+    "name": "Figma",
+    "icon": "figma"
+  },
+  {
+    "name": "Flutter",
+    "icon": "flutter"
+  },
+  {
+    "name": "Dart",
+    "icon": "dart"
+  }
+]
