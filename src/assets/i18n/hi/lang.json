@@ -7,7 +7,7 @@
   "copyright": "© 2020 अंकित कुमार",
   "projects": {
     "title": "प्रोजेक्ट्स",
-    "subtitle": "यहां उन प्रोजेक्ट्स का चयन किया गया है, जिन पर मैंने हाल ही में काम किया है",
+    "subtitle": "यहाँ उन परियोजनाओं का चयन किया गया है जिन पर मैंने व्यक्तिगत रूप से काम किया है",
     "go-to": "जाये यंहा पे"
   },
   "experience": {
@@ -57,20 +57,14 @@
       "period": "May 2019 - Current",
       "company": "GLobal IDs, Kolkata",
       "description": "As a Software Developer I build and revamp the UI of product along with my team using Vue.JS",
-      "technologies": [
-        "Vue.js",
-        "Swagger"
-      ]
+      "technologies": ["Vue.js", "Swagger"]
     },
     {
       "title": "Assistant Systems Engineer",
       "period": "July 2018 - January 2019",
       "company": "Tata Consultancy Services, Kolkata",
       "description": "As a Trainee Backend Developer I built web application modules along with my team for a given project using Node.JS",
-      "technologies": [
-        "Angular",
-        "Node.JS"
-      ]
+      "technologies": ["Angular", "Node.JS"]
     }
   ],
   "ui": {
