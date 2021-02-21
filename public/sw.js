@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-const cacheName = 'spanion-v1';
+const cacheName = 'spanion-v2';
 const staticAssets = [
   './',
   './index.html',
