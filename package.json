@@ -11,7 +11,7 @@
     "deploy": "firebase deploy --only hosting"
   },
   "dependencies": {
-    "axios": "^0.21.1",
+    "axios": "^0.21.2",
     "core-js": "^2.6.5",
     "uid": "0.0.2",
     "vue": "^2.6.10",
