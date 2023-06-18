@@ -15,7 +15,7 @@
             class="name-item-container overline"
           >
             <div class="name-item-wrapper">
-              <div class="d-inline-block">ankitkumar.xyz</div>
+              <div class="d-inline-block">{{ hostName }}</div>
             </div>
           </div>
         </v-col>
@@ -115,6 +115,9 @@ export default {
     alive() {
       return this.$store.getters.navMenu;
     },
+    hostName() {
+      return window.location.hostname;
+    },
     socialLinks() {
       return this.$i18n.locale === 'en' ? socialEn : socialHi;
     },
@@ -212,16 +215,19 @@ export default {
   right: 0;
   top: 0;
 }
+
 .nav-menu-container--active {
   transition: transform 1s cubic-bezier(1, 0, 0, 1);
   transform: translate3d(0px, 0px, 0px);
 }
+
 .nav-item-container,
 .theme-item-container,
 .name-item-container,
 .link-item-container {
   overflow: hidden;
 }
+
 .nav-item-wrapper,
 .theme-item-wrapper,
 .copy-item-wrapper,
@@ -230,19 +236,23 @@ export default {
   transition: transform 0.5s cubic-bezier(1, 0, 0, 1);
   will-change: transform;
 }
+
 .nav-item,
 .link-item {
   cursor: pointer;
   will-change: transform;
   transition: transform 150ms ease-out;
 }
+
 .nav-container {
   margin-top: 24px;
 }
+
 @media only screen and (max-width: 600px) {
   .nav-menu-container {
     padding: 16px 24px 4px 24px;
   }
+
   .nav-container {
     margin-top: 0px;
   }
