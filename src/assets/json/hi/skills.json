@@ -16,6 +16,10 @@
     "icon": "react"
   },
   {
+    "name": "रियेक्ट राऊटर",
+    "icon": "reactrouter"
+  },
+  {
     "name": "रिडअक्स",
     "icon": "redux"
   },
@@ -51,6 +55,32 @@
     "name": "नोड",
     "icon": "node-dot-js"
   },
+  
+  {
+    "name": "इलेक्ट्रान",
+    "icon": "electron",
+    "top": true
+  },
+  {
+    "name": "वेबपक",
+    "icon": "webpack",
+    "top": true
+  },
+  {
+    "name": "वीते",
+    "icon": "vite",
+    "top": true
+  },
+  {
+    "name": "इस बिल्ड ",
+    "icon": "esbuild",
+    "top": true
+  },
+  {
+    "name": "रोलुप",
+    "icon": "rollup",
+    "top": true
+  },
   {
     "name": "जक्वेरी",
     "icon": "jquery"
@@ -74,10 +104,6 @@
   {
     "name": "एंगुलर",
     "icon": "angular"
-  },
-  {
-    "name": "रियेक्ट राऊटर",
-    "icon": "reactrouter"
   },
   {
     "name": "पाइथन",

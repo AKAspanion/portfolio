@@ -1,12 +1,21 @@
 [
   {
     "name": "GeekyAnts",
+    "role": "Technical Lead",
+    "location": "Bengaluru, India",
+    "time": "August 2022 - Present",
+    "img": "geekyants",
+    "link": "https://www.geekyants.com/",
+    "desc": "Currently working as a Technical Lead."
+  },
+  {
+    "name": "GeekyAnts",
     "role": "Software Engineer",
     "location": "Bengaluru, India",
     "time": "October 2020 - Present",
     "img": "geekyants",
     "link": "https://www.geekyants.com/",
-    "desc": "Currently working as a full time Software Engineer."
+    "desc": "As a Software Engineer, successfull delivered numerous projects."
   },
   {
     "name": "Global IDs",

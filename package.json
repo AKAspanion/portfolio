@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
-    "build": "set NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "predeploy": "npm run build",
-    "login": "firebase login",
-    "deploy": "firebase deploy --only hosting"
+    "login:firebase": "firebase login",
+    "deploy:firebase": "firebase deploy --only hosting"
   },
   "dependencies": {
     "axios": "^0.21.1",

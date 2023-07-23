@@ -20,6 +20,11 @@
     "top": true
   },
   {
+    "name": "React Router",
+    "icon": "reactrouter",
+    "top": true
+  },
+  {
     "name": "Redux",
     "icon": "redux",
     "top": true
@@ -65,6 +70,31 @@
     "top": true
   },
   {
+    "name": "Electron",
+    "icon": "electron",
+    "top": true
+  },
+  {
+    "name": "Webpack",
+    "icon": "webpack",
+    "top": true
+  },
+  {
+    "name": "Vite",
+    "icon": "vite",
+    "top": true
+  },
+  {
+    "name": "ES Build",
+    "icon": "esbuild",
+    "top": true
+  },
+  {
+    "name": "Rollup",
+    "icon": "rollup",
+    "top": true
+  },
+  {
     "name": "jQuery",
     "icon": "jquery",
     "top": true
@@ -88,10 +118,6 @@
   {
     "name": "Angular",
     "icon": "angular"
-  },
-  {
-    "name": "React Router",
-    "icon": "reactrouter"
   },
   {
     "name": "Python",
