@@ -28,3 +28,6 @@ yarn-error.log*
 /test-results
 /blob-report
 /node_modules/.tmp
+
+# Firebase CLI
+firebase-debug.log

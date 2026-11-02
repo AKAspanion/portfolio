@@ -1,0 +1,62 @@
+name: Deploy
+
+# Every push to master runs the full CI suite, then deploys hosting.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
+
+jobs:
+  ci:
+    uses: ./.github/workflows/ci.yml
+
+  deploy:
+    name: Build and deploy to Firebase
+    needs: ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: production
+      # Primary address; set the APP_URL variable to change it (the .web.app address keeps working).
+      url: ${{ vars.APP_URL || format('https://{0}.web.app', vars.FIREBASE_PROJECT_ID) }}
+    env:
+      # Public site config, kept in repository Variables (Settings > Secrets and variables > Actions).
+      VITE_ADSENSE_CLIENT: ${{ vars.VITE_ADSENSE_CLIENT }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Check deploy configuration
+        env:
+          HAS_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT != '' }}
+          FIREBASE_PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+        run: |
+          missing=""
+          for v in VITE_ADSENSE_CLIENT FIREBASE_PROJECT_ID; do
+            [ -n "${!v}" ] || missing="$missing $v"
+          done
+          [ "$HAS_SERVICE_ACCOUNT" = "true" ] || missing="$missing FIREBASE_SERVICE_ACCOUNT(secret)"
+          if [ -n "$missing" ]; then
+            echo "::error::Missing repository settings:$missing. See README > CI/CD."
+            exit 1
+          fi
+      - run: npm ci
+      - run: npm run build
+      - name: Deploy hosting
+        uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0
+        with:
+          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          projectId: ${{ vars.FIREBASE_PROJECT_ID }}
+          channelId: live
+          firebaseToolsVersion: 15.34.2
