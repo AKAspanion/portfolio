@@ -10,13 +10,13 @@ generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
 
 ## Variables
 
-| Name | Kind | What it is |
-| --- | --- | --- |
-| `VITE_ADSENSE_CLIENT` | Build-time, public | The AdSense publisher id. Optional locally: empty means no ads ([[integrations/google-adsense]]). |
-| `FIREBASE_PROJECT_ID` | GitHub Actions variable | The Firebase project to deploy to. |
-| `FIREBASE_SERVICE_ACCOUNT` | GitHub Actions secret | Service-account key for the hosting deploy. |
-| `APP_URL` | GitHub Actions variable, optional | Address shown on the `production` environment. |
-| `CI` | Set by the CI runner | Switches Playwright to CI behaviour. |
+| Name                       | Kind                              | What it is                                                                                        |
+| -------------------------- | --------------------------------- | ------------------------------------------------------------------------------------------------- |
+| `VITE_ADSENSE_CLIENT`      | Build-time, public                | The AdSense publisher id. Optional locally: empty means no ads ([[integrations/google-adsense]]). |
+| `FIREBASE_PROJECT_ID`      | GitHub Actions variable           | The Firebase project to deploy to.                                                                |
+| `FIREBASE_SERVICE_ACCOUNT` | GitHub Actions secret             | Service-account key for the hosting deploy.                                                       |
+| `APP_URL`                  | GitHub Actions variable, optional | Address shown on the `production` environment.                                                    |
+| `CI`                       | Set by the CI runner              | Switches Playwright to CI behaviour.                                                              |
 
 Locally the variable goes in `.env` (git-ignored), copied from `.env.example`. The values for CI are listed in `README.md` under CI/CD.
 

@@ -12,13 +12,13 @@ There is no database. All content is JSON committed under `src/assets/json/<loca
 
 ## Entities
 
-| Entity | Interface | File per locale | Shown in |
-| --- | --- | --- | --- |
-| Project | `Project` (with `ProjectTag` tags) | `projects.json` | Projects section |
-| Job | `Experience` | `experience.json` | Experience section |
-| Skill | `Skill` | `skills.json` | Skills section |
-| Menu item | `NavItem` | `nav.json` | `NavMenu` |
-| Social profile | `SocialLink` | `social.json` | Contact section, `SocialLinks`, `NavMenu` |
+| Entity         | Interface                          | File per locale   | Shown in                                  |
+| -------------- | ---------------------------------- | ----------------- | ----------------------------------------- |
+| Project        | `Project` (with `ProjectTag` tags) | `projects.json`   | Projects section                          |
+| Job            | `Experience`                       | `experience.json` | Experience section                        |
+| Skill          | `Skill`                            | `skills.json`     | Skills section                            |
+| Menu item      | `NavItem`                          | `nav.json`        | `NavMenu`                                 |
+| Social profile | `SocialLink`                       | `social.json`     | Contact section, `SocialLinks`, `NavMenu` |
 
 `content` in `src/content.ts` maps each `Locale` (`en`, `hi`, from `src/plugins/i18n.ts`) to a `Content` object holding all five lists; `useContent()` returns the current locale's, falling back to English.
 

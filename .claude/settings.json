@@ -1,8 +1,6 @@
 {
   "permissions": {
-    "ask": [
-      "Bash(*knowledge confirm*)"
-    ],
+    "ask": ["Bash(*knowledge confirm*)"],
     "deny": [
       "Read(**/.env*)",
       "Read(!**/.env.example)",
