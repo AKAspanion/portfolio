@@ -31,7 +31,7 @@
       content="https://avatars0.githubusercontent.com/u/25038931?s=460&u=35412ce35192913ac8dd3d0d70ca12c795f8b114&v=4"
     />
     <meta property="og:title" content="Ankit Kumar Pandit" />
-    <meta property="og:url" content="https://ankitkumar.xyz/" />
+    <meta property="og:url" content="https://spanion.in/" />
     <meta
       property="og:description"
       content="Portfolio website of Ankit Kumar Pandit."
@@ -41,11 +41,10 @@
       name="twitter:description"
       content="Portfolio website of Ankit Kumar Pandit."
     />
-    <script
-      async
-      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9381121077394867"
-      crossorigin="anonymous"
-    ></script>
+    <% if (typeof VUE_APP_ADSENSE_CLIENT !== 'undefined') { %>
+    <meta name="google-adsense-account" content="<%= VUE_APP_ADSENSE_CLIENT %>" />
+    <% } %>
+    <link rel="canonical" href="https://spanion.in/" />
   </head>
 
   <body>

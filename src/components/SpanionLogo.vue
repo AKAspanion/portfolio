@@ -8,7 +8,7 @@
             iconHover($event, '.logo-container', '.logo-wrapper', mobile);
             hideCursor(mobile);
         "
-        @click="navigateTo('/home')"
+        @click="navigateTo('/')"
         @mouseover="showCursor(mobile)"
         class="logo-container"
     >

@@ -262,6 +262,7 @@
 import HoverText from '@/components/HoverText.vue';
 import MaskText from '@/components/MaskText.vue';
 import SkewOnHover from '@/components/SkewOnHover.vue';
+import { loadAds } from '@/util/ads';
 
 import expEn from '../assets/json/en/experience.json';
 import expHi from '../assets/json/hi/experience.json';
@@ -330,6 +331,8 @@ export default {
   mounted() {
     setTimeout(() => {
       this.$store.dispatch('LOADED', true);
+      // Only request ads once the projects/skills/experience sections exist.
+      this.$nextTick(loadAds);
     }, 1500);
   },
 };
