@@ -1,119 +1,111 @@
-<template>
-    <div
-        @mousemove="textHover($event, false, mobile)"
-        class="hover--text"
-        :class="[
-            classes,
-            hoverClass,
-            'd-inline-block',
-            $vuetify.theme.dark ? 'dark--hover' : 'white--hover',
-        ]"
-        @mouseover="
-            onHover($event);
-            showCursor(text, link, mobile);
-        "
-        @mouseout="
-            onHover($event);
-            hideCursor(mobile);
-            textHover($event, true, mobile);
-        "
-        @click="$emit('click', $event)"
-    >
-        <slot></slot>
-    </div>
-</template>
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useTheme } from 'vuetify';
 
-<script>
-export default {
-    props: {
-        classes: String,
-        text: String,
-        link: String,
-    },
-    data() {
-        return {
-            hoverClass: 'left--hover',
-        };
-    },
-    computed: {
-        mobile() {
-            return this.$vuetify.breakpoint.xsOnly;
-        },
-    },
-    methods: {
-        onHover(e) {
-            var pos = e.target.getBoundingClientRect();
-            var edge = this.closestEdge(
-                e.pageX - pos.x,
-                e.pageY - pos.y,
-                pos.width,
-                pos.height
-            );
-            this.hoverClass = `${
-                edge === 'left' || edge === 'top' ? 'left' : 'right'
-            }--hover`;
-        },
-        closestEdge(x, y, w, h) {
-            let topEdgeDist = this.distMetric(x, y, w / 2, 0);
-            let bottomEdgeDist = this.distMetric(x, y, w / 2, h);
-            let leftEdgeDist = this.distMetric(x, y, 0, h / 2);
-            let rightEdgeDist = this.distMetric(x, y, w, h / 2);
-            let min = Math.min(
-                topEdgeDist,
-                bottomEdgeDist,
-                leftEdgeDist,
-                rightEdgeDist
-            );
-            switch (min) {
-                case leftEdgeDist:
-                    return 'left';
-                case rightEdgeDist:
-                    return 'right';
-                case topEdgeDist:
-                    return 'top';
-                case bottomEdgeDist:
-                    return 'bottom';
-            }
-        },
-        distMetric(x, y, x2, y2) {
-            let xDiff = x - x2;
-            let yDiff = y - y2;
-            return xDiff * xDiff + yDiff * yDiff;
-        },
-    },
-};
+import { useCursor } from '@/composables/useCursor';
+import { useMagnet } from '@/composables/useMagnet';
+
+const props = defineProps<{
+  /** Cursor tooltip. */
+  text?: string;
+  /** Image shown in the cursor tooltip. */
+  link?: string;
+  /** Makes the text a link; external links open in a new tab. */
+  href?: string;
+  classes?: string;
+}>();
+
+defineEmits<{ click: [event: MouseEvent] }>();
+
+const { t } = useI18n();
+const theme = useTheme();
+const { showCursor, hideCursor } = useCursor();
+const { textHover } = useMagnet();
+
+const external = computed(() => !!props.href && /^https?:/.test(props.href));
+/** Side the underline grows from, following where the pointer entered. */
+const side = ref<'left' | 'right'>('left');
+
+function onEdge(e: MouseEvent) {
+  const el = e.currentTarget as HTMLElement;
+  const { left, top, width, height } = el.getBoundingClientRect();
+  const x = e.clientX - left;
+  const y = e.clientY - top;
+  const dist = (x2: number, y2: number) => (x - x2) ** 2 + (y - y2) ** 2;
+  const edges = {
+    left: dist(0, height / 2),
+    right: dist(width, height / 2),
+    top: dist(width / 2, 0),
+    bottom: dist(width / 2, height),
+  };
+  const closest = (Object.keys(edges) as (keyof typeof edges)[]).reduce(
+    (a, b) => (edges[a] <= edges[b] ? a : b),
+  );
+  side.value = closest === 'left' || closest === 'top' ? 'left' : 'right';
+}
 </script>
 
+<template>
+  <component
+    :is="href ? 'a' : 'span'"
+    :href="href"
+    :target="external ? '_blank' : undefined"
+    :rel="external ? 'noopener noreferrer' : undefined"
+    class="hover--text d-inline-block"
+    :class="[
+      classes,
+      `${side}--hover`,
+      theme.current.value.dark ? 'dark--hover' : 'white--hover',
+    ]"
+    @mousemove="textHover($event)"
+    @mouseover="
+      onEdge($event);
+      showCursor(text, link);
+    "
+    @mouseout="
+      onEdge($event);
+      hideCursor();
+      textHover($event, true);
+    "
+    @click="$emit('click', $event)"
+  >
+    <slot />
+    <span v-if="external" class="visually-hidden">
+      ({{ t('a11y.new-tab') }})</span
+    >
+  </component>
+</template>
+
 <style scoped>
-.hover--text.dark--hover.left--hover:before,
-.hover--text.white--hover.left--hover:before {
-    top: 0;
-    width: 0%;
-    content: '';
-    height: 50%;
-    position: absolute;
-    transition: width 600ms cubic-bezier(1, 0, 0, 1);
-}
-.hover--text.dark--hover.right--hover:before,
-.hover--text.white--hover.right--hover:before {
-    left: 100%;
-    content: '';
-    height: 50%;
-    width: 0%;
-    position: absolute;
-    transform: translate3d(-100%, 0, 0);
-    transition: width 600ms cubic-bezier(1, 0, 0, 1);
+.hover--text {
+  position: relative;
 }
 
-.hover--text.dark--hover:before {
-    background: #e0e0e0;
+.hover--text::before {
+  top: 0;
+  width: 0%;
+  content: '';
+  height: 50%;
+  position: absolute;
+  transition: width 600ms cubic-bezier(1, 0, 0, 1);
 }
-.hover--text.white--hover:before {
-    background: #212121;
+
+.hover--text.right--hover::before {
+  left: 100%;
+  transform: translate3d(-100%, 0, 0);
 }
-.hover--text.dark--hover:hover:before,
-.hover--text.white--hover:hover:before {
-    width: 100%;
-    transition: width 600ms cubic-bezier(1, 0, 0, 1);
+
+.hover--text.dark--hover::before {
+  background: #e0e0e0;
+}
+
+.hover--text.white--hover::before {
+  background: #212121;
+}
+
+.hover--text:hover::before,
+.hover--text:focus-visible::before {
+  width: 100%;
 }
 </style>

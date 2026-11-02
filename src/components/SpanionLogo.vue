@@ -1,103 +1,106 @@
-<template>
-    <div
-        :style="`top: ${top}px;left: ${left}px;`"
-        @mousemove="
-            iconHover($event, '.logo-container', '.logo-wrapper', mobile)
-        "
-        @mouseout="
-            iconHover($event, '.logo-container', '.logo-wrapper', mobile);
-            hideCursor(mobile);
-        "
-        @click="navigateTo('/')"
-        @mouseover="showCursor(mobile)"
-        class="logo-container"
-    >
-        <div class="logo-wrapper">
-            <div
-                class="logo-bar"
-                :style="
-                    `background: ${$vuetify.theme.dark ? '#e0e0e0' : '#212121'}`
-                "
-                :class="`logo-bar-${n}`"
-                v-for="n in 3"
-                :key="n"
-            ></div>
-        </div>
-    </div>
-</template>
+<script setup lang="ts">
+import { ref, type ComponentPublicInstance } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRoute } from 'vue-router';
+import { useGoTo, useTheme } from 'vuetify';
 
-<script>
-export default {
-    name: 'SpanionLogo',
-    props: {
-        top: {
-            type: Number,
-            default: 30,
-        },
-        left: {
-            type: Number,
-            default: 30,
-        },
-    },
-    computed: {
-        mobile() {
-            return this.$vuetify.breakpoint.xsOnly;
-        },
-    },
-    methods: {
-        navigateTo(link) {
-            this.$router.push(link);
-        },
-        handleMouseOver(e) {
-            let hamb = document.querySelector('.logo-container');
-            let xLimit = this.left + 80,
-                yLimit = this.top + 80,
-                xPos = 0,
-                yPos = 0;
-            if (
-                e.pageY <= yLimit &&
-                e.pageY >= this.top &&
-                e.pageX <= xLimit &&
-                e.pageX >= this.left
-            ) {
-                yPos = e.pageY - (this.top + 40);
-                xPos = e.pageX - (this.left + 40);
-            }
-            hamb.style.transform = `translate3d(${xPos}px, ${yPos}px, 0px)`;
-        },
-    },
-};
+import { useCursor } from '@/composables/useCursor';
+import { useMagnet } from '@/composables/useMagnet';
+
+withDefaults(defineProps<{ top?: number; left?: number }>(), {
+  top: 30,
+  left: 30,
+});
+
+const { t } = useI18n();
+const theme = useTheme();
+const route = useRoute();
+const goTo = useGoTo();
+const { showCursor, hideCursor } = useCursor();
+const { iconHover } = useMagnet();
+
+const container = ref<ComponentPublicInstance>();
+const inner = ref<HTMLElement>();
+
+// On the home page the logo scrolls back to the top instead of navigating.
+function onClick(e: MouseEvent) {
+  if (route.path === '/') {
+    e.preventDefault();
+    void goTo(0);
+  }
+}
 </script>
+
+<template>
+  <router-link
+    ref="container"
+    to="/"
+    class="logo-container"
+    :aria-label="t('a11y.back-to-top')"
+    :style="{ top: `${top}px`, left: `${left}px` }"
+    @mousemove="
+      iconHover($event, container?.$el as HTMLElement | undefined, inner)
+    "
+    @mouseout="
+      iconHover($event, container?.$el as HTMLElement | undefined, inner);
+      hideCursor();
+    "
+    @mouseover="showCursor()"
+    @click="onClick"
+  >
+    <span ref="inner" class="logo-wrapper">
+      <span
+        v-for="n in 3"
+        :key="n"
+        class="logo-bar"
+        :class="`logo-bar-${n}`"
+        :style="{
+          background: theme.current.value.dark ? '#e0e0e0' : '#212121',
+        }"
+      />
+    </span>
+  </router-link>
+</template>
 
 <style scoped>
 .logo-container {
-    width: 80px;
-    height: 80px;
-    z-index: 50;
-    margin: 0 auto;
-    position: fixed;
-    cursor: pointer;
-    will-change: transform;
-    transition: transform 150ms ease-out, left 450ms ease;
-    transform: translate3d(0px, 0px, 0px);
+  display: block;
+  width: 80px;
+  height: 80px;
+  z-index: 50;
+  margin: 0 auto;
+  position: fixed;
+  cursor: pointer;
+  will-change: transform;
+  transition:
+    transform 150ms ease-out,
+    left 450ms ease;
+  transform: translate3d(0px, 0px, 0px);
 }
+
 .logo-wrapper {
-    padding: 30px 25px;
-    transition: 250ms;
+  display: block;
+  padding: 30px 25px;
+  transition: 250ms;
 }
+
 .logo-bar {
-    width: 29px;
-    height: 4px;
-    transition: 250ms;
-    margin-bottom: 4px;
+  display: block;
+  width: 29px;
+  height: 4px;
+  transition: 250ms;
+  margin-bottom: 4px;
 }
+
 .logo-bar-1 {
-    transform: rotate(-45deg) skewX(45deg) translate3d(0.5px, -2.5px, 0px);
+  transform: rotate(-45deg) skewX(45deg) translate3d(0.5px, -2.5px, 0px);
 }
+
 .logo-bar-2 {
-    transform: rotate(180deg) skewX(-45deg);
+  transform: rotate(180deg) skewX(-45deg);
 }
+
 .logo-bar-3 {
-    transform: rotate(-45deg) skewX(45deg) translate3d(-0.5px, 2.5px, 0px);
+  transform: rotate(-45deg) skewX(45deg) translate3d(-0.5px, 2.5px, 0px);
 }
 </style>

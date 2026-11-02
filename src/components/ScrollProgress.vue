@@ -1,95 +1,92 @@
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import { computed, onBeforeUnmount, onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useGoTo, useTheme } from 'vuetify';
+
+import { useCursor } from '@/composables/useCursor';
+import { useMagnet } from '@/composables/useMagnet';
+import { icons } from '@/icons';
+import { useUiStore } from '@/stores/ui';
+
+withDefaults(defineProps<{ bottom?: number; right?: number }>(), {
+  bottom: 24,
+  right: 24,
+});
+
+const { t } = useI18n();
+const theme = useTheme();
+const goTo = useGoTo();
+const ui = useUiStore();
+const { navMenu } = storeToRefs(ui);
+const { showCursor, hideCursor } = useCursor();
+const { iconHover } = useMagnet();
+
+const container = ref<HTMLElement>();
+const inner = ref<HTMLElement>();
+const percentage = ref(0);
+const goesUp = computed(() => percentage.value > 10);
+const color = computed(() =>
+  theme.current.value.dark ? '#e0e0e0' : '#212121',
+);
+
+function onClick() {
+  hideCursor();
+  void goTo(goesUp.value ? 0 : 200);
+}
+
+function onScroll() {
+  const top = Math.floor(window.scrollY);
+  const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+  ui.scrollPos = top;
+  percentage.value =
+    scrollable > 0 ? Math.min(100, Math.floor((top / scrollable) * 100)) : 0;
+}
+
+onMounted(() => {
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+});
+onBeforeUnmount(() => window.removeEventListener('scroll', onScroll));
+</script>
+
 <template>
   <div
-    @mouseout="iconHover($event,'.scroll-arrow-container','.scroll-arrow-wrapper',mobile);hideCursor(mobile);"
-    @mousemove="iconHover($event,'.scroll-arrow-container','.scroll-arrow-wrapper',mobile)"
-    @mouseover="showCursor(percentage > 10 ? $t('go-up') : $t('scroll'), null, mobile)"
-    :style="`bottom: ${bottom}px;right: ${right}px;`"
-    class="scroll-arrow-container"
     v-if="!navMenu"
+    ref="container"
+    class="scroll-arrow-container"
+    :style="{ bottom: `${bottom}px`, right: `${right}px` }"
+    @mouseout="
+      iconHover($event, container, inner);
+      hideCursor();
+    "
+    @mousemove="iconHover($event, container, inner)"
+    @mouseover="showCursor(goesUp ? t('go-up') : t('scroll'))"
   >
-    <div class="scroll-arrow-wrapper">
+    <div ref="inner" class="scroll-arrow-wrapper">
       <v-progress-circular
         size="40"
         width="2"
-        :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
-        :value="percentage <= 99 && percentage >= 95 ? 100 : percentage"
+        aria-hidden="true"
+        :color="color"
+        :model-value="percentage >= 95 ? 100 : percentage"
+      />
+      <v-btn
+        icon
+        variant="text"
+        size="small"
+        :color="color"
+        :aria-label="goesUp ? t('a11y.back-to-top') : t('a11y.scroll-down')"
+        @click="onClick"
       >
-        <v-btn icon @click="onScroll" :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'">
-          <v-icon
-            :style="`transform: rotate(${percentage > 10 ? '135' : '-45'}deg)`"
-          >mdi-arrow-bottom-left</v-icon>
-        </v-btn>
-      </v-progress-circular>
+        <v-icon
+          :icon="icons.arrowBottomLeft"
+          :style="{ transform: `rotate(${goesUp ? 135 : -45}deg)` }"
+        />
+      </v-btn>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  name: 'ScrollProgress',
-  props: {
-    bottom: {
-      type: Number,
-      default: 24,
-    },
-    right: {
-      type: Number,
-      default: 24,
-    },
-  },
-  data() {
-    return {
-      percentage: 0,
-      scrolling: false,
-    };
-  },
-  computed: {
-    navMenu: {
-      get() {
-        return this.$store.getters.navMenu;
-      },
-    },
-    mobile() {
-      return this.$vuetify.breakpoint.xsOnly;
-    },
-  },
-  methods: {
-    onScroll() {
-      this.hideCursor();
-      if (this.percentage < 10) {
-        this.$vuetify.goTo(200);
-      } else {
-        this.$vuetify.goTo(0);
-        this.$store.dispatch('SET_SCROLLING', true);
-        setTimeout(() => {
-          this.$store.dispatch('SET_SCROLLING', false);
-        }, 600);
-      }
-    },
-    handleScroll() {
-      let topPosition = Math.floor(
-        document.documentElement.scrollTop || document.body.scrollTop,
-      );
-      let bottomPosition =
-        document.getElementById('app').scrollHeight - window.innerHeight;
-
-      this.$store.dispatch('SET_SCROLL_POS', topPosition);
-
-      this.percentage =
-        topPosition !== 0
-          ? Math.floor((topPosition / bottomPosition) * 100)
-          : 0;
-    },
-  },
-  mounted() {
-    this.handleScroll();
-    window.addEventListener('scroll', this.handleScroll);
-  },
-  destroyed() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-};
-</script>
 
 <style scoped>
 .scroll-arrow-container {
@@ -100,11 +97,21 @@ export default {
   position: fixed;
   cursor: pointer;
   will-change: transform;
-  transition: transform 150ms ease-out, right 450ms ease;
+  transition:
+    transform 150ms ease-out,
+    right 450ms ease;
   transform: translate3d(0px, 0px, 0px);
 }
+
 .scroll-arrow-wrapper {
-  padding: 20px 20px;
+  position: relative;
+  padding: 20px;
   transition: 250ms;
+}
+
+.scroll-arrow-wrapper .v-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
 </style>

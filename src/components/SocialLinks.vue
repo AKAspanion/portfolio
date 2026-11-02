@@ -1,105 +1,112 @@
+<script setup lang="ts">
+import { computed, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useTheme } from 'vuetify';
+
+import { useCursor } from '@/composables/useCursor';
+import { useMagnet } from '@/composables/useMagnet';
+import { useContent } from '@/content';
+import { icons, socialBrand } from '@/icons';
+
+withDefaults(defineProps<{ bottom?: number; left?: number }>(), {
+  bottom: 24,
+  left: 24,
+});
+
+const { t } = useI18n();
+const theme = useTheme();
+const content = useContent();
+const { showCursor, hideCursor } = useCursor();
+const { iconHover } = useMagnet();
+
+const hide = ref(true);
+const color = computed(() =>
+  theme.current.value.dark ? '#e0e0e0' : '#212121',
+);
+
+// Each link leans towards the pointer on its own; refs keyed by link name.
+const containers = ref<Record<string, HTMLElement | null>>({});
+const inners = ref<Record<string, HTMLElement | null>>({});
+const toggle = ref<HTMLElement>();
+const toggleInner = ref<HTMLElement>();
+</script>
+
 <template>
-  <div class="social-links-wrapper text-center" :style="`bottom: ${bottom}px;left: ${left}px;`">
+  <div
+    class="social-links-wrapper text-center"
+    :style="{ bottom: `${bottom}px`, left: `${left}px` }"
+  >
     <div class="social-links-content-wrapper">
       <div
-        @click="toggle()"
-        @mouseover="showCursor($t('links'))"
-        class="speedial-container white--text"
-        @mousemove="iconHover($event,'.speedial-container','.speedial-wrapper')"
-        @mouseout="iconHover($event,'.speedial-container','.speedial-wrapper');hideCursor();"
+        ref="toggle"
+        class="speedial-container"
+        @mouseover="showCursor(t('links'))"
+        @mousemove="iconHover($event, toggle, toggleInner)"
+        @mouseout="
+          iconHover($event, toggle, toggleInner);
+          hideCursor();
+        "
       >
-        <div class="speedial-wrapper">
+        <div ref="toggleInner" class="speedial-wrapper">
           <v-progress-circular
             size="40"
             width="2"
-            :value="hide ? 0 : 100"
-            :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'"
+            aria-hidden="true"
+            :model-value="hide ? 0 : 100"
+            :color="color"
+          />
+          <v-btn
+            icon
+            variant="text"
+            size="small"
+            :color="color"
+            :aria-label="t('a11y.social-links')"
+            :aria-expanded="!hide"
+            aria-controls="social-links"
+            @click="hide = !hide"
           >
-            <v-btn icon :color="$vuetify.theme.dark ? '#e0e0e0' : '#212121'">
-              <v-icon :style="`transform: rotate(${hide ? '45':'90'}deg)`">mdi-chevron-left</v-icon>
-            </v-btn>
-          </v-progress-circular>
+            <v-icon
+              :icon="icons.chevronLeft"
+              :style="{ transform: `rotate(${hide ? 45 : 90}deg)` }"
+            />
+          </v-btn>
         </div>
       </div>
-      <div
-        @mouseover="showCursor()"
-        :class="hide ? 'hide-icon':''"
-        class="link-logo-container-gh"
-        @click="openLink('https://github.com/AKAspanion')"
-        @mousemove="iconHover($event,'.link-logo-container-gh','.link-logo-wrapper-gh')"
-        @mouseout="iconHover($event,'.link-logo-container-gh','.link-logo-wrapper-gh');hideCursor();"
-      >
-        <div class="link-logo-wrapper-gh">
-          <v-icon>mdi-github-circle</v-icon>
-        </div>
-      </div>
-      <div
-        @mouseover="showCursor()"
-        :class="hide ? 'hide-icon':''"
-        class="link-logo-container-li"
-        @click="openLink('https://www.linkedin.com/in/spanion')"
-        @mousemove="iconHover($event,'.link-logo-container-li','.link-logo-wrapper-li')"
-        @mouseout="iconHover($event,'.link-logo-container-li','.link-logo-wrapper-li');hideCursor();"
-      >
-        <div class="link-logo-wrapper-li">
-          <v-icon>mdi-linkedin-box</v-icon>
-        </div>
-      </div>
-      <div
-        @mouseover="showCursor()"
-        :class="hide ? 'hide-icon':''"
-        class="link-logo-container-in"
-        @click="openLink('https://www.instagram.com/spanionkumar')"
-        @mousemove="iconHover($event,'.link-logo-container-in','.link-logo-wrapper-in')"
-        @mouseout="iconHover($event,'.link-logo-container-in','.link-logo-wrapper-in');hideCursor();"
-      >
-        <div class="link-logo-wrapper-in">
-          <v-icon>mdi-instagram</v-icon>
-        </div>
-      </div>
-      <div
-        @mouseover="showCursor()"
-        :class="hide ? 'hide-icon':''"
-        class="link-logo-container-fb"
-        @click="openLink('https://www.facebook.com/AKAspanion')"
-        @mousemove="iconHover($event,'.link-logo-container-fb','.link-logo-wrapper-fb')"
-        @mouseout="iconHover($event,'.link-logo-container-fb','.link-logo-wrapper-fb');hideCursor();"
-      >
-        <div class="link-logo-wrapper-fb">
-          <v-icon size="24">mdi-facebook</v-icon>
-        </div>
-      </div>
+      <ul id="social-links" class="social-links-list" :inert="hide">
+        <li
+          v-for="(link, i) in content.social"
+          :key="link.id"
+          :ref="(el) => (containers[link.name] = el as HTMLElement | null)"
+          class="link-logo-container"
+          :class="{ 'hide-icon': hide }"
+          :style="{
+            top: `${-82 * (content.social.length - i)}px`,
+            transitionDelay: `${50 * (content.social.length - 1 - i)}ms`,
+          }"
+          @mouseover="showCursor()"
+          @mousemove="
+            iconHover($event, containers[link.name], inners[link.name])
+          "
+          @mouseout="
+            iconHover($event, containers[link.name], inners[link.name]);
+            hideCursor();
+          "
+        >
+          <a
+            :ref="(el) => (inners[link.name] = el as HTMLElement | null)"
+            class="link-logo-wrapper"
+            :href="link.url"
+            target="_blank"
+            rel="noopener noreferrer"
+            :aria-label="`${link.name} (${t('a11y.new-tab')})`"
+          >
+            <v-icon :icon="socialBrand(link.url)?.icon" />
+          </a>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
-
-<script>
-export default {
-  props: {
-    bottom: {
-      type: Number,
-      default: 24,
-    },
-    left: {
-      type: Number,
-      default: 24,
-    },
-  },
-  data() {
-    return {
-      hide: true,
-    };
-  },
-  methods: {
-    toggle() {
-      this.hide = !this.hide;
-    },
-    openLink(url) {
-      window.open(url, '_blank');
-    },
-  },
-};
-</script>
 
 <style scoped>
 .social-links-wrapper {
@@ -108,63 +115,55 @@ export default {
   margin: 0 auto;
   position: fixed;
   will-change: transform;
-  transition: transform 150ms ease-out, left 450ms ease;
+  transition:
+    transform 150ms ease-out,
+    left 450ms ease;
   transform: translate3d(0px, 0px, 0px);
-}
-.speedial-container,
-.link-logo-container-fb,
-.link-logo-container-gh,
-.link-logo-container-in,
-.link-logo-container-li {
-  width: 80px;
-  height: 80px;
-  cursor: pointer;
-  margin-bottom: 2px;
-}
-.speedial-wrapper,
-.link-logo-wrapper-fb,
-.link-logo-wrapper-gh,
-.link-logo-wrapper-in,
-.link-logo-wrapper-li {
-  padding: 28px;
-  transition: 250ms;
 }
 
 .social-links-content-wrapper {
   position: relative;
 }
 
-.link-logo-container-fb,
-.link-logo-container-gh,
-.link-logo-container-in,
-.link-logo-container-li {
-  position: absolute;
-  transition: 250ms;
-  left: 0px;
+.social-links-list {
+  list-style: none;
 }
 
-.link-logo-container-gh {
-  top: -328px;
-  transition-delay: 150ms;
+.speedial-container,
+.link-logo-container {
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  margin-bottom: 2px;
 }
-.link-logo-container-li {
-  top: -246px;
-  transition-delay: 100ms;
+
+.speedial-wrapper {
+  position: relative;
+  padding: 20px;
+  transition: 250ms;
 }
-.link-logo-container-in {
-  top: -164px;
-  transition-delay: 50ms;
+
+.speedial-wrapper .v-btn {
+  position: absolute;
+  top: 20px;
+  left: 20px;
 }
-.link-logo-container-fb {
-  top: -82px;
+
+.link-logo-container {
+  position: absolute;
+  left: 0px;
+  transition: 250ms;
 }
+
+.link-logo-wrapper {
+  display: block;
+  padding: 28px;
+  transition: 250ms;
+}
+
 .hide-icon {
   opacity: 0;
   left: -100%;
-  transition: 250ms;
   pointer-events: none;
-}
-.speedial-wrapper {
-  padding: 20px;
 }
 </style>

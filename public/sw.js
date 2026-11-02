@@ -1,27 +1,14 @@
-/* eslint-disable no-console */
-const cacheName = 'spanion-v2';
-const staticAssets = [
-  './',
-  './index.html',
-  './app.js',
-  './load.js',
-  './images/',
-  './assets/',
-  './fonts/',
-];
+// The site used to register a caching service worker. This replacement
+// removes it from browsers that still have it: it clears the old caches and
+// unregisters itself. Keep it at this URL until old visitors have cycled out.
+self.addEventListener('install', () => self.skipWaiting());
 
-self.addEventListener('install', async () => {
-  const cache = await caches.open(cacheName);
-  await cache.addAll(staticAssets);
+self.addEventListener('activate', (event) => {
+  event.waitUntil(
+    (async () => {
+      const keys = await caches.keys();
+      await Promise.all(keys.map((key) => caches.delete(key)));
+      await self.registration.unregister();
+    })(),
+  );
 });
-
-self.addEventListener('fetch', async event => {
-  const req = event.request;
-  event.respondWith(cacheFirst(req));
-});
-
-async function cacheFirst(req) {
-  const cache = await caches.open(cacheName);
-  const cachedResponse = await cache.match(req);
-  return cachedResponse || fetch(req);
-}

@@ -21,3 +21,10 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Test output
+/coverage
+/playwright-report
+/test-results
+/blob-report
+/node_modules/.tmp
