@@ -1,7 +1,12 @@
 import AxeBuilder from '@axe-core/playwright';
 import { expect, test, type Page } from '@playwright/test';
 
-const AD_SCRIPT = /pagead2\.googlesyndication\.com/;
+const AD_HOST = 'pagead2.googlesyndication.com';
+const AD_SCRIPT = /^https:\/\/pagead2\.googlesyndication\.com\//;
+
+/** Errors caused by the blocked AdSense request are expected. */
+const unexpected = (errors: string[]) =>
+  errors.filter((e) => !e.includes(AD_HOST) && !e.includes('ERR_FAILED'));
 
 /** Records page errors and blocks (but counts) AdSense requests. */
 async function watch(page: Page) {
@@ -35,9 +40,7 @@ test('home page shows all sections without errors', async ({ page }) => {
     'href',
     'https://spanion.in/',
   );
-  expect(
-    errors.filter((e) => !AD_SCRIPT.test(e) && !/ERR_FAILED/.test(e)),
-  ).toEqual([]);
+  expect(unexpected(errors)).toEqual([]);
 });
 
 test('ads are requested only after the home content is shown', async ({
@@ -206,7 +209,5 @@ test('a hash that is not a valid selector does not break the page', async ({
   const { errors } = await watch(page);
   await page.goto('/#1');
   await page.waitForTimeout(2_500);
-  expect(
-    errors.filter((e) => !AD_SCRIPT.test(e) && !/ERR_FAILED/.test(e)),
-  ).toEqual([]);
+  expect(unexpected(errors)).toEqual([]);
 });
