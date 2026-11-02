@@ -1,211 +1,240 @@
+<script setup lang="ts">
+import { storeToRefs } from 'pinia';
+import {
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+} from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRoute, useRouter } from 'vue-router';
+import { useDisplay, useGoTo, useTheme } from 'vuetify';
+
+import HoverText from '@/components/HoverText.vue';
+import { useCursor } from '@/composables/useCursor';
+import { useContent } from '@/content';
+import { icons } from '@/icons';
+import { locales, type Locale } from '@/plugins/i18n';
+import { useUiStore } from '@/stores/ui';
+import { saveLocale, saveTheme } from '@/util/preferences';
+import { findSection, focusSection } from '@/util/sections';
+
+const { t, locale } = useI18n();
+const theme = useTheme();
+const route = useRoute();
+const router = useRouter();
+const goTo = useGoTo();
+const { xs } = useDisplay();
+const { navMenu } = storeToRefs(useUiStore());
+const { hideCursor } = useCursor();
+const content = useContent();
+
+const hostName = window.location.hostname;
+const year = new Date().getFullYear();
+
+const themeName = computed({
+  get: () => (theme.current.value.dark ? 'dark' : 'light'),
+  set: (name: 'light' | 'dark') => {
+    void theme.change(name);
+    saveTheme(name);
+  },
+});
+
+const language = computed({
+  get: () => locale.value as Locale,
+  set: (value: Locale) => {
+    locale.value = value;
+    saveLocale(value);
+  },
+});
+
+/**
+ * Items rise into place one after another once the menu has slid in, and
+ * drop away quickly when it closes.
+ */
+function delay(index: number, base = 800) {
+  return {
+    transitionDelay: navMenu.value
+      ? `${base + 120 * index}ms`
+      : `${60 * index}ms`,
+  };
+}
+
+function navigateTo(e: MouseEvent, domId: string) {
+  e.preventDefault();
+  hideCursor();
+  navMenu.value = false;
+
+  // From another page, the home page scrolls to the hash once it is shown.
+  if (route.path !== '/') {
+    void router.push({ path: '/', hash: `#${domId}` });
+    return;
+  }
+  const section = findSection(domId);
+  if (!section) return;
+  void goTo(section);
+  focusSection(section);
+}
+
+function onKeydown(e: KeyboardEvent) {
+  if (e.key === 'Escape' && navMenu.value) {
+    navMenu.value = false;
+    document.getElementById('menu-toggle')?.focus();
+  }
+}
+
+// Move keyboard focus into the menu when it opens; the page behind is inert.
+const menu = ref<HTMLElement>();
+watch(navMenu, async (open) => {
+  if (!open) return;
+  await nextTick();
+  menu.value
+    ?.querySelector<HTMLElement>('.nav-item')
+    ?.focus({ preventScroll: true });
+});
+
+onMounted(() => document.addEventListener('keydown', onKeydown));
+onBeforeUnmount(() => document.removeEventListener('keydown', onKeydown));
+</script>
+
 <template>
-  <v-card
-    tile
-    width="100vw"
-    height="100vh"
+  <div
+    id="nav-menu"
+    ref="menu"
     class="nav-menu-container d-flex flex-column"
-    :class="alive ? 'nav-menu-container--active' : ''"
-    :color="$vuetify.theme.dark ? '#000000' : '#FFFFFF'"
+    :class="{ 'nav-menu-container--active': navMenu }"
+    :style="{ background: theme.current.value.dark ? '#000000' : '#FFFFFF' }"
+    :inert="!navMenu"
+    :aria-hidden="!navMenu"
   >
     <div class="mb-auto">
-      <v-row dense>
+      <v-row density="compact">
         <v-col cols="12" md="2">
           <div
-            :class="$vuetify.breakpoint.xsOnly ? 'my-3' : 'my-8'"
-            class="name-item-container overline"
+            :class="xs ? 'my-3' : 'my-8'"
+            class="name-item-container type-overline font-weight-medium"
           >
-            <div class="name-item-wrapper">
-              <div class="d-inline-block">{{ hostName }}</div>
+            <div class="name-item-wrapper slide-small" :style="delay(0)">
+              {{ hostName }}
             </div>
           </div>
         </v-col>
         <v-col cols="12" md="10">
-          <div class="nav-container">
-            <div
-              :class="$vuetify.breakpoint.xsOnly ? 'display-2' : 'display-3'"
-              class="nav-item-container font-weight-thin my-4"
-              v-for="navItem in navItems"
-              :key="navItem.id"
-            >
-              <div class="nav-item-wrapper">
-                <hover-text
-                  classes="nav-item"
-                  :text="navItem.tooltip"
-                  @click="navigateTo(navItem)"
-                  >{{ navItem.name }}</hover-text
-                >
-              </div>
-            </div>
-          </div>
+          <nav class="nav-container" :aria-label="t('a11y.main-nav')">
+            <ul>
+              <li
+                v-for="(item, i) in content.nav"
+                :key="item.id"
+                :class="xs ? 'type-display-2' : 'type-display-3'"
+                class="nav-item-container font-weight-thin my-4"
+              >
+                <div class="nav-item-wrapper slide-large" :style="delay(i)">
+                  <HoverText
+                    classes="nav-item"
+                    :text="item.tooltip"
+                    :href="`#${item.domId}`"
+                    @click="navigateTo($event, item.domId)"
+                  >
+                    {{ item.name }}
+                  </HoverText>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </v-col>
       </v-row>
     </div>
     <div class="mt-auto">
-      <v-row dense align="center">
+      <v-row density="compact" class="align-center">
         <v-col cols="12" md="2" class="theme-item-container">
-          <div class="theme-item-wrapper d-flex align-center">
+          <div
+            class="theme-item-wrapper slide-large d-flex align-center"
+            :style="delay(0, 1600)"
+          >
             <v-btn-toggle
-              tile
+              v-model="themeName"
+              mandatory
+              rounded="0"
               class="my-4"
-              v-model="theme"
-              :background-color="theme === 1 ? '#000000' : '#FFFFFF'"
+              :aria-label="t('a11y.theme')"
             >
-              <v-btn x-small text>
-                <v-icon x-small>mdi-white-balance-sunny</v-icon>
+              <v-btn
+                value="light"
+                size="x-small"
+                variant="text"
+                :aria-label="t('a11y.light')"
+              >
+                <v-icon size="x-small" :icon="icons.sun" />
               </v-btn>
-              <v-btn x-small text>
-                <v-icon x-small style="transform: rotate(-45deg)"
-                  >mdi-moon-waning-crescent</v-icon
-                >
+              <v-btn
+                value="dark"
+                size="x-small"
+                variant="text"
+                :aria-label="t('a11y.dark')"
+              >
+                <v-icon
+                  size="x-small"
+                  :icon="icons.moon"
+                  style="transform: rotate(-45deg)"
+                />
               </v-btn>
             </v-btn-toggle>
             <v-btn-toggle
-              tile
+              v-model="language"
+              mandatory
+              rounded="0"
               class="my-4 ml-4"
-              v-model="lang"
-              :background-color="theme === 1 ? '#000000' : '#FFFFFF'"
+              :aria-label="t('a11y.language')"
             >
-              <v-btn x-small text>EN</v-btn>
-              <v-btn x-small text>HI</v-btn>
+              <v-btn
+                v-for="code in locales"
+                :key="code"
+                :value="code"
+                size="x-small"
+                variant="text"
+              >
+                {{ code.toUpperCase() }}
+              </v-btn>
             </v-btn-toggle>
           </div>
         </v-col>
         <v-col cols="12" md="7">
-          <v-row no-gutters align="center">
-            <div
-              :class="$vuetify.breakpoint.xsOnly ? 'mb-3 pr-4' : 'my-8 pr-8 '"
-              class="overline link-item-container"
-              v-for="link in socialLinks"
+          <ul class="d-flex flex-wrap align-center">
+            <li
+              v-for="(link, i) in content.social"
               :key="link.id"
+              :class="xs ? 'mb-3 pr-4' : 'my-8 pr-8'"
+              class="type-overline font-weight-medium link-item-container"
             >
-              <div class="link-item-wrapper">
-                <hover-text classes="link-item" @click="openLink(link)">{{
+              <div class="link-item-wrapper slide-small" :style="delay(i)">
+                <HoverText classes="link-item" :href="link.url">{{
                   link.name
-                }}</hover-text>
+                }}</HoverText>
               </div>
-            </div>
-          </v-row>
+            </li>
+          </ul>
         </v-col>
         <v-col cols="12" md="3">
           <div
-            :class="$vuetify.breakpoint.xsOnly ? 'mb-4' : ''"
-            class="overline text-sm-right copy-item-wrapper"
+            :class="{ 'mb-4': xs }"
+            class="type-overline font-weight-medium text-sm-right copy-item-wrapper slide-large"
+            :style="delay(0, 1600)"
           >
-            {{ $t('copyright') }}
+            {{ t('copyright', { year }) }}
           </div>
         </v-col>
       </v-row>
     </div>
-  </v-card>
+  </div>
 </template>
-
-<script>
-import HoverText from '@/components/HoverText.vue';
-
-import navEn from '../assets/json/en/nav.json';
-import socialEn from '../assets/json/en/social.json';
-import navHi from '../assets/json/hi/nav.json';
-import socialHi from '../assets/json/hi/social.json';
-
-export default {
-  components: {
-    HoverText,
-  },
-  computed: {
-    alive() {
-      return this.$store.getters.navMenu;
-    },
-    hostName() {
-      return window.location.hostname;
-    },
-    socialLinks() {
-      return this.$i18n.locale === 'en' ? socialEn : socialHi;
-    },
-    navItems() {
-      return this.$i18n.locale === 'en' ? navEn : navHi;
-    },
-    theme: {
-      get() {
-        return this.$vuetify.theme.dark ? 1 : 0;
-      },
-      set(val) {
-        this.$vuetify.theme.dark = val === 1 ? true : false;
-        localStorage.setItem('dark', JSON.stringify(this.$vuetify.theme.dark));
-      },
-    },
-    lang: {
-      get() {
-        return this.$i18n.locale === 'en' ? 0 : 1;
-      },
-      set(val) {
-        this.$i18n.locale = val === 0 ? 'en' : 'hi';
-        localStorage.setItem('lang', JSON.stringify(this.$i18n.locale));
-      },
-    },
-  },
-  watch: {
-    alive: {
-      handler(newV) {
-        this.animateItems(newV);
-      },
-    },
-    deep: true,
-    immediate: true,
-  },
-  methods: {
-    navigateTo({ domId }) {
-      // this.$router.push(`/${page.name}`);
-      this.hideCursor();
-      this.$store.dispatch('SHOW_NAV_MENU', false);
-      this.$vuetify.goTo(`#${domId}`);
-    },
-    openLink(link) {
-      window.open(link.url, '_blank');
-    },
-    animateItems(alive) {
-      let navs = document.querySelectorAll('.nav-item-wrapper');
-      let name = document.querySelectorAll('.name-item-wrapper');
-      let theme = document.querySelectorAll('.theme-item-wrapper');
-      let links = document.querySelectorAll('.link-item-wrapper');
-      let copy = document.querySelectorAll('.copy-item-wrapper');
-      let _navStyle = `translate3d${
-        alive ? '(0px, 0px, 0px)' : '(0px, 100px, 0px)'
-      }`;
-      let _linkStyle = `translate3d${
-        alive ? '(0px, 0px, 0px)' : '(0px, 16px, 0px)'
-      }`;
-      let _timeout = alive ? 120 : 60;
-      let _delay = alive ? 800 : 0;
-      navs.forEach((nav, index) => {
-        setTimeout(() => {
-          nav.style.transform = _navStyle;
-        }, _timeout * index + _delay);
-      });
-      links.forEach((link, index) => {
-        setTimeout(() => {
-          link.style.transform = _linkStyle;
-        }, _timeout * index + _delay);
-      });
-      setTimeout(() => {
-        name[0].style.transform = _linkStyle;
-      }, _delay);
-      setTimeout(() => {
-        copy[0].style.transform = _navStyle;
-        theme[0].style.transform = _navStyle;
-      }, _delay * 2);
-    },
-  },
-  mounted() {
-    this.animateItems(false);
-    this.$vuetify.theme.dark =
-      localStorage.getItem('dark') == 'true' ? true : false;
-    this.$i18n.locale = localStorage.getItem('lang') == 'hi' ? 'hi' : 'en';
-  },
-};
-</script>
 
 <style>
 .nav-menu-container {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   transition: transform 1s cubic-bezier(1, 0, 0, 1);
   transform: translate3d(100vw, 0px, 0px);
   padding: 24px 48px 0px 48px;
@@ -217,8 +246,11 @@ export default {
 }
 
 .nav-menu-container--active {
-  transition: transform 1s cubic-bezier(1, 0, 0, 1);
   transform: translate3d(0px, 0px, 0px);
+}
+
+.nav-menu-container ul {
+  list-style: none;
 }
 
 .nav-item-container,
@@ -228,13 +260,23 @@ export default {
   overflow: hidden;
 }
 
-.nav-item-wrapper,
-.theme-item-wrapper,
-.copy-item-wrapper,
-.name-item-wrapper,
-.link-item-wrapper {
+.slide-large,
+.slide-small {
   transition: transform 0.5s cubic-bezier(1, 0, 0, 1);
   will-change: transform;
+}
+
+.slide-large {
+  transform: translate3d(0px, 100px, 0px);
+}
+
+.slide-small {
+  transform: translate3d(0px, 16px, 0px);
+}
+
+.nav-menu-container--active .slide-large,
+.nav-menu-container--active .slide-small {
+  transform: translate3d(0px, 0px, 0px);
 }
 
 .nav-item,
@@ -246,6 +288,16 @@ export default {
 
 .nav-container {
   margin-top: 24px;
+}
+
+/* Compact toggles, as in the original design. */
+.nav-menu-container .v-btn-group {
+  height: 20px;
+}
+
+.nav-menu-container .v-btn-group .v-btn {
+  min-width: 28px;
+  padding: 0 6px;
 }
 
 @media only screen and (max-width: 600px) {

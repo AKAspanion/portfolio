@@ -1,0 +1,159 @@
+/* Vuetify 4 keeps its styles in cascade layers, so unlayered rules always win.
+   The reset goes into Vuetify's own reset layer to keep utilities working. */
+@layer vuetify-core.reset {
+  * {
+    margin: 0;
+    padding: 0;
+  }
+
+  button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+  }
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  transition: background-color 0.5s ease;
+}
+
+#app {
+  font-family: 'Rubik', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+.v-theme--light.v-application {
+  background: #ffffff;
+  color: rgb(65, 65, 65);
+}
+
+.v-theme--dark.v-application {
+  background: #000000;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #424242;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #000000;
+}
+
+/* Type scale carried over from Vuetify 2 (Material Design 2), which the
+   design was built on. Weights come from the font-weight-* utilities. */
+.type-display-3,
+.type-display-2,
+.type-display-1,
+.type-headline,
+.type-title,
+.type-subtitle,
+.type-overline {
+  font-family: Roboto, sans-serif;
+}
+
+.type-display-3 {
+  font-size: 3.75rem;
+  line-height: 3.75rem;
+  letter-spacing: -0.0083333333em;
+}
+
+.type-display-2 {
+  font-size: 3rem;
+  line-height: 3.125rem;
+}
+
+.type-display-1 {
+  font-size: 2.125rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.0073529412em;
+}
+
+.type-headline {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.type-title {
+  font-size: 1.25rem;
+  line-height: 2rem;
+  letter-spacing: 0.0125em;
+}
+
+.type-subtitle {
+  font-size: 1rem;
+  line-height: 1.75rem;
+  letter-spacing: 0.009375em;
+}
+
+.type-overline {
+  font-size: 0.75rem;
+  line-height: 2rem;
+  letter-spacing: 0.1666666667em;
+  text-transform: uppercase;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.disable-cursor {
+  pointer-events: none;
+}
+
+.fixed-wrapper {
+  margin-inline: auto;
+  max-width: 1220px;
+}
+
+.home-padding {
+  padding: 64px max(11vw, 128px);
+}
+
+@media only screen and (max-width: 600px) {
+  .home-padding {
+    padding: 148px 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
