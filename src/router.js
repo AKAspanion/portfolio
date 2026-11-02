@@ -4,21 +4,21 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 import Home from './views/Home.vue';
-import About from './views/About.vue';
-import Contact from './views/Contact.vue';
-import Project from './views/Project.vue';
-import ProjectDetail from './views/ProjectDetail.vue';
-import Experience from './views/Experience.vue';
 import NotFound from './views/NotFound.vue';
 
+// The whole portfolio lives on the home page. Older section URLs redirect
+// there so they never render an empty or under-construction screen.
+const legacyPaths = [
+  '/home',
+  '/about',
+  '/experience',
+  '/projects',
+  '/projects/:id',
+  '/contact',
+  '/exp',
+];
+
 const routes = [
-  {
-    path: '/home',
-    component: Home,
-    meta: {
-      index: 0,
-    },
-  },
   {
     path: '/',
     component: Home,
@@ -26,48 +26,7 @@ const routes = [
       index: 0,
     },
   },
-  {
-    path: '/about',
-    component: About,
-    meta: {
-      index: 1,
-    },
-  },
-  {
-    path: '/experience',
-    component: Experience,
-    meta: {
-      index: 2,
-    },
-  },
-  {
-    path: '/projects',
-    component: Project,
-    meta: {
-      index: 2,
-    },
-  },
-  {
-    path: '/projects/:id',
-    component: ProjectDetail,
-    meta: {
-      index: 2,
-    },
-  },
-  {
-    path: '/contact',
-    component: Contact,
-    meta: {
-      index: 3,
-    },
-  },
-  {
-    path: '/exp',
-    component: Contact,
-    meta: {
-      index: 3,
-    },
-  },
+  ...legacyPaths.map((path) => ({ path, redirect: '/' })),
   {
     path: '*',
     component: NotFound,
