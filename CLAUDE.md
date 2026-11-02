@@ -1,5 +1,5 @@
 <!-- GA-WORKFLOW:START -->
-<!-- ga:rules 8861ef6a6589 -->
+<!-- ga:rules 6dd7bcedf301 -->
 
 ## How work flows here
 
@@ -10,7 +10,7 @@ Use these skills without being asked; the developer shouldn't have to name them.
 - **While building:** `ga:debug` when something fails and the cause isn't obvious.
 - **Where a plan run stands:** `ga.mjs run status` reads each run's ledger: tasks done out of the plan's total, the task in hand and its fix round, the checkpoints, rulings and provisional rulings so far. Run it when the developer asks how far the work has got, rather than piecing it together.
 - **Before saying it's done:** `ga:verify-work`. `ga:review-code` when the developer asks for a review.
-- **Commands:** typecheck `npm run type-check`, lint `npm run lint`, test `npm test`, e2e `npm run test:e2e`. This repository has no format-check command. Run these as written. An app's `AGENTS.md` may list its own under Commands.
+- **Commands:** typecheck `npm run type-check`, lint `npm run lint`, format-check `npx prettier --check .`, test `npm test`, e2e `npx vite build && npm run test:e2e`. Fix lint with `npm run format` before fixing it by hand. Run these as written. An app's `AGENTS.md` may list its own under Commands.
 - **Anything the client hands over** (documents, an API collection, a design or a Figma link, their code): `ga:learn` files it, asks the one question it needs and runs the skill that learns it. For what's already in place, use those directly: `ga:learn-docs` for `intake/`, and `ga:learn-codebase` for an existing codebase with little knowledge, or the client's code copied into this project, keeping their structure and updating the knowledge base that's there. Drafts are reviewed by a person: suggest `/ga:review-knowledge`.
 - **Estimating a new build for a proposal:** suggest `/ga:estimate`, which the developer starts. It grills out every gap in the client's documents and prototype, freezes the workflows, and writes the GeekyAnts estimate, plus the client's own format when they gave one. Never estimate from a template of your own.
 - **Knowledge:** `ga:ask` before searching the code, `ga:remember` for every feature, decision or changed requirement, and `ga:check-knowledge` at the end. The knowledge section below has the rules.
@@ -43,9 +43,9 @@ Set in `.ga/config.json` under `workflow`. `/ga:workflow` asks the developer and
 - A task runs no checks: only the tests it writes, each alone, by name, to watch it fail and then pass. Every check runs once, at the end.
 - Before the work is done, run smoke (`ga.mjs run smoke --since <the branch's base>`: the apps and the routes the branch adds start and answer, and no app's latest compile failed), typecheck (`npm run type-check`) and lint (`npm run lint`). Run those for what the branch changed: `ga.mjs run checks --since <the branch's base> --only typecheck,lint` gives each command, narrowed to the packages it changed and those that depend on them. Test and e2e run only when the developer asks ("run the tests", "run e2e", "run all checks"): `ga.mjs run checks --since <the branch's base> --only <checks>` gives each command, narrowed to what changed. Then `ga:verify-work`: read the output, don't assume it.
 - Commit at the end of each step: each spec, each approved design, each task. In a plan run the implementer commits its task, and the task is complete then. Stage the step's files by name, never `git add -A`, with the knowledge that describes them in the same commit.
-- Commit messages are Conventional Commits: `type(scope): summary`.
+- Commit messages are plain sentences.
 - Build on a branch named `feat/<topic>`.
-- Branch from, and merge back into, `main`. Until ga's own setup is on `main` (`git cat-file -e main:.ga/config.json` fails), branch from the branch that holds it, and say so: a branch cut from `main` then has no `knowledge/` and no `.ga/`.
+- Branch from, and merge back into, `master`. Until ga's own setup is on `master` (`git cat-file -e master:.ga/config.json` fails), branch from the branch that holds it, and say so: a branch cut from `master` then has no `knowledge/` and no `.ga/`.
 - Ask before pushing.
 - Ask before opening a merge request.
 - Keep the branch's commits as they are when it's finished; don't squash.
@@ -101,6 +101,66 @@ Never configurable, whatever the project sets:
 
 ## Knowledge map
 
-_No concepts yet. Add the first one under `knowledge/`._
+_Generated from `knowledge/`. Do not edit by hand._
+
+### apps
+
+- [spanion-portfolio (web)](knowledge/apps/spanion-portfolio.md) _(Application)_ — The portfolio web app at the repository root — Vue 3, Vite, Vuetify, Pinia, Vue Router and vue-i18n in TypeScript.
+
+### data
+
+- [Content model](knowledge/data/model.md) _(Data Model)_ — The portfolio's content — projects, experience, skills, nav items and social links — typed in src/content.ts and stored as JSON per locale, with images found by basename.
+
+### design-system
+
+- [Accessibility](knowledge/design-system/accessibility.md) _(Convention)_ — The accessibility rules the site follows — real links and buttons with labels, visible focus, inert backgrounds, reduced motion, decorative effects hidden — and the axe check that guards them.
+- [Components](knowledge/design-system/components.md) _(Component Inventory)_ — The site's own components and composables — the fixed page chrome, the animated cursor, and the hover and reveal effects — and where each is used.
+- [Design tokens](knowledge/design-system/tokens.md) _(Design Tokens)_ — The type scale and fonts in src/styles/main.css, and the light/dark greys that are written directly into components rather than kept as theme tokens.
+
+### domain
+
+- [Ads only on screens with content](knowledge/domain/ads-only-with-content.md) _(Business Rule)_ — AdSense is loaded only on the home page after its content has rendered, never on the intro, a 404 or a redirect — to meet AdSense's publisher-content policy.
+- [English and Hindi stay in step](knowledge/domain/locale-parity.md) _(Business Rule)_ — Hindi must have exactly the English UI-string keys and the same number of content items, and every image, icon and link the content names must exist — enforced by unit tests.
+
+### features
+
+- [Navigation menu](knowledge/features/navigation-menu.md) _(Feature)_ — The full-screen menu opened from the hamburger button — jumps to a home section from any page, holds the theme and language toggles, and manages keyboard focus.
+- [Not-found page and old URLs](knowledge/features/not-found-and-redirects.md) _(Feature)_ — Old section URLs redirect to the home page, every other unknown path shows a noindex 404 page without ads, and a stale chunk after a deploy triggers one reload.
+- [Portfolio home page](knowledge/features/portfolio-home.md) _(Feature)_ — The one page a visitor reads — an intro, then projects, skills, experience and contact sections — with the intro delay, deep links by hash and hover previews.
+- [Theme and language](knowledge/features/theme-and-language.md) _(Feature)_ — Light/dark theme and English/Hindi language, chosen in the menu, remembered per browser in localStorage, with the OS colour scheme as the first default.
+
+### integrations
+
+- [Firebase Hosting](knowledge/integrations/firebase-hosting.md) _(Integration)_ — Where the built site is served from — the project, the SPA rewrite, security headers and cache rules in firebase.json, and how deploys reach it.
+- [Google AdSense](knowledge/integrations/google-adsense.md) _(Integration)_ — Display ads on the home page — the build-time site tag and ads.txt from VITE_ADSENSE_CLIENT, and the script loaded on demand at runtime.
+
+### operations
+
+- [Environment](knowledge/operations/environment.md) _(Runbook)_ — The one build-time variable, VITE_ADSENSE_CLIENT, and the GitHub Actions variables and secret the deploy needs — where each is set and read.
+- [Run locally](knowledge/operations/run-locally.md) _(Runbook)_ — How to get the site running on a developer machine, preview the production build, and deploy by hand.
+
+### project
+
+- [Architecture](knowledge/project/architecture.md) _(Architecture)_ — A static Vue 3 single-page app on Firebase Hosting with no backend — startup order, data flow from JSON to screen, and the build-time AdSense step.
+- [Conventions](knowledge/project/conventions.md) _(Conventions)_ — How code is written in this repository — file layout, naming, component style, error handling, tests, lint, git and the commands to run.
+- [Overview](knowledge/project/overview.md) _(Project Overview)_ — spanion.in — Ankit Kumar Pandit's single-page, English/Hindi portfolio site; what it shows and its parts.
+
+### quality
+
+- [CI and deploys](knowledge/quality/ci.md) _(Runbook)_ — GitHub Actions — checks and e2e on every pull request, the full suite then a Firebase deploy on every push to master, CodeQL, and Dependabot.
+- [Testing](knowledge/quality/testing.md) _(Test Strategy)_ — Vitest unit and component tests in jsdom, and a Playwright suite run against the production build on desktop and mobile with an axe accessibility check.
+
+### questions
+
+- [Must every deploy carry AdSense?](knowledge/questions/adsense-required-to-deploy.md) _(Open Question)_ — deploy.yml refuses to deploy without VITE_ADSENSE_CLIENT, while the README and the build plugin treat it as optional ("leave empty for no ads").
+- [Scoped or global component styles?](knowledge/questions/scoped-vs-global-styles.md) _(Open Question)_ — Five single-file components use a global <style> block and seven use <style scoped>; which should new code follow?
+
+### risks
+
+- [Technical debt](knowledge/risks/debt.md) _(Technical Debt)_ — Known rough edges worth fixing — colours scattered through templates, a service-worker tombstone to keep, a hard-coded email, and inconsistent style scoping.
+
+### security
+
+- [Data protection](knowledge/security/data-protection.md) _(Security)_ — The site has no accounts and collects nothing; what it stores in the browser, the HTTP security headers Firebase sends, and how outbound links and URL input are handled.
 
 <!-- OKF-KNOWLEDGE-MAP:END -->
