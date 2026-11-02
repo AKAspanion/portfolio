@@ -44,16 +44,20 @@ Before the first end-to-end run, install the browser: `npx playwright install ch
 
 ## CI/CD
 
-GitHub Actions (`.github/workflows/ci.yml`) runs on every pull request and push to `master`:
+GitHub Actions, in the same layout as [flash-cards](https://github.com/AKAspanion/flash-cards):
 
-1. Lint, type-check, unit tests and a dependency audit.
-2. Production build and Playwright end-to-end tests (desktop and mobile).
-3. Pull requests: deploy to a Firebase preview channel and comment the URL on the PR (expires after 7 days, no ads).
-4. `master`: deploy to production.
+- **`ci.yml`**: on every pull request, runs lint, type-check, unit tests, the production build and a dependency audit, then the Playwright end-to-end suite.
+- **`deploy.yml`**: on every push to `master` (or run by hand), runs the full CI suite and then deploys to Firebase Hosting.
+- **`codeql.yml`**: CodeQL code scanning on pull requests, pushes to `master` and weekly.
+- **Dependabot**: grouped weekly update PRs for npm packages and GitHub Actions.
 
-CodeQL scans the code weekly and on every change, and Dependabot opens weekly update PRs.
+Deploys need, under Settings > Secrets and variables > Actions:
 
-The workflows need, in the repository settings:
+| Name                       | Kind     | Value                                                     |
+| -------------------------- | -------- | --------------------------------------------------------- |
+| `FIREBASE_SERVICE_ACCOUNT` | Secret   | JSON key of a service account with Firebase Hosting Admin |
+| `FIREBASE_PROJECT_ID`      | Variable | `spanion-portfolio`                                       |
+| `VITE_ADSENSE_CLIENT`      | Variable | The AdSense publisher ID (`ca-pub-…`)                     |
+| `APP_URL`                  | Variable | Optional: `https://spanion.in`, shown on deployments      |
 
-- **Secret** `FIREBASE_SERVICE_ACCOUNT_SPANION_PORTFOLIO`: a Firebase service account key with Hosting deploy rights. `npx firebase-tools init hosting:github` creates it and adds it for you.
-- **Variable** `VITE_ADSENSE_CLIENT`: the AdSense publisher ID. Production deploys fail without it, so the site never ships without `ads.txt`.
+The deploy job stops with an error naming any setting that is missing.

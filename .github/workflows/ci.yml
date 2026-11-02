@@ -2,21 +2,20 @@ name: CI
 
 on:
   pull_request:
-  push:
-    branches: [master]
-  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  check:
-    name: Lint, types and unit tests
+  checks:
+    name: Lint, types, unit tests, build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
@@ -29,13 +28,17 @@ jobs:
       - run: npm run lint
       - run: npm run type-check
       - run: npm test
-      - name: Audit runtime dependencies
+      - name: Production build
+        run: npx vite build
+      - name: Audit shipped dependencies
         run: npm audit --omit=dev --audit-level=moderate
 
   e2e:
-    name: Build and end-to-end tests
+    name: End-to-end (Playwright)
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     env:
+      # Builds with the AdSense ID so the ad-loading tests run.
       VITE_ADSENSE_CLIENT: ${{ vars.VITE_ADSENSE_CLIENT }}
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -47,75 +50,15 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npx playwright install --with-deps chromium
-      - run: npm run build
-      - run: npm run test:e2e
-      - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
-        if: ${{ !cancelled() }}
+      - run: npx vite build
+      - name: Run e2e suite against the production build
+        run: npm run test:e2e
+      - name: Upload Playwright report
+        if: ${{ failure() }}
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: playwright-report
-          path: playwright-report/
-          retention-days: 14
-
-  # Pull requests from this repository get a temporary preview URL, posted
-  # as a PR comment. Built without the AdSense ID so previews show no ads.
-  deploy-preview:
-    name: Deploy preview
-    needs: [check, e2e]
-    if: >-
-      github.event_name == 'pull_request' &&
-      github.event.pull_request.head.repo.full_name == github.repository &&
-      github.actor != 'dependabot[bot]'
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      checks: write
-      pull-requests: write
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm ci
-      - run: npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPANION_PORTFOLIO }}
-          projectId: spanion-portfolio
-          expires: 7d
-
-  deploy-live:
-    name: Deploy to production
-    needs: [check, e2e]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    runs-on: ubuntu-latest
-    environment:
-      name: production
-      url: https://spanion.in
-    env:
-      VITE_ADSENSE_CLIENT: ${{ vars.VITE_ADSENSE_CLIENT }}
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          persist-credentials: false
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version-file: .nvmrc
-          cache: npm
-      - run: npm ci
-      - name: Check the AdSense ID is configured
-        run: |
-          if [ -z "$VITE_ADSENSE_CLIENT" ]; then
-            echo "::error::Set the VITE_ADSENSE_CLIENT repository variable; production would ship without ads.txt"
-            exit 1
-          fi
-      - run: npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@500ac625ca2dd40cbd15f7659af953801858032a # v0.11.0
-        with:
-          repoToken: ${{ secrets.GITHUB_TOKEN }}
-          firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_SPANION_PORTFOLIO }}
-          projectId: spanion-portfolio
-          channelId: live
+          path: |
+            playwright-report/
+            test-results/
+          retention-days: 7
