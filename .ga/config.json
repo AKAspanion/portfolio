@@ -1,0 +1,22 @@
+{
+  "consent": null,
+  "workflow": {
+    "git": {
+      "message": "free",
+      "ticket": "none",
+      "base": "master",
+      "branch": "feat/<topic>",
+      "squash": false
+    },
+    "checks": {
+      "commands": {
+        "typecheck": "npm run type-check",
+        "lint": "npm run lint",
+        "lint-fix": "npm run format",
+        "format-check": "npx prettier --check .",
+        "test": "npm test",
+        "e2e": "npx vite build && npm run test:e2e"
+      }
+    }
+  }
+}
