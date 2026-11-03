@@ -18,11 +18,16 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T04:59:03Z }
 - **Images.** Resized in the browser to at most `2000` px wide and converted to WebP before upload; Storage refuses anything that isn't an image or is over `MAX_IMAGE_MB = 10`. Deleting a post deletes its images.
 - **Ads.** Blog pages follow [[domain/ads-on-content-pages]]; the manager never carries ads.
 - **Privacy policy.** [[features/privacy-policy]] names the blog's ads, its Firestore and Storage hosting, the owner-only sign-in and what Firebase keeps in a visitor's browser.
+- **SEO.** Every public blog URL carries its own title, description, canonical link, share-preview tags and structured data in the HTML crawlers receive; a missing post answers `404`; `/sitemap.xml` (planned) lists every published post and `/blog/rss.xml` (planned) the latest 20 ([[decisions/blog-seo-function]]). A post may set an SEO title of at most `70` characters and an SEO description of at most `160`.
 - **Speed.** Firebase and the editor load only on the blog's routes, never on the home page.
 
 ## Out of scope for the first version
 
-Per-post share previews for link-preview bots (they need a Cloud Function), comments, scheduled publishing, search and RSS.
+Comments, scheduled publishing, search and multiple authors.
+
+## History
+
+- 2026-11-03: left per-post share previews, a per-post sitemap and RSS out of scope; now they are required, because the owner asked for every SEO feature. See [decisions/blog-seo-function](../decisions/blog-seo-function.md).
 
 ## Sources
 
