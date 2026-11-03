@@ -18,7 +18,7 @@ Turning ads off — for an AdSense review, a policy problem, or by choice — wo
 
 ## Status
 
-Open.
+Answered: yes, `VITE_ADSENSE_CLIENT` must be present for every deploy; the check in `deploy.yml` is intended. See [Every deploy carries AdSense](../decisions/adsense-required-for-deploy.md).
 
 ## Sources
 

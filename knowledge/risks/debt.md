@@ -14,7 +14,7 @@ verified: human:ankitp@geekyants.com
 - **Service-worker tombstone.** `public/sw.js` exists only to remove an old caching service worker from returning visitors; its comment says to keep it at that URL until they have cycled out. Nothing records when that will be. It can be deleted then.
 - **Contact email in code.** `EMAIL` in `src/views/HomeView.vue` is the only piece of portfolio content not in the content JSON ([[data/model]]); `SECURITY.md` repeats the same address.
 - **Duplicated metadata.** The social profile URLs exist in `social.json` (both locales) and again in the JSON-LD and `<noscript>` block of `index.html`.
-- **Style scoping is mixed.** Some components use global `<style>`, others `<style scoped>` — [[questions/scoped-vs-global-styles]].
+- **Global component styles.** Five components still use a global `<style>` block, against [[decisions/scoped-component-styles]]; each is listed there.
 - **Misleading field name.** `CursorState.link` in `src/stores/ui.ts` holds an image URL, not a link (its doc comment says so); `HoverText` has the same `link` prop beside a real `href`.
 
 ## Sources

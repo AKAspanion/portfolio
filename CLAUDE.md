@@ -113,7 +113,9 @@ _Generated from `knowledge/`. Do not edit by hand._
 
 ### decisions
 
+- [Every deploy carries AdSense](knowledge/decisions/adsense-required-for-deploy.md) _(Decision)_ — A production deploy must have VITE_ADSENSE_CLIENT set; deploy.yml failing without it is intended. Leaving it empty is for local builds only.
 - [Consent through Google, privacy policy at /privacy](knowledge/decisions/consent-and-privacy-policy.md) _(Decision)_ — Ad consent is left to Google's own AdSense consent message; the privacy policy it points to lives at /privacy in English and Hindi and is not linked from the site.
+- [Component styles are scoped](knowledge/decisions/scoped-component-styles.md) _(Decision)_ — Single-file components use <style scoped> only; the existing global <style> blocks are debt to convert.
 
 ### design-system
 

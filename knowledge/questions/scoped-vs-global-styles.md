@@ -23,7 +23,7 @@ Some global blocks may be deliberate — `App.vue`'s page-transition classes, or
 
 ## Status
 
-Open.
+Answered: `<style scoped>` only; the existing global blocks are debt to convert. See [Component styles are scoped](../decisions/scoped-component-styles.md).
 
 ## Sources
 

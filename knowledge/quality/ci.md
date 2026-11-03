@@ -21,7 +21,7 @@ The `README.md` says this layout matches the author's flash-cards repository.
 
 - Every pull request runs `checks`, `e2e` and CodeQL. Whether they are required to merge is a branch-protection setting on GitHub, not in the repository.
 - A deploy needs the whole of `ci.yml` to pass first (`needs: ci`).
-- The deploy job checks for `VITE_ADSENSE_CLIENT`, `FIREBASE_PROJECT_ID` and the `FIREBASE_SERVICE_ACCOUNT` secret before building, and fails naming any that is missing ([[operations/environment]], [[questions/adsense-required-to-deploy]]).
+- The deploy job checks for `VITE_ADSENSE_CLIENT`, `FIREBASE_PROJECT_ID` and the `FIREBASE_SERVICE_ACCOUNT` secret before building, and fails naming any that is missing ([[operations/environment]], [[decisions/adsense-required-for-deploy]]).
 - Workflows run with `contents: read` (CodeQL's job adds `security-events: write`), check out without persisting credentials, and pin every action to a commit SHA.
 
 ## Sources
