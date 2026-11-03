@@ -111,6 +111,13 @@ _Generated from `knowledge/`. Do not edit by hand._
 
 - [Content model](knowledge/data/model.md) _(Data Model)_ — The portfolio's content — projects, experience, skills, nav items and social links — typed in src/content.ts and stored as JSON per locale, with images found by basename.
 
+### decisions
+
+- [Blog posts are written in a TipTap editor and stored as JSON](knowledge/decisions/blog-editor-json.md) _(Decision)_ — Posts are written in a WYSIWYG TipTap editor and saved as its structured JSON, which the public page turns into HTML through the same fixed set of elements — never as stored HTML.
+- [Blog posts are managed in a Firebase-backed web manager](knowledge/decisions/blog-firebase-manager.md) _(Decision)_ — The blog's posts are written and published in a web manager on the live site, signed in with the owner's Google account only, and stored in Firestore with images in Firebase Storage.
+- [The blog owner is identified by a verified Google email in the security rules](knowledge/decisions/blog-owner-identity.md) _(Decision)_ — Only a verified Google sign-in with the owner's email may read drafts or write posts and images; the email is written into the Firestore and Storage rules, not looked up.
+- [Each blog post is written in one language](knowledge/decisions/blog-posts-single-language.md) _(Decision)_ — A post is written once, in English or Hindi, and shown as written whatever the site's language; the blog's own labels still follow the site language.
+
 ### design-system
 
 - [Accessibility](knowledge/design-system/accessibility.md) _(Convention)_ — The accessibility rules the site follows — real links and buttons with labels, visible focus, inert backgrounds, reduced motion, decorative effects hidden — and the axe check that guards them.
@@ -119,6 +126,7 @@ _Generated from `knowledge/`. Do not edit by hand._
 
 ### domain
 
+- [Ads only on screens with content](knowledge/domain/ads-on-content-pages.md) _(Business Rule)_ — AdSense loads on the home page and on blog pages that show posts, only after their content has rendered — never on the intro, a 404, a redirect, an empty blog list or the blog manager.
 - [Ads only on screens with content](knowledge/domain/ads-only-with-content.md) _(Business Rule)_ — AdSense is loaded only on the home page after its content has rendered, never on the intro, a 404 or a redirect — to meet AdSense's publisher-content policy.
 - [English and Hindi stay in step](knowledge/domain/locale-parity.md) _(Business Rule)_ — Hindi must have exactly the English UI-string keys and the same number of content items, and every image, icon and link the content names must exist — enforced by unit tests.
 
@@ -155,6 +163,10 @@ _Generated from `knowledge/`. Do not edit by hand._
 - [Does the site need ad consent?](knowledge/questions/ad-consent.md) _(Open Question)_ — AdSense loads on the home page with no cookie-consent banner or consent platform; is one needed for the site's visitors?
 - [Must every deploy carry AdSense?](knowledge/questions/adsense-required-to-deploy.md) _(Open Question)_ — deploy.yml refuses to deploy without VITE_ADSENSE_CLIENT, while the README and the build plugin treat it as optional ("leave empty for no ads").
 - [Scoped or global component styles?](knowledge/questions/scoped-vs-global-styles.md) _(Open Question)_ — Five single-file components use a global <style> block and seven use <style scoped>; which should new code follow?
+
+### requirements
+
+- [Personal blog](knowledge/requirements/blog.md) _(Requirement)_ — A public blog at /blog — a list and a page per post — and a Google-signed-in manager at /blog/manage where the owner writes, publishes and deletes posts with images.
 
 ### risks
 

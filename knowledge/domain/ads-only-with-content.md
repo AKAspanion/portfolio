@@ -4,6 +4,8 @@ title: Ads only on screens with content
 description: AdSense is loaded only on the home page after its content has rendered, never on the intro, a 404 or a redirect — to meet AdSense's publisher-content policy.
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
 verified: human:ankitp@geekyants.com
+superseded_by: domain/ads-on-content-pages
+status: superseded
 ---
 
 # Ads only on screens with content
