@@ -56,6 +56,14 @@ describe('HomeView', () => {
     wrapper.unmount();
   });
 
+  it('links the contact email', async () => {
+    const { wrapper } = await mountWithApp(HomeView);
+    const link = wrapper.find('a[href^="mailto:"]');
+    expect(link.attributes('href')).toBe('mailto:panditankit1995@gmail.com');
+    expect(link.text()).toBe('panditankit1995@gmail.com');
+    wrapper.unmount();
+  });
+
   it('shows the current year in the footer', async () => {
     const { wrapper } = await mountWithApp(HomeView);
     expect(wrapper.find('footer').text()).toContain(

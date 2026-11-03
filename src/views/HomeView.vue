@@ -8,13 +8,12 @@ import HoverText from '@/components/HoverText.vue';
 import MaskText from '@/components/MaskText.vue';
 import SkewOnHover from '@/components/SkewOnHover.vue';
 import { useCursor } from '@/composables/useCursor';
-import { useContent } from '@/content';
+import { CONTACT_EMAIL, useContent } from '@/content';
 import { icons, projectIcon, socialBrand } from '@/icons';
 import { useUiStore } from '@/stores/ui';
 import { loadAds } from '@/util/ads';
 import { findSection, focusSection } from '@/util/sections';
 
-const EMAIL = 'panditankit1995@gmail.com';
 /** Length of the intro before the page controls slide in. */
 const INTRO_MS = 1500;
 
@@ -296,10 +295,10 @@ onBeforeUnmount(() => clearTimeout(introTimer));
           <div class="text-center pt-12 mt-12">
             <a
               class="d-inline-block type-headline font-weight-light contact-email"
-              :href="`mailto:${EMAIL}`"
-              :aria-label="`${t('a11y.email')}: ${EMAIL}`"
+              :href="`mailto:${CONTACT_EMAIL}`"
+              :aria-label="`${t('a11y.email')}: ${CONTACT_EMAIL}`"
             >
-              <v-icon :icon="icons.email" class="mr-2" />{{ EMAIL }}
+              <v-icon :icon="icons.email" class="mr-2" />{{ CONTACT_EMAIL }}
             </a>
           </div>
           <ul class="text-center pt-6 mb-12 pb-8 contact-links">

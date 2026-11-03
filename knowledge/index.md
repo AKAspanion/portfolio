@@ -20,5 +20,6 @@ Start with the [Overview](project/overview.md).
 - [Design system](design-system/index.md)
 - [Operations](operations/index.md)
 - [Quality](quality/index.md)
+- [Decisions](decisions/index.md)
 - [Risks](risks/index.md)
 - [Questions](questions/index.md)

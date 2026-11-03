@@ -18,6 +18,19 @@ describe('router', () => {
     },
   );
 
+  it('serves the privacy policy at /privacy', async () => {
+    const router = makeRouter();
+    await router.push('/privacy');
+    expect(router.currentRoute.value.name).toBe('privacy');
+    expect(router.currentRoute.value.path).toBe('/privacy');
+  });
+
+  it('sends paths below /privacy to the 404 page', async () => {
+    const router = makeRouter();
+    await router.push('/privacy/extra');
+    expect(router.currentRoute.value.name).toBe('not-found');
+  });
+
   it('sends unknown paths to the 404 page', async () => {
     const router = makeRouter();
     await router.push('/does/not/exist');

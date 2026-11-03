@@ -23,6 +23,11 @@ export const routes: RouteRecordRaw[] = [
   { path: '/', name: 'home', component: HomeView },
   ...legacyPaths.map((path) => ({ path, redirect: '/' })),
   {
+    path: '/privacy',
+    name: 'privacy',
+    component: () => import('@/views/PrivacyPolicy.vue'),
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('@/views/NotFound.vue'),

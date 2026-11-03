@@ -23,8 +23,7 @@ How the parts fit is in [[project/architecture]]; the content each section shows
 
 ## Open
 
-- [[questions/adsense-required-to-deploy]]
-- [[questions/scoped-vs-global-styles]]
+The questions found while learning the code are answered; see [[decisions/adsense-required-for-deploy]], [[decisions/scoped-component-styles]] and [[decisions/consent-and-privacy-policy]].
 
 ## Sources
 

@@ -21,7 +21,7 @@ The AdSense script may be on a page only when that page shows real publisher con
 
 The reason is in commit `60a055c`, "Fix AdSense 'ads on screens without publisher content' violation", which fixed that violation by keeping ads off the splash, 404 and stub pages.
 
-Whether ads must also wait for visitor consent is open: [[questions/ad-consent]].
+Visitor consent is asked by Google's own consent message, not by the site, so this rule has no consent step: [[decisions/consent-and-privacy-policy]].
 
 ## Where it is enforced
 

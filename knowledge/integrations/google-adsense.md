@@ -10,14 +10,14 @@ verified: human:ankitp@geekyants.com
 
 ## What it is used for
 
-Showing Google ads on the home page. When ads may appear is a business rule of its own: [[domain/ads-only-with-content]]. Whether they must wait for visitor consent is open: [[questions/ad-consent]].
+Showing Google ads on the home page. When ads may appear is a business rule of its own: [[domain/ads-only-with-content]]. Consent is asked by Google's own consent message, set up in the AdSense dashboard: [[decisions/consent-and-privacy-policy]].
 
 ## Configuration
 
 - **Publisher id:** `VITE_ADSENSE_CLIENT` ([[operations/environment]]), typed in `env.d.ts`. The comment on `adsense()` in `build/adsense.ts` gives the reason it is an environment variable: so the id lives in `.env` rather than in the repository.
 - **Build time** (`build/adsense.ts`, registered in `vite.config.ts`): with the id set, the plugin checks it against `CLIENT_PATTERN`, failing the build if it doesn't match; adds the `google-adsense-account` meta tag to `index.html`; and emits `ads.txt` built by `adsTxt()` from the id and `GOOGLE_TAG_ID`. Without the id it adds nothing.
 - **Runtime** (`src/util/ads.ts`): `loadAds()` appends the `adsbygoogle.js` script to `<head>` with the id as `client`, once, in production builds only. No ad slots are placed in the markup.
-- **In CI** the id comes from the repository variable of the same name; `deploy.yml` refuses to deploy without it ([[quality/ci]], [[questions/adsense-required-to-deploy]]).
+- **In CI** the id comes from the repository variable of the same name; `deploy.yml` refuses to deploy without it ([[quality/ci]], [[decisions/adsense-required-for-deploy]]).
 
 ## Failure modes
 

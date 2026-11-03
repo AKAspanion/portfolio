@@ -113,10 +113,13 @@ _Generated from `knowledge/`. Do not edit by hand._
 
 ### decisions
 
+- [Every deploy carries AdSense](knowledge/decisions/adsense-required-for-deploy.md) _(Decision)_ — A production deploy must have VITE_ADSENSE_CLIENT set; deploy.yml failing without it is intended. Leaving it empty is for local builds only.
 - [Blog posts are written in a TipTap editor and stored as JSON](knowledge/decisions/blog-editor-json.md) _(Decision)_ — Posts are written in a WYSIWYG TipTap editor and saved as its structured JSON, which the public page turns into HTML through the same fixed set of elements — never as stored HTML.
 - [Blog posts are managed in a Firebase-backed web manager](knowledge/decisions/blog-firebase-manager.md) _(Decision)_ — The blog's posts are written and published in a web manager on the live site, signed in with the owner's Google account only, and stored in Firestore with images in Firebase Storage.
 - [The blog owner is identified by a verified Google email in the security rules](knowledge/decisions/blog-owner-identity.md) _(Decision)_ — Only a verified Google sign-in with the owner's email may read drafts or write posts and images; the email is written into the Firestore and Storage rules, not looked up.
 - [Each blog post is written in one language](knowledge/decisions/blog-posts-single-language.md) _(Decision)_ — A post is written once, in English or Hindi, and shown as written whatever the site's language; the blog's own labels still follow the site language.
+- [Consent through Google, privacy policy at /privacy](knowledge/decisions/consent-and-privacy-policy.md) _(Decision)_ — Ad consent is left to Google's own AdSense consent message; the privacy policy it points to lives at /privacy in English and Hindi and is not linked from the site.
+- [Component styles are scoped](knowledge/decisions/scoped-component-styles.md) _(Decision)_ — Single-file components use <style scoped> only; the existing global <style> blocks are debt to convert.
 
 ### design-system
 
@@ -135,6 +138,7 @@ _Generated from `knowledge/`. Do not edit by hand._
 - [Navigation menu](knowledge/features/navigation-menu.md) _(Feature)_ — The full-screen menu opened from the hamburger button — jumps to a home section from any page, holds the theme and language toggles, and manages keyboard focus.
 - [Not-found page and old URLs](knowledge/features/not-found-and-redirects.md) _(Feature)_ — Old section URLs redirect to the home page, every other unknown path shows a noindex 404 page without ads, and a stale chunk after a deploy triggers one reload.
 - [Portfolio home page](knowledge/features/portfolio-home.md) _(Feature)_ — The one page a visitor reads — an intro, then projects, skills, experience and contact sections — with the intro delay, deep links by hash and hover previews.
+- [Privacy policy page](knowledge/features/privacy-policy.md) _(Feature)_ — The privacy policy at /privacy in English and Hindi, unlinked from the site and listed in the sitemap; while shown it names itself as canonical and requests no ads.
 - [Theme and language](knowledge/features/theme-and-language.md) _(Feature)_ — Light/dark theme and English/Hindi language, chosen in the menu, remembered per browser in localStorage, with the OS colour scheme as the first default.
 
 ### integrations
