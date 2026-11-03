@@ -133,6 +133,7 @@ _Generated from `knowledge/`. Do not edit by hand._
 - [Navigation menu](knowledge/features/navigation-menu.md) _(Feature)_ — The full-screen menu opened from the hamburger button — jumps to a home section from any page, holds the theme and language toggles, and manages keyboard focus.
 - [Not-found page and old URLs](knowledge/features/not-found-and-redirects.md) _(Feature)_ — Old section URLs redirect to the home page, every other unknown path shows a noindex 404 page without ads, and a stale chunk after a deploy triggers one reload.
 - [Portfolio home page](knowledge/features/portfolio-home.md) _(Feature)_ — The one page a visitor reads — an intro, then projects, skills, experience and contact sections — with the intro delay, deep links by hash and hover previews.
+- [Privacy policy page](knowledge/features/privacy-policy.md) _(Feature)_ — The privacy policy at /privacy in English and Hindi, unlinked from the site and listed in the sitemap; while shown it names itself as canonical and requests no ads.
 - [Theme and language](knowledge/features/theme-and-language.md) _(Feature)_ — Light/dark theme and English/Hindi language, chosen in the menu, remembered per browser in localStorage, with the OS colour scheme as the first default.
 
 ### integrations
