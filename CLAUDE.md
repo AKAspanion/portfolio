@@ -111,6 +111,10 @@ _Generated from `knowledge/`. Do not edit by hand._
 
 - [Content model](knowledge/data/model.md) _(Data Model)_ — The portfolio's content — projects, experience, skills, nav items and social links — typed in src/content.ts and stored as JSON per locale, with images found by basename.
 
+### decisions
+
+- [Consent through Google, privacy policy at /privacy](knowledge/decisions/consent-and-privacy-policy.md) _(Decision)_ — Ad consent is left to Google's own AdSense consent message; the privacy policy it points to lives at /privacy in English and Hindi and is not linked from the site.
+
 ### design-system
 
 - [Accessibility](knowledge/design-system/accessibility.md) _(Convention)_ — The accessibility rules the site follows — real links and buttons with labels, visible focus, inert backgrounds, reduced motion, decorative effects hidden — and the axe check that guards them.
