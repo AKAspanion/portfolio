@@ -17,6 +17,7 @@ generated: { by: claude-code/claude-opus-5-5, at: 2026-11-03T04:59:03Z }
 - **Stable links.** A slug can change until the post is first published, then it is locked. Slugs are unique, and `manage` is reserved.
 - **Images.** Resized in the browser to at most `2000` px wide and converted to WebP before upload; Storage refuses anything that isn't an image or is over `MAX_IMAGE_MB = 10`. Deleting a post deletes its images.
 - **Ads.** Blog pages follow [[domain/ads-on-content-pages]]; the manager never carries ads.
+- **Privacy policy.** [[features/privacy-policy]] names the blog's ads, its Firestore and Storage hosting, the owner-only sign-in and what Firebase keeps in a visitor's browser.
 - **Speed.** Firebase and the editor load only on the blog's routes, never on the home page.
 
 ## Out of scope for the first version

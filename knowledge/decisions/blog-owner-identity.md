@@ -17,7 +17,7 @@ The blog manager is the site's first sign-in ([[decisions/blog-firebase-manager]
 
 The owner is the account signed in with the `google.com` provider whose token carries `email == 'panditankit1995@gmail.com'` and `email_verified == true`. That check is written into both the Firestore and the Storage rules. Every other signed-in account is treated like an anonymous visitor.
 
-An email rather than a user id, because it is known before the owner's first sign-in, and it is already public on the site (the contact email in `src/views/HomeView.vue`).
+An email rather than a user id, because it is known before the owner's first sign-in, and it is already public on the site (`CONTACT_EMAIL` in `src/content.ts`, shown on the home page and the privacy policy).
 
 ## Consequences
 
@@ -26,5 +26,5 @@ An email rather than a user id, because it is known before the owner's first sig
 
 ## Sources
 
-- `src/views/HomeView.vue`
+- `src/content.ts`
 - `docs/specs/2026-11-03-blog.md`
