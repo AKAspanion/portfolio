@@ -1,5 +1,7 @@
 # Privacy Policy Page Implementation Plan
 
+**Status:** complete
+
 > **For agentic workers:** REQUIRED SUB-SKILL: the project's workflow policy names the executor (`run.executor`): ga:implement-with-subagents by default, or ga:implement. Follow the policy and this plan's Checkpoints. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Publish an English and Hindi privacy policy at `/privacy`, unlinked from the site, for Google's AdSense consent message to point to.
@@ -125,21 +127,21 @@ Constants inside `PrivacyPolicy.vue`:
 - Given the home page mounted, then its contact link is still `mailto:panditankit1995@gmail.com` (the move to `CONTACT_EMAIL` changes nothing visible).
 - Given both locales, then `src/__tests__/content.spec.ts` still passes: Hindi has every `privacy` key English has.
 
-- [ ] **Step 1: Write the failing tests** for each Acceptance case: the route cases in `src/__tests__/router.spec.ts`, the page cases in `src/views/__tests__/PrivacyPolicy.spec.ts`, and the home-email case in `src/views/__tests__/HomeView.spec.ts` if the existing cases don't already pin it. Create `src/views/PrivacyPolicy.vue` as an empty `<main>` and add the route first, so the page tests fail on behaviour, not on a missing module.
+- [x] **Step 1: Write the failing tests** for each Acceptance case: the route cases in `src/__tests__/router.spec.ts`, the page cases in `src/views/__tests__/PrivacyPolicy.spec.ts`, and the home-email case in `src/views/__tests__/HomeView.spec.ts` if the existing cases don't already pin it. Create `src/views/PrivacyPolicy.vue` as an empty `<main>` and add the route first, so the page tests fail on behaviour, not on a missing module.
 
-- [ ] **Step 2: Run them to verify they fail**
+- [x] **Step 2: Run them to verify they fail**
 
 Run: `npx vitest run src/__tests__/router.spec.ts src/views/__tests__/PrivacyPolicy.spec.ts`
 Expected: FAIL on the assertions (heading, canonical, title, mailto), not on an import error
 
-- [ ] **Step 3: Write the minimal implementation** to the Interfaces: the `CONTACT_EMAIL` export, the `HomeView.vue` change, the `privacy` keys in both `lang.json` files, and the view, until the tests pass
+- [x] **Step 3: Write the minimal implementation** to the Interfaces: the `CONTACT_EMAIL` export, the `HomeView.vue` change, the `privacy` keys in both `lang.json` files, and the view, until the tests pass
 
-- [ ] **Step 4: Run them to verify they pass**
+- [x] **Step 4: Run them to verify they pass**
 
 Run: `npx vitest run src/__tests__/router.spec.ts src/views/__tests__/PrivacyPolicy.spec.ts src/views/__tests__/HomeView.spec.ts src/__tests__/content.spec.ts`
 Expected: PASS
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add src/views/PrivacyPolicy.vue src/views/__tests__/PrivacyPolicy.spec.ts src/router/index.ts src/__tests__/router.spec.ts src/content.ts src/views/HomeView.vue src/assets/i18n/en/lang.json src/assets/i18n/hi/lang.json
@@ -180,21 +182,21 @@ git commit -m "Add the /privacy page with the privacy policy in English and Hind
 - Given `/privacy` opened, then the page has no `meta[name="robots"]`.
 - Given the production build, when `/sitemap.xml` is requested, then it is served as text (not the app shell) and contains `<loc>https://spanion.in/privacy</loc>`.
 
-- [ ] **Step 1: Write the failing tests** for each Acceptance case, as one or more `test(...)` blocks whose names start with "privacy page", in `e2e/site.spec.ts`
+- [x] **Step 1: Write the failing tests** for each Acceptance case, as one or more `test(...)` blocks whose names start with "privacy page", in `e2e/site.spec.ts`
 
-- [ ] **Step 2: Run them to verify they fail**
+- [x] **Step 2: Run them to verify they fail**
 
 Run: `npx vite build && npx playwright test e2e/site.spec.ts -g "privacy page"`
 Expected: FAIL on the sitemap assertion, and on anything Task 1 left out
 
-- [ ] **Step 3: Write the minimal implementation**: add the `<url><loc>https://spanion.in/privacy</loc></url>` entry to `public/sitemap.xml`
+- [x] **Step 3: Write the minimal implementation**: add the `<url><loc>https://spanion.in/privacy</loc></url>` entry to `public/sitemap.xml`
 
-- [ ] **Step 4: Run them to verify they pass**
+- [x] **Step 4: Run them to verify they pass**
 
 Run: `npx vite build && npx playwright test e2e/site.spec.ts -g "privacy page"`
 Expected: PASS on both the desktop and mobile projects
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add public/sitemap.xml e2e/site.spec.ts
