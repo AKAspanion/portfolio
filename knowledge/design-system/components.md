@@ -2,8 +2,8 @@
 type: Component Inventory
 title: Components
 description: The site's own components and composables — the fixed page chrome, the animated cursor, and the hover and reveal effects — and where each is used.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Components

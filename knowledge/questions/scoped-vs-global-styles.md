@@ -2,8 +2,8 @@
 type: Open Question
 title: Scoped or global component styles?
 description: Five single-file components use a global <style> block and seven use <style scoped>; which should new code follow?
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Scoped or global component styles?

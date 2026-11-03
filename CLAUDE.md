@@ -152,6 +152,7 @@ _Generated from `knowledge/`. Do not edit by hand._
 
 ### questions
 
+- [Does the site need ad consent?](knowledge/questions/ad-consent.md) _(Open Question)_ — AdSense loads on the home page with no cookie-consent banner or consent platform; is one needed for the site's visitors?
 - [Must every deploy carry AdSense?](knowledge/questions/adsense-required-to-deploy.md) _(Open Question)_ — deploy.yml refuses to deploy without VITE_ADSENSE_CLIENT, while the README and the build plugin treat it as optional ("leave empty for no ads").
 - [Scoped or global component styles?](knowledge/questions/scoped-vs-global-styles.md) _(Open Question)_ — Five single-file components use a global <style> block and seven use <style scoped>; which should new code follow?
 

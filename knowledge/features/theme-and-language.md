@@ -2,8 +2,8 @@
 type: Feature
 title: Theme and language
 description: Light/dark theme and English/Hindi language, chosen in the menu, remembered per browser in localStorage, with the OS colour scheme as the first default.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Theme and language

@@ -2,8 +2,8 @@
 type: Application
 title: spanion-portfolio (web)
 description: The portfolio web app at the repository root — Vue 3, Vite, Vuetify, Pinia, Vue Router and vue-i18n in TypeScript.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # spanion-portfolio (web)

@@ -2,8 +2,8 @@
 type: Integration
 title: Firebase Hosting
 description: Where the built site is served from — the project, the SPA rewrite, security headers and cache rules in firebase.json, and how deploys reach it.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Firebase Hosting

@@ -2,8 +2,8 @@
 type: Design Tokens
 title: Design tokens
 description: The type scale and fonts in src/styles/main.css, and the light/dark greys that are written directly into components rather than kept as theme tokens.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Design tokens
@@ -21,7 +21,7 @@ Vuetify's own `light` and `dark` themes are used unchanged (`src/plugins/vuetify
 
 ## Spacing and radius
 
-Spacing uses Vuetify's utility classes (`pa-*`, `pt-*`, `my-*`). Page padding is `.home-padding` and the content width `.fixed-wrapper`, both in `src/styles/main.css`. Corners are square: the toggles set `rounded="0"`.
+Spacing uses Vuetify's utility classes (`pa-*`, `pt-*`, `my-*`). Page padding is `.home-padding` and the content width `.fixed-wrapper`, both in `src/styles/main.css`. There is no radius scale: the theme and language toggles in `NavMenu.vue` set `rounded="0"`, and the cursor ring in `CursorAnimated.vue` is a circle.
 
 ## Typography
 
@@ -41,4 +41,5 @@ Spacing uses Vuetify's utility classes (`pa-*`, `pt-*`, `my-*`). Page padding is
 - `src/components/SpanionLogo.vue`
 - `src/components/ScrollProgress.vue`
 - `src/components/SocialLinks.vue`
+- `src/components/CursorAnimated.vue`
 - `index.html`

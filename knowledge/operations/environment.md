@@ -2,8 +2,8 @@
 type: Runbook
 title: Environment
 description: The one build-time variable, VITE_ADSENSE_CLIENT, and the GitHub Actions variables and secret the deploy needs — where each is set and read.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Environment

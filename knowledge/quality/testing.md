@@ -2,8 +2,8 @@
 type: Test Strategy
 title: Testing
 description: Vitest unit and component tests in jsdom, and a Playwright suite run against the production build on desktop and mobile with an axe accessibility check.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Testing

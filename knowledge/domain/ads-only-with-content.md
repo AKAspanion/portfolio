@@ -2,8 +2,8 @@
 type: Business Rule
 title: Ads only on screens with content
 description: AdSense is loaded only on the home page after its content has rendered, never on the intro, a 404 or a redirect — to meet AdSense's publisher-content policy.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Ads only on screens with content
@@ -17,7 +17,9 @@ The AdSense script may be on a page only when that page shows real publisher con
 - The 404 page never carries it. Because a loaded AdSense script can't be removed (comment in `src/router/index.ts`), any in-app navigation to a 404 after ads have loaded — such as browser Back from the home page — does a full reload, so the 404 starts clean.
 - Builds without `VITE_ADSENSE_CLIENT`, and development builds, load no ads at all.
 
-The reason is in commit `60a055c`, "Fix AdSense 'ads on screens without publisher content' violation": the site had been flagged for ads on the splash, 404 and placeholder pages.
+The reason is in commit `60a055c`, "Fix AdSense 'ads on screens without publisher content' violation", which fixed that violation by keeping ads off the splash, 404 and stub pages.
+
+Whether ads must also wait for visitor consent is open: [[questions/ad-consent]].
 
 ## Where it is enforced
 

@@ -2,8 +2,8 @@
 type: Architecture
 title: Architecture
 description: A static Vue 3 single-page app on Firebase Hosting with no backend — startup order, data flow from JSON to screen, and the build-time AdSense step.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Architecture

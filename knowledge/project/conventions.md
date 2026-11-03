@@ -2,8 +2,8 @@
 type: Conventions
 title: Conventions
 description: How code is written in this repository — file layout, naming, component style, error handling, tests, lint, git and the commands to run.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Conventions
@@ -21,7 +21,7 @@ generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
 - Import from `src` through the `@/` alias set in `vite.config.ts` and `tsconfig.app.json`, as `src/App.vue` does.
 - Components use `<script setup lang="ts">` with typed `defineProps`, as in `src/components/HoverText.vue`.
 - Visible text comes from i18n keys (`t('…')`), with both `src/assets/i18n/en/lang.json` and `src/assets/i18n/hi/lang.json` updated together ([[domain/locale-parity]]).
-- Brand-icon SVG paths are imported one by one from `@mdi/js` in `src/icons.ts`, never the whole icon font.
+- Icons are SVG paths imported one by one from `@mdi/js` in `src/icons.ts`, never the whole icon font.
 - Build-time code lives in `build/`, as in `build/adsense.ts`.
 - Component styles: split between global `<style>` and `<style scoped>` — see [[questions/scoped-vs-global-styles]].
 
@@ -29,7 +29,7 @@ generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
 
 - Browser storage access is wrapped in try/catch and failures are ignored, as in `src/util/preferences.ts`.
 - Input from the URL is decoded defensively and looked up by id, never used as a selector, as in `src/util/sections.ts`.
-- Router failures are handled in `router.onError` in `src/router/index.ts`; elsewhere errors go to `console.error` (`src/main.ts`).
+- Router failures are handled in `router.onError` in `src/router/index.ts`. The one `console.error` logs a failed first navigation, in `src/main.ts`.
 
 ## Tests
 
@@ -45,7 +45,7 @@ generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
 
 ## Git
 
-- Commit messages: free-form, imperative summaries — 0 of the last 100 commits on `master` are conventional (`git.message`).
+- Commit messages: free-form summaries — 0 of the last 100 commits on `master` are conventional (`git.message`).
 - No ticket keys in history, no commitlint (`git.ticket`).
 - Changes merge into `master`, 33 of 33 merges (`git.base`).
 - Branch names are split (claude/ 3, feat/ 2, none 2 of 7); ga's default is kept (`git.branch`).

@@ -2,8 +2,8 @@
 type: Runbook
 title: Run locally
 description: How to get the site running on a developer machine, preview the production build, and deploy by hand.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Run locally

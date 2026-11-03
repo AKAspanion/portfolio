@@ -2,15 +2,15 @@
 type: Integration
 title: Google AdSense
 description: Display ads on the home page — the build-time site tag and ads.txt from VITE_ADSENSE_CLIENT, and the script loaded on demand at runtime.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Google AdSense
 
 ## What it is used for
 
-Showing Google ads on the home page. When ads may appear is a business rule of its own: [[domain/ads-only-with-content]].
+Showing Google ads on the home page. When ads may appear is a business rule of its own: [[domain/ads-only-with-content]]. Whether they must wait for visitor consent is open: [[questions/ad-consent]].
 
 ## Configuration
 

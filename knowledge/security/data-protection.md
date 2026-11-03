@@ -2,8 +2,8 @@
 type: Security
 title: Data protection
 description: The site has no accounts and collects nothing; what it stores in the browser, the HTTP security headers Firebase sends, and how outbound links and URL input are handled.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Data protection
@@ -11,8 +11,8 @@ generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
 ## Sensitive data
 
 - The site has no sign-in, forms or server, and sends nothing about the visitor to an endpoint of its own.
-- The browser stores only two preferences in localStorage (`dark`, `lang`) and one sessionStorage key (`chunk-reload`) — see [[features/theme-and-language]] and [[features/not-found-and-redirects]].
-- Third parties the browser contacts: Google Fonts (`index.html`) and, on the home page, Google AdSense ([[integrations/google-adsense]]).
+- The site's own code stores only two preferences in localStorage (`dark`, `lang`) and one sessionStorage key (`chunk-reload`) — see [[features/theme-and-language]] and [[features/not-found-and-redirects]].
+- Third parties the browser contacts: Google Fonts (`index.html`) and, on the home page, Google AdSense ([[integrations/google-adsense]]). Once AdSense loads, it sets Google's own cookies; the site has no consent banner or consent platform — see [[questions/ad-consent]].
 - Ankit's own contact email is in `HomeView.vue` and `SECURITY.md`, and his social profiles in `social.json` and the JSON-LD in `index.html` — public by intent.
 - The only build setting, `VITE_ADSENSE_CLIENT`, is a public publisher id, not a secret ([[operations/environment]]). The deploy credential is a GitHub Actions secret ([[quality/ci]]).
 

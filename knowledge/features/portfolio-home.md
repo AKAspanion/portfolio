@@ -2,8 +2,8 @@
 type: Feature
 title: Portfolio home page
 description: The one page a visitor reads — an intro, then projects, skills, experience and contact sections — with the intro delay, deep links by hash and hover previews.
-status: draft
 generated: { by: claude-opus-5-5/ga-2.15.0, at: 2026-11-02T19:13:09Z }
+verified: human:ankitp@geekyants.com
 ---
 
 # Portfolio home page
@@ -31,7 +31,7 @@ The content comes from [[data/model]] in the visitor's language ([[features/them
 - **Ads after content.** The AdSense script is requested at the end of the intro, after the next render — [[domain/ads-only-with-content]].
 - **Hash links are looked up by id.** `findSection()` in `src/util/sections.ts` decodes the hash and uses `getElementById`, so a hash that isn't a valid CSS selector (such as `#1`) can't throw; the section then gets focus without a second scroll (`focusSection()`).
 - **Phones.** Below Vuetify's `xs` breakpoint the cursor effects are off (`useCursor`, `useMagnet`), the social-links widget is hidden, and the top bar takes the background colour of the section under it (`App.vue`).
-- **External links** open in a new tab with `rel="noopener noreferrer"` and an off-screen "opens in a new tab" label (`HoverText.vue`).
+- **External links** follow the new-tab rule in [[design-system/accessibility]].
 - The contact email is the `EMAIL` constant in `HomeView.vue`.
 
 ## Sources
