@@ -23,7 +23,7 @@ verified: human:ankitp@geekyants.com
 - Visible text comes from i18n keys (`t('…')`), with both `src/assets/i18n/en/lang.json` and `src/assets/i18n/hi/lang.json` updated together ([[domain/locale-parity]]).
 - Icons are SVG paths imported one by one from `@mdi/js` in `src/icons.ts`, never the whole icon font.
 - Build-time code lives in `build/`, as in `build/adsense.ts`.
-- Component styles: split between global `<style>` and `<style scoped>` — see [[questions/scoped-vs-global-styles]].
+- Component styles are `<style scoped>`, as in `src/views/HomeView.vue`; site-wide rules go in `src/styles/main.css` ([[decisions/scoped-component-styles]]).
 
 ## Error handling
 
@@ -84,3 +84,5 @@ The policy's `checks.commands.typecheck`, `checks.commands.lint`, `checks.comman
 - `src/util/__tests__/preferences.spec.ts`
 - `src/views/__tests__/NotFound.spec.ts`
 - `e2e/site.spec.ts`
+- `src/styles/main.css`
+- `src/views/HomeView.vue`

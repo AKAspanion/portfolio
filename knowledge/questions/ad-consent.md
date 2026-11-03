@@ -18,7 +18,7 @@ It decides whether ad loading needs a consent step before `loadAds()`, which wou
 
 ## Status
 
-Open.
+Answered: Google's own AdSense consent message handles it, with the privacy policy at `/privacy`; the site builds no consent step. See [Consent through Google, privacy policy at /privacy](../decisions/consent-and-privacy-policy.md).
 
 ## Sources
 

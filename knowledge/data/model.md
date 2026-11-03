@@ -33,7 +33,13 @@ No entity refers to another. Each refers to files in `public/`:
 - `SocialLink.url`'s domain picks its icon and brand colour through `socialBrand()` in `src/icons.ts` — names are translated, so the URL is the key.
 - `NavItem.domId` is the `id` of a `<section>` in `HomeView.vue`.
 
+`CONTACT_EMAIL` in `src/content.ts` is not part of the JSON: it is the contact address used by the home page and the privacy policy ([[features/privacy-policy]]).
+
 `src/__tests__/content.spec.ts` checks every one of these references.
+
+## History
+
+- 2026-11-03: `CONTACT_EMAIL` added to `src/content.ts` as the contact address shared by the home page and the privacy policy.
 
 ## Sources
 

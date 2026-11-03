@@ -211,3 +211,39 @@ test('a hash that is not a valid selector does not break the page', async ({
   await page.waitForTimeout(2_500);
   expect(unexpected(errors)).toEqual([]);
 });
+
+test('privacy page opens directly, is indexable and has no ads or violations', async ({
+  page,
+}) => {
+  const { errors, adRequests } = await watch(page);
+  await page.goto('/privacy');
+
+  await expect(
+    page.getByRole('heading', { level: 1, name: 'Privacy policy' }),
+  ).toBeVisible();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    'href',
+    'https://spanion.in/privacy',
+  );
+  await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
+
+  await page.waitForTimeout(2_000);
+  expect(adRequests).toHaveLength(0);
+  expect(unexpected(errors)).toEqual([]);
+
+  const results = await new AxeBuilder({ page }).analyze();
+  const serious = results.violations.filter((v) =>
+    ['serious', 'critical'].includes(v.impact ?? ''),
+  );
+  expect(serious.map((v) => `${v.id}: ${v.nodes.length} nodes`)).toEqual([]);
+});
+
+test('privacy page is listed in the sitemap, served as text', async ({
+  request,
+}) => {
+  const res = await request.get('/sitemap.xml');
+  expect(res.ok()).toBe(true);
+  const body = await res.text();
+  expect(body).not.toContain('<!doctype html>');
+  expect(body).toContain('<loc>https://spanion.in/privacy</loc>');
+});

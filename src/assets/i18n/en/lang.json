@@ -32,6 +32,46 @@
     "title": "This page doesn't exist.",
     "back": "Back to the portfolio"
   },
+  "privacy": {
+    "title": "Privacy policy",
+    "page-title": "Privacy policy — Ankit Kumar Pandit",
+    "updated": "Last updated: {date}",
+    "back": "Back to the portfolio",
+    "sections": {
+      "who": {
+        "title": "Who runs this site",
+        "body": "This website is the personal portfolio of Ankit Kumar Pandit, a software developer. If you have a question about this policy or about your data, write to {email}."
+      },
+      "stored": {
+        "title": "What the site stores",
+        "body": "The site itself has no accounts, forms or analytics, and it sends nothing about you to a server of its own. Your browser keeps two preferences for the site in its local storage: your colour theme (dark) and your language (lang), so they are remembered on your next visit. It also keeps one marker in session storage (chunk-reload), used to reload the page once if the site was updated while it was open; it goes away when you close the tab. None of these identifies you."
+      },
+      "ads": {
+        "title": "Ads (Google AdSense)",
+        "body": "The home page shows ads from Google AdSense. To show and measure ads, Google and its partners may use cookies and similar identifiers on your device, and may collect data such as your IP address and the pages you view, whether the ads are personalised or not. This site does not receive that data. Visitors in the European Economic Area, the United Kingdom and Switzerland are first shown Google's consent message, where they can accept or decline. More is on these Google pages:"
+      },
+      "fonts": {
+        "title": "Fonts (Google Fonts)",
+        "body": "The site's fonts are loaded from Google Fonts. When your browser fetches them, your IP address and browser details are sent to Google, as with any request to a web server."
+      },
+      "hosting": {
+        "title": "Hosting",
+        "body": "The site is hosted on Firebase Hosting, a Google service. It handles each request for a page and may log it, including your IP address, the time and the page requested, under Google's own terms."
+      },
+      "rights": {
+        "title": "Your choices and rights",
+        "body": "You can clear this site's data in your browser settings at any time to remove the preferences described above. You can change or turn off personalised ads in Google's ad settings (linked above), and decline cookies in the consent message where it is shown. To ask what data is held about you, or to have it deleted, write to {email}."
+      },
+      "changes": {
+        "title": "Changes to this policy",
+        "body": "This policy may change. The date of the latest update is shown at the top of the page."
+      }
+    },
+    "links": {
+      "google-partner-sites": "How Google uses information from sites that use our services",
+      "google-ad-settings": "Google's ad settings"
+    }
+  },
   "a11y": {
     "open-menu": "Open menu",
     "close-menu": "Close menu",

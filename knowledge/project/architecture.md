@@ -27,7 +27,7 @@ None: the site has no background work. The only build-time step beyond Vite and 
 3. **Content**: `src/content.ts` imports one JSON file per kind per locale from `src/assets/json/<locale>/` and `useContent()` returns the current locale's set; UI strings come from `src/assets/i18n/<locale>/lang.json` through vue-i18n — see [[data/model]].
 4. **Shell** (`src/App.vue`): the fixed chrome (logo, menu button, scroll progress, social links, animated cursor) and the full-screen `NavMenu`, around a `<router-view>` with a page transition.
 5. **Shared UI state** lives in one Pinia store, `useUiStore` in `src/stores/ui.ts`: `loaded` (intro finished), `navMenu` (menu open), `scrollPos`, and the cursor tooltip.
-6. **Routes** (`src/router/index.ts`): `/` is `HomeView`; old section URLs redirect to `/`; anything else lazy-loads `NotFound` — see [[features/not-found-and-redirects]].
+6. **Routes** (`src/router/index.ts`): `/` is `HomeView`; `/privacy` is `PrivacyPolicy` ([[features/privacy-policy]]); old section URLs redirect to `/`; anything else lazy-loads `NotFound` — see [[features/not-found-and-redirects]].
 
 ## Sources
 

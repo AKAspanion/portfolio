@@ -26,7 +26,7 @@ Vue 3 with `<script setup>` and TypeScript, built by Vite; Vuetify for layout, t
 
 ## Screens and routes
 
-Routes are defined in `src/router/index.ts`: `/` (`home`, `HomeView`), the redirects in `legacyPaths`, and the `not-found` catch-all. The pages are `src/views/HomeView.vue` and `src/views/NotFound.vue`; `src/views/NavMenu.vue` is an overlay shown on every page.
+Routes are defined in `src/router/index.ts`: `/` (`home`, `HomeView`), `/privacy` (`privacy`, `PrivacyPolicy`, [[features/privacy-policy]]), the redirects in `legacyPaths`, and the `not-found` catch-all. The pages are `src/views/HomeView.vue`, `src/views/PrivacyPolicy.vue` and `src/views/NotFound.vue`; `src/views/NavMenu.vue` is an overlay shown on every page.
 
 ## Depends on
 
@@ -43,6 +43,7 @@ Routes are defined in `src/router/index.ts`: `/` (`home`, `HomeView`), the redir
 - `src/App.vue`
 - `src/router/index.ts`
 - `src/views/HomeView.vue`
+- `src/views/PrivacyPolicy.vue`
 - `src/views/NotFound.vue`
 - `src/views/NavMenu.vue`
 - `vite.config.ts`

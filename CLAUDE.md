@@ -111,6 +111,12 @@ _Generated from `knowledge/`. Do not edit by hand._
 
 - [Content model](knowledge/data/model.md) _(Data Model)_ — The portfolio's content — projects, experience, skills, nav items and social links — typed in src/content.ts and stored as JSON per locale, with images found by basename.
 
+### decisions
+
+- [Every deploy carries AdSense](knowledge/decisions/adsense-required-for-deploy.md) _(Decision)_ — A production deploy must have VITE_ADSENSE_CLIENT set; deploy.yml failing without it is intended. Leaving it empty is for local builds only.
+- [Consent through Google, privacy policy at /privacy](knowledge/decisions/consent-and-privacy-policy.md) _(Decision)_ — Ad consent is left to Google's own AdSense consent message; the privacy policy it points to lives at /privacy in English and Hindi and is not linked from the site.
+- [Component styles are scoped](knowledge/decisions/scoped-component-styles.md) _(Decision)_ — Single-file components use <style scoped> only; the existing global <style> blocks are debt to convert.
+
 ### design-system
 
 - [Accessibility](knowledge/design-system/accessibility.md) _(Convention)_ — The accessibility rules the site follows — real links and buttons with labels, visible focus, inert backgrounds, reduced motion, decorative effects hidden — and the axe check that guards them.
@@ -127,6 +133,7 @@ _Generated from `knowledge/`. Do not edit by hand._
 - [Navigation menu](knowledge/features/navigation-menu.md) _(Feature)_ — The full-screen menu opened from the hamburger button — jumps to a home section from any page, holds the theme and language toggles, and manages keyboard focus.
 - [Not-found page and old URLs](knowledge/features/not-found-and-redirects.md) _(Feature)_ — Old section URLs redirect to the home page, every other unknown path shows a noindex 404 page without ads, and a stale chunk after a deploy triggers one reload.
 - [Portfolio home page](knowledge/features/portfolio-home.md) _(Feature)_ — The one page a visitor reads — an intro, then projects, skills, experience and contact sections — with the intro delay, deep links by hash and hover previews.
+- [Privacy policy page](knowledge/features/privacy-policy.md) _(Feature)_ — The privacy policy at /privacy in English and Hindi, unlinked from the site and listed in the sitemap; while shown it names itself as canonical and requests no ads.
 - [Theme and language](knowledge/features/theme-and-language.md) _(Feature)_ — Light/dark theme and English/Hindi language, chosen in the menu, remembered per browser in localStorage, with the OS colour scheme as the first default.
 
 ### integrations

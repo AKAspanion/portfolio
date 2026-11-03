@@ -66,6 +66,9 @@ export interface Content {
   social: SocialLink[];
 }
 
+/** The address visitors write to, shown on the home page and in the privacy policy. */
+export const CONTACT_EMAIL = 'panditankit1995@gmail.com';
+
 export const content: Record<Locale, Content> = {
   en: {
     projects: projectsEn,
