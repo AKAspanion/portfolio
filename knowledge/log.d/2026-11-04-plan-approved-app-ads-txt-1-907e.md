@@ -8,4 +8,5 @@ ref: docs/plans/2026-11-04-app-ads-txt.md
 by: human:ankitp@geekyants.com
 agent: claude-code
 ---
+
 Plan approved: app-ads.txt, 1 task, no checkpoints
