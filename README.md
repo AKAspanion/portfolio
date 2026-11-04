@@ -15,8 +15,8 @@ Needs Node.js 24 (see `.nvmrc`).
 git clone https://github.com/AKAspanion/portfolio.git
 cd portfolio
 cp .env.example .env   # then fill in the values
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 ## Configuration
@@ -29,18 +29,18 @@ Settings live in `.env`, which is not committed. `.env.example` lists them:
 
 ## Scripts
 
-| Command              | What it does                                           |
-| -------------------- | ------------------------------------------------------ |
-| `npm run dev`        | Dev server with hot reload                             |
-| `npm run build`      | Type-check and build for production into `dist/`       |
-| `npm run preview`    | Serve the production build locally                     |
-| `npm run lint`       | ESLint and Prettier checks (`npm run format` fixes)    |
-| `npm run type-check` | TypeScript checks                                      |
-| `npm test`           | Unit and component tests (Vitest)                      |
-| `npm run test:e2e`   | End-to-end tests (Playwright) against the build        |
-| `npm run deploy`     | Build and deploy to Firebase Hosting from your machine |
+| Command               | What it does                                           |
+| --------------------- | ------------------------------------------------------ |
+| `pnpm run dev`        | Dev server with hot reload                             |
+| `pnpm run build`      | Type-check and build for production into `dist/`       |
+| `pnpm run preview`    | Serve the production build locally                     |
+| `pnpm run lint`       | ESLint and Prettier checks (`pnpm run format` fixes)   |
+| `pnpm run type-check` | TypeScript checks                                      |
+| `pnpm test`           | Unit and component tests (Vitest)                      |
+| `pnpm run test:e2e`   | End-to-end tests (Playwright) against the build        |
+| `pnpm run deploy`     | Build and deploy to Firebase Hosting from your machine |
 
-Before the first end-to-end run, install the browser: `npx playwright install chromium`.
+Before the first end-to-end run, install the browser: `pnpm exec playwright install chromium`.
 
 ## CI/CD
 
