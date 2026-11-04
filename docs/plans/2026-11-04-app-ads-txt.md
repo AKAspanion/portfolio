@@ -1,5 +1,7 @@
 # app-ads.txt Implementation Plan
 
+**Status:** complete
+
 > **For agentic workers:** REQUIRED SUB-SKILL: the project's workflow policy names the executor (`run.executor`): ga:implement-with-subagents by default, or ga:implement. Follow the policy and this plan's Checkpoints. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Make the production build emit `app-ads.txt` at the site root, next to `ads.txt`, so AdMob can verify the
@@ -58,23 +60,23 @@ this edit and the README's `VITE_ADSENSE_CLIENT` row, not this task.
   `google.com, pub-1234567890123456, DIRECT, f08c47fec0942fa0\n`.
 - Given `VITE_ADSENSE_CLIENT` is empty, when the same hooks run, then `emitFile` is never called.
 
-- [ ] **Step 1: Write the failing tests** for each Acceptance case in `build/__tests__/adsense.spec.ts`. Call the
+- [x] **Step 1: Write the failing tests** for each Acceptance case in `build/__tests__/adsense.spec.ts`. Call the
       hooks on the object `adsense()` returns, with a stub `emitFile` as `this` for `generateBundle`
 
-- [ ] **Step 2: Run them to verify they fail**
+- [x] **Step 2: Run them to verify they fail**
 
 Run: `npx vitest run build/__tests__/adsense.spec.ts`
 Expected: the id-set case FAILS because `app-ads.txt` isn't emitted, and the empty case passes
 
-- [ ] **Step 3: Write the minimal implementation**: emit `app-ads.txt` in `generateBundle()` and update the doc comment
+- [x] **Step 3: Write the minimal implementation**: emit `app-ads.txt` in `generateBundle()` and update the doc comment
       on `adsense()`
 
-- [ ] **Step 4: Run them to verify they pass**
+- [x] **Step 4: Run them to verify they pass**
 
 Run: `npx vitest run build/__tests__/adsense.spec.ts`
 Expected: PASS
 
-- [ ] **Step 5: Commit**
+- [x] **Step 5: Commit**
 
 ```bash
 git add build/adsense.ts build/__tests__/adsense.spec.ts
