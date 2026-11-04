@@ -1,5 +1,4 @@
 import { describe, expect, it, vi } from 'vitest';
-import type { ResolvedConfig } from 'vite';
 
 import { adsense, adsTxt } from '../adsense';
 
