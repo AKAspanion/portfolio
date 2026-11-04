@@ -13,6 +13,8 @@ Start with the [Overview](project/overview.md).
 - [Features](features/index.md)
 - [Data](data/index.md)
 - [Domain](domain/index.md)
+- [Decisions](decisions/index.md)
+- [Requirements](requirements/index.md)
 - [Security](security/index.md)
 - [Integrations](integrations/index.md)
 - [Design system](design-system/index.md)

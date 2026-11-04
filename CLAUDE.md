@@ -114,6 +114,11 @@ _Generated from `knowledge/`. Do not edit by hand._
 ### decisions
 
 - [Every deploy carries AdSense](knowledge/decisions/adsense-required-for-deploy.md) _(Decision)_ — A production deploy must have VITE_ADSENSE_CLIENT set; deploy.yml failing without it is intended. Leaving it empty is for local builds only.
+- [Blog posts are written in a TipTap editor and stored as JSON](knowledge/decisions/blog-editor-json.md) _(Decision)_ — Posts are written in a WYSIWYG TipTap editor and saved as its structured JSON, which the public page turns into HTML through the same fixed set of elements — never as stored HTML.
+- [Blog posts are managed in a Firebase-backed web manager](knowledge/decisions/blog-firebase-manager.md) _(Decision)_ — The blog's posts are written and published in a web manager on the live site, signed in with the owner's Google account only, and stored in Firestore with images in Firebase Storage.
+- [The blog owner is identified by a verified Google email in the security rules](knowledge/decisions/blog-owner-identity.md) _(Decision)_ — Only a verified Google sign-in with the owner's email may read drafts or write posts and images; the email is written into the Firestore and Storage rules, not looked up.
+- [Each blog post is written in one language](knowledge/decisions/blog-posts-single-language.md) _(Decision)_ — A post is written once, in English or Hindi, and shown as written whatever the site's language; the blog's own labels still follow the site language.
+- [A Cloud Function serves the blog's public pages to crawlers and link previews](knowledge/decisions/blog-seo-function.md) _(Decision)_ — /blog, /blog/:slug, /sitemap.xml and /blog/rss.xml go through a Cloud Function that fills the site's index.html with each page's tags, structured data and article, so bots that don't run JavaScript see real content.
 - [Consent through Google, privacy policy at /privacy](knowledge/decisions/consent-and-privacy-policy.md) _(Decision)_ — Ad consent is left to Google's own AdSense consent message; the privacy policy it points to lives at /privacy in English and Hindi and is not linked from the site.
 - [Component styles are scoped](knowledge/decisions/scoped-component-styles.md) _(Decision)_ — Single-file components use <style scoped> only; the existing global <style> blocks are debt to convert.
 
@@ -125,6 +130,7 @@ _Generated from `knowledge/`. Do not edit by hand._
 
 ### domain
 
+- [Ads only on screens with content](knowledge/domain/ads-on-content-pages.md) _(Business Rule)_ — AdSense loads on the home page and on blog pages that show posts, only after their content has rendered — never on the intro, a 404, a redirect, an empty blog list or the blog manager.
 - [Ads only on screens with content](knowledge/domain/ads-only-with-content.md) _(Business Rule)_ — AdSense is loaded only on the home page after its content has rendered, never on the intro, a 404 or a redirect — to meet AdSense's publisher-content policy.
 - [English and Hindi stay in step](knowledge/domain/locale-parity.md) _(Business Rule)_ — Hindi must have exactly the English UI-string keys and the same number of content items, and every image, icon and link the content names must exist — enforced by unit tests.
 
@@ -162,6 +168,10 @@ _Generated from `knowledge/`. Do not edit by hand._
 - [Does the site need ad consent?](knowledge/questions/ad-consent.md) _(Open Question)_ — AdSense loads on the home page with no cookie-consent banner or consent platform; is one needed for the site's visitors?
 - [Must every deploy carry AdSense?](knowledge/questions/adsense-required-to-deploy.md) _(Open Question)_ — deploy.yml refuses to deploy without VITE_ADSENSE_CLIENT, while the README and the build plugin treat it as optional ("leave empty for no ads").
 - [Scoped or global component styles?](knowledge/questions/scoped-vs-global-styles.md) _(Open Question)_ — Five single-file components use a global <style> block and seven use <style scoped>; which should new code follow?
+
+### requirements
+
+- [Personal blog](knowledge/requirements/blog.md) _(Requirement)_ — A public blog at /blog — a list and a page per post — and a Google-signed-in manager at /blog/manage where the owner writes, publishes and deletes posts with images.
 
 ### risks
 
