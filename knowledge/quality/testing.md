@@ -16,7 +16,7 @@ verified: human:ankitp@geekyants.com
 - `src/__tests__/router.spec.ts` — legacy redirects and the 404 catch-all.
 - `src/util/__tests__/` — the ads loader, preferences (including throwing storage and the old JSON-encoded locale), hash lookup.
 - `src/views/__tests__/` — `HomeView` (sections render, ads after the intro, safe external links, footer year) `NotFound` (noindex, canonical removed and restored) and `PrivacyPolicy` (heading, `mailto:` link, canonical and title set and restored, no ads).
-- `build/__tests__/adsense.spec.ts` — the `ads.txt` line.
+- `build/__tests__/adsense.spec.ts` — the `ads.txt` line, and that `app-ads.txt` is emitted with it.
 
 Components are mounted with `mountWithApp()` from `src/test/mount.ts`, which installs a testing Pinia, a memory-history router with the app's `routes`, Vuetify and i18n, and stubs the browser observers and `matchMedia` jsdom lacks.
 

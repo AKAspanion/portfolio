@@ -17,7 +17,7 @@ There are no accounts, no forms and no backend: everything shown comes from JSON
 ## Applications
 
 - One web app at the repository root, `spanion-portfolio` ([[apps/spanion-portfolio]]): Vue 3 + Vite, built to `dist/` and served by Firebase Hosting ([[integrations/firebase-hosting]]).
-- A Vite build plugin, `build/adsense.ts`, that injects the AdSense site tag and writes `ads.txt` at build time ([[integrations/google-adsense]]).
+- A Vite build plugin, `build/adsense.ts`, that injects the AdSense site tag and writes `ads.txt` and `app-ads.txt` at build time ([[integrations/google-adsense]]).
 
 How the parts fit is in [[project/architecture]]; the content each section shows is described in [[data/model]].
 

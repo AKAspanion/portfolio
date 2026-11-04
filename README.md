@@ -23,9 +23,9 @@ npm run dev
 
 Settings live in `.env`, which is not committed. `.env.example` lists them:
 
-| Variable              | Purpose                                                                                                                  |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `VITE_ADSENSE_CLIENT` | AdSense publisher ID (`ca-pub-…`). Adds the AdSense meta tag, generates `ads.txt` and loads ads. Leave empty for no ads. |
+| Variable              | Purpose                                                                                                                                                                   |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `VITE_ADSENSE_CLIENT` | AdSense publisher ID (`ca-pub-…`). Adds the AdSense meta tag, generates `ads.txt` and `app-ads.txt` (AdMob's, for the Android app) and loads ads. Leave empty for no ads. |
 
 ## Scripts
 
