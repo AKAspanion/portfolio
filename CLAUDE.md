@@ -120,6 +120,7 @@ _Generated from `knowledge/`. Do not edit by hand._
 - [Each blog post is written in one language](knowledge/decisions/blog-posts-single-language.md) _(Decision)_ — A post is written once, in English or Hindi, and shown as written whatever the site's language; the blog's own labels still follow the site language.
 - [A Cloud Function serves the blog's public pages to crawlers and link previews](knowledge/decisions/blog-seo-function.md) _(Decision)_ — /blog, /blog/:slug, /sitemap.xml and /blog/rss.xml go through a Cloud Function that fills the site's index.html with each page's tags, structured data and article, so bots that don't run JavaScript see real content.
 - [Consent through Google, privacy policy at /privacy](knowledge/decisions/consent-and-privacy-policy.md) _(Decision)_ — Ad consent is left to Google's own AdSense consent message; the privacy policy it points to lives at /privacy in English and Hindi and is not linked from the site.
+- [pnpm is the package manager](knowledge/decisions/pnpm.md) _(Decision)_ — The project installs and runs scripts with pnpm, locally and in CI and deploys, at the version pinned by packageManager; the dependency overrides live in pnpm-workspace.yaml.
 - [Component styles are scoped](knowledge/decisions/scoped-component-styles.md) _(Decision)_ — Single-file components use <style scoped> only; the existing global <style> blocks are debt to convert.
 
 ### design-system

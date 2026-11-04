@@ -9,6 +9,7 @@
 - [Each blog post is written in one language](blog-posts-single-language.md) - A post is written once, in English or Hindi, and shown as written whatever the site's language; the blog's own labels still follow the site language.
 - [A Cloud Function serves the blog's public pages to crawlers and link previews](blog-seo-function.md) - /blog, /blog/:slug, /sitemap.xml and /blog/rss.xml go through a Cloud Function that fills the site's index.html with each page's tags, structured data and article, so bots that don't run JavaScript see real content.
 - [Consent through Google, privacy policy at /privacy](consent-and-privacy-policy.md) - Ad consent is left to Google's own AdSense consent message; the privacy policy it points to lives at /privacy in English and Hindi and is not linked from the site.
+- [pnpm is the package manager](pnpm.md) - The project installs and runs scripts with pnpm, locally and in CI and deploys, at the version pinned by packageManager; the dependency overrides live in pnpm-workspace.yaml.
 - [Component styles are scoped](scoped-component-styles.md) - Single-file components use <style scoped> only; the existing global <style> blocks are debt to convert.
 
 <!-- GA-GENERATED:END -->
