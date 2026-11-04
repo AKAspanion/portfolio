@@ -9,4 +9,5 @@ work_item: tmp-pnpm
 by: human:ankitp@geekyants.com
 agent: claude-code
 ---
+
 Spec approved: switch CI and deploys to pnpm, moving the npm overrides to pnpm-workspace.yaml

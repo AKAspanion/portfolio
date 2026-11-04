@@ -7,4 +7,5 @@ work_item: tmp-pnpm
 by: human:ankitp@geekyants.com
 agent: claude-code
 ---
+
 Added decisions/pnpm: pnpm replaces npm everywhere, and the overrides move to pnpm-workspace.yaml.

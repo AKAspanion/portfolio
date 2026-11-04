@@ -9,4 +9,5 @@ work_item: tmp-pnpm
 by: human:ankitp@geekyants.com
 agent: claude-code
 ---
+
 Plan approved: switch CI and deploys to pnpm, 3 tasks, no stops
