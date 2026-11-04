@@ -16,7 +16,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "deploy": "npm run build && npx --yes firebase-tools@15.34.2 deploy --only hosting"
+    "deploy": "pnpm run build && pnpm dlx firebase-tools@15.34.2 deploy --only hosting"
   },
   "dependencies": {
     "@mdi/js": "^7.4.47",
