@@ -145,7 +145,7 @@ _Generated from `knowledge/`. Do not edit by hand._
 ### integrations
 
 - [Firebase Hosting](knowledge/integrations/firebase-hosting.md) _(Integration)_ — Where the built site is served from — the project, the SPA rewrite, security headers and cache rules in firebase.json, and how deploys reach it.
-- [Google AdSense](knowledge/integrations/google-adsense.md) _(Integration)_ — Display ads on the home page — the build-time site tag and ads.txt from VITE_ADSENSE_CLIENT, and the script loaded on demand at runtime.
+- [Google AdSense](knowledge/integrations/google-adsense.md) _(Integration)_ — Display ads on the home page — the build-time site tag, ads.txt and app-ads.txt from VITE_ADSENSE_CLIENT, and the script loaded on demand at runtime.
 
 ### operations
 

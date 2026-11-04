@@ -29,12 +29,13 @@ Visitor consent is asked by Google's own consent message, not by the site, so th
 - `createAdsLoader()` in `src/util/ads.ts` adds the script at most once, and only when a client id is set and the build is production (`import.meta.env.PROD`).
 - `HomeView.vue` calls `loadAds()` in the intro timer, after `nextTick()`.
 - `router.afterEach` in `src/router/index.ts` reloads on arriving at a screen that must stay ad-free from another route when `adsLoaded()` is true.
-- `build/adsense.ts` emits the verification meta tag and `ads.txt` only when the client id is set.
+- `build/adsense.ts` emits the verification meta tag, `ads.txt` and `app-ads.txt` only when the client id is set.
 
 How AdSense is configured is in [[integrations/google-adsense]]. The blog's screens are specified in `docs/specs/2026-11-03-blog.md`.
 
 ## History
 
+- 2026-11-04: said the build emits the meta tag and `ads.txt`; now it also emits `app-ads.txt`, because AdMob verifies the Android weather app against it. See [Google AdSense](../integrations/google-adsense.md).
 - 2026-11-03: said visitor consent was an open question; now Google's consent message handles it and the privacy page requests no ads, because master answered `questions/ad-consent`. See [Consent through Google](../decisions/consent-and-privacy-policy.md).
 
 ## Sources

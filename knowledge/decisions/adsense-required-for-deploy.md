@@ -20,8 +20,12 @@ Decided by the developer, from the ga dashboard, on 2026-11-03.
 
 ## Consequences
 
-- Production always ships the AdSense site tag, `ads.txt` and the on-demand script ([[integrations/google-adsense]]).
+- Production always ships the AdSense site tag, `ads.txt`, `app-ads.txt` and the on-demand script ([[integrations/google-adsense]]).
 - Turning ads off in production means changing this decision and the workflow, not just clearing the variable.
+
+## History
+
+- 2026-11-04: was a deploy carrying `ads.txt`; now it also carries `app-ads.txt`, because the build emits both ([[integrations/google-adsense]]).
 
 ## Sources
 
