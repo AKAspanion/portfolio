@@ -10,12 +10,12 @@
     },
     "checks": {
       "commands": {
-        "typecheck": "npm run type-check",
-        "lint": "npm run lint",
-        "lint-fix": "npm run format",
-        "format-check": "npx prettier --check .",
-        "test": "npm test",
-        "e2e": "npx vite build && npm run test:e2e"
+        "typecheck": "pnpm run type-check",
+        "lint": "pnpm run lint",
+        "lint-fix": "pnpm run format",
+        "format-check": "pnpm exec prettier --check .",
+        "test": "pnpm test",
+        "e2e": "pnpm exec vite build && pnpm run test:e2e"
       }
     }
   }

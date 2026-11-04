@@ -23,7 +23,7 @@ verified: human:ankitp@geekyants.com
 - **Outbound links** that open a new tab use `rel="noopener noreferrer"` (`HoverText.vue`, `SocialLinks.vue`, `HomeView.vue`).
 - **URL input.** The location hash is decoded defensively and looked up with `getElementById`, never passed to a selector API (`src/util/sections.ts`).
 - **AdSense id** is checked against a pattern at build time before it is written into the page (`CLIENT_PATTERN` in `build/adsense.ts`).
-- **Dependencies and code** are scanned by `npm audit` in CI, CodeQL and Dependabot ([[quality/ci]]). Vulnerabilities are reported privately, as `SECURITY.md` says.
+- **Dependencies and code** are scanned by `pnpm audit --prod` in CI, CodeQL and Dependabot ([[quality/ci]]). Vulnerabilities are reported privately, as `SECURITY.md` says.
 
 ## History
 

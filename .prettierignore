@@ -2,7 +2,7 @@ dist
 coverage
 playwright-report
 test-results
-package-lock.json
+pnpm-lock.yaml
 public/images
 
 # ga: generated, gitignored

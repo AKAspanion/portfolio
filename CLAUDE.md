@@ -1,5 +1,5 @@
 <!-- GA-WORKFLOW:START -->
-<!-- ga:rules 6dd7bcedf301 -->
+<!-- ga:rules 68b3f105d394 -->
 
 ## How work flows here
 
@@ -10,7 +10,7 @@ Use these skills without being asked; the developer shouldn't have to name them.
 - **While building:** `ga:debug` when something fails and the cause isn't obvious.
 - **Where a plan run stands:** `ga.mjs run status` reads each run's ledger: tasks done out of the plan's total, the task in hand and its fix round, the checkpoints, rulings and provisional rulings so far. Run it when the developer asks how far the work has got, rather than piecing it together.
 - **Before saying it's done:** `ga:verify-work`. `ga:review-code` when the developer asks for a review.
-- **Commands:** typecheck `npm run type-check`, lint `npm run lint`, format-check `npx prettier --check .`, test `npm test`, e2e `npx vite build && npm run test:e2e`. Fix lint with `npm run format` before fixing it by hand. Run these as written. An app's `AGENTS.md` may list its own under Commands.
+- **Commands:** typecheck `pnpm run type-check`, lint `pnpm run lint`, format-check `pnpm exec prettier --check .`, test `pnpm test`, e2e `pnpm exec vite build && pnpm run test:e2e`. Fix lint with `pnpm run format` before fixing it by hand. Run these as written. An app's `AGENTS.md` may list its own under Commands.
 - **Anything the client hands over** (documents, an API collection, a design or a Figma link, their code): `ga:learn` files it, asks the one question it needs and runs the skill that learns it. For what's already in place, use those directly: `ga:learn-docs` for `intake/`, and `ga:learn-codebase` for an existing codebase with little knowledge, or the client's code copied into this project, keeping their structure and updating the knowledge base that's there. Drafts are reviewed by a person: suggest `/ga:review-knowledge`.
 - **Estimating a new build for a proposal:** suggest `/ga:estimate`, which the developer starts. It grills out every gap in the client's documents and prototype, freezes the workflows, and writes the GeekyAnts estimate, plus the client's own format when they gave one. Never estimate from a template of your own.
 - **Knowledge:** `ga:ask` before searching the code, `ga:remember` for every feature, decision or changed requirement, and `ga:check-knowledge` at the end. The knowledge section below has the rules.
@@ -41,7 +41,7 @@ Set in `.ga/config.json` under `workflow`. `/ga:workflow` asks the developer and
 - A task is security-sensitive when the plan tags it `security`: `ga:write-plan` tags every task touching auth, sessions, secrets, encryption, permissions, personal data, uploads, outbound URL fetches, allowlists or rate limits.
 - Nothing is reviewed unasked here: no task review, re-review, security review or final review, and so no fix rounds. A task is done when its code is in, and a test-first task when its own test passes. When the developer asks ("review it", "review the branch"), review the branch since its base with `ga:review-code`, as a background agent, and post its findings when it's done. `ga.mjs workflow set review.when both` (or `run.pace thorough`) reviews every task and the branch again.
 - A task runs no checks: only the tests it writes, each alone, by name, to watch it fail and then pass. Every check runs once, at the end.
-- Before the work is done, run smoke (`ga.mjs run smoke --since <the branch's base>`: the apps and the routes the branch adds start and answer, and no app's latest compile failed), typecheck (`npm run type-check`) and lint (`npm run lint`). Run those for what the branch changed: `ga.mjs run checks --since <the branch's base> --only typecheck,lint` gives each command, narrowed to the packages it changed and those that depend on them. Test and e2e run only when the developer asks ("run the tests", "run e2e", "run all checks"): `ga.mjs run checks --since <the branch's base> --only <checks>` gives each command, narrowed to what changed. Then `ga:verify-work`: read the output, don't assume it.
+- Before the work is done, run smoke (`ga.mjs run smoke --since <the branch's base>`: the apps and the routes the branch adds start and answer, and no app's latest compile failed), typecheck (`pnpm run type-check`) and lint (`pnpm run lint`). Run those for what the branch changed: `ga.mjs run checks --since <the branch's base> --only typecheck,lint` gives each command, narrowed to the packages it changed and those that depend on them. Test and e2e run only when the developer asks ("run the tests", "run e2e", "run all checks"): `ga.mjs run checks --since <the branch's base> --only <checks>` gives each command, narrowed to what changed. Then `ga:verify-work`: read the output, don't assume it.
 - Commit at the end of each step: each spec, each approved design, each task. In a plan run the implementer commits its task, and the task is complete then. Stage the step's files by name, never `git add -A`, with the knowledge that describes them in the same commit.
 - Commit messages are plain sentences.
 - Build on a branch named `feat/<topic>`.
@@ -120,6 +120,7 @@ _Generated from `knowledge/`. Do not edit by hand._
 - [Each blog post is written in one language](knowledge/decisions/blog-posts-single-language.md) _(Decision)_ — A post is written once, in English or Hindi, and shown as written whatever the site's language; the blog's own labels still follow the site language.
 - [A Cloud Function serves the blog's public pages to crawlers and link previews](knowledge/decisions/blog-seo-function.md) _(Decision)_ — /blog, /blog/:slug, /sitemap.xml and /blog/rss.xml go through a Cloud Function that fills the site's index.html with each page's tags, structured data and article, so bots that don't run JavaScript see real content.
 - [Consent through Google, privacy policy at /privacy](knowledge/decisions/consent-and-privacy-policy.md) _(Decision)_ — Ad consent is left to Google's own AdSense consent message; the privacy policy it points to lives at /privacy in English and Hindi and is not linked from the site.
+- [pnpm is the package manager](knowledge/decisions/pnpm.md) _(Decision)_ — The project installs and runs scripts with pnpm, locally and in CI and deploys, at the version pinned by packageManager; the dependency overrides live in pnpm-workspace.yaml.
 - [Component styles are scoped](knowledge/decisions/scoped-component-styles.md) _(Decision)_ — Single-file components use <style scoped> only; the existing global <style> blocks are debt to convert.
 
 ### design-system

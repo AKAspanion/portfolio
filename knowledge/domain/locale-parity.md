@@ -23,7 +23,7 @@ The file-to-image conventions behind these checks are in [[data/model]].
 
 ## Where it is enforced
 
-`src/__tests__/content.spec.ts`, which runs for every locale in `content` (`src/content.ts`) as part of `npm test`, and so in CI ([[quality/ci]]).
+`src/__tests__/content.spec.ts`, which runs for every locale in `content` (`src/content.ts`) as part of `pnpm test`, and so in CI ([[quality/ci]]).
 
 The nav-item check compares against a list of section ids written in that test, not against `src/views/HomeView.vue`: a new home page section must be added to that list too, and a section renamed on the page is not caught.
 
