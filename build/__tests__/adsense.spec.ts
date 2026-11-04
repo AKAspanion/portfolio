@@ -11,19 +11,22 @@ describe('adsTxt', () => {
   });
 });
 
+type Hook = (this: unknown, ...args: unknown[]) => void;
+
+function asFunction(hook: unknown): Hook {
+  const fn =
+    typeof hook === 'function' ? hook : (hook as { handler: unknown }).handler;
+  return fn as Hook;
+}
+
 function runBuild(client: string) {
   const plugin = adsense();
   const emitFile = vi.fn();
-  const configResolved = plugin.configResolved as (
-    config: ResolvedConfig,
-  ) => void;
-  const generateBundle = plugin.generateBundle as (this: {
-    emitFile: typeof emitFile;
-  }) => void;
-  configResolved({
-    env: { VITE_ADSENSE_CLIENT: client },
-  } as unknown as ResolvedConfig);
-  generateBundle.call({ emitFile });
+  asFunction(plugin.configResolved).call(
+    {},
+    { env: { VITE_ADSENSE_CLIENT: client } },
+  );
+  asFunction(plugin.generateBundle).call({ emitFile });
   return emitFile;
 }
 
