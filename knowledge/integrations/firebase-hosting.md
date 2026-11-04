@@ -18,7 +18,7 @@ Serving `dist/` as the production site at spanion.in and at the project's `.web.
 - **What is served:** `hosting.public` in `firebase.json` is `dist`; dotfiles and `node_modules` are ignored.
 - **SPA rewrite:** every path that isn't a file is served `index.html`, so client routes work on reload. This is also why unknown paths return 200 and the 404 page marks itself `noindex` ([[features/not-found-and-redirects]]).
 - **Headers:** security headers on every path ([[security/data-protection]]) and `Cache-Control` rules per path. The reason for `no-cache` on the HTML is in commit `28afb4f`: `index.html` had been cached for an hour while deploys removed the old JavaScript. Hashed files under `/assets/` are cached as immutable; `/images/` for a shorter time.
-- **Deploying:** `deploy.yml` on every push to `master`, using `FirebaseExtended/action-hosting-deploy` with the `FIREBASE_SERVICE_ACCOUNT` secret; or by hand with `npm run deploy` (`scripts.deploy` in `package.json`), which builds and runs `firebase-tools` at a pinned version.
+- **Deploying:** `deploy.yml` on every push to `master`, using `FirebaseExtended/action-hosting-deploy` with the `FIREBASE_SERVICE_ACCOUNT` secret; or by hand with `pnpm run deploy` (`scripts.deploy` in `package.json`), which builds and runs `firebase-tools` at a pinned version.
 
 ## Failure modes
 
