@@ -11,7 +11,9 @@ export function adsTxt(client: string): string {
 /**
  * Adds the AdSense site-verification meta tag and generates ads.txt from
  * VITE_ADSENSE_CLIENT, so the publisher ID lives in .env rather than in the
- * repository. Without the variable the build ships no ads at all.
+ * repository. The same line is also emitted as app-ads.txt, which serves
+ * AdMob's verification of the Android app. Without the variable the build
+ * ships no ads at all.
  */
 export function adsense(): Plugin {
   let client: string | undefined;
@@ -38,11 +40,9 @@ export function adsense(): Plugin {
     },
     generateBundle() {
       if (!client) return;
-      this.emitFile({
-        type: 'asset',
-        fileName: 'ads.txt',
-        source: adsTxt(client),
-      });
+      for (const fileName of ['ads.txt', 'app-ads.txt']) {
+        this.emitFile({ type: 'asset', fileName, source: adsTxt(client) });
+      }
     },
   };
 }
